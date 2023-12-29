@@ -9,10 +9,10 @@ const Navbar = () => {
                 <div className="text-xl font-bold font-inter">Hello-Sol</div>
             </NavLink>
             <nav className='items-center justify-center flex gap-8'>
-                <NavLink to='/learn'>
+                <NavLink to='/learn' className={({ isActive }) => isActive ? "underline underline-offset-2" : null }>
                     <div className="text-sm font-normal font-inter">Learn</div>
                 </NavLink>
-                <NavLink to='/create'>
+                <NavLink to='/create' className={({ isActive }) => isActive ? "underline underline-offset-2" : null }>
                     <div className="text-sm font-normal font-inter">Create</div>
                 </NavLink>
                 <NavLink to='/play' className='rounded-full bg-black-200 w-20 h-9 items-center justify-center flex'>
