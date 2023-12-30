@@ -1,6 +1,18 @@
+import './create_index.css'
+
 const Create = () => {
   return (
-    <div>Create</div>
+    <section>
+      <div>Create</div>
+
+      <div id='container_form'>
+        <h1>Welcome to Geo-Creator</h1>
+        <p>Mix and match with our signature models to</p>
+        <p>create and share your own Geo.</p>
+      </div>
+      
+    </section>
+    
   )
 }
 

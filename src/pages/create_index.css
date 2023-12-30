@@ -1,0 +1,11 @@
+section {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+#container_form {
+    width: auto;
+    margin: 20px;
+    transform: translate(0, 200%);
+    text-align: center;
+}
