@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unknown-property */
 import { Suspense, useEffect, useState } from "react"
-import { Canvas} from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber"
 import Loader from "../components/Loader"
 // import { OrbitControls } from "@react-three/drei"
 // import RCar from "../models/RCar"
@@ -102,48 +102,10 @@ const Learn = () => {
 
     <section className='w-full h-screen relative bg-white-200'>
 
-       {/* <div
-          className="text-5xl font-bold font-inter" style={{position: 'fixed', top: '15%', left: '10%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s'}}>
-          <div className="mb-2">Hello.</div>
-          <div>This is Geo-Sol.</div>
-        </div> */}
+      {/* HTML behind Canvas */}
 
-      {/* HTML */}
-      {/* P1 */}
-      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s'}}>
-        <div className="text-5xl font-bold font-inter mb-4">
-          <div className="mb-2">Hello.</div>
-          <div>This is Geo-Sol.</div>
-        </div>
-        <div className="w-72 text-sm font-inter">
-          Lorem ipsum dolor sit amet, consectetur adip elit, labore et dolore magna aliqua.
-        </div>
-
-      </div>
-      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s' }}>
-        <div className="outline outline-1 rounded-3xl p-8 mb-4">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-4">
-            Play daily for a chance to win a free Geo-Energy Portable Charger!
-          </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
-            <div className="text-sm font-inter py-2 px-6">Start playing</div>
-          </button>
-        </div>
-        <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
-            Create your dream Geo!
-          </div>
-          <div className="w-64 text-sm font-inter pb-4">
-            Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-City.
-          </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
-            <div className="text-sm font-inter py-2 px-6">Start building</div>
-          </button>
-        </div>
-      </div>
-     
       {/* P2 */}
-      <div className="w-56" style={{ position: 'fixed', top: '20%', right: '15%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-56" style={{ position: 'fixed', top: '20%', right: '15%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
         <div className="text-base font-bold font-inter pb-1">
           It’s simple.
         </div>
@@ -153,7 +115,7 @@ const Learn = () => {
       </div>
 
       {/* P3 */}
-      <div className="w-56" style={{ position: 'fixed', top: '40%', left: '15%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-56" style={{ position: 'fixed', top: '40%', left: '15%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
         <div className="text-base font-bold font-inter pb-1">
           It’s all-electric.
         </div>
@@ -163,12 +125,12 @@ const Learn = () => {
       </div>
 
       {/* P4a+b */}
-      <div className="" style={{ position: 'fixed', bottom: '22%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="" style={{ position: 'fixed', bottom: '22%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4a ? 'auto' : 'none' }}>
         <div className="flex gap-2">
           <div className="text-xl font-inter">
             It’s where
           </div>
-          <div className="flex gap-1" style={{ opacity: show4b ? 1 : 0, transition: 'opacity 0.2s' }}>
+          <div className="flex gap-1" style={{ opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
             <div className="text-xl font-bold font-inter underline underline-offset-8">geometric meets electric</div>
             <div className="text-xl font-inter">.</div>
           </div>
@@ -176,7 +138,7 @@ const Learn = () => {
       </div>
 
       {/* P5 */}
-      <div className="w-96 text-center" style={{ position: 'fixed', bottom: '15%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-96 text-center" style={{ position: 'fixed', bottom: '15%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show5 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Smaller than ever.
         </div>
@@ -186,14 +148,14 @@ const Learn = () => {
       </div>
 
       {/* P6 */}
-      <div className="" style={{ position: 'fixed', top: '53%', left: '50%', transform: `translate(${show6 ? '-49.8%' : '100%'}, -50%)`, opacity: show6 ? 1 : 0, transition: 'transform 0.5s, opacity 0.2s' }}>
+      <div className="" style={{ position: 'fixed', top: '53%', left: '50%', transform: `translate(${show6 ? '-49.8%' : '100%'}, -50%)`, opacity: show6 ? 1 : 0, transition: 'transform 0.5s, opacity 0.2s', pointerEvents: show6 ? 'auto' : 'none' }}>
         <div className="vroom font-bold font-inter text-yellow-100">
           Vrooom!!
         </div>
       </div>
 
       {/* P7 */}
-      <div className="w-72" style={{ position: 'fixed', top: '25%', left: '20%', opacity: show7 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-72" style={{ position: 'fixed', top: '25%', left: '20%', opacity: show7 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show7 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Faster than ever.
         </div>
@@ -203,17 +165,17 @@ const Learn = () => {
       </div>
 
       {/* P8 */}
-      <div className="w-96" style={{ position: 'fixed', bottom: '30%', right: '20%', opacity: show8 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-96" style={{ position: 'fixed', bottom: '30%', right: '20%', opacity: show8 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
-        Greener than ever.
+          Greener than ever.
         </div>
         <div className="text-sm font-inter">
-        Powered by solar energy and ethically sourced high voltage lithium-ion batteries, the Geo-Sol is a zero-emission vehicle.  
+          Powered by solar energy and ethically sourced high voltage lithium-ion batteries, the Geo-Sol is a zero-emission vehicle.
         </div>
       </div>
 
       {/* P9 */}
-      <div className="w-72" style={{ position: 'fixed', top: '15%', left: '10%', opacity: show9 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-72" style={{ position: 'fixed', top: '15%', left: '10%', opacity: show9 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show9 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Easier than ever.
         </div>
@@ -223,7 +185,7 @@ const Learn = () => {
       </div>
 
       {/* P10 */}
-      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '15%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '15%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Rear View Camera
         </div>
@@ -232,7 +194,7 @@ const Learn = () => {
         </div>
       </div>
 
-      <div className="w-48" style={{ position: 'fixed', top: '25%', left: '65%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '25%', left: '65%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Digital dashboard
         </div>
@@ -241,7 +203,7 @@ const Learn = () => {
         </div>
       </div>
 
-      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s' }}>
+      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Smart OS
         </div>
@@ -250,37 +212,10 @@ const Learn = () => {
         </div>
       </div>
 
-      {/* P11 */}
-      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s' }}>
-        <div className="text-5xl font-bold font-inter mb-3">
-          It’s Geo-Sol.
-        </div>
-        <div className="text-2xl text-grey-100 font-inter pb-4">
-          Where geometric meets electric.
-        </div>
-        <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
-          <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
-
-        </div>
-
-      </div>
-      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s' }}>
-        <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
-            It’s your dream car!
-          </div>
-          <div className="w-64 text-sm font-inter pb-4">
-            Create your own custom Geo-Sol with our Geo-Creator.
-          </div>
-          <button className='rounded-full bg-black-200 items-center justify-center flex'>
-            <div className="text-sm font-inter py-2 px-6 text-white-100">Start building</div>
-          </button>
-        </div>
-      </div>
+      
 
 
-      <Canvas className="w-full h-screen " camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }}>
+      <Canvas className="w-full h-screen relative" camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
         <Suspense fallback={<Loader />}>
 
           <directionalLight intensity={1} position={[5, 10, 5]} />
@@ -298,6 +233,69 @@ const Learn = () => {
           </ScrollControls>
         </Suspense>
       </Canvas>
+
+      {/* HTML in front of Canvas */}
+      {/* P1 */}
+      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+        <div className="text-5xl font-bold font-inter mb-4">
+          <div className="mb-2">Hello.</div>
+          <div>This is Geo-Sol.</div>
+        </div>
+        <div className="w-72 text-sm font-inter">
+          Lorem ipsum dolor sit amet, consectetur adip elit, labore et dolore magna aliqua.
+        </div>
+
+      </div>
+      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+        <div className="outline outline-1 rounded-3xl p-8 mb-4">
+          <div className="w-64 text-xl font-bold font-inter leading-6 pb-4">
+            Play daily for a chance to win a free Geo-Energy Portable Charger!
+          </div>
+          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+            <div className="text-sm font-inter py-2.5 px-6">Start playing</div>
+          </button>
+        </div>
+        <div className="outline outline-1 rounded-3xl p-8">
+          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
+            Create your dream Geo!
+          </div>
+          <div className="w-64 text-sm font-inter pb-4">
+            Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-City.
+          </div>
+          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+            <div className="text-sm font-inter py-2.5 px-6">Start building</div>
+          </button>
+        </div>
+      </div>
+
+      {/* P11 */}
+      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+        <div className="text-5xl font-bold font-inter mb-2">
+          It’s Geo-Sol.
+        </div>
+        <div className="text-2xl text-grey-100 font-inter pb-5">
+          Where geometric meets electric.
+        </div>
+        <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
+          <div className="font-inter pl-2">Visit Geo.com to learn more</div>
+          <button>
+            <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
+          </button>
+        </div>
+      </div>
+      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+        <div className="outline outline-1 rounded-3xl p-8">
+          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
+            It’s your dream car!
+          </div>
+          <div className="w-64 text-sm font-inter pb-4">
+            Create your own custom Geo-Sol with our Geo-Creator.
+          </div>
+          <button className='rounded-full bg-black-200 items-center justify-center flex'>
+            <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start building</div>
+          </button>
+        </div>
+      </div>
 
 
     </section>
