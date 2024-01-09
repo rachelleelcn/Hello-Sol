@@ -355,7 +355,6 @@ const Create = () => {
           </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
-
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : goNextSection()}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
@@ -451,7 +450,7 @@ const Create = () => {
           </div>
 
           <div className="mt-4 w-56 text-base text-grey-100 font-inter mt-20">
-            Visit Geo.com to learn more about our <span className="underline underline-offset-4"> models and prices</span> .
+            Visit Geo.com to learn more about our <span className="underline underline-offset-4"> models and prices</span>.
           </div>
         </div>
 

@@ -130,7 +130,7 @@ const Learn = () => {
           <div className="text-xl font-inter">
             It’s where
           </div>
-          <div className="flex gap-1" style={{ opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+          <div className="flex gap-0" style={{ opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
             <div className="text-xl font-bold font-inter underline underline-offset-8">geometric meets electric</div>
             <div className="text-xl font-inter">.</div>
           </div>
@@ -278,7 +278,7 @@ const Learn = () => {
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <button>
+          <button > 
             <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
           </button>
         </div>
