@@ -449,7 +449,7 @@ const Create = () => {
             </button>
           </div>
 
-          <div className="mt-4 w-56 text-base text-grey-100 font-inter mt-20">
+          <div className="w-56 text-base text-grey-100 font-inter mt-20">
             Visit Geo.com to learn more about our <span className="underline underline-offset-4"> models and prices</span>.
           </div>
         </div>
