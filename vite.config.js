@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/Hello-Sol/",
   plugins: [react()],
-  assetsInclude: ['**/*.glb'], 
-  base: "/Hello-Sol/"
+  assetsInclude: ['**/*.glb']
 })
