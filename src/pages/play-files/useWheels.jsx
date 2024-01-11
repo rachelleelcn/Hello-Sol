@@ -21,7 +21,7 @@ export const useWheels = (width, height, front, radius) => {
         steeringSpeed: 0.005,
         steeringMax: Math.PI * 0.17,
         steeringQuad: false,
-        brakeStrength: 1
+        brakeStrength: 10
     }
 
     const wheelInfos = [

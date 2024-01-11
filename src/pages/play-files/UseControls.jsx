@@ -33,13 +33,13 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
     useEffect(() => {
         // Forward
         if (controls.w || controls.arrowup) {
-            vehicleAPI.applyEngineForce(150, 2)
-            vehicleAPI.applyEngineForce(150, 3)
+            vehicleAPI.applyEngineForce(120, 2)
+            vehicleAPI.applyEngineForce(120, 3)
         }
         // Backward
         else if (controls.s || controls.arrowdown) {
-            vehicleAPI.applyEngineForce(-150, 2)
-            vehicleAPI.applyEngineForce(-150, 3)
+            vehicleAPI.applyEngineForce(-120, 2)
+            vehicleAPI.applyEngineForce(-120, 3)
         }
         // No movement
         else {
@@ -82,9 +82,8 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
             vehicleAPI.setBrake(0, 3)
         }
 
-        // Reset position
+        // Press R to reset car rotation (if it flips over or smth)
         if (controls.r) {
-            // chassisAPI.position.set(0, -0.3, 0)
             chassisAPI.velocity.set(0, 0, 0)
             chassisAPI.rotation.set(0, 0, 0)
         }

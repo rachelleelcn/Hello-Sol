@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import * as THREE from 'three'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Physics, usePlane } from '@react-three/cannon'
 import { Suspense, useEffect } from 'react'
@@ -32,7 +32,7 @@ export function Scene() {
         <ambientLight intensity={0.8} castShadow/>
         <directionalLight intensity={0.5} position={[2,2,3]} castShadow/>
 
-        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={100}/>
+        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={120}/>
         <OrbitControls target={[0, 0, 0]}/>
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>
@@ -50,18 +50,18 @@ export function Scene() {
   
 }
 
-const Play = () => {
-  return (
+// const Play = () => {
+//   return (
 
-    <section>
+//     <section>
 
-      <div className="w-full h-screen relative">
-        <Scene/>
-      </div>
+//       <div className="w-full h-screen relative">
+//         <Scene/>
+//       </div>
       
-    </section>
+//     </section>
     
-  )
-}
+//   )
+// }
 
-export default Play
+// export default Play

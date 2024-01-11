@@ -15,6 +15,10 @@ import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 
+import { Canvas } from '@react-three/fiber'
+import { Scene } from './Play_temp.jsx'
+
+
 const Play = () => {
 
   const navigate = useNavigate();
@@ -36,6 +40,7 @@ const Play = () => {
     navigate('/create');
   };
 
+  const [showSandbox, setShowSandbox] = useState(false)
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -45,6 +50,11 @@ const Play = () => {
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
+
+      {/* Sandbox Game */}
+      <div style={{width: '100%', height: '100%'}}>
+        <Scene/>
+      </div>
 
       {/* P1 - Landing */}
       <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '10%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
@@ -351,15 +361,12 @@ const Play = () => {
         </div>
       </div>
 
-
-
-
-
-
-
-
+      
 
     </section>
+
+
+
   )
 }
 
