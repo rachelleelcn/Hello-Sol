@@ -1,11 +1,3 @@
-// const Play = () => {
-//   return (
-//     <div>Play</div>
-//   )
-// }
-
-// export default Play
-
 import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from "react"
 import go_icon from "../assets/icons/go.png";
@@ -34,7 +26,7 @@ const Play = () => {
   };
   const leaveToCreate = () => {
     setShowCreateGeo(false);
-    navigate('/create');
+    navigate('/Hello-Sol/create');
   };
 
 
@@ -65,7 +57,7 @@ const Play = () => {
 
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between mb-7'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <button>
+          <button onClick={() => navigate('/Hello-Sol/geo')}>
             <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
           </button>
         </div>
@@ -224,7 +216,7 @@ const Play = () => {
         <div className="text-base pb-6">Come back again tomorrow for another chance to enter the draw!</div>
         <div className="flex justify-center">
           <div className="text-xs text-grey-100 text-center w-48">
-            Visit Geo.com to learn more about <span className="underline underline-offset-4"> how our giveaway works</span>.
+            Visit Geo.com to learn more about <button className="underline underline-offset-4" onClick={() => navigate('/Hello-Sol/geo')}> how our giveaway works</button>.
           </div>
         </div>
       </div>
@@ -256,7 +248,7 @@ const Play = () => {
         <div className="text-base pb-6">Come back again tomorrow for another chance to enter the draw!</div>
         <div className="flex justify-center">
           <div className="text-xs text-grey-100 text-center w-48">
-            Visit Geo.com to learn more about <span className="underline underline-offset-4"> how our giveaway works</span>.
+            Visit Geo.com to learn more about <button className="underline underline-offset-4" onClick={() => navigate('/Hello-Sol/geo')}> how our giveaway works</button>.
           </div>
         </div>
       </div>

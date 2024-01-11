@@ -28,7 +28,7 @@ const Navbar = () => {
                     <div className="text-white-100 text-sm font-inter py-2 px-6">Play</div>
                 </NavLink>
                 <NavLink to='/Hello-Sol/geo' onClick={() => (isActive('/Hello-Sol/geo') ? handleClick() : null)}>
-                    <img src={geo_icon} alt='geo-logo' className='w-10 object-contain mt-1.5' />
+                    <img src={geo_icon} alt='geo-logo' className='w-10 object-contain' />
                 </NavLink>
             </nav>
         </header>

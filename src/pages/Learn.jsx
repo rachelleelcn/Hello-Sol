@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unknown-property */
+import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import Loader from "../components/Loader"
@@ -13,6 +14,7 @@ import go_icon from "../assets/icons/go.png";
 
 const Learn = () => {
 
+  const navigate = useNavigate();
   const [scrollValue, setScrollValue] = useState(0);
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
@@ -251,9 +253,9 @@ const Learn = () => {
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-4">
             Play daily for a chance to win a free Geo-Energy Portable Charger!
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
             <div className="text-sm font-inter py-2.5 px-6">Start playing</div>
-          </button>
+          </button> 
         </div>
         <div className="outline outline-1 rounded-3xl p-8">
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
@@ -262,7 +264,7 @@ const Learn = () => {
           <div className="w-64 text-sm font-inter pb-4">
             Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-City.
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
             <div className="text-sm font-inter py-2.5 px-6">Start building</div>
           </button>
         </div>
@@ -278,7 +280,7 @@ const Learn = () => {
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <button > 
+          <button onClick={() => navigate('/Hello-Sol/geo')}> 
             <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
           </button>
         </div>
@@ -291,7 +293,7 @@ const Learn = () => {
           <div className="w-64 text-sm font-inter pb-4">
             Create your own custom Geo-Sol with our Geo-Creator.
           </div>
-          <button className='rounded-full bg-black-200 items-center justify-center flex'>
+          <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
             <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start building</div>
           </button>
         </div>

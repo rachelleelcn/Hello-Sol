@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from "react"
 import license_icon from "../assets/icons/license.png";
 import download_icon from "../assets/icons/download.png";
@@ -6,6 +7,8 @@ import share_icon from "../assets/icons/share.png";
 
 
 const Create = () => {
+
+  const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(1);
   const [activeTab, setActiveTab] = useState(0);
   const [topColour, setTopColour] = useState(0);
@@ -450,7 +453,7 @@ const Create = () => {
           </div>
 
           <div className="w-56 text-base text-grey-100 font-inter mt-20">
-            Visit Geo.com to learn more about our <span className="underline underline-offset-4"> models and prices</span>.
+            Visit Geo.com to learn more about our <button className="underline underline-offset-4" onClick={() => navigate('/Hello-Sol/geo')}> models and prices</button>.
           </div>
         </div>
 
@@ -462,7 +465,7 @@ const Create = () => {
             <div className="w-64 text-sm font-inter pb-4">
               Put your Geo to the test, play to enter today’s giveaway.
             </div>
-            <button className='rounded-full bg-black-200 items-center justify-center flex'>
+            <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
               <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start playing</div>
             </button>
           </div>
