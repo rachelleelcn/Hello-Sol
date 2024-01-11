@@ -15,7 +15,6 @@ import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 
-
 const Play = () => {
 
   const navigate = useNavigate();
