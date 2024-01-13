@@ -27,7 +27,7 @@ const CubeV = ({position, size}) => {
       onPointerOut={() => setHovered(false)}
       >
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={active ? 'grey' : 'green'}/>
+        <meshStandardMaterial color={active ? '#A8A8A8' : '#C8F165'}/>
         <Decal
             position={[0, 0, 0]}
             rotation={[0, 1.5, 0]}
