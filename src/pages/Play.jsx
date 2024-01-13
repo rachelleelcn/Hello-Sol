@@ -7,6 +7,8 @@ import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 
+import { Scene } from './Play_temp';
+
 
 const Play = () => {
 
@@ -375,6 +377,9 @@ const Play = () => {
       </div>
 
 
+      <div>
+        <Scene/>
+      </div>
 
 
 
