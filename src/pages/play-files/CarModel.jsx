@@ -55,30 +55,13 @@ export function CarModel() {
                 new Vector3(0, 0.6, 0)
             )
         )
-        // Puts camera behind car
         state.camera.position.copy(cameraPosition)
-
-        // Makes camera look at car
         state.camera.lookAt(position)
-
     })
-    
 
     return (
         <group>
-            {/* <OrbitControls
-                target={position}
-                minDistance={1.5}
-                maxDistance={5}
-                enableDamping={true}
-                enablePan={false}
-                maxPolarAngle={Math.PI / 2 - 0.05}
-                rotateSpeed={0.5}
-                zoomSpeed={2.5}
-            /> */}
-    
             <group ref={vehicle} name='vehicle'>
-                
                 <group ref={chassisBody} name="chassisBody">
                     <primitive 
                         object={model.scene} 

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import * as THREE from 'three'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Physics, usePlane } from '@react-three/cannon'
 import { Suspense, useEffect } from 'react'

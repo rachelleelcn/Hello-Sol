@@ -86,7 +86,7 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
         if (controls.r) {
             chassisAPI.position.set(15, 0, 0)
             chassisAPI.velocity.set(0, 0, 0)
-            // chassisAPI.rotation.set(0, 0, 0)s
+            // chassisAPI.rotation.set(0, 0, 0)
         }
 
     }, [controls, vehicleAPI, chassisAPI])
