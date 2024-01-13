@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unknown-property */
+import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import Loader from "../components/Loader"
@@ -13,6 +14,7 @@ import go_icon from "../assets/icons/go.png";
 
 const Learn = () => {
 
+  const navigate = useNavigate();
   const [scrollValue, setScrollValue] = useState(0);
   const [show1, setShow1] = useState(true);
   const [show2, setShow2] = useState(false);
@@ -26,6 +28,12 @@ const Learn = () => {
   const [show9, setShow9] = useState(false);
   const [show10, setShow10] = useState(false);
   const [show11, setShow11] = useState(false);
+  const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+
+  const leaveToGeo = () => {
+    setShowLeaveGeo(false);
+    navigate('/Hello-Sol/geo');
+  };
 
   const handleScroll = (value) => {
     setScrollValue(value);
@@ -242,7 +250,7 @@ const Learn = () => {
           <div>This is Geo-Sol.</div>
         </div>
         <div className="w-72 text-sm font-inter">
-          Lorem ipsum dolor sit amet, consectetur adip elit, labore et dolore magna aliqua.
+          Introducing the all-new electrifying Geo.
         </div>
 
       </div>
@@ -251,18 +259,18 @@ const Learn = () => {
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-4">
             Play daily for a chance to win a free Geo-Energy Portable Charger!
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
             <div className="text-sm font-inter py-2.5 px-6">Start playing</div>
-          </button>
+          </button> 
         </div>
         <div className="outline outline-1 rounded-3xl p-8">
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
             Create your dream Geo!
           </div>
           <div className="w-64 text-sm font-inter pb-4">
-            Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-City.
+            Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-Town.
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex'>
+          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
             <div className="text-sm font-inter py-2.5 px-6">Start building</div>
           </button>
         </div>
@@ -278,7 +286,7 @@ const Learn = () => {
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <button > 
+          <button onClick={() => setShowLeaveGeo(true)}> 
             <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
           </button>
         </div>
@@ -291,9 +299,25 @@ const Learn = () => {
           <div className="w-64 text-sm font-inter pb-4">
             Create your own custom Geo-Sol with our Geo-Creator.
           </div>
-          <button className='rounded-full bg-black-200 items-center justify-center flex'>
+          <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
             <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start building</div>
           </button>
+        </div>
+      </div>
+
+      {/* PopUp - Leave Geo*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+        <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="font-bold text-2xl mb-1">Leaving site...</div>
+          <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+          <div className="flex justify-center">
+            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
+            </button>
+          </div>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Suspense, useEffect, useState } from "react"
 import license_icon from "../assets/icons/license.png";
 import download_icon from "../assets/icons/download.png";
@@ -6,6 +7,8 @@ import share_icon from "../assets/icons/share.png";
 
 
 const Create = () => {
+
+  const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(1);
   const [activeTab, setActiveTab] = useState(0);
   const [topColour, setTopColour] = useState(0);
@@ -19,6 +22,13 @@ const Create = () => {
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
+  const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+
+  const leaveToGeo = () => {
+    setShowLeaveGeo(false);
+    navigate('/Hello-Sol/geo');
+  };
+
 
   const goNextSection = () => {
     setCurrentSection(currentSection + 1);
@@ -92,9 +102,9 @@ const Create = () => {
 
       {/* P1 */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
-        <div className="w-1/3 text-center font-inter" style={{ position: 'fixed', top: '23%', left: '50%', transform: `translate(-50%,-50%)` }}>
+        <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '23%', left: '50%', transform: `translate(-50%,-50%)` }}>
           <div className="text-3xl font-bold pb-4">Welcome to Geo-Creator</div>
-          <div className="text-sm">Lorem ipsum dolor sit amut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerc nisi ut aliquip ex ea commodo consequat. </div>
+          <div className="text-sm">Mix and match with our signature models to create and share your very own custom Geo-Sol.</div>
         </div>
         <button className='rounded-full bg-black-200 items-center justify-center flex'
           style={{ position: 'fixed', bottom: '14%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
@@ -123,7 +133,7 @@ const Create = () => {
         />
         <div className={`text-sm mt-2 mb-14 ${showNameValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showNameValidate ? 'text' : 'none' }}>
           {nameValidateMsg}
-          </div>
+        </div>
         <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => name === '' ? nameValidate(1) : goNextSection()}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
         </button>
@@ -352,7 +362,7 @@ const Create = () => {
         />
         <div className={`text-sm mt-2 mb-14 ${showLicenseValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showLicenseValidate ? 'text' : 'none' }}>
           {licenseValidateMsg}
-          </div>
+        </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : goNextSection()}>
@@ -449,8 +459,8 @@ const Create = () => {
             </button>
           </div>
 
-          <div className="mt-4 w-56 text-base text-grey-100 font-inter mt-20">
-            Visit Geo.com to learn more about our <span className="underline underline-offset-4"> models and prices</span>.
+          <div className="w-56 text-base text-grey-100 font-inter mt-20">
+            Visit Geo.com to learn more about our <button className="underline underline-offset-4" onClick={() => setShowLeaveGeo(true)}> models and prices</button>.
           </div>
         </div>
 
@@ -462,13 +472,28 @@ const Create = () => {
             <div className="w-64 text-sm font-inter pb-4">
               Put your Geo to the test, play to enter today’s giveaway.
             </div>
-            <button className='rounded-full bg-black-200 items-center justify-center flex'>
+            <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
               <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start playing</div>
             </button>
           </div>
         </div>
       </div>
 
+      {/* PopUp - Leave Geo*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+        <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="font-bold text-2xl mb-1">Leaving site...</div>
+          <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+          <div className="flex justify-center">
+            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
+            </button>
+          </div>
+        </div>
+      </div>
 
 
 

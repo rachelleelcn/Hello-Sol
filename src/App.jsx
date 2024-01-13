@@ -8,11 +8,11 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Navigate to='/learn' />} />
-          <Route path='/learn' element={<Learn />} />
-          <Route path='/create' element={<Create />} />
-          <Route path='/play' element={<Play />} />
-          <Route path='/geo' element={<Geo />} />
+          <Route path='/Hello-Sol/' element={<Navigate to='/Hello-Sol/learn' />} />
+          <Route path='/Hello-Sol/learn' element={<Learn />} />
+          <Route path='/Hello-Sol/create' element={<Create />} />
+          <Route path='/Hello-Sol/play' element={<Play />} />
+          <Route path='/Hello-Sol/geo' element={<Geo />} />
         </Routes>
       </Router>
     </main>
