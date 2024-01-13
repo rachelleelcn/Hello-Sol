@@ -9,7 +9,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 
 import { useWheels } from './useWheels'
 import { WheelDebug } from './WheelDebug'
-import { UseControls } from './useControls'
+import { UseControls } from './UseControls'
 
 
 export function CarModel() {
