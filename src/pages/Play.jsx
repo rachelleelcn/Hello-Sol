@@ -7,6 +7,9 @@ import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 
+import { Canvas } from '@react-three/fiber'
+import { Scene } from './Play_temp.jsx'
+
 
 const Play = () => {
 
@@ -18,25 +21,29 @@ const Play = () => {
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
   const [email, setEmail] = useState('');
+  const [startGame, setStartGame] = useState(false);
 
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
   };
-
-
   const goSection = (index) => {
     setCurrentSection(index);
+    if (index < 3) {
+      setStartGame(false);
+    } else {
+      setStartGame(true);
+    }
   };
   const quitGame = () => {
     setCurrentSection(1);
     setShowQuitGame(false);
+    setStartGame(false);
   };
   const leaveToCreate = () => {
     setShowCreateGeo(false);
     navigate('/Hello-Sol/create');
   };
-
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -46,6 +53,13 @@ const Play = () => {
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
+
+      {/* Sandbox Game */}
+      <div style={{ width: '100%', height: '100%' }}>
+        <Scene />
+      </div>
+
+      <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame? 0 : 1, pointerEvents: startGame? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
       <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '10%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
@@ -128,7 +142,7 @@ const Play = () => {
             </button>
             <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
               <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
-              <div className="text-xs whitespace-nowrap">Jane Doe's</div>
+              <div className="text-xs whitespace-nowrap">Jane Doe’s</div>
             </button>
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
               <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
@@ -187,7 +201,7 @@ const Play = () => {
 
 
       {/* P4 - Win*/}
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px]" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
           <img src={share_icon} alt='share-logo' className='w-4 object-contain' />
         </button>
@@ -236,7 +250,7 @@ const Play = () => {
 
 
       {/* P5 - Lose */}
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px]" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 5 ? 1 : 0, pointerEvents: currentSection === 5 ? 'auto' : 'none' }}>
+      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 5 ? 1 : 0, pointerEvents: currentSection === 5 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
           <img src={share_icon} alt='share-logo' className='w-4 object-contain' />
         </button>
@@ -379,6 +393,9 @@ const Play = () => {
 
 
     </section>
+
+
+
   )
 }
 
