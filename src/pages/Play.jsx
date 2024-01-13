@@ -7,7 +7,7 @@ import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 
-import { Scene } from './Play_temp';
+import { Scene } from './Sandbox';
 
 
 const Play = () => {
@@ -25,7 +25,7 @@ const Play = () => {
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
-  };
+  };s
   const goSection = (index) => {
     setCurrentSection(index);
     if (index < 3) {
@@ -386,12 +386,6 @@ const Play = () => {
           </div>
         </div>
       </div>
-
-
-      <div>
-        <Scene/>
-      </div>
-
 
 
     </section>

@@ -19,7 +19,7 @@ const Plane = () => {
   return (
     <mesh scale={105} ref={ref} receiveShadow>
       <planeGeometry/>
-      <meshBasicMaterial color={'grey'} side={THREE.DoubleSide}/>
+      <meshBasicMaterial color={'#FFFFFF'} side={THREE.DoubleSide}/>
     </mesh>
   )
 }
@@ -28,8 +28,8 @@ export function Scene() {
   return (
     <Suspense fallback={null}>
         <Canvas shadows>
-        <ambientLight intensity={0.8} castShadow/>
-        <directionalLight intensity={0.5} position={[2,2,3]} castShadow/>
+        <ambientLight intensity={1} castShadow/>
+        <directionalLight intensity={1.5} position={[2,2,3]} castShadow/>
 
         <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={100}/>
         {/* <OrbitControls target={[0, 0, 0]}/> */}

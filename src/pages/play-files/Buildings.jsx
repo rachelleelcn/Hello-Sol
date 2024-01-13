@@ -13,7 +13,7 @@ const Cube = ({position, size}) => {
     return (
       <mesh ref={ref}>
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={'white'}/>
+        <meshStandardMaterial color={'#FFFFFF'}/>
       </mesh>
     )
   }
