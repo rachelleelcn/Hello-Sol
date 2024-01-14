@@ -6,6 +6,9 @@ import add_icon from "../assets/icons/add.png";
 import close_icon from "../assets/icons/close.png";
 import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
+import mute_icon from "../assets/icons/mute.png";
+import controls_icon from "../assets/icons/controls.png";
+import sound_icon from "../assets/icons/sound.png";
 
 import { Canvas } from '@react-three/fiber'
 import { Scene } from './Play_temp.jsx'
@@ -15,13 +18,15 @@ const Play = () => {
 
   const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(1);
-  const [showInstructions, setShowInstructions] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
   const [showCreateGeo, setShowCreateGeo] = useState(false);
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
   const [email, setEmail] = useState('');
   const [startGame, setStartGame] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
+  const [entries, setEntries] = useState(0);
 
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
@@ -39,10 +44,27 @@ const Play = () => {
     setCurrentSection(1);
     setShowQuitGame(false);
     setStartGame(false);
+    //TODO: reset all values
   };
   const leaveToCreate = () => {
     setShowCreateGeo(false);
     navigate('/Hello-Sol/create');
+  };
+
+  const soundToggle = () => {
+    if (soundOn) {
+      setSoundOn(false);
+    } else {
+      setSoundOn(true);
+    }
+  };
+
+  const controlsToggle = () => {
+    if (showControls) {
+      setShowControls(false);
+    } else {
+      setShowControls(true);
+    }
   };
 
   // for testing
@@ -59,7 +81,7 @@ const Play = () => {
         <Scene />
       </div>
 
-      <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame? 0 : 1, pointerEvents: startGame? 'none' : 'auto' }}></div>
+      <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
       <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '10%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
@@ -67,20 +89,20 @@ const Play = () => {
         <div className="text-xl text-grey-100 font-inter pb-4">
           Play for a chance to win a Geo-Energy portable charger!
         </div>
-
-        <div className="text-sm w-[55%] pb-4">
-          Navigate through Geo-Town to find all six charging stations located around the city before the time runs out, and you’ll earn a daily entry to the giveaway.
+        <div className="text-sm w-[53%] pb-4">
+          Find the 6 charging stations located across Geo-Town before the time runs out to earn entries to our giveaway. The more entries you have, the higher your chances of winning!
         </div>
-
+        <div className="text-xs pb-0.5">
+          Please note that each email can only claim entries to the giveaway once per day.
+        </div>
         <div className="text-xs pb-7">
           Play daily from <span className="underline underline-offset-4"> April 5th to 19th, 2024</span>.
         </div>
 
-
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between mb-7'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
           <button onClick={() => setShowLeaveGeo(true)}>
-            <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
+            <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
           </button>
         </div>
 
@@ -104,35 +126,52 @@ const Play = () => {
           <div className="flex">
             <div className="flex flex-col">
               <div className="text-3xl font-bold pb-3">Instructions</div>
-              <div className="text-sm w-[640px] pb-8 mr-4">
-                Drive around to locate all six charging stations hidden across Geo-Town, each represented by a green leaf symbol. Find and collect all six stations in 5 minutes or less to win an entry to the giveaway!
+              <div className="text-sm w-[680px] pb-10 mr-6">
+                Drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within the time limit to earn a bonus entry to the giveaway!
               </div>
             </div>
             <div className="w-16 h-24 bg-grey-100"></div>
           </div>
-          <div className="flex gap-16">
+
+          <div className="flex gap-10 text-nowrap">
             <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
+              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
               <div className="text-xs">
-                <div className="font-bold">WASD / Arrow keys</div>
+                <div className="font-bold">WASD / Arrows</div>
                 <div>Steer car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
+              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="text-xs">
+                <div className="font-bold">Shift</div>
+                <div>Brake car</div>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="text-xs">
+                <div className="font-bold">R</div>
+                <div>Reset car</div>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor movement</div>
                 <div>Rotate camera</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
+              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor click</div>
                 <div>Collect stations</div>
               </div>
             </div>
           </div>
+
+
           <hr className="border-black-100 border-t-1 my-10" />
           <div className=" text-sm font-bold pb-4">Pick your car:</div>
           <div className="flex gap-6">
@@ -146,7 +185,7 @@ const Play = () => {
             </button>
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
               <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
-                <img src={add_icon} alt='add-logo' className='w-4 object-contain' />
+                <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
               </div>
               <div className="text-xs font-bold w-24 pb-1">Create new dream Geo</div>
             </button>
@@ -166,162 +205,183 @@ const Play = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 3 ? 1 : 0, pointerEvents: currentSection === 3 ? 'auto' : 'none' }}>
         <div style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => setShowQuitGame(true)}>
-            <img src={close_icon} alt='close-logo' className='w-4 object-contain' />
+            <img src={close_icon} alt='close-icon' className='w-4 object-contain' />
             <div className="text-sm font-inter text-black-100 pr-1.5">Quit game</div>
           </button>
         </div>
 
-        <div className="flex items-center gap-6" style={{ position: 'fixed', bottom: '5%', left: '3.5%' }}>
-          <button className='w-12 h-12 rounded-full outline outline-1  flex items-center justify-center' onClick={() => setShowInstructions(true)}>
-            <img src={info_icon} alt='info-logo' className='w-5 object-contain' />
+
+        <div className="flex gap-3" style={{ position: 'fixed', bottom: '5%', left: '3.5%' }}>
+          <button className={`w-40 rounded-full outline ${showControls ? 'outline-2' : 'outline-1'} items-center justify-center flex py-3 px-6 gap-2`} onClick={controlsToggle}>
+            <img src={controls_icon} alt='controls-icon' className='w-3.5 object-contain' />
+            <div className="text-sm font-inter text-black-100 pr-1.5">Controls</div>
           </button>
-          <div className="font-bold text-2xl ">5:00</div>
+          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={soundToggle}>
+            {soundOn ? (
+              <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
+            )}
+          </button>
         </div>
+
+        <div style={{ position: 'fixed', bottom: 'calc(5% + 52px)', left: '3.5%' }}>
+          <div style={{ transition: 'opacity 0.2s', opacity: showControls === true ? 1 : 0, pointerEvents: showControls === true ? 'auto' : 'none' }}>
+            <div className="w-40 font-inter p-4">
+              <div className="flex flex-col gap-6 text-nowrap">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="text-[10px]">
+                    <div className="font-bold">WASD / Arrows</div>
+                    <div>Steer car</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="text-[10px]">
+                    <div className="font-bold">Shift</div>
+                    <div>Brake car</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="text-[10px]">
+                    <div className="font-bold">R</div>
+                    <div>Reset car</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="text-[10px]">
+                    <div className="font-bold">Cursor movement</div>
+                    <div>Rotate camera</div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="text-[10px]">
+                    <div className="font-bold">Cursor click</div>
+                    <div>Collect stations</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>5:00</div>
 
         <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-12 h-12 bg-grey-100 rounded-full"></div>
-          <div className="w-12 h-12 bg-grey-100 rounded-full"></div>
-          <div className="w-12 h-12 bg-grey-100 rounded-full"></div>
-          <div className="w-12 h-12 bg-grey-100 rounded-full"></div>
-          <div className="w-12 h-12 bg-grey-100 rounded-full"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full outline outline-1"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
         </div>
+
+
 
         {/* for testing - TO BE DELETED */}
-        <div className="flex gap-2" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: `translateX(-50%)` }}>
-          <button className='w-20 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => goSection(4)}>
-            <div className="text-sm font-inter text-black-100">Win</div>
+        <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
+          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4); }}>
+            <div className="text-sm font-inter text-black-100">All Entries</div>
           </button>
-          <button className='w-20 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => goSection(5)}>
-            <div className="text-sm font-inter text-black-100">Lose</div>
+          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(3); goSection(4); }}>
+            <div className="text-sm font-inter text-black-100">Some Entries</div>
+          </button>
+          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(0); goSection(4); }}>
+            <div className="text-sm font-inter text-black-100">No Entries</div>
           </button>
         </div>
+
       </div>
 
 
-
-      {/* P4 - Win*/}
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      {/* P4 - Results*/}
+      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
-          <img src={share_icon} alt='share-logo' className='w-4 object-contain' />
+          <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
-        <div className="font-bold text-3xl pb-2">Congratulations!</div>
-        <div className="text-base pb-6">You have successfully unlocked today’s entry to our giveaway!</div>
-        <div className="flex gap-4 pb-4 justify-center items-center">
+
+          {entries === 0 && (
+            <div>
+              <div className="font-bold text-3xl pb-2">Good try!</div>
+              <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
+            </div>
+          )}
+          {entries === 6 && (
+            <div>
+              <div className="font-bold text-3xl pb-2">Congratulations!</div>
+              <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
+            </div>
+          )}
+          {entries > 0 && entries < 6 && (
+            <div>
+              <div className="font-bold text-3xl pb-2">Congratulations!</div>
+              <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
+            </div>
+          )}
+
+
+        <div className="flex gap-4 pb-3 justify-center items-center">
           <div className="text-base font-bold">Day 6</div>
           <hr className="border-black-100 border-t-1 w-8" />
           <div className="text-base">April 10th, 2024</div>
           <hr className="border-black-100 border-t-1 w-8" />
           <div className="text-base font-bold">2:05</div>
         </div>
+
         <div className="flex gap-2 justify-center items-center pb-8">
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
+          {entries > 5 && (
+            <div className="relative">
+              <div className="w-10 h-10 rounded-full outline outline-1"></div>
+              <div className="w-8 h-8 bg-grey-100 rounded-full outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+          )}
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
         </div>
-        <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6">
-          <div className="text-sm pb-2">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
-          <div className="flex gap-2">
-            <input
-              className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-sm p-2 w-full"
-              type="text"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => {
-                const value = e.target.value;
-                setEmail(value);
-              }}
-            />
-            <button className="flex-shrink-0" onClick={() => email === '' ? null : setShowEmailSent(true)}>
-              <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
-            </button>
+
+        {entries > 0 && (
+          <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6">
+            <div className="text-sm pb-1">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
+            <div className="flex gap-2">
+              <input
+                className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-sm p-2 w-full"
+                type="text"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setEmail(value);
+                }}
+              />
+              <button className="flex-shrink-0" onClick={() => email === '' ? null : setShowEmailSent(true)}>
+                <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+              </button>
+            </div>
+            <div className="text-[10px] pt-2 text-grey-100">
+              *Each email can only claim entries once per day
+            </div>
           </div>
-        </div>
-        <div className="text-base pb-6">Come back again tomorrow for another chance to enter the draw!</div>
+        )}
+
+        <div className="text-base pb-5">Come back tomorrow to earn more entries and increase your chances of winning!</div>
         <div className="flex justify-center">
           <div className="text-xs text-grey-100 text-center w-48">
             Visit Geo.com to learn more about <button className="underline underline-offset-4" onClick={() => setShowLeaveGeo(true)}> how our giveaway works</button>.
           </div>
         </div>
       </div>
-
-
-      {/* P5 - Lose */}
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[420px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 5 ? 1 : 0, pointerEvents: currentSection === 5 ? 'auto' : 'none' }}>
-        <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
-          <img src={share_icon} alt='share-logo' className='w-4 object-contain' />
-        </button>
-        <div className="font-bold text-3xl pb-2">Good try!</div>
-        <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
-        <div className="flex gap-4 pb-4 justify-center items-center">
-          <div className="text-base font-bold">Day 6</div>
-          <hr className="border-black-100 border-t-1 w-8" />
-          <div className="text-base">April 10th, 2024</div>
-          <hr className="border-black-100 border-t-1 w-8" />
-          <div className="text-base font-bold">2:05</div>
-        </div>
-        <div className="flex gap-2 justify-center items-center pb-8">
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full"></div>
-          <div className="w-10 h-10 bg-grey-100 rounded-full"></div>
-        </div>
-
-        <div className="text-base pb-6">Come back again tomorrow for another chance to enter the draw!</div>
-        <div className="flex justify-center">
-          <div className="text-xs text-grey-100 text-center w-48">
-            Visit Geo.com to learn more about <button className="underline underline-offset-4" onClick={() => setShowLeaveGeo(true)}> how our giveaway works</button>.
-          </div>
-        </div>
-      </div>
-
-      {/* In-game instructions */}
-      <div style={{ transition: 'opacity 0.2s', opacity: showInstructions === true ? 1 : 0, pointerEvents: showInstructions === true ? 'auto' : 'none' }}>
-        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
-        <div className="font-inter outline outline-1 rounded-3xl p-16 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <button className="absolute top-2 right-2 p-4" onClick={() => setShowInstructions(false)}>
-            <img src={close_icon} alt='close-logo' className='w-4 object-contain' />
-          </button>
-          <div className="flex">
-            <div className="flex flex-col">
-              <div className="text-3xl font-bold pb-3">Instructions</div>
-              <div className="text-sm w-[640px] pb-12 mr-4">
-                Drive around to locate all six charging stations hidden across Geo-Town, each represented by a green leaf symbol. Find and collect all six stations in 5 minutes or less to win an entry to the giveaway!
-              </div>
-            </div>
-            <div className="w-16 h-24 bg-grey-100"></div>
-          </div>
-          <div className="flex gap-16">
-            <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
-              <div className="text-xs">
-                <div className="font-bold">WASD / Arrow keys</div>
-                <div>Steer car</div>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
-              <div className="text-xs">
-                <div className="font-bold">Cursor movement</div>
-                <div>Rotate camera</div>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <div className="w-16 h-16 rounded-full bg-grey-100 mr-4"></div>
-              <div className="text-xs">
-                <div className="font-bold">Cursor click</div>
-                <div>Collect stations</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
 
 
       {/* PopUp - Create new geo */}
@@ -378,7 +438,7 @@ const Play = () => {
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
-          <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+          <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
@@ -392,7 +452,7 @@ const Play = () => {
 
 
 
-    </section>
+    </section >
 
 
 
