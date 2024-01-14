@@ -127,7 +127,7 @@ const Play = () => {
             <div className="flex flex-col">
               <div className="text-3xl font-bold pb-3">Instructions</div>
               <div className="text-sm w-[680px] pb-10 mr-6">
-                Drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within the time limit to earn a bonus entry to the giveaway!
+                Drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within 3 minutes to earn a bonus entry to the giveaway!
               </div>
             </div>
             <div className="w-16 h-24 bg-grey-100"></div>
