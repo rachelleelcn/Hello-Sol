@@ -303,29 +303,38 @@ const Play = () => {
 
 
       {/* P4 - Results*/}
+
+      {/* for testing - TO BE DELETED */}
+      <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+        <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); }}>
+          <div className="text-sm font-inter text-black-100">Back</div>
+        </button>
+      </div>
+
+
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
 
-          {entries === 0 && (
-            <div>
-              <div className="font-bold text-3xl pb-2">Good try!</div>
-              <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
-            </div>
-          )}
-          {entries === 6 && (
-            <div>
-              <div className="font-bold text-3xl pb-2">Congratulations!</div>
-              <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
-            </div>
-          )}
-          {entries > 0 && entries < 6 && (
-            <div>
-              <div className="font-bold text-3xl pb-2">Congratulations!</div>
-              <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
-            </div>
-          )}
+        {entries === 0 && (
+          <div>
+            <div className="font-bold text-3xl pb-2">Good try!</div>
+            <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
+          </div>
+        )}
+        {entries === 6 && (
+          <div>
+            <div className="font-bold text-3xl pb-2">Congratulations!</div>
+            <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
+          </div>
+        )}
+        {entries > 0 && entries < 6 && (
+          <div>
+            <div className="font-bold text-3xl pb-2">Congratulations!</div>
+            <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
+          </div>
+        )}
 
 
         <div className="flex gap-4 pb-3 justify-center items-center">

@@ -430,7 +430,7 @@ const Create = () => {
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
               <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
-                <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
+                <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
           </div>
