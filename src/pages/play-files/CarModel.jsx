@@ -5,12 +5,14 @@ import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Quaternion, Vector3 } from 'three'
+import { OrbitControls } from '@react-three/drei'
 
 import { useWheels } from './useWheels'
 import { WheelDebug } from './WheelDebug'
 import { UseControls } from './useControls'
 
 export function CarModel() {
+    const ref = useRef()
     const model = useLoader(GLTFLoader, './models/Car.gltf')
 
     const position = [15, 0, 0]
@@ -23,7 +25,7 @@ export function CarModel() {
 
     const [chassisBody, chassisAPI] = useBox(() => ({
         args: chassisBodyArgs,
-        mass: 150,
+        mass: 80,
         position,
         allowSleep: false,
     }), useRef(null))
@@ -52,7 +54,7 @@ export function CarModel() {
 
         let cameraPosition = position.clone().add(
             wDir.clone().multiplyScalar(-1).add(
-                new Vector3(0, 0.6, 0)
+                new Vector3(0, 0.4, 0)
             )
         )
         state.camera.position.copy(cameraPosition)
@@ -61,12 +63,23 @@ export function CarModel() {
 
     return (
         <group>
+            <OrbitControls
+                target={position}
+                minDistance={1.5}
+                maxDistance={100}
+                enableDamping={true}
+                enablePan={true}
+                maxPolarAngle={Math.PI / 2 - 0.05}
+                rotateSpeed={0.5}
+                zoomSpeed={2.5}
+            />
+
             <group ref={vehicle} name='vehicle'>
                 <group ref={chassisBody} name="chassisBody">
                     <primitive 
                         object={model.scene} 
                         rotation-y={Math.PI} 
-                        position={[0, -0.5, 0]}
+                        position={[0, -0.45, 0]}
                         scale={[0.3, 0.3, 0.3]}
                         />
                 </group>

@@ -33,13 +33,13 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
     useEffect(() => {
         // Forward
         if (controls.w || controls.arrowup) {
-            vehicleAPI.applyEngineForce(150, 2)
-            vehicleAPI.applyEngineForce(150, 3)
+            vehicleAPI.applyEngineForce(80, 2)
+            vehicleAPI.applyEngineForce(80, 3)
         }
         // Backward
         else if (controls.s || controls.arrowdown) {
-            vehicleAPI.applyEngineForce(-150, 2)
-            vehicleAPI.applyEngineForce(-150, 3)
+            vehicleAPI.applyEngineForce(-80, 2)
+            vehicleAPI.applyEngineForce(-80, 3)
         }
         // No movement
         else {
@@ -72,8 +72,8 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
         if (controls.shift) {
             vehicleAPI.setBrake(10, 0)
             vehicleAPI.setBrake(10, 1)
-            // vehicleAPI.setBrake(8, 2)
-            // vehicleAPI.setBrake(8, 3)
+            vehicleAPI.setBrake(10, 2)
+            vehicleAPI.setBrake(10, 3)
         }
         else {
             vehicleAPI.setBrake(0, 0)
@@ -86,7 +86,7 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
         if (controls.r) {
             chassisAPI.position.set(15, 0, 0)
             chassisAPI.velocity.set(0, 0, 0)
-            // chassisAPI.rotation.set(0, 0, 0)
+            chassisAPI.rotation.set(0, 0, 0)
         }
 
     }, [controls, vehicleAPI, chassisAPI])

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import { useBox } from '@react-three/cannon'
+import { Ground } from './Ground.jsx'
 import { Roads } from './Roads.jsx'
 import { Buildings } from './Buildings.jsx'
 import { Stations } from './Stations.jsx'
@@ -40,7 +41,8 @@ export const Borders = () => {
     return ( 
         <group>
           <Borders/>
-          <Roads/>
+          <Ground/>
+          {/* <Roads/> */}
           <Buildings/>
           <Stations/>
         </group>

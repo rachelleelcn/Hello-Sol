@@ -25,7 +25,7 @@ const Play = () => {
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
-  };s
+  };
   const goSection = (index) => {
     setCurrentSection(index);
     if (index < 3) {
