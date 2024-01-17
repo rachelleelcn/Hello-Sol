@@ -48,7 +48,7 @@ const Navbar = () => {
                 <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
                     <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
                     <div className="font-bold text-2xl mb-1">Leaving site...</div>
-                    <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+                    <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
                     <div className="flex justify-center">
                         <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
                         <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>

@@ -188,12 +188,13 @@ const Learn = () => {
           Easier than ever.
         </div>
         <div className="text-sm font-inter">
-          With premium features and equipment the Geo-Sol makes driving easier.
+          With premium features and equipment, the Geo-Sol makes driving easier.
         </div>
       </div>
 
       {/* P10 */}
       <div className="w-40" style={{ position: 'fixed', top: '58%', left: '15%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Rear View Camera
         </div>
@@ -203,15 +204,17 @@ const Learn = () => {
       </div>
 
       <div className="w-48" style={{ position: 'fixed', top: '25%', left: '65%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Digital dashboard
         </div>
         <div className="text-xs font-inter">
-          Real-time information right behind the wheel to keep you focused on the road ahead.
+          Real-time information right behind the wheel for a focused drive.
         </div>
       </div>
 
       <div className="w-40" style={{ position: 'fixed', top: '58%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
         <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
           Smart OS
         </div>
@@ -220,7 +223,7 @@ const Learn = () => {
         </div>
       </div>
 
-      
+
 
 
       <Canvas className="w-full h-screen relative" camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
@@ -261,7 +264,7 @@ const Learn = () => {
           </div>
           <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
             <div className="text-sm font-inter py-2.5 px-6">Start playing</div>
-          </button> 
+          </button>
         </div>
         <div className="outline outline-1 rounded-3xl p-8">
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
@@ -286,8 +289,8 @@ const Learn = () => {
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
-          <button onClick={() => setShowLeaveGeo(true)}> 
-            <img src={go_icon} alt='go-logo' className='w-10 object-contain' />
+          <button onClick={() => setShowLeaveGeo(true)}>
+            <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
           </button>
         </div>
       </div>
@@ -311,7 +314,7 @@ const Learn = () => {
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
-          <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+          <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
