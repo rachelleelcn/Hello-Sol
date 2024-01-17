@@ -33,7 +33,7 @@ export const useWheels = (width, height, front, radius) => {
         acceleratingMaxSpeed: 0.055,
         acceleratingQuad: true,
 
-        brakeStrength: 5
+        brakeStrength: 10
     }
 
     const wheelInfos = [
