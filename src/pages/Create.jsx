@@ -418,7 +418,7 @@ const Create = () => {
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
                 <div className="flex items-center">
-                  <img src={license_icon} alt='license-logo' className='m-4 w-10 object-contain' />
+                  <img src={license_icon} alt='license-icon' className='m-4 w-10 object-contain' />
                   <div className="text-xs font-bold ml-1">{license}</div>
                 </div>
               </div>
@@ -430,7 +430,7 @@ const Create = () => {
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
               <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
-                <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
+                <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
           </div>
@@ -451,11 +451,11 @@ const Create = () => {
 
           <div className="flex">
             <button className='w-52 rounded-full outline outline-1 flex items-center p-4 justify-center mr-3'>
-              <img src={download_icon} alt='download-logo' className='w-5 object-contain' />
+              <img src={download_icon} alt='download-icon' className='w-5 object-contain' />
               <div className="font-inter pl-3 mr-2">Download image</div>
             </button>
             <button className="w-14 h-14 rounded-full outline outline-1 flex items-center justify-center">
-              <img src={share_icon} alt='share-logo' className='w-6 object-contain mr-1' />
+              <img src={share_icon} alt='share-icon' className='w-6 object-contain mr-1' />
             </button>
           </div>
 
@@ -485,7 +485,7 @@ const Create = () => {
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
-          <div className="text-sm mb-8">Progress you made may no be saved. Are you sure you want to leave this page?</div>
+          <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
