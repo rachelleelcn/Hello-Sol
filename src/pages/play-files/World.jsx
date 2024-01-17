@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import { useBox } from '@react-three/cannon'
+import { Ground } from './Ground.jsx'
 import { Roads } from './Roads.jsx'
 import { Buildings } from './Buildings.jsx'
 import { Stations } from './Stations.jsx'
@@ -25,12 +26,12 @@ export const Borders = () => {
   return (
     <group>
       {/* Front & Back */}
-      <Cube position={[0, 24, -51.3]} size={[103, 50, 0.01]}/>
-      <Cube position={[0, 24, 51.3]} size={[103, 50, 0.01]}/>
+      <Cube position={[0, 24, -52.5]} size={[105, 50, 0.01]}/>
+      <Cube position={[0, 24, 52.5]} size={[105, 50, 0.01]}/>
 
       {/* Sides */}
-      <Cube position={[-51.3, 24, 0]} size={[0.01, 50, 103]}/>
-      <Cube position={[51.3, 24, 0]} size={[0.01, 50, 103]}/>
+      <Cube position={[-52.5, 24, 0]} size={[0.01, 50, 105]}/>
+      <Cube position={[52.5, 24, 0]} size={[0.01, 50, 105]}/>
     </group>
     
   )
@@ -40,7 +41,8 @@ export const Borders = () => {
     return ( 
         <group>
           <Borders/>
-          <Roads/>
+          <Ground/>
+          {/* <Roads/> */}
           <Buildings/>
           <Stations/>
         </group>

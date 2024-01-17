@@ -10,8 +10,7 @@ import mute_icon from "../assets/icons/mute.png";
 import controls_icon from "../assets/icons/controls.png";
 import sound_icon from "../assets/icons/sound.png";
 
-import { Canvas } from '@react-three/fiber'
-import { Scene } from './Play_temp.jsx'
+import { Scene } from './Sandbox';
 
 
 const Play = () => {
@@ -457,11 +456,8 @@ const Play = () => {
         </div>
       </div>
 
+    </section>
 
-
-
-
-    </section >
 
 
 

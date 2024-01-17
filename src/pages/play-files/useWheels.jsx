@@ -8,19 +8,31 @@ export const useWheels = (width, height, front, radius) => {
         radius,
         directionLocal: [0, -1, 0],
         axleLocal: [1, 0, 0],
-        suspensionStiffness: 60,
+
+        suspensionStiffness: 80,
         suspensionRestLength: 0.1,
-        frictionSlip: 100,
-        dampingRelaxation: 2.3,
-        dampingCompression: 4.4,
+
+        frictionSlip: 1,
+
+        dampingRelaxation: 3,
+        dampingCompression: 4,
+
         maxSuspensionForce: 100000, 
-        rollInfluence: 0.01,
         maxSuspensionTravel: 0.1,
+
+        rollInfluence: 0.01,
+        
         customSlidingRotationalSpeed: -30,
         useCustomSlidingRotationalSpeed: true,
+        
         steeringSpeed: 0.005,
         steeringMax: Math.PI * 0.17,
         steeringQuad: false,
+
+        acceleratingSpeed: 1,
+        acceleratingMaxSpeed: 0.055,
+        acceleratingQuad: true,
+
         brakeStrength: 10
     }
 
@@ -52,7 +64,7 @@ export const useWheels = (width, height, front, radius) => {
         mass: 1,
         shapes: [
             {
-                args: [wheelInfo.radius, wheelInfo.radius, 0.015, 16],
+                args: [wheelInfo.radius, wheelInfo.radius, 0.5, 16],
                 rotation: [0, 0, -Math.PI/2],
                 type: 'Cylinder'
             },
