@@ -74,7 +74,7 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
             vehicleAPI.setBrake(10, 1)
             vehicleAPI.setBrake(10, 2)
             vehicleAPI.setBrake(10, 3)
-            chassisAPI.velocity.set(0, 0, 0)
+            // chassisAPI.velocity.set(0, 0, 0)
         }
         else {
             vehicleAPI.setBrake(0, 0)
