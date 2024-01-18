@@ -16,13 +16,13 @@ const Cube = ({position, size}) => {
     return (
       <mesh ref={ref}>   
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={'#FFFFFF'}/>
-        <Edges
+        <meshStandardMaterial color={'#F4FFDB'}/>
+        {/* <Edges
             scale={1}
             threshold={1}
-            color={'green'}
+            color={'#C8F165'}
             
-        />
+        /> */}
 
         {/* <Outlines 
             thickness={0.2} 

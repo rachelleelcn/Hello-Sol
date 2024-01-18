@@ -12,11 +12,14 @@ export function Scene() {
   return (
     <Suspense fallback={null}>
         <Canvas shadows>
-        <ambientLight intensity={2} color={'white'} castShadow/>
-        {/* <directionalLight intensity={1.5} position={[2,2,3]} castShadow/> */}
+        <ambientLight intensity={1.8} color={'white'} castShadow/>
+        <directionalLight intensity={3} position={[15, 100, 0]} castShadow/>
+        <directionalLight intensity={3} position={[-15, 100, 0]} castShadow/>
 
-        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={130}/>
+        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={120}/>
         {/* <OrbitControls/> */}
+
+
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>
           <CarModel/>
