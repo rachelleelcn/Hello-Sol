@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react'
 import { useBox } from '@react-three/cannon'
 import { Decal, useTexture } from '@react-three/drei'
+import leaf_icon from "../../assets/icons/leaf.png";
 
 const CubeV = ({position, size}) => {
-    const texture = useTexture('./src/assets/icons/leaf.png')
+    const texture = useTexture(leaf_icon)
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -45,7 +46,7 @@ const CubeV = ({position, size}) => {
   }
 
 const CubeH = ({position, size}) => {
-    const texture = useTexture('./src/assets/icons/leaf.png')
+    const texture = useTexture(leaf_icon)
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
