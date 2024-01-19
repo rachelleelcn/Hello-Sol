@@ -5,7 +5,7 @@ import { useBox } from '@react-three/cannon'
 import { Decal, useTexture } from '@react-three/drei'
 
 const CubeV = ({position, size}) => {
-    const texture = useTexture('./textures/leaf_icon.png')
+    const texture = useTexture('./src/assets/icons/leaf.png')
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -27,7 +27,7 @@ const CubeV = ({position, size}) => {
       onPointerOut={() => setHovered(false)}
       >
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={active ? '#A8A8A8' : '#C8F165'}/>
+        <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
         <Decal
             position={[0, 0, 0]}
             rotation={[0, 1.5, 0]}
@@ -37,6 +37,7 @@ const CubeV = ({position, size}) => {
                 map={texture}
                 polygonOffset
                 polygonOffsetFactor={-1}
+                transparent
                 />
         </Decal>
       </mesh>
@@ -44,7 +45,7 @@ const CubeV = ({position, size}) => {
   }
 
 const CubeH = ({position, size}) => {
-    const texture = useTexture('./textures/leaf_icon.png')
+    const texture = useTexture('./src/assets/icons/leaf.png')
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -66,7 +67,7 @@ const CubeH = ({position, size}) => {
         onPointerOut={() => setHovered(false)}
         >
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={active ? '#A8A8A8' : '#C8F165'}/>
+        <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
         <Decal
             position={[0, 0, 0]}
             rotation={[0, 0.1, 0]}
@@ -76,6 +77,7 @@ const CubeH = ({position, size}) => {
                 map={texture}
                 polygonOffset
                 polygonOffsetFactor={-1}
+                transparent
                 />
         </Decal>
       </mesh>
