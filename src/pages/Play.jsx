@@ -9,6 +9,7 @@ import share_icon from "../assets/icons/share.png";
 import mute_icon from "../assets/icons/mute.png";
 import controls_icon from "../assets/icons/controls.png";
 import sound_icon from "../assets/icons/sound.png";
+import { sendCustomEmail } from "./email";
 
 import { Scene } from './Sandbox';
 
@@ -22,10 +23,37 @@ const Play = () => {
   const [showCreateGeo, setShowCreateGeo] = useState(false);
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
-  const [email, setEmail] = useState('');
+  const [entries, setEntries] = useState(0);
+  //const [email, setEmail] = useState('');
+
+  const [details, setDetails] = useState({
+    to_email: "",
+    numEntry: entries,
+  });
+
+  const handleDetailsChange = (event) => {
+    const { name, value } = event.target;
+
+
+
+    setDetails((prevDetails) => {
+      return {
+        ...prevDetails,
+        [name]: value,
+      };
+    });
+
+
+  };
+
+  const handleSendEmail = () => {
+    sendCustomEmail(details);
+
+    //setEntries(entries);
+    //console.log("Value of entries:", entries);
+  };
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
-  const [entries, setEntries] = useState(0);
 
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
@@ -287,7 +315,7 @@ const Play = () => {
 
         {/* for testing - TO BE DELETED */}
         <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
-          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4); }}>
+          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4);}}>
             <div className="text-sm font-inter text-black-100">All Entries</div>
           </button>
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(3); goSection(4); }}>
@@ -365,15 +393,15 @@ const Play = () => {
             <div className="flex gap-2">
               <input
                 className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-sm p-2 w-full"
-                type="text"
+                name="to_email"
+                type="email"
                 placeholder="Your email"
-                value={email}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setEmail(value);
-                }}
+                value={details.to_email}
+                onChange={
+                  handleDetailsChange
+                }
               />
-              <button className="flex-shrink-0" onClick={() => email === '' ? null : setShowEmailSent(true)}>
+              <button className="flex-shrink-0" onClick={() => details.to_email === '' ? null : (handleSendEmail(), setShowEmailSent(true))}>
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>
@@ -414,7 +442,7 @@ const Play = () => {
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
           <div className="font-bold text-2xl mb-1">Email sent!</div>
-          <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to email@email.com.</div>
+          <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
           <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
           <div className="flex justify-center">
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowEmailSent(false)}>
