@@ -46,11 +46,11 @@ const Play = () => {
 
   };
 
-  const handleSendEmail = () => {
-    sendCustomEmail(details);
+  const handleSendEmail = (entryNum) => {
+    sendCustomEmail(details, entryNum);
 
     //setEntries(entries);
-    //console.log("Value of entries:", entries);
+    console.log("Value of entries:", entryNum);
   };
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -401,7 +401,7 @@ const Play = () => {
                   handleDetailsChange
                 }
               />
-              <button className="flex-shrink-0" onClick={() => details.to_email === '' ? null : (handleSendEmail(), setShowEmailSent(true))}>
+              <button className="flex-shrink-0" onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true))}>
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>

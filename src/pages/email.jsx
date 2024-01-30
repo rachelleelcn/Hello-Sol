@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 
-const sendCustomEmail = (details) => {
+const sendCustomEmail = (details, entries) => {
   // initialize using your User ID saved in the .env file
   emailjs.init(import.meta.env.VITE_EMAIL_USER_ID);
   emailjs
@@ -10,7 +10,7 @@ const sendCustomEmail = (details) => {
       // Start of the variables defined in the template earlier
       {
         to_email: details.to_email,
-        numEntry: details.numEntry,
+        numEntry: entries,
       }
       // End of the variables defined in the template earlier
     )

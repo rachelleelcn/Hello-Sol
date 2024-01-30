@@ -11,7 +11,6 @@ import RCar from "../models/RCar"
 import go_icon from "../assets/icons/go.png";
 
 
-
 const Learn = () => {
 
   const navigate = useNavigate();
