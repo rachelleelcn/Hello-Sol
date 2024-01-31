@@ -12,9 +12,7 @@ import sound_icon from "../assets/icons/sound.png";
 
 import { Scene } from './Sandbox';
 
-
 const Play = () => {
-
   const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(1);
   const [showControls, setShowControls] = useState(false);
@@ -27,24 +25,55 @@ const Play = () => {
   const [soundOn, setSoundOn] = useState(true);
   const [entries, setEntries] = useState(0);
 
+  const START_MINUTES = '5'
+  const START_SECONDS = '00'
+  const START_DURATION = 10
+  const [minutes, setMinutes] = useState(START_MINUTES)
+  const [seconds, setSeconds] = useState(START_SECONDS)
+  const [duration, setDuration] = useState(START_DURATION)
+  const [isRunning, setIsRunning] = useState(false)
+  
+  const startTimer = () => {
+    setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
+    setIsRunning(true)
+  }
+  const resetTimer = () => {
+      setMinutes(START_MINUTES)
+      setSeconds(START_SECONDS)
+      setIsRunning(false)
+      setDuration(START_DURATION)
+  }
+
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
   };
+
   const goSection = (index) => {
     setCurrentSection(index);
+
     if (index < 3) {
       setStartGame(false);
-    } else {
+    }
+    // show results when all stations found
+    else if (entries == 6) {
+      setCurrentSection(4);
       setStartGame(true);
     }
-  };
+    else {
+      setStartGame(true);
+    }
+  };  
+
   const quitGame = () => {
     setCurrentSection(1);
     setShowQuitGame(false);
     setStartGame(false);
+    setEntries(0)
+    resetTimer()
     //TODO: reset all values
   };
+
   const leaveToCreate = () => {
     setShowCreateGeo(false);
     navigate('/Hello-Sol/create');
@@ -57,7 +86,6 @@ const Play = () => {
       setSoundOn(true);
     }
   };
-
   const controlsToggle = () => {
     if (showControls) {
       setShowControls(false);
@@ -65,6 +93,34 @@ const Play = () => {
       setShowControls(true);
     }
   };
+
+  useEffect(() => {
+    if (isRunning === true) {
+        let timer = duration
+        var mins, secs
+        
+        const interval = setInterval(function () {
+          // If time runs out, show results and reset timer
+            if (--timer <= 0) {
+              goSection(4)
+              setEntries(entries)
+              resetTimer() 
+            }
+            else {
+                mins = parseInt(timer / 60, 10)
+                secs = parseInt(timer % 60, 10)
+
+                mins = mins < 10 ? + mins : mins
+                secs = secs < 10 ? '0' + secs : secs
+
+                setMinutes(mins)
+                setSeconds(secs)
+            }
+        }, 1000)
+        return () => clearInterval(interval)
+    }
+}, [isRunning])
+  
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -193,7 +249,11 @@ const Play = () => {
 
         <div className="flex" style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => goSection(1)}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => goSection(3)}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' 
+          onClick={() => {
+            goSection(3)
+            startTimer()
+          }}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Start game</div>
           </button>
         </div>
@@ -208,7 +268,6 @@ const Play = () => {
             <div className="text-sm font-inter text-black-100 pr-1.5">Quit game</div>
           </button>
         </div>
-
 
         <div className="flex gap-3" style={{ position: 'fixed', bottom: '5%', left: '3.5%' }}>
           <button className={`w-40 rounded-full outline ${showControls ? 'outline-2' : 'outline-1'} items-center justify-center flex py-3 px-6 gap-2`} onClick={controlsToggle}>
@@ -269,18 +328,20 @@ const Play = () => {
         </div>
 
 
+        {/* Timer */}
+        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
+          {minutes} <span>:</span> {seconds}
+        </div>
+        {/* <GameTimer/>       */}
 
-
-
-        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>5:00</div>
-
+        {/* Collected station indicators */}
         <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
-          <div className="w-11 h-11 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
         </div>
 
 
@@ -305,7 +366,7 @@ const Play = () => {
 
       {/* for testing - TO BE DELETED */}
       <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
-        <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); }}>
+        <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); setEntries(0) }}>
           <div className="text-sm font-inter text-black-100">Back</div>
         </button>
       </div>
@@ -457,8 +518,6 @@ const Play = () => {
       </div>
 
     </section>
-
-
 
 
   )

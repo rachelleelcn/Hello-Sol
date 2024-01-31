@@ -15,7 +15,7 @@ export function Scene() {
         <ambientLight intensity={2} color={'white'} castShadow/>
         {/* <directionalLight intensity={1.5} position={[2,2,3]} castShadow/> */}
 
-        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={130}/>
+        <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={100}/>
         {/* <OrbitControls/> */}
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>

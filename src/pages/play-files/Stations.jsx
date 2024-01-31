@@ -85,54 +85,53 @@ const CubeH = ({position, size}) => {
   export const Stations = () => {
     return (
         <group>
-            {/* Square 1 */}    
+            {/* Section 1 */}    
             <group>
                 <CubeV position={[-35, 0, -26]} size={[0.5, 2, 1.5]}/>
                
             </group>
             
-            {/* Square 2 */}
+            {/* Section 2 */}
             <group>
                 <CubeV position={[-9, 0, -28]} size={[0.5, 2, 1.5]}/>
             
             </group>
 
-            {/* Square 3 */}
+            {/* Section 3 */}
             <group>
                 
-               
             </group>
             
-            {/* Square 4 */}
+            {/* Section 4 */}
             <group>         
                 <CubeV position={[-40, 0, 8]}  size={[0.5, 2, 1.5]}/>
              
             </group>
                 
-            {/* Square 5 */}
+            {/* Section 5 */}
             <group>
                 
             </group>
 
-            {/* Square 6 */}
+            {/* Section 6 */}
             <group>
                 <CubeH position={[36, 0, 10]} size={[1.5, 2, 0.5]}/>
                
             </group>
 
-            {/* Square 7 */}
+            {/* Section 7 */}
             <group>
                 <CubeV position={[-46, 0, 30]} size={[0.5, 2, 1.5]}/>
                 
             </group>
 
-            {/* Square 8 */}
+            {/* Section 8 */}
             <group>
                 <CubeH position={[-10, 0, 33]} size={[1.5, 2, 0.5]}/>
                 
             </group>
 
-            {/* Square 9 */}
+            {/* Section 9 */}
             <group>
                 <CubeV position={[44, 0, 33]} size={[0.5, 2, 1.5]}/>
                 

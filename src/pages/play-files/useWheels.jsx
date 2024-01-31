@@ -10,15 +10,15 @@ export const useWheels = (width, height, front, radius) => {
         axleLocal: [1, 0, 0],
 
         suspensionStiffness: 80,
-        suspensionRestLength: 0.1,
+        suspensionRestLength: 0.3,
 
         frictionSlip: 1,
 
-        dampingRelaxation: 3,
-        dampingCompression: 4,
+        dampingRelaxation: 10,
+        dampingCompression: 4.4,
 
-        maxSuspensionForce: 100000, 
-        maxSuspensionTravel: 0.1,
+        maxSuspensionForce: 1e4, 
+        maxSuspensionTravel: 0.3,
 
         rollInfluence: 0.01,
         
@@ -33,7 +33,7 @@ export const useWheels = (width, height, front, radius) => {
         acceleratingMaxSpeed: 0.055,
         acceleratingQuad: true,
 
-        brakeStrength: 10
+        brakeStrength: 5
     }
 
     const wheelInfos = [
@@ -61,7 +61,7 @@ export const useWheels = (width, height, front, radius) => {
 
     const propsFunc = () => ({
         collisionFilterGroup: 0,
-        mass: 1,
+        mass: 10,
         shapes: [
             {
                 args: [wheelInfo.radius, wheelInfo.radius, 0.5, 16],

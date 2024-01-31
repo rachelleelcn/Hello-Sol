@@ -1,19 +1,19 @@
 /* eslint-disable react/no-unknown-property */
-import * as THREE from 'react'
+import * as THREE from 'three'
 import { useBox, useRaycastVehicle } from '@react-three/cannon'
-import { useFrame, useLoader, useThree } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useFrame, useLoader } from '@react-three/fiber'
+import React, { useEffect, useRef } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Quaternion, Vector3 } from 'three'
-import { OrbitControls } from '@react-three/drei'
+import { PerspectiveCamera } from '@react-three/drei'
 
 import { useWheels } from './useWheels'
 import { WheelDebug } from './WheelDebug'
 import { UseControls } from './UseControls'
 
-export function CarModel() {
-    const ref = useRef()
-    const model = useLoader(GLTFLoader, './models/Car.gltf')
+
+export function CarModel(enableControls) {
+    const model = useLoader(GLTFLoader, './models/EV_gltf_GEO.glb')
 
     const position = [15, 0, 0]
     const width = 0.8
@@ -63,24 +63,14 @@ export function CarModel() {
 
     return (
         <group>
-            <OrbitControls
-                target={position}
-                minDistance={1.5}
-                maxDistance={100}
-                enableDamping={true}
-                enablePan={true}
-                maxPolarAngle={Math.PI / 2 - 0.05}
-                rotateSpeed={0.5}
-                zoomSpeed={2.5}
-            />
-
+            
             <group ref={vehicle} name='vehicle'>
                 <group ref={chassisBody} name="chassisBody">
                     <primitive 
                         object={model.scene} 
-                        rotation-y={Math.PI} 
-                        position={[0, -0.45, 0]}
-                        scale={[0.3, 0.3, 0.3]}
+                        rotation-y={Math.PI/2}
+                        position={[0, -0.42, 0]}
+                        scale={[0.22, 0.22, 0.22]}
                         />
                 </group>
         

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 
-
-export const UseControls = (vehicleAPI, chassisAPI) => {
-    let [controls, setControls] = useState({
-    })
+export function UseControls(vehicleAPI, chassisAPI) {
+    let [controls, setControls] = useState({})
 
     useEffect(() => {
         const keyDownHandler = (e) => {
@@ -19,15 +17,15 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
                 [e.key.toLowerCase()]: false
             }))
         }
-
-        window.addEventListener('keydown', keyDownHandler)
-        window.addEventListener('keyup', keyUpHandler)
+            window.addEventListener('keydown', keyDownHandler)
+            window.addEventListener('keyup', keyUpHandler)
 
         return () => {
             window.removeEventListener('keydown', keyDownHandler)
             window.removeEventListener('keyup', keyUpHandler)
         }
     }, [])
+    
 
     // Apply movement
     useEffect(() => {
@@ -70,11 +68,10 @@ export const UseControls = (vehicleAPI, chassisAPI) => {
 
         // Hold shift to brake
         if (controls.shift) {
-            vehicleAPI.setBrake(10, 0)
-            vehicleAPI.setBrake(10, 1)
-            vehicleAPI.setBrake(10, 2)
-            vehicleAPI.setBrake(10, 3)
-            // chassisAPI.velocity.set(0, 0, 0)
+            vehicleAPI.setBrake(8, 0)
+            vehicleAPI.setBrake(8, 1)
+            // vehicleAPI.setBrake(8, 2)
+            // vehicleAPI.setBrake(8, 3)
         }
         else {
             vehicleAPI.setBrake(0, 0)
