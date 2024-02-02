@@ -136,7 +136,7 @@ const Play = () => {
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
               <div className="text-xs">
-                <div className="font-bold">WASD / Arrows</div>
+                <div className="font-bold font-sans">WASD / Arrows</div>
                 <div>Steer car</div>
               </div>
             </div>
@@ -231,7 +231,7 @@ const Play = () => {
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
                   <div className="text-[10px]">
-                    <div className="font-bold">WASD / Arrows</div>
+                    <div className="font-bold font-sans">WASD / Arrows</div>
                     <div>Steer car</div>
                   </div>
                 </div>
