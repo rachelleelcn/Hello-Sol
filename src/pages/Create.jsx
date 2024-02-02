@@ -130,6 +130,12 @@ const Create = () => {
               nameValidate(0);
             }
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter'){
+              e.preventDefault();
+              name === '' ? nameValidate(1) : goNextSection();
+            }
+          }}
         />
         <div className={`text-sm mt-2 mb-14 ${showNameValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showNameValidate ? 'text' : 'none' }}>
           {nameValidateMsg}
@@ -334,7 +340,13 @@ const Create = () => {
           <hr className="border-black-100 border-t" />
           <div className="flex items-center justify-center pt-6">
             <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                goNextSection();
+              }
+            }}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
             </button>
           </div>
@@ -357,6 +369,12 @@ const Create = () => {
               licenseValidate(2);
             } else {
               licenseValidate(0);
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              license === '' ? licenseValidate(1) : goNextSection();
             }
           }}
         />
@@ -429,7 +447,13 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  goNextSection();
+                }
+              }}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>

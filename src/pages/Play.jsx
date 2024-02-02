@@ -24,17 +24,21 @@ const Play = () => {
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
   const [entries, setEntries] = useState(0);
+  const currentDate = new Date ();
+  const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
+
+  const imageUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
 
   const [details, setDetails] = useState({
     to_email: "",
     numEntry: entries,
+    date: formattedDate,
+    image: imageUrl,
   });
 
   const handleDetailsChange = (event) => {
     const { name, value } = event.target;
-
-
 
     setDetails((prevDetails) => {
       return {
@@ -46,12 +50,28 @@ const Play = () => {
 
   };
 
-  const handleSendEmail = (entryNum) => {
-    sendCustomEmail(details, entryNum);
+  const handleSendEmail = (entryNum, dateFormat, imageUrl) => {
+    sendCustomEmail(details, entryNum, dateFormat, imageUrl);
 
     //setEntries(entries);
-    console.log("Value of entries:", entryNum);
+    //console.log("Value of entries:", entryNum);
+   //console.log("today's date:", dateFormat);
+   //console.log("image: ", imageUrl);
   };
+
+  const handleClearEmail = ()=> {
+    setDetails({...details, to_email: ""});
+
+  };
+
+  const handleButtonEmailClick = () => {
+    if (details.to_email.trim() !== '') {
+      handleSendEmail(entries, formattedDate, imageUrl);
+      setShowEmailSent(true);
+    }
+  };
+
+
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
 
@@ -397,11 +417,16 @@ const Play = () => {
                 type="email"
                 placeholder="Your email"
                 value={details.to_email}
-                onChange={
-                  handleDetailsChange
-                }
+                onChange={handleDetailsChange}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleButtonEmailClick();
+                  }
+                }}
+                //onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true), handleClearEmail())}
               />
-              <button className="flex-shrink-0" onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true))}>
+              <button className="flex-shrink-0"onClick={handleButtonEmailClick} >
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>
@@ -445,7 +470,16 @@ const Play = () => {
           <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
           <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
           <div className="flex justify-center">
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowEmailSent(false)}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {setShowEmailSent(false); handleClearEmail();}}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter'){
+                e.preventDefault();
+                setShowEmailSent(false);
+                handleClearEmail();
+              }
+            }
+
+            }>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>

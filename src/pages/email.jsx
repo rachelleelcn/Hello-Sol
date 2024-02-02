@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 
-const sendCustomEmail = (details, entries) => {
+const sendCustomEmail = (details, entries, formattedDate, imageUrl) => {
   // initialize using your User ID saved in the .env file
   emailjs.init(import.meta.env.VITE_EMAIL_USER_ID);
   emailjs
@@ -11,6 +11,8 @@ const sendCustomEmail = (details, entries) => {
       {
         to_email: details.to_email,
         numEntry: entries,
+        date: formattedDate,
+        image: imageUrl,
       }
       // End of the variables defined in the template earlier
     )
