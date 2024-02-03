@@ -171,4 +171,7 @@ body:has(.card[data-color="green"]:hover) {
   letter-spacing: -12px;
 }
 
-
+@font-face {
+  font-family: 'Inter';
+  src: url('assets/fonts/Inter.ttf') format('truetype');
+}
