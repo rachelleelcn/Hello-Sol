@@ -9,8 +9,10 @@ import Loader from "../components/Loader"
 import { Environment, Scroll, ScrollControls, useScroll } from "@react-three/drei"
 import go_icon from "../assets/icons/go.png";
 
+
 import RCar from "../models/RCar"
 import LearnCar from "../models/LearnCar"
+
 
 const Learn = () => {
 
