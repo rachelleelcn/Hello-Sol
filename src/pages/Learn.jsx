@@ -5,12 +5,10 @@ import { Suspense, useEffect, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import Loader from "../components/Loader"
 // import { OrbitControls } from "@react-three/drei"
-// import RCar from "../models/RCar"
 import { Environment, Scroll, ScrollControls, useScroll } from "@react-three/drei"
 import go_icon from "../assets/icons/go.png";
 
 
-import RCar from "../models/RCar"
 import LearnCar from "../models/LearnCar"
 
 
