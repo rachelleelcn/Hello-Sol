@@ -20,23 +20,26 @@ const EVBottom = (props) => {
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
             >
+                {/* <meshStandardMaterial color={props.colour} /> */}
             </mesh>
             <mesh
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
                 rotation={[0, Math.PI / 2, 0]}
             >
+                {/* <meshStandardMaterial color={props.colour} /> */}
             </mesh>
             <mesh
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
             >
-                {/* <meshStandardMaterial color={props.colour} /> */}
+                <meshStandardMaterial color={props.colour} />
             </mesh> 
             <mesh
                 geometry={nodes.mesh_3.geometry}
                 material={nodes.mesh_3.material}
             >
+                {/* <meshStandardMaterial color={props.colour} /> */}
             </mesh>
         </group>
     );

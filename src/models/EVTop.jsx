@@ -26,7 +26,7 @@ const EVTop = (props) => {
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
             >
-                {/* <meshStandardMaterial color={props.colour} /> */}
+                <meshStandardMaterial color={props.colour} />
             </mesh>
             <mesh
                 geometry={nodes.mesh_2.geometry}

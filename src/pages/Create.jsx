@@ -4,9 +4,12 @@ import license_icon from "../assets/icons/license.png";
 import download_icon from "../assets/icons/download.png";
 import share_icon from "../assets/icons/share.png";
 import geo_icon from "../assets/icons/geo.png";
+import close_icon from "../assets/icons/close.png";
 import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon } from 'react-share';
+// import { Storage } from '@google-cloud/storage';
 
 
 const Create = () => {
@@ -26,29 +29,33 @@ const Create = () => {
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+  const [showImageShare, setShowImageShare] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [shareUrl, setShareUrl] = useState(null);
 
-  const downloadImage = () => {
-    const existingCanvas = document.querySelector('canvas');
-    const newCanvas = document.createElement('canvas');
-    newCanvas.width = 1200;
-    newCanvas.height = 1400;
-    const newContext = newCanvas.getContext('2d');
 
-    // background color
-    newContext.fillStyle = '#F1F1F1';
-    newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
+  const generateImage = () => {
+    return new Promise((resolve) => {
+      const existingCanvas = document.querySelector('canvas');
+      const newCanvas = document.createElement('canvas');
+      newCanvas.width = 1200;
+      newCanvas.height = 1400;
+      const newContext = newCanvas.getContext('2d');
 
-    // add existing canvas to new
-    const existingCanvasScale = 1.2;
-    const existingCanvasX = (newCanvas.width - existingCanvas.width * existingCanvasScale) / 2;
-    const existingCanvasY = (newCanvas.height - existingCanvas.height * existingCanvasScale) / 2;
-    newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
+      // background color
+      newContext.fillStyle = '#F1F1F1';
+      newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
-    // text / image
+      // add existing canvas to new
+      const existingCanvasScale = 1.2;
+      const existingCanvasX = (newCanvas.width - existingCanvas.width * existingCanvasScale) / 2;
+      const existingCanvasY = (newCanvas.height - existingCanvas.height * existingCanvasScale) / 2;
+      newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
+
+      // text / image
       const image = new Image();
       image.src = geo_icon;
       image.onload = function () {
-
         newContext.fillStyle = 'black';
         newContext.font = 'bold 64px Inter';
         newContext.fillText('The rarest Geo of all,', 48, 120);
@@ -56,7 +63,7 @@ const Create = () => {
         newContext.fillText(`${name}’s Geo`, 48, 196);
         newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
         newContext.font = 'bold 28px Inter';
-        newContext.fillText("Hello-Sol", 48, newCanvas.height - 48);
+        newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
         newContext.font = '28px Inter';
         const nameText = `by ${name}`;
         const nameTextWidth = newContext.measureText(nameText).width;
@@ -66,19 +73,36 @@ const Create = () => {
         const imageWidth = imageHeight * imageAspectRatio;
         newContext.drawImage(image, newCanvas.width - nameTextWidth - 48 - imageWidth - 12, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
 
-        // trigger download
-        const link = document.createElement('a');
-        link.setAttribute('download', 'canvas.png');
-        link.setAttribute('href', newCanvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
-        link.click();
-
+        resolve(newCanvas);
       };
+    });
+
+  };
+
+  const downloadImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+
+    // trigger download
+    const link = document.createElement('a');
+    link.setAttribute('download', 'canvas.png');
+    link.setAttribute('href', imageUrl.replace('image/png', 'image/octet-stream'));
+    link.click();
+  };
+
+  const shareImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+    setImageUrl(imageUrl);
+
+    // create blob
+    const blob = await (await fetch(imageUrl)).blob();
+    const blobUrl = URL.createObjectURL(blob);
+    setShareUrl(blobUrl);
+    setShowImageShare(true);
 
   }
 
-  const shareImage = () => {
-
-  }
 
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
@@ -138,7 +162,7 @@ const Create = () => {
     }
   }
 
-  const tabWidth = 113; // Adjust this value if needed
+  const tabWidth = 113;
   const tabOffset = activeTab * tabWidth;
 
   const colours = ['blue', 'green', 'yellow', 'red', 'pink', 'purple'];
@@ -219,7 +243,7 @@ const Create = () => {
             }
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter'){
+            if (e.key === 'Enter') {
               e.preventDefault();
               name === '' ? nameValidate(1) : goNextSection();
             }
@@ -429,12 +453,12 @@ const Create = () => {
           <div className="flex items-center justify-center pt-6">
             <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                goNextSection();
-              }
-            }}>
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  goNextSection();
+                }
+              }}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
             </button>
           </div>
@@ -536,12 +560,12 @@ const Create = () => {
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
               <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  goNextSection();
-                }
-              }}>
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    goNextSection();
+                  }
+                }}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
@@ -604,6 +628,23 @@ const Create = () => {
               <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* PopUp - Image Share*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showImageShare === true ? 1 : 0, pointerEvents: showImageShare === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+        <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+          <button className="p-2 absolute top-6 right-6" onClick={() => setShowImageShare(false)}>
+            <img src={close_icon} alt='close-icon' className='w-4 object-contain' />
+          </button>
+          <img className="outline outline-1 w-24" src={imageUrl} alt="Your Image" />
+          <div className="font-bold text-2xl mb-2">Share your creation!</div>
+          <div className="text-sm mb-4">Share this image via</div>
+          <WhatsappShareButton separator={'\n'} url={shareUrl} title="Thank you for visiting Hello-Sol. Here is your geo!" windowHeight={700} windowWidth={1000}>
+            <WhatsappIcon size={32} round={true} />
+          </WhatsappShareButton>
+          <div className="text-sm mb-8">Or copy link</div>
         </div>
       </div>
 
