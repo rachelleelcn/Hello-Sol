@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import { useBox } from '@react-three/cannon'
-import { BoxGeometry } from 'three'
-import { Edges, Outlines } from '@react-three/drei'
+
+// import { SquareBuilding } from './BuildingGroups/Building1'
+// import { RectBuilding } from './BuildingGroups/Building2'
+// import { LBuilding } from './BuildingGroups/Building3'
+// import { UBuilding } from './BuildingGroups/Building4'
+// import { ZBuilding } from './BuildingGroups/Building5'
+// import { TBuilding } from './BuildingGroups/Building6'
 
 // Pink buildings
 const Cube = ({position, size}) => {
@@ -16,18 +21,7 @@ const Cube = ({position, size}) => {
     return (
       <mesh ref={ref}>   
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={'#FFFFFF'}/>
-        <Edges
-            scale={1}
-            threshold={1}
-            color={'#F178B8'}
-            
-        />
-
-        {/* <Outlines 
-            thickness={0.2} 
-            color={'#A8A8A8'}
-            /> */}
+        <meshStandardMaterial color={'#FFEAF5'}/>
       </mesh>
     )
   }
@@ -35,6 +29,10 @@ const Cube = ({position, size}) => {
   export const Section1 = () => {
     return (
       <group>
+        {/* <SquareBuilding position={[-36, -1, -9.5]}/>
+        <RectBuilding position={[0, -1, 0]}/>
+        <LBuilding position={[-20, -1, -15]}/>   */}
+
         <Cube position={[-36, 3, -9.5]}     size={[13, 8, 10]} />
         <Cube position={[-30, 6.5, -26]}    size={[6, 15, 15]} />
         <Cube position={[-45, 4, -12]}      size={[5, 10, 15]} />

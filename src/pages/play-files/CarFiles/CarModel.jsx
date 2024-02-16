@@ -1,19 +1,16 @@
 /* eslint-disable react/no-unknown-property */
-import * as THREE from 'three'
 import { useBox, useRaycastVehicle } from '@react-three/cannon'
 import { useFrame, useLoader } from '@react-three/fiber'
-import React, { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Quaternion, Vector3 } from 'three'
-import { PerspectiveCamera } from '@react-three/drei'
 
 import { useWheels } from './useWheels'
 import { WheelDebug } from './WheelDebug'
 import { UseControls } from './UseControls'
 
-
-export function CarModel(enableControls) {
-    const model = useLoader(GLTFLoader, './models/EV_gltf_GEO.glb')
+export function CarModel() {
+    const model = useLoader(GLTFLoader, './models/EV_WHOLE.glb')
 
     const position = [15, 0, 0]
     const width = 0.8
@@ -39,7 +36,7 @@ export function CarModel(enableControls) {
     }), useRef(null))
 
     UseControls(vehicleAPI, chassisAPI)
-
+    
     // Third person camera stuff
     useFrame((state) => {
         let position = new Vector3(0, 0, 0)
@@ -63,13 +60,13 @@ export function CarModel(enableControls) {
 
     return (
         <group>
-            
             <group ref={vehicle} name='vehicle'>
                 <group ref={chassisBody} name="chassisBody">
                     <primitive 
                         object={model.scene} 
-                        rotation-y={Math.PI/2}
-                        position={[0, -0.42, 0]}
+                        rotation-y={Math.PI}
+                        // rotation-y={Math.PI/2}
+                        position={[0, -0.5, 0]}
                         scale={[0.22, 0.22, 0.22]}
                         />
                 </group>
@@ -80,6 +77,5 @@ export function CarModel(enableControls) {
                 <WheelDebug wheelRef={wheels[3]} radius={wheelRadius}/>
             </group>
         </group>
-       
     )
 }

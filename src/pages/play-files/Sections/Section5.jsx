@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 import { useBox } from '@react-three/cannon'
-import { BoxGeometry } from 'three'
-import { Edges, Outlines } from '@react-three/drei'
 
 // Yellow buildings
 const Cube = ({position, size}) => {
@@ -16,18 +14,7 @@ const Cube = ({position, size}) => {
     return (
       <mesh ref={ref}>   
         <boxGeometry args={size}/>
-        <meshStandardMaterial color={'#FFFFFF'}/>
-        <Edges
-            scale={1}
-            threshold={1}
-            color={'#D89B37'}
-            
-        />
-
-        {/* <Outlines 
-            thickness={0.2} 
-            color={'#A8A8A8'}
-            /> */}
+        <meshStandardMaterial color={'#FFF8D9'}/>
         
       </mesh>
     )

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-export function UseControls(vehicleAPI, chassisAPI) {
+export const UseControls = (vehicleAPI, chassisAPI) => {
     let [controls, setControls] = useState({})
-
+    
     useEffect(() => {
         const keyDownHandler = (e) => {
             setControls((controls) => ({
@@ -90,4 +90,4 @@ export function UseControls(vehicleAPI, chassisAPI) {
     }, [controls, vehicleAPI, chassisAPI])
 
     return controls
-}
+} 
