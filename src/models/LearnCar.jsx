@@ -172,52 +172,64 @@ const LearnCar = (props) => {
                 <mesh
                     geometry={nodes.mesh_0.geometry}
                     material={nodes.mesh_0.material}
+                    material-metalness={0}
                 />
                 <mesh
                     geometry={nodes.mesh_1.geometry}
                     material={nodes.mesh_1.material}
+                    material-metalness={0}
                 />
                 <mesh
                     geometry={nodes.mesh_2.geometry}
                     material={nodes.mesh_2.material}
+                    material-metalness={0}
                 />
                 <mesh
                     geometry={nodes.mesh_3.geometry}
                     material={nodes.mesh_3.material}
+                    material-metalness={0}
                 />
             </group>
             <mesh
                 geometry={nodes.mesh_4.geometry}
                 material={nodes.mesh_4.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_5.geometry}
                 material={nodes.mesh_5.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_6.geometry}
                 material={nodes.mesh_6.material}
                 rotation={[0, Math.PI / 2, 0]}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_7.geometry}
                 material={nodes.mesh_7.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_8.geometry}
                 material={nodes.mesh_8.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_9.geometry}
                 material={nodes.mesh_9.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_10.geometry}
                 material={nodes.mesh_10.material}
+                material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_11.geometry}
                 material={nodes.mesh_11.material}
+                material-metalness={0}
             />
 
 

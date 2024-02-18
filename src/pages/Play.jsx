@@ -11,9 +11,8 @@ import mute_icon from "../assets/icons/mute.png";
 import controls_icon from "../assets/icons/controls.png";
 import sound_icon from "../assets/icons/sound.png";
 import { sendCustomEmail } from "./email";
-
 import { Scene } from './Sandbox';
-import { sendCustomEmail } from "./email";
+
 
 const Play = () => {
   const navigate = useNavigate();
@@ -25,52 +24,10 @@ const Play = () => {
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
 
   const [entries, setEntries] = useState(0);
-  const currentDate = new Date ();
+  const currentDate = new Date();
   const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
-
   const imageUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
-
-  const [details, setDetails] = useState({
-    to_email: "",
-    numEntry: entries,
-    date: formattedDate,
-    image: imageUrl,
-  });
-
-  const handleDetailsChange = (event) => {
-    const { name, value } = event.target;
-
-    setDetails((prevDetails) => {
-      return {
-        ...prevDetails,
-        [name]: value,
-      };
-    });
-
-
-  };
-
-  const handleSendEmail = (entryNum, dateFormat, imageUrl) => {
-    sendCustomEmail(details, entryNum, dateFormat, imageUrl);
-
-    //setEntries(entries);
-    //console.log("Value of entries:", entryNum);
-   //console.log("today's date:", dateFormat);
-   //console.log("image: ", imageUrl);
-  };
-
-  const handleClearEmail = ()=> {
-    setDetails({...details, to_email: ""});
-
-  };
-
-  const handleButtonEmailClick = () => {
-    if (details.to_email.trim() !== '') {
-      handleSendEmail(entries, formattedDate, imageUrl);
-      setShowEmailSent(true);
-    }
-  };
 
 
   const [startGame, setStartGame] = useState(false);
@@ -78,7 +35,7 @@ const Play = () => {
 
   // Current date variables
   const today = new Date()
-  const dateValues = {year: 'numeric', month: 'short', day: 'numeric'}
+  const dateValues = { year: 'numeric', month: 'short', day: 'numeric' }
   const dateFormat = today.toLocaleString('en-US', dateValues)
 
   // Timer variables
@@ -90,16 +47,16 @@ const Play = () => {
   const [duration, setDuration] = useState(START_DURATION)
   const [isRunning, setIsRunning] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
-  
+
   const startTimer = () => {
     setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
     setIsRunning(true)
   }
   const resetTimer = () => {
-      setMinutes(START_MINUTES)
-      setSeconds(START_SECONDS)
-      setIsRunning(false)
-      setDuration(START_DURATION)
+    setMinutes(START_MINUTES)
+    setSeconds(START_SECONDS)
+    setIsRunning(false)
+    setDuration(START_DURATION)
   }
 
   const leaveToGeo = () => {
@@ -117,7 +74,7 @@ const Play = () => {
       setStartGame(true);
     }
   };
-  
+
   const quitGame = () => {
     setCurrentSection(1);
     setShowQuitGame(false);
@@ -147,10 +104,48 @@ const Play = () => {
     }
   };
 
-  // email details
+  // Timer logic
+  useEffect(() => {
+    if (isRunning === true) {
+      let timer = duration
+      var mins, secs
+
+      const interval = setInterval(function () {
+        // If time runs out, show results and reset timer
+        if (--timer <= 0) {
+          goSection(4)
+          resetTimer()
+          setElapsedTime(duration)
+        }
+        else {
+          mins = parseInt(timer / 60, 10)
+          secs = parseInt(timer % 60, 10)
+
+          mins = mins < 10 ? + mins : mins
+          secs = secs < 10 ? '0' + secs : secs
+
+          setMinutes(mins)
+          setSeconds(secs)
+          setElapsedTime(duration - timer)
+        }
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [isRunning, duration])
+
+  useEffect(() => {
+    if (entries === 6) {
+      goSection(4)
+      resetTimer()
+      setElapsedTime(elapsedTime)
+    }
+  }, [entries, elapsedTime])
+
   const [details, setDetails] = useState({
     to_email: "",
     numEntry: entries,
+    date: formattedDate,
+    image: imageUrl,
     timeTaken: elapsedTime
   });
 
@@ -165,49 +160,28 @@ const Play = () => {
     });
   };
 
-  const handleSendEmail = ({ entryNum, timeTaken }) => {
-    sendCustomEmail(details, entryNum, timeTaken);
+  const handleSendEmail = (entryNum, dateFormat, imageUrl, timeTaken) => {
+    sendCustomEmail(details, entryNum, dateFormat, imageUrl, timeTaken);
 
-    console.log("Value of entries:", entryNum);
-    console.log('Time:', timeTaken)
+    //setEntries(entries);
+    //console.log("Value of entries:", entryNum);
+    //console.log("today's date:", dateFormat);
+    //console.log("image: ", imageUrl);
+    //  console.log('Time:', timeTaken)
   };
 
-  // Timer logic
-  useEffect(() => {
-    if (isRunning === true) {
-        let timer = duration
-        var mins, secs
-        
-        const interval = setInterval(function () {
-          // If time runs out, show results and reset timer
-            if (--timer <= 0) {
-              goSection(4)
-              resetTimer() 
-              setElapsedTime(duration)
-            }
-            else {
-                mins = parseInt(timer / 60, 10)
-                secs = parseInt(timer % 60, 10)
+  const handleClearEmail = () => {
+    setDetails({ ...details, to_email: "" });
 
-                mins = mins < 10 ? + mins : mins
-                secs = secs < 10 ? '0' + secs : secs
+  };
 
-                setMinutes(mins)
-                setSeconds(secs)
-                setElapsedTime(duration - timer)
-            }
-        }, 1000)
-        return () => clearInterval(interval)
+  const handleButtonEmailClick = () => {
+    if (details.to_email.trim() !== '') {
+      handleSendEmail(entries, formattedDate, imageUrl);
+      setShowEmailSent(true);
     }
-}, [isRunning, duration])
+  };
 
-useEffect(() => {
-  if (entries === 6) {
-    goSection(4)
-    resetTimer()
-    setElapsedTime(elapsedTime)
-  }
-}, [entries])
 
 
   // for testing
@@ -220,12 +194,12 @@ useEffect(() => {
     <section className='w-full h-screen relative bg-white-200'>
 
       {/* Sandbox Game - Appears after instructions, disappears on results */}
-      {currentSection > 2 && currentSection < 4 && (
+      {currentSection > 2 && currentSection < 5 && (
         <div style={{ width: '100%', height: '100%' }}>
           <Scene entries={entries} setEntries={setEntries} />
         </div>
       )}
-      
+
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
@@ -280,40 +254,40 @@ useEffect(() => {
 
           <div className="flex gap-10 text-nowrap">
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold font-sans">WASD / Arrows</div>
                 <div>Steer car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold">Shift</div>
                 <div>Brake car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold">R</div>
                 <div>Reset car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor movement</div>
                 <div>Rotate camera</div>
               </div>
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor click</div>
                 <div>Collect stations</div>
               </div>
-            </div>
+            </div> */}
           </div>
 
 
@@ -339,11 +313,11 @@ useEffect(() => {
 
         <div className="flex" style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => goSection(1)}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' 
-          onClick={() => {
-            goSection(3)
-            startTimer()
-          }}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex'
+            onClick={() => {
+              goSection(3)
+              startTimer()
+            }}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Start game</div>
           </button>
         </div>
@@ -405,13 +379,13 @@ useEffect(() => {
                     <div>Rotate camera</div>
                   </div>
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
                   <div className="text-[10px]">
                     <div className="font-bold">Cursor click</div>
                     <div>Collect stations</div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -436,7 +410,7 @@ useEffect(() => {
 
         {/* for testing - TO BE DELETED */}
         <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
-          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4);}}>
+          <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4); }}>
             <div className="text-sm font-inter text-black-100">All Entries</div>
           </button>
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(3); goSection(4); }}>
@@ -463,7 +437,7 @@ useEffect(() => {
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
-        
+
 
         {/* Result message */}
         {entries === 0 && (
@@ -472,7 +446,7 @@ useEffect(() => {
             <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
           </div>
         )}
-        
+
         {entries === 6 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
@@ -487,7 +461,7 @@ useEffect(() => {
           </div>
         )}
 
-          {/* Result details */}
+        {/* Result details */}
         <div className="flex gap-4 pb-3 justify-center items-center">
           <div className="text-base font-bold">Day 1</div>
 
@@ -505,7 +479,7 @@ useEffect(() => {
           </div>
         </div>
 
-          {/* Indicators of # of stations found */}
+        {/* Indicators of # of stations found */}
         <div className="flex gap-2 justify-center items-center pb-8">
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
@@ -540,9 +514,9 @@ useEffect(() => {
                     handleButtonEmailClick();
                   }
                 }}
-                //onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true), handleClearEmail())}
+              //onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true), handleClearEmail())}
               />
-              <button className="flex-shrink-0"onClick={handleButtonEmailClick} >
+              <button className="flex-shrink-0" onClick={handleButtonEmailClick} >
 
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
@@ -562,17 +536,17 @@ useEffect(() => {
       </div>
 
 
-      {/* PopUp - Email sent */}
-      <div style={{ transition: 'opacity 0.2s', opacity: showEmailSent === true ? 1 : 0, pointerEvents: showEmailSent === true ? 'auto' : 'none' }}>
+      {/* PopUp - Create new geo */}
+      <div style={{ transition: 'opacity 0.2s', opacity: showCreateGeo === true ? 1 : 0, pointerEvents: showCreateGeo === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
-          <div className="font-bold text-2xl mb-1">Email sent!</div>
-          <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
-          <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
+          <div className="font-bold text-2xl mb-1">Going to Geo-Creator...</div>
+          <div className="text-sm mb-8">You’re about to leave this page to create your own custom Geo-Sol with our Geo-Creator.</div>
           <div className="flex justify-center">
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowEmailSent(false)}>
-              <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
+            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowCreateGeo(false)}>Skip</button>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToCreate}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Go</div>
             </button>
           </div>
         </div>
@@ -587,16 +561,16 @@ useEffect(() => {
           <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
           <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
           <div className="flex justify-center">
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {setShowEmailSent(false); handleClearEmail();}}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter'){
-                e.preventDefault();
-                setShowEmailSent(false);
-                handleClearEmail();
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { setShowEmailSent(false); handleClearEmail(); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  setShowEmailSent(false);
+                  handleClearEmail();
+                }
               }
-            }
 
-            }>
+              }>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>

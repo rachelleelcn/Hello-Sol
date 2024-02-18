@@ -13,7 +13,7 @@ const sendCustomEmail = (details, entries, formattedDate, imageUrl, elapsedTime)
       {
         to_email: details.to_email,
         numEntry: entries,
-        timeTaken: elapsedTime
+        timeTaken: elapsedTime,
         date: formattedDate,
         image: imageUrl,
       }
