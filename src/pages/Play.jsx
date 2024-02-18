@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
+
 import go_icon from "../assets/icons/go.png";
 import go_transparent_icon from "../assets/icons/go_transparent.png";
 import add_icon from "../assets/icons/add.png";
@@ -12,10 +13,9 @@ import sound_icon from "../assets/icons/sound.png";
 import { sendCustomEmail } from "./email";
 
 import { Scene } from './Sandbox';
-
+import { sendCustomEmail } from "./email";
 
 const Play = () => {
-
   const navigate = useNavigate();
   const [currentSection, setCurrentSection] = useState(1);
   const [showControls, setShowControls] = useState(false);
@@ -23,6 +23,7 @@ const Play = () => {
   const [showCreateGeo, setShowCreateGeo] = useState(false);
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+
   const [entries, setEntries] = useState(0);
   const currentDate = new Date ();
   const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
@@ -75,24 +76,57 @@ const Play = () => {
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
 
+  // Current date variables
+  const today = new Date()
+  const dateValues = {year: 'numeric', month: 'short', day: 'numeric'}
+  const dateFormat = today.toLocaleString('en-US', dateValues)
+
+  // Timer variables
+  const START_MINUTES = '5'
+  const START_SECONDS = '00'
+  const START_DURATION = 10
+  const [minutes, setMinutes] = useState(START_MINUTES)
+  const [seconds, setSeconds] = useState(START_SECONDS)
+  const [duration, setDuration] = useState(START_DURATION)
+  const [isRunning, setIsRunning] = useState(false)
+  const [elapsedTime, setElapsedTime] = useState(0)
+  
+  const startTimer = () => {
+    setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
+    setIsRunning(true)
+  }
+  const resetTimer = () => {
+      setMinutes(START_MINUTES)
+      setSeconds(START_SECONDS)
+      setIsRunning(false)
+      setDuration(START_DURATION)
+  }
+
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
   };
+
   const goSection = (index) => {
     setCurrentSection(index);
+
     if (index < 3) {
       setStartGame(false);
-    } else {
+    }
+    else {
       setStartGame(true);
     }
   };
+  
   const quitGame = () => {
     setCurrentSection(1);
     setShowQuitGame(false);
     setStartGame(false);
+    setEntries(0)
+    resetTimer()
     //TODO: reset all values
   };
+
   const leaveToCreate = () => {
     setShowCreateGeo(false);
     navigate('/Hello-Sol/create');
@@ -105,7 +139,6 @@ const Play = () => {
       setSoundOn(true);
     }
   };
-
   const controlsToggle = () => {
     if (showControls) {
       setShowControls(false);
@@ -113,6 +146,69 @@ const Play = () => {
       setShowControls(true);
     }
   };
+
+  // email details
+  const [details, setDetails] = useState({
+    to_email: "",
+    numEntry: entries,
+    timeTaken: elapsedTime
+  });
+
+  const handleDetailsChange = (event) => {
+    const { name, value } = event.target;
+
+    setDetails((prevDetails) => {
+      return {
+        ...prevDetails,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSendEmail = ({ entryNum, timeTaken }) => {
+    sendCustomEmail(details, entryNum, timeTaken);
+
+    console.log("Value of entries:", entryNum);
+    console.log('Time:', timeTaken)
+  };
+
+  // Timer logic
+  useEffect(() => {
+    if (isRunning === true) {
+        let timer = duration
+        var mins, secs
+        
+        const interval = setInterval(function () {
+          // If time runs out, show results and reset timer
+            if (--timer <= 0) {
+              goSection(4)
+              resetTimer() 
+              setElapsedTime(duration)
+            }
+            else {
+                mins = parseInt(timer / 60, 10)
+                secs = parseInt(timer % 60, 10)
+
+                mins = mins < 10 ? + mins : mins
+                secs = secs < 10 ? '0' + secs : secs
+
+                setMinutes(mins)
+                setSeconds(secs)
+                setElapsedTime(duration - timer)
+            }
+        }, 1000)
+        return () => clearInterval(interval)
+    }
+}, [isRunning, duration])
+
+useEffect(() => {
+  if (entries === 6) {
+    goSection(4)
+    resetTimer()
+    setElapsedTime(elapsedTime)
+  }
+}, [entries])
+
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -123,11 +219,13 @@ const Play = () => {
   return (
     <section className='w-full h-screen relative bg-white-200'>
 
-      {/* Sandbox Game */}
-      <div style={{ width: '100%', height: '100%' }}>
-        <Scene />
-      </div>
-
+      {/* Sandbox Game - Appears after instructions, disappears on results */}
+      {currentSection > 2 && currentSection < 4 && (
+        <div style={{ width: '100%', height: '100%' }}>
+          <Scene entries={entries} setEntries={setEntries} />
+        </div>
+      )}
+      
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
@@ -241,7 +339,11 @@ const Play = () => {
 
         <div className="flex" style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => goSection(1)}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => goSection(3)}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' 
+          onClick={() => {
+            goSection(3)
+            startTimer()
+          }}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Start game</div>
           </button>
         </div>
@@ -256,7 +358,6 @@ const Play = () => {
             <div className="text-sm font-inter text-black-100 pr-1.5">Quit game</div>
           </button>
         </div>
-
 
         <div className="flex gap-3" style={{ position: 'fixed', bottom: '5%', left: '3.5%' }}>
           <button className={`w-40 rounded-full outline ${showControls ? 'outline-2' : 'outline-1'} items-center justify-center flex py-3 px-6 gap-2`} onClick={controlsToggle}>
@@ -317,21 +418,21 @@ const Play = () => {
         </div>
 
 
-
-
-
-        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>5:00</div>
-
-        <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
-          <div className="w-11 h-11 bg-grey-100 rounded-full outline outline-1"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
-          <div className="w-11 h-11 bg-grey-100 rounded-full"></div>
+        {/* Timer */}
+        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
+          {minutes} <span>:</span> {seconds}
         </div>
+        {/* <GameTimer/>       */}
 
-
+        {/* Collected station indicators */}
+        <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
+        </div>
 
         {/* for testing - TO BE DELETED */}
         <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
@@ -353,29 +454,32 @@ const Play = () => {
 
       {/* for testing - TO BE DELETED */}
       <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
-        <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); }}>
+        <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); setEntries(0) }}>
           <div className="text-sm font-inter text-black-100">Back</div>
         </button>
       </div>
-
 
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
+        
 
+        {/* Result message */}
         {entries === 0 && (
           <div>
             <div className="font-bold text-3xl pb-2">Good try!</div>
             <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
           </div>
         )}
+        
         {entries === 6 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
           </div>
         )}
+
         {entries > 0 && entries < 6 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
@@ -383,15 +487,25 @@ const Play = () => {
           </div>
         )}
 
-
+          {/* Result details */}
         <div className="flex gap-4 pb-3 justify-center items-center">
-          <div className="text-base font-bold">Day 6</div>
-          <hr className="border-black-100 border-t-1 w-8" />
-          <div className="text-base">April 10th, 2024</div>
-          <hr className="border-black-100 border-t-1 w-8" />
-          <div className="text-base font-bold">2:05</div>
+          <div className="text-base font-bold">Day 1</div>
+
+          {/* Today's date */}
+          <hr className="border-black-100 border-t-1 w-6" />
+          <div className="text-base">
+            {dateFormat}
+          </div>
+
+          {/* Time taken */}
+          <hr className="border-black-100 border-t-1 w-6" />
+          <div className="text-base font-bold">
+            {Math.floor(elapsedTime / 60)} <span>:</span> {String(elapsedTime % 60).padStart(2, '0')}
+
+          </div>
         </div>
 
+          {/* Indicators of # of stations found */}
         <div className="flex gap-2 justify-center items-center pb-8">
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
@@ -407,6 +521,7 @@ const Play = () => {
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
         </div>
 
+        {/* Email text field */}
         {entries > 0 && (
           <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6">
             <div className="text-sm pb-1">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
@@ -417,6 +532,7 @@ const Play = () => {
                 type="email"
                 placeholder="Your email"
                 value={details.to_email}
+
                 onChange={handleDetailsChange}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -427,6 +543,7 @@ const Play = () => {
                 //onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true), handleClearEmail())}
               />
               <button className="flex-shrink-0"onClick={handleButtonEmailClick} >
+
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>
@@ -445,17 +562,17 @@ const Play = () => {
       </div>
 
 
-      {/* PopUp - Create new geo */}
-      <div style={{ transition: 'opacity 0.2s', opacity: showCreateGeo === true ? 1 : 0, pointerEvents: showCreateGeo === true ? 'auto' : 'none' }}>
+      {/* PopUp - Email sent */}
+      <div style={{ transition: 'opacity 0.2s', opacity: showEmailSent === true ? 1 : 0, pointerEvents: showEmailSent === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
           <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
-          <div className="font-bold text-2xl mb-1">Going to Geo-Creator...</div>
-          <div className="text-sm mb-8">You’re about to leave this page to create your own custom Geo-Sol with our Geo-Creator.</div>
+          <div className="font-bold text-2xl mb-1">Email sent!</div>
+          <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
+          <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
           <div className="flex justify-center">
-            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowCreateGeo(false)}>Skip</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToCreate}>
-              <div className="text-sm font-inter py-3 px-6 text-white-100">Go</div>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowEmailSent(false)}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>
         </div>
@@ -519,8 +636,6 @@ const Play = () => {
       </div>
 
     </section>
-
-
 
 
   )
