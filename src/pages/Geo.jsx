@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Geo = () => {
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
+  // const goBack = () => {
+  //   navigate(-1); // Navigate back to the previous page
+  // };
 
   return (
     <section className='w-full h-screen relative bg-white-200 z-10'>

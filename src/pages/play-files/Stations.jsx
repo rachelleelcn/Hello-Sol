@@ -5,8 +5,10 @@ import { useBox } from '@react-three/cannon'
 import { Decal, useTexture } from '@react-three/drei'
 import leaf_icon from "../../assets/icons/leaf.png";
 
-const CubeV = ({position, size}) => {
+
+const CubeV = ({position, size, entries, setEntries}) => {
     const texture = useTexture(leaf_icon)
+
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -21,32 +23,42 @@ const CubeV = ({position, size}) => {
         document.body.style.cursor = hovered ? 'pointer' : 'auto'
     }, [hovered])
 
+    // change to grey, update entries value
+    const handleMeshClick = () => {
+        if (!active) {
+            setActive(true)
+            UpdateEntries(entries, setEntries)
+        }
+    }
+
     return (
-      <mesh ref={ref} 
-      onClick={() => setActive(!active)}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      >
-        <boxGeometry args={size}/>
-        <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
-        <Decal
-            position={[0, 0, 0]}
-            rotation={[0, 1.5, 0]}
-            scale={1}
-            >
-            <meshBasicMaterial 
-                map={texture}
-                polygonOffset
-                polygonOffsetFactor={-1}
-                transparent
-                />
-        </Decal>
-      </mesh>
+
+        <group>
+            <mesh ref={ref} 
+            onClick={() => { handleMeshClick() }} 
+            onPointerOver={() => setHovered(true)}
+            onPointerOut={() => setHovered(false)}>
+            <boxGeometry args={size}/>
+            <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
+            <Decal
+                position={[0, 0, 0]}
+                rotation={[0, 1.5, 0]}
+                scale={1}
+                >
+                <meshBasicMaterial 
+                    map={texture}
+                    polygonOffset
+                    polygonOffsetFactor={-1}
+                    />
+            </Decal>
+            </mesh>
+        </group>
     )
   }
 
-const CubeH = ({position, size}) => {
+const CubeH = ({position, size, entries, setEntries}) => {
     const texture = useTexture(leaf_icon)
+
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -61,86 +73,114 @@ const CubeH = ({position, size}) => {
         document.body.style.cursor = hovered ? 'pointer' : 'auto'
     }, [hovered])
 
+    // change to grey, update entries value
+    const handleMeshClick = () => {
+        if (!active) {
+            setActive(true)
+            UpdateEntries(entries, setEntries)
+        }
+    }
+
     return (
-        <mesh ref={ref} 
-        onClick={() => setActive(!active)}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-        >
-        <boxGeometry args={size}/>
-        <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
-        <Decal
-            position={[0, 0, 0]}
-            rotation={[0, 0.1, 0]}
-            scale={1}
+
+        <group>
+            <mesh ref={ref} 
+            onClick={() => { handleMeshClick() }} 
+            onPointerOver={() => setHovered(true)}
+            onPointerOut={() => setHovered(false)}
             >
-            <meshBasicMaterial 
-                map={texture}
-                polygonOffset
-                polygonOffsetFactor={-1}
-                transparent
-                />
-        </Decal>
-      </mesh>
+            <boxGeometry args={size}/>
+            <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
+            <Decal
+                position={[0, 0, 0]}
+                rotation={[0, 0.1, 0]}
+                scale={1}
+                >
+                <meshBasicMaterial 
+                    map={texture}
+                    polygonOffset
+                    polygonOffsetFactor={-1}
+                    />
+            </Decal>
+            </mesh>
+        </group>
+
     )
   }
 
-  export const Stations = () => {
+export function UpdateEntries(entries, setEntries) {
+    let newEntry = entries
+
+    if (entries < 6) {
+        newEntry = entries + 1
+        setEntries(newEntry)
+    }
+
+    console.log(newEntry)
+    return newEntry
+}
+
+
+  export const Stations = ({ entries, setEntries }) => {
+    // const [entries, setEntries] = useState(0); 
+    setEntries(entries)
+
     return (
         <group>
-            {/* Square 1 */}    
+            {/* Section 1 */}    
             <group>
-                <CubeV position={[-35, 0, -26]} size={[0.5, 2, 1.5]}/>
+                <CubeV position={[-35, 0, -26]} size={[0.5, 2, 1.5]} entries={entries} setEntries={setEntries}/>
                
             </group>
             
-            {/* Square 2 */}
+            {/* Section 2 */}
             <group>
-                <CubeV position={[-9, 0, -28]} size={[0.5, 2, 1.5]}/>
-            
+                <CubeV position={[-9, 0, -28]} size={[0.5, 2, 1.5]} entries={entries} setEntries={setEntries}/>
+
+                {/* test station */}
+                {/* <CubeV position={[12, 0, -10]} size={[0.5, 2, 1.5]} entries={entries} setEntries={setEntries}/> */}
             </group>
 
-            {/* Square 3 */}
+            {/* Section 3 */}
             <group>
                 
-               
             </group>
             
-            {/* Square 4 */}
+            {/* Section 4 */}
             <group>         
-                <CubeV position={[-40, 0, 8]}  size={[0.5, 2, 1.5]}/>
+                <CubeV position={[-40, 0, 8]}  size={[0.5, 2, 1.5]}  entries={entries} setEntries={setEntries}/>
              
             </group>
                 
-            {/* Square 5 */}
+            {/* Section 5 */}
             <group>
                 
             </group>
 
-            {/* Square 6 */}
+            {/* Section 6 */}
             <group>
-                <CubeH position={[36, 0, 10]} size={[1.5, 2, 0.5]}/>
+                <CubeH position={[36, 0, 10]} size={[1.5, 2, 0.5]} entries={entries} setEntries={setEntries}/>
                
             </group>
 
-            {/* Square 7 */}
+            {/* Section 7 */}
             <group>
-                <CubeV position={[-46, 0, 30]} size={[0.5, 2, 1.5]}/>
+                <CubeV position={[-46, 0, 30]} size={[0.5, 2, 1.5]} entries={entries} setEntries={setEntries}/>
                 
             </group>
 
-            {/* Square 8 */}
+            {/* Section 8 */}
             <group>
-                <CubeH position={[-10, 0, 33]} size={[1.5, 2, 0.5]}/>
+                <CubeH position={[-10, 0, 33]} size={[1.5, 2, 0.5]} entries={entries} setEntries={setEntries}/>
                 
             </group>
 
-            {/* Square 9 */}
+            {/* Section 9 */}
             <group>
-                <CubeV position={[44, 0, 33]} size={[0.5, 2, 1.5]}/>
+                <CubeV position={[44, 0, 33]} size={[0.5, 2, 1.5]} entries={entries} setEntries={setEntries}/>
                 
             </group>
-            
+
         </group>
     )
   }

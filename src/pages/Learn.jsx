@@ -5,11 +5,12 @@ import { Suspense, useEffect, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import Loader from "../components/Loader"
 // import { OrbitControls } from "@react-three/drei"
-// import RCar from "../models/RCar"
-import { Scroll, ScrollControls, useScroll } from "@react-three/drei"
-import RCar from "../models/RCar"
+import { Environment, Scroll, ScrollControls, useScroll } from "@react-three/drei"
 import go_icon from "../assets/icons/go.png";
+import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 
+
+import LearnCar from "../models/LearnCar"
 
 
 const Learn = () => {
@@ -229,15 +230,11 @@ const Learn = () => {
       <Canvas className="w-full h-screen relative" camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
         <Suspense fallback={<Loader />}>
 
-          <directionalLight intensity={1} position={[5, 10, 5]} />
-          <ambientLight intensity={0.2} />
-          <pointLight intensity={0.8} position={[-5, 5, 5]} />
-          <spotLight intensity={1} position={[0, 10, 0]} angle={Math.PI / 4} penumbra={0.2} />
-          <hemisphereLight intensity={0.3} skyColor="#ffffff" groundColor="#000000" />
+        <Environment files={city} />
 
           <ScrollControls pages={15} damping={0.1}>
-            <RCar
-              position={[-0.5, -3, -1]}
+            <LearnCar
+              position={[-0.1, -1, 5.5]}
               rotation={[0, -0.5, 0]}
               onScroll={handleScroll}
             />
