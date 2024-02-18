@@ -8,15 +8,15 @@ import { useRef, useEffect, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
-import evTopScene from "../assets/3d/EV-TOP.glb";
+import classicTopScene from "../assets/3d/CLASSIC-TOP.glb";
 
-const EVTop = (props) => {
+const ClassicTop = (props) => {
 
-    const evTop = useRef();
-    const { nodes, materials } = useGLTF(evTopScene);
+    const classicTop = useRef();
+    const { nodes, materials } = useGLTF(classicTopScene);
 
     return (
-        <group ref={evTop} {...props} dispose={null}>
+        <group ref={classicTop} {...props} dispose={null}>
 
             {/* <mesh
                 geometry={nodes.mesh_0.geometry}
@@ -29,12 +29,7 @@ const EVTop = (props) => {
                 material-metalness={0}
             >
                 <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            /> */}
+            </mesh> */}
 
             <mesh
                 geometry={nodes.mesh_0.geometry}
@@ -44,15 +39,11 @@ const EVTop = (props) => {
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
             />
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-            />
 
 
         </group>
     );
 }
 
-export default EVTop;
+export default ClassicTop;
 

@@ -8,23 +8,23 @@ import { useRef, useEffect, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
-import evBottomScene from "../assets/3d/EV-BOTTOM.glb";
+import classicBottomScene from "../assets/3d/CLASSIC-BOTTOM.glb";
 
-const EVBottom = (props) => {
+const ClassicBottom = (props) => {
 
-    const evBottom = useRef();
-    const { nodes, materials } = useGLTF(evBottomScene);
+    const classicBottom = useRef();
+    const { nodes, materials } = useGLTF(classicBottomScene);
 
     return (
-        <group ref={evBottom} {...props} dispose={null}>
-
+        <group ref={classicBottom} {...props} dispose={null}>
 
             {/* <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                rotation={[0, Math.PI / 2, 0]}
                 material-metalness={0}
-            />
+                >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
             <mesh
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
@@ -33,13 +33,13 @@ const EVBottom = (props) => {
             <mesh
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
+                position={[0, -0.141, 0]}
                 material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
+            />
             <mesh
                 geometry={nodes.mesh_3.geometry}
                 material={nodes.mesh_3.material}
+                position={[0, -0.141, 0]}
                 material-metalness={0}
             />
             <mesh
@@ -51,7 +51,6 @@ const EVBottom = (props) => {
             <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                rotation={[0, Math.PI / 2, 0]}
             />
             <mesh
                 geometry={nodes.mesh_1.geometry}
@@ -70,8 +69,9 @@ const EVBottom = (props) => {
                 material={nodes.mesh_4.material}
             />
 
+
         </group>
     );
 }
 
-export default EVBottom;
+export default ClassicBottom;

@@ -12,6 +12,7 @@ import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookI
 // import { Storage } from '@google-cloud/storage';
 
 
+
 const Create = () => {
 
   const navigate = useNavigate();
@@ -178,7 +179,7 @@ const Create = () => {
     <section className='w-full h-screen relative bg-white-200 download'>
 
       {currentSection > 1 && currentSection < 6 && (
-        <div className="w-2/3 h-screen relative pb-20 pl-10" >
+        <div className="w-2/3 h-screen relative" >
           <Canvas style={{ background: '#F1F1F1' }} >
             <Suspense fallback={<Loader />}>
               <Configurator
@@ -195,7 +196,7 @@ const Create = () => {
       )}
 
       {currentSection === 6 && (
-        <div className="w-full h-screen relative pb-20 pl-10" >
+        <div className="w-full h-screen relative" >
           <Canvas style={{ background: '#F1F1F1' }} gl={{ preserveDrawingBuffer: true }}>
             <Suspense fallback={<Loader />}>
               <Configurator
@@ -268,7 +269,7 @@ const Create = () => {
 
               <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 0 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(0)}>Top</button>
               <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 1 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(1)}>Body</button>
-              <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 2 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(2)}>Wheels</button>
+              <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 2 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(2)}>Tires</button>
             </div>
             <div className="w-1/3 h-8 bg-black-200 rounded-full transition-transform" style={{ transform: `translateX(${tabOffset}px)` }}></div>
           </div>
@@ -411,7 +412,7 @@ const Create = () => {
 
           {activeTab === 2 && (
             <div className="flex-grow">
-              <div className="font-bold text-base pb-2.5">3/3 Wheels</div>
+              <div className="font-bold text-base pb-2.5">3/3 Tires</div>
 
               <div className="text-xs pb-1.5">Model</div>
               <div className="grid grid-rows-2 grid-cols-3 gap-2.5 pb-6">
@@ -533,7 +534,7 @@ const Create = () => {
                 <div className={`bg-${colours[bodyColour]}-100 w-8 h-8 rounded-full m-2 mr-3`} />
               </div>
             </div>
-            <div className="text-xs pb-1">3/4 Wheels</div>
+            <div className="text-xs pb-1">3/4 Tires</div>
             <div className="relative w-full mb-3.5">
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">

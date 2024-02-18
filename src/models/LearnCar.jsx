@@ -8,7 +8,8 @@ import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import gsap from 'gsap'
 
-import learnCarScene from "../assets/3d/EV_WHOLE.glb";
+import learnCarScene from "../assets/3d/EV.glb";
+
 
 const LearnCar = (props) => {
 
@@ -101,7 +102,9 @@ const LearnCar = (props) => {
 
     return (
         <group ref={learnCar} {...props} dispose={null}>
-            <group rotation={[0, Math.PI / 2, 0]}>
+
+
+            {/* <group rotation={[0, Math.PI / 2, 0]}>
                 <mesh
                     geometry={nodes.mesh_0.geometry}
                     material={nodes.mesh_0.material}
@@ -136,12 +139,12 @@ const LearnCar = (props) => {
             <mesh
                 geometry={nodes.mesh_6.geometry}
                 material={nodes.mesh_6.material}
+                rotation={[0, Math.PI / 2, 0]}
                 material-metalness={0}
             />
             <mesh
                 geometry={nodes.mesh_7.geometry}
                 material={nodes.mesh_7.material}
-                rotation={[0, Math.PI / 2, 0]}
                 material-metalness={0}
             />
             <mesh
@@ -159,7 +162,67 @@ const LearnCar = (props) => {
                 material={nodes.mesh_10.material}
                 material-metalness={0}
             />
+            <mesh
+                geometry={nodes.mesh_11.geometry}
+                material={nodes.mesh_11.material}
+                material-metalness={0}
+            /> */}
+
+            <group rotation={[0, Math.PI / 2, 0]}>
+                <mesh
+                    geometry={nodes.mesh_0.geometry}
+                    material={nodes.mesh_0.material}
+                />
+                <mesh
+                    geometry={nodes.mesh_1.geometry}
+                    material={nodes.mesh_1.material}
+                />
+                <mesh
+                    geometry={nodes.mesh_2.geometry}
+                    material={nodes.mesh_2.material}
+                />
+                <mesh
+                    geometry={nodes.mesh_3.geometry}
+                    material={nodes.mesh_3.material}
+                />
+            </group>
+            <mesh
+                geometry={nodes.mesh_4.geometry}
+                material={nodes.mesh_4.material}
+            />
+            <mesh
+                geometry={nodes.mesh_5.geometry}
+                material={nodes.mesh_5.material}
+            />
+            <mesh
+                geometry={nodes.mesh_6.geometry}
+                material={nodes.mesh_6.material}
+                rotation={[0, Math.PI / 2, 0]}
+            />
+            <mesh
+                geometry={nodes.mesh_7.geometry}
+                material={nodes.mesh_7.material}
+            />
+            <mesh
+                geometry={nodes.mesh_8.geometry}
+                material={nodes.mesh_8.material}
+            />
+            <mesh
+                geometry={nodes.mesh_9.geometry}
+                material={nodes.mesh_9.material}
+            />
+            <mesh
+                geometry={nodes.mesh_10.geometry}
+                material={nodes.mesh_10.material}
+            />
+            <mesh
+                geometry={nodes.mesh_11.geometry}
+                material={nodes.mesh_11.material}
+            />
+
+
         </group>
+
     );
 }
 
