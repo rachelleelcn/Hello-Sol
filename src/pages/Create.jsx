@@ -493,6 +493,7 @@ const Create = () => {
           onChange={(e) => {
             const value = e.target.value.slice(0, 8).toUpperCase();
             setLicense(value);
+            licenseShow();
             if (value.length === 8) {
               licenseValidate(2);
             } else {
@@ -512,7 +513,7 @@ const Create = () => {
         </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : (goNextSection(), licenseShow())}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : (goNextSection())}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
         </div>
