@@ -3,6 +3,13 @@ import { Suspense, useEffect, useState } from "react"
 import license_icon from "../assets/icons/license.png";
 import download_icon from "../assets/icons/download.png";
 import share_icon from "../assets/icons/share.png";
+import geo_icon from "../assets/icons/geo.png";
+import close_icon from "../assets/icons/close.png";
+import Loader from "../components/Loader"
+import { Canvas } from "@react-three/fiber"
+import Configurator from '../components/Configurator';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon } from 'react-share';
+// import { Storage } from '@google-cloud/storage';
 
 
 
@@ -23,12 +30,85 @@ const Create = () => {
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+  const [showImageShare, setShowImageShare] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [shareUrl, setShareUrl] = useState(null);
+
+
+  const generateImage = () => {
+    return new Promise((resolve) => {
+      const existingCanvas = document.querySelector('canvas');
+      const newCanvas = document.createElement('canvas');
+      newCanvas.width = 1200;
+      newCanvas.height = 1400;
+      const newContext = newCanvas.getContext('2d');
+
+      // background color
+      newContext.fillStyle = '#F1F1F1';
+      newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+      // add existing canvas to new
+      const existingCanvasScale = 1.2;
+      const existingCanvasX = (newCanvas.width - existingCanvas.width * existingCanvasScale) / 2;
+      const existingCanvasY = (newCanvas.height - existingCanvas.height * existingCanvasScale) / 2;
+      newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
+
+      // text / image
+      const image = new Image();
+      image.src = geo_icon;
+      image.onload = function () {
+        newContext.fillStyle = 'black';
+        newContext.font = 'bold 64px Inter';
+        newContext.fillText('The rarest Geo of all,', 48, 120);
+        newContext.font = '64px Inter';
+        newContext.fillText(`${name}’s Geo`, 48, 196);
+        newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
+        newContext.font = 'bold 28px Inter';
+        newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
+        newContext.font = '28px Inter';
+        const nameText = `by ${name}`;
+        const nameTextWidth = newContext.measureText(nameText).width;
+        newContext.fillText(nameText, newCanvas.width - nameTextWidth - 48, newCanvas.height - 48);
+        const imageHeight = 26;
+        const imageAspectRatio = image.width / image.height;
+        const imageWidth = imageHeight * imageAspectRatio;
+        newContext.drawImage(image, newCanvas.width - nameTextWidth - 48 - imageWidth - 12, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
+
+        resolve(newCanvas);
+      };
+    });
+
+  };
+
+  const downloadImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+
+    // trigger download
+    const link = document.createElement('a');
+    link.setAttribute('download', 'canvas.png');
+    link.setAttribute('href', imageUrl.replace('image/png', 'image/octet-stream'));
+    link.click();
+  };
+
+  const shareImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+    setImageUrl(imageUrl);
+
+    // create blob
+    const blob = await (await fetch(imageUrl)).blob();
+    const blobUrl = URL.createObjectURL(blob);
+    setShareUrl(blobUrl);
+    setShowImageShare(true);
+
+  }
+
 
   const leaveToGeo = () => {
     setShowLeaveGeo(false);
     navigate('/Hello-Sol/geo');
   };
-
 
   const goNextSection = () => {
     setCurrentSection(currentSection + 1);
@@ -75,7 +155,7 @@ const Create = () => {
       setLicenseValidateMsg('Message required.');
       setShowLicenseValidate(true);
     } else if (index === 2) {
-      setLicenseValidateMsg('Maximum 10 characters.');
+      setLicenseValidateMsg('Maximum 8 characters.');
       setShowLicenseValidate(true);
     } else {
       setLicenseValidateMsg('x');
@@ -83,7 +163,7 @@ const Create = () => {
     }
   }
 
-  const tabWidth = 113; // Adjust this value if needed
+  const tabWidth = 113;
   const tabOffset = activeTab * tabWidth;
 
   const colours = ['blue', 'green', 'yellow', 'red', 'pink', 'purple'];
@@ -96,10 +176,43 @@ const Create = () => {
   // console.log("Width: " + width + ", Height: " + height);
 
   return (
-    <section className='w-full h-screen relative bg-white-200'>
+    <section className='w-full h-screen relative bg-white-200 download'>
+
+      {currentSection > 1 && currentSection < 6 && (
+        <div className="w-2/3 h-screen relative" >
+          <Canvas style={{ background: '#F1F1F1' }} >
+            <Suspense fallback={<Loader />}>
+              <Configurator
+                topColour={topColour}
+                topModel={topModel}
+                bodyColour={bodyColour}
+                bodyModel={bodyModel}
+                wheelModel={wheelModel}
+                section={currentSection}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
+
+      {currentSection === 6 && (
+        <div className="w-full h-screen relative" >
+          <Canvas style={{ background: '#F1F1F1' }} gl={{ preserveDrawingBuffer: true }}>
+            <Suspense fallback={<Loader />}>
+              <Configurator
+                topColour={topColour}
+                topModel={topModel}
+                bodyColour={bodyColour}
+                bodyModel={bodyModel}
+                wheelModel={wheelModel}
+                section={currentSection}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
 
       {/* HTML */}
-
       {/* P1 */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '23%', left: '50%', transform: `translate(-50%,-50%)` }}>
@@ -113,7 +226,7 @@ const Create = () => {
       </div>
 
       {/* P2 */}
-      <div className="w-[404px] font-inter text-center grid place-items-center" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 2 ? 1 : 0, pointerEvents: currentSection === 2 ? 'auto' : 'none' }}>
+      <div className="w-[404px] font-inter text-center grid place-items-center" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 2 ? 1 : 0, pointerEvents: currentSection === 2 ? 'auto' : 'none' }}>
         <div className="pb-4">Create your dream Geo</div>
         <div className="text-3xl font-bold pb-14">Tell us your name.</div>
         <input
@@ -130,6 +243,12 @@ const Create = () => {
               nameValidate(0);
             }
           }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              name === '' ? nameValidate(1) : goNextSection();
+            }
+          }}
         />
         <div className={`text-sm mt-2 mb-14 ${showNameValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showNameValidate ? 'text' : 'none' }}>
           {nameValidateMsg}
@@ -141,7 +260,7 @@ const Create = () => {
 
 
       {/* P3 */}
-      <div className="font-inter" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-48%)', opacity: currentSection === 3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 3 ? 'auto' : 'none' }}>
+      <div className="font-inter" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-50%)', opacity: currentSection === 3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 3 ? 'auto' : 'none' }}>
         <div className="pl-4 pb-2 text-sm">Creating {name}’s dream Geo...</div>
         <div className="w-[404px] h-[545px] outline outline-1 rounded-3xl p-6 flex flex-col">
 
@@ -150,7 +269,7 @@ const Create = () => {
 
               <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 0 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(0)}>Top</button>
               <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 1 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(1)}>Body</button>
-              <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 2 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(2)}>Wheels</button>
+              <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 2 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(2)}>Tires</button>
             </div>
             <div className="w-1/3 h-8 bg-black-200 rounded-full transition-transform" style={{ transform: `translateX(${tabOffset}px)` }}></div>
           </div>
@@ -293,7 +412,7 @@ const Create = () => {
 
           {activeTab === 2 && (
             <div className="flex-grow">
-              <div className="font-bold text-base pb-2.5">3/3 Wheels</div>
+              <div className="font-bold text-base pb-2.5">3/3 Tires</div>
 
               <div className="text-xs pb-1.5">Model</div>
               <div className="grid grid-rows-2 grid-cols-3 gap-2.5 pb-6">
@@ -334,7 +453,13 @@ const Create = () => {
           <hr className="border-black-100 border-t" />
           <div className="flex items-center justify-center pt-6">
             <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  goNextSection();
+                }
+              }}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
             </button>
           </div>
@@ -342,7 +467,7 @@ const Create = () => {
       </div>
 
       {/* P4 */}
-      <div className="w-[404px] font-inter text-center grid place-items-center" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-48%)', opacity: currentSection === 4 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      <div className="w-[404px] font-inter text-center grid place-items-center" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-50%)', opacity: currentSection === 4 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <div className="pb-4">Creating {name}’s dream Geo...</div>
         <div className="text-3xl font-bold pb-14">Design your license plate</div>
         <input
@@ -351,12 +476,18 @@ const Create = () => {
           placeholder="Your message"
           value={license}
           onChange={(e) => {
-            const value = e.target.value.slice(0, 10).toUpperCase();
+            const value = e.target.value.slice(0, 8).toUpperCase();
             setLicense(value);
-            if (value.length === 10) {
+            if (value.length === 8) {
               licenseValidate(2);
             } else {
               licenseValidate(0);
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              license === '' ? licenseValidate(1) : goNextSection();
             }
           }}
         />
@@ -372,7 +503,7 @@ const Create = () => {
       </div>
 
       {/* P5 */}
-      <div className="font-inter" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-48%)', opacity: currentSection === 5 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 5 ? 'auto' : 'none' }}>
+      <div className="font-inter" style={{ position: 'fixed', top: '50%', right: '8%', transform: 'translateY(-50%)', opacity: currentSection === 5 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 5 ? 'auto' : 'none' }}>
         <div className="pl-4 pb-2 text-sm text-transparent">Creating {name}’s dream Geo...</div>
         <div id="test" className="w-[404px] h-[545px] outline outline-1 rounded-3xl p-6 flex flex-col">
 
@@ -403,7 +534,7 @@ const Create = () => {
                 <div className={`bg-${colours[bodyColour]}-100 w-8 h-8 rounded-full m-2 mr-3`} />
               </div>
             </div>
-            <div className="text-xs pb-1">3/4 Wheels</div>
+            <div className="text-xs pb-1">3/4 Tires</div>
             <div className="relative w-full mb-3.5">
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
@@ -429,7 +560,13 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    goNextSection();
+                  }
+                }}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
@@ -441,7 +578,7 @@ const Create = () => {
 
       {/* P6 */}
       <div style={{ opacity: currentSection === 6 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 6 ? 'auto' : 'none' }}>
-        <div style={{ position: 'fixed', top: '15%', left: '10%' }}>
+        <div style={{ position: 'fixed', top: '15%', left: '8%' }}>
           <div className="text-4xl font-bold font-inter mb-1">
             The rarest Geo of all,
           </div>
@@ -450,11 +587,11 @@ const Create = () => {
           </div>
 
           <div className="flex">
-            <button className='w-52 rounded-full outline outline-1 flex items-center p-4 justify-center mr-3'>
+            <button className='w-52 rounded-full outline outline-1 flex items-center p-4 justify-center mr-3' onClick={downloadImage}>
               <img src={download_icon} alt='download-icon' className='w-5 object-contain' />
               <div className="font-inter pl-3 mr-2">Download image</div>
             </button>
-            <button className="w-14 h-14 rounded-full outline outline-1 flex items-center justify-center">
+            <button className="w-14 h-14 rounded-full outline outline-1 flex items-center justify-center" onClick={shareImage}>
               <img src={share_icon} alt='share-icon' className='w-6 object-contain mr-1' />
             </button>
           </div>
@@ -492,6 +629,23 @@ const Create = () => {
               <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* PopUp - Image Share*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showImageShare === true ? 1 : 0, pointerEvents: showImageShare === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+        <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+          <button className="p-2 absolute top-6 right-6" onClick={() => setShowImageShare(false)}>
+            <img src={close_icon} alt='close-icon' className='w-4 object-contain' />
+          </button>
+          <img className="outline outline-1 w-24" src={imageUrl} alt="Your Image" />
+          <div className="font-bold text-2xl mb-2">Share your creation!</div>
+          <div className="text-sm mb-4">Share this image via</div>
+          <WhatsappShareButton separator={'\n'} url={shareUrl} title="Thank you for visiting Hello-Sol. Here is your geo!" windowHeight={700} windowWidth={1000}>
+            <WhatsappIcon size={32} round={true} />
+          </WhatsappShareButton>
+          <div className="text-sm mb-8">Or copy link</div>
         </div>
       </div>
 

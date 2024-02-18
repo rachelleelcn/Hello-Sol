@@ -14,10 +14,8 @@ export function Scene({ entries, setEntries }) {
         <Canvas shadows>
         <Environment preset="city" />
         <ambientLight intensity={0.5} color={'white'} castShadow/>
-        {/* <directionalLight intensity={1.5} position={[2,2,3]} castShadow/> */}
 
         <PerspectiveCamera makeDefault position={[0, 2.5, 5]} fov={100}/>
-        {/* <OrbitControls/> */}
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>
           <CarModel/>

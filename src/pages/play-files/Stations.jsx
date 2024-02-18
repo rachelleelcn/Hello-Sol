@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react'
 import { useBox } from '@react-three/cannon'
 import { Decal, useTexture } from '@react-three/drei'
+import leaf_icon from "../../assets/icons/leaf.png";
 
 
 const CubeV = ({position, size, entries, setEntries}) => {
-    const texture = useTexture('./textures/leaf_icon.png')
+    const texture = useTexture(leaf_icon)
+
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -30,13 +32,14 @@ const CubeV = ({position, size, entries, setEntries}) => {
     }
 
     return (
+
         <group>
             <mesh ref={ref} 
             onClick={() => { handleMeshClick() }} 
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}>
             <boxGeometry args={size}/>
-            <meshStandardMaterial color={active ? '#A8A8A8' : '#C8F165'}/>
+            <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
             <Decal
                 position={[0, 0, 0]}
                 rotation={[0, 1.5, 0]}
@@ -54,7 +57,8 @@ const CubeV = ({position, size, entries, setEntries}) => {
   }
 
 const CubeH = ({position, size, entries, setEntries}) => {
-    const texture = useTexture('./textures/leaf_icon.png')
+    const texture = useTexture(leaf_icon)
+
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -78,6 +82,7 @@ const CubeH = ({position, size, entries, setEntries}) => {
     }
 
     return (
+
         <group>
             <mesh ref={ref} 
             onClick={() => { handleMeshClick() }} 
@@ -85,7 +90,7 @@ const CubeH = ({position, size, entries, setEntries}) => {
             onPointerOut={() => setHovered(false)}
             >
             <boxGeometry args={size}/>
-            <meshStandardMaterial color={active ? '#A8A8A8' : '#C8F165'}/>
+            <meshStandardMaterial color={active ? '#FFF' : '#C8F165'}/>
             <Decal
                 position={[0, 0, 0]}
                 rotation={[0, 0.1, 0]}
@@ -99,6 +104,7 @@ const CubeH = ({position, size, entries, setEntries}) => {
             </Decal>
             </mesh>
         </group>
+
     )
   }
 
