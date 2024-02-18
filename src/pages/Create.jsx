@@ -85,7 +85,7 @@ const Create = () => {
 
     // trigger download
     const link = document.createElement('a');
-    link.setAttribute('download', 'canvas.png');
+    link.setAttribute('download', 'MyGeo.png');
     link.setAttribute('href', imageUrl.replace('image/png', 'image/octet-stream'));
     link.click();
   };
