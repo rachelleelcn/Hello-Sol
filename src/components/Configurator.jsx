@@ -4,16 +4,13 @@ import EVTop from "../models/EVTop";
 import EVBottom from "../models/EVBottom";
 import EVWheels from "../models/EVWheels";
 
-const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, section }) => {
+const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, section, license, showLicense}) => {
     // 'blue', 'green', 'yellow', 'red', 'pink', 'purple'
     const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
     // 'Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'
     // const models = ['Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'];
 
     const rotation = section === 4 ? [-0.1, 0, 0] : [0.1, -0.6, 0];
-
-    
-
 
     return (
 
@@ -25,7 +22,7 @@ const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, 
                 )}
 
                 {bodyModel === 0 && (
-                    <EVBottom scale="1" colour={colours[bodyColour]}/>
+                    <EVBottom scale="1" colour={colours[bodyColour]} showLicense={showLicense} license ={license}/>
                 )}
 
                 {wheelModel === 0 && (

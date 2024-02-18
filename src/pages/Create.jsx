@@ -7,6 +7,7 @@ import geo_icon from "../assets/icons/geo.png";
 import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
+//import EVBottom from '../models/EVBottom'; // import EVBottom component
 
 
 const Create = () => {
@@ -21,11 +22,38 @@ const Create = () => {
   const [wheelModel, setWheelModel] = useState(0);
   const [name, setName] = useState('');
   const [license, setLicense] = useState('');
+  const [showLicense, setShowLicense] = useState(false);
   const [showNameValidate, setShowNameValidate] = useState(false);
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+  //console.log('License:', license);
+  /*
+ const [license, setLicense] = useState({
+    licenseMsg: "",
+  });
+
+  const handleLicenseChange = (event) => {
+    const { value } = event.target;
+
+    setLicense((prevLicense) => {
+      return {
+        ...prevLicense,
+        licenseMsg: value.slice(0,8).toUpperCase()
+      };
+    });
+    console.log("License: ", license.licenseMsg);
+
+  };
+  useEffect(() => {
+    if (license.licenseMsg.length === 8) {
+        licenseValidate(2);
+    } else {
+        licenseValidate(0);
+    }
+}, [license.licenseMsg, licenseValidate]);
+*/ 
 
   const downloadImage = () => {
     const existingCanvas = document.querySelector('canvas');
@@ -89,12 +117,19 @@ const Create = () => {
     setCurrentSection(currentSection + 1);
     nameValidate(0);
     licenseValidate(0);
+    //console.log('License:', license);
+    //console.log('show license', showLicense);
   };
   const goPrevSection = () => {
     setCurrentSection(currentSection - 1);
     nameValidate(0);
     licenseValidate(0);
   };
+
+  const licenseShow = (showLicense) => {
+    setShowLicense(true);
+    console.log('show license', showLicense);
+  }
   const toggleTab = (index) => {
     setActiveTab(index);
   };
@@ -164,6 +199,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license= {license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -181,6 +218,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license={license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -447,6 +486,7 @@ const Create = () => {
         <div className="text-3xl font-bold pb-14">Design your license plate</div>
         <input
           className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-center text-2xl p-2 w-80"
+          //name="licenseMsg"
           type="text"
           placeholder="Your message"
           value={license}
@@ -465,13 +505,14 @@ const Create = () => {
               license === '' ? licenseValidate(1) : goNextSection();
             }
           }}
+        
         />
         <div className={`text-sm mt-2 mb-14 ${showLicenseValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showLicenseValidate ? 'text' : 'none' }}>
           {licenseValidateMsg}
         </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : goNextSection()}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : (goNextSection(), licenseShow())}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
         </div>
