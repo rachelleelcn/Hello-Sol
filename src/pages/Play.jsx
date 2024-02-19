@@ -274,20 +274,20 @@ const Play = () => {
                 <div>Reset car</div>
               </div>
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor movement</div>
                 <div>Rotate camera</div>
               </div>
-            </div>
-            {/* <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-grey-100 mr-2"></div>
+            </div> */}
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
               <div className="text-xs">
                 <div className="font-bold">Cursor click</div>
                 <div>Collect stations</div>
               </div>
-            </div> */}
+            </div>
           </div>
 
 
@@ -372,20 +372,20 @@ const Play = () => {
                     <div>Reset car</div>
                   </div>
                 </div>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
                   <div className="text-[10px]">
                     <div className="font-bold">Cursor movement</div>
                     <div>Rotate camera</div>
                   </div>
-                </div>
-                {/* <div className="flex items-center">
+                </div> */}
+                <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
                   <div className="text-[10px]">
                     <div className="font-bold">Cursor click</div>
                     <div>Collect stations</div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -498,10 +498,10 @@ const Play = () => {
         {/* Email text field */}
         {entries > 0 && (
           <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6">
-            <div className="text-sm pb-1">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
+            <div className="text-sm pb-3">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
             <div className="flex gap-2">
               <input
-                className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-sm p-2 w-full"
+                className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-sm p-2 w-full "
                 name="to_email"
                 type="email"
                 placeholder="Your email"
@@ -517,7 +517,6 @@ const Play = () => {
               //onClick={() => details.to_email === '' ? null : (handleSendEmail(entries), setShowEmailSent(true), handleClearEmail())}
               />
               <button className="flex-shrink-0" onClick={handleButtonEmailClick} >
-
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>
