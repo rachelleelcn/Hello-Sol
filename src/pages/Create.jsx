@@ -24,6 +24,7 @@ const Create = () => {
   const [wheelModel, setWheelModel] = useState(0);
   const [name, setName] = useState('');
   const [license, setLicense] = useState('');
+  const [showLicense, setShowLicense] = useState(false);
   const [showNameValidate, setShowNameValidate] = useState(false);
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
@@ -119,6 +120,12 @@ const Create = () => {
     nameValidate(0);
     licenseValidate(0);
   };
+
+  const licenseShow = (showLicense) => {
+    setShowLicense(true);
+    console.log('show license', showLicense);
+  }
+
   const toggleTab = (index) => {
     setActiveTab(index);
   };
@@ -188,6 +195,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license= {license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -205,6 +214,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license= {license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -477,6 +488,7 @@ const Create = () => {
           onChange={(e) => {
             const value = e.target.value.slice(0, 8).toUpperCase();
             setLicense(value);
+            licenseShow();
             if (value.length === 8) {
               licenseValidate(2);
             } else {
