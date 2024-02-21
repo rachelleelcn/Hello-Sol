@@ -256,7 +256,9 @@ const Create = () => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              name === '' ? nameValidate(1) : goNextSection();
+              if (name === '') {
+                nameValidate(1) ; }
+              else {setCurrentSection(3)};
             }
           }}
         />
@@ -463,13 +465,7 @@ const Create = () => {
           <hr className="border-black-100 border-t" />
           <div className="flex items-center justify-center pt-6">
             <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  goNextSection();
-                }
-              }}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
             </button>
           </div>
@@ -498,7 +494,9 @@ const Create = () => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              license === '' ? licenseValidate(1) : goNextSection();
+              if (license === '') {
+              licenseValidate(1) ; }
+              else {setCurrentSection(5)};
             }
           }}
         />
@@ -571,13 +569,7 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    goNextSection();
-                  }
-                }}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>

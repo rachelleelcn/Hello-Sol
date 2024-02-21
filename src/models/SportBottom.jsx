@@ -23,7 +23,7 @@ const SportBottom = ({showLicense,license, ...props}) => {
                 material={nodes.mesh_0.material}
                 material-metalness={0}
             >
-                        {showLicense && (
+            {showLicense && (
                 <>
                 <Text
                     position={[0,0.402,2.39]}
