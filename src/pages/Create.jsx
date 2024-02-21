@@ -28,32 +28,6 @@ const Create = () => {
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
-  //console.log('License:', license);
-  /*
- const [license, setLicense] = useState({
-    licenseMsg: "",
-  });
-
-  const handleLicenseChange = (event) => {
-    const { value } = event.target;
-
-    setLicense((prevLicense) => {
-      return {
-        ...prevLicense,
-        licenseMsg: value.slice(0,8).toUpperCase()
-      };
-    });
-    console.log("License: ", license.licenseMsg);
-
-  };
-  useEffect(() => {
-    if (license.licenseMsg.length === 8) {
-        licenseValidate(2);
-    } else {
-        licenseValidate(0);
-    }
-}, [license.licenseMsg, licenseValidate]);
-*/ 
 
   const downloadImage = () => {
     const existingCanvas = document.querySelector('canvas');
@@ -117,8 +91,6 @@ const Create = () => {
     setCurrentSection(currentSection + 1);
     nameValidate(0);
     licenseValidate(0);
-    //console.log('License:', license);
-    //console.log('show license', showLicense);
   };
   const goPrevSection = () => {
     setCurrentSection(currentSection - 1);
@@ -486,7 +458,6 @@ const Create = () => {
         <div className="text-3xl font-bold pb-14">Design your license plate</div>
         <input
           className="border-b border-black-200 placeholder-grey-100 focus:outline-none bg-transparent text-center text-2xl p-2 w-80"
-          //name="licenseMsg"
           type="text"
           placeholder="Your message"
           value={license}

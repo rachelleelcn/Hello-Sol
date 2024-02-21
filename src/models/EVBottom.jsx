@@ -20,9 +20,7 @@ const EVBottom = ({showLicense,license, ...props}) => {
 
     //console.log('license showing? ', showLicense);
     //console.log('license :', license);
-    {/*  useEffect(() => {
-        console.log('show license:', showLicense);
-    }, [showLicense]);*/}
+
     return (
         <group ref={evBottom} {...props} dispose={null}>
             <mesh
@@ -51,29 +49,6 @@ const EVBottom = ({showLicense,license, ...props}) => {
                 </>
 
             )}
-         
-        
-                    {/*       {license && (
-                    <Text
-                        position={[3,3,0]}
-                        color="#000000"
-                        fontSize={0.5}
-                        >
-                        {license}
-                    </Text>
-                )}*/}
-          
-
-               {/*  {license && (
-                    <mesh position={[3, 3, 0]}>
-                        <textGeometry args = {[license, {font: 'helvetiker', size: 10, height: 10}]} />
-                        <meshBasicMaterial color= "#000000" />
-                    </mesh>
-                )}
-                */}
-    
-        
-        
             </mesh>
             <mesh
                 geometry={nodes.mesh_1.geometry}
@@ -85,7 +60,7 @@ const EVBottom = ({showLicense,license, ...props}) => {
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
             >
-                {/* <meshStandardMaterial color={props.colour} /> */}
+
             </mesh> 
             <mesh
                 geometry={nodes.mesh_3.geometry}
