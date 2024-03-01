@@ -24,6 +24,7 @@ const Create = () => {
   const [wheelModel, setWheelModel] = useState(0);
   const [name, setName] = useState('');
   const [license, setLicense] = useState('');
+  const [showLicense, setShowLicense] = useState(false);
   const [showNameValidate, setShowNameValidate] = useState(false);
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
@@ -119,6 +120,12 @@ const Create = () => {
     nameValidate(0);
     licenseValidate(0);
   };
+
+  const licenseShow = (showLicense) => {
+    setShowLicense(true);
+    console.log('show license', showLicense);
+  }
+
   const toggleTab = (index) => {
     setActiveTab(index);
   };
@@ -188,6 +195,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license= {license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -205,6 +214,8 @@ const Create = () => {
                 bodyModel={bodyModel}
                 wheelModel={wheelModel}
                 section={currentSection}
+                license= {license}
+                showLicense={showLicense}
               />
             </Suspense>
           </Canvas>
@@ -245,7 +256,9 @@ const Create = () => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              name === '' ? nameValidate(1) : goNextSection();
+              if (name === '') {
+                nameValidate(1) ; }
+              else {setCurrentSection(3)};
             }
           }}
         />
@@ -452,13 +465,7 @@ const Create = () => {
           <hr className="border-black-100 border-t" />
           <div className="flex items-center justify-center pt-6">
             <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  goNextSection();
-                }
-              }}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
             </button>
           </div>
@@ -477,6 +484,7 @@ const Create = () => {
           onChange={(e) => {
             const value = e.target.value.slice(0, 8).toUpperCase();
             setLicense(value);
+            licenseShow();
             if (value.length === 8) {
               licenseValidate(2);
             } else {
@@ -486,7 +494,9 @@ const Create = () => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              license === '' ? licenseValidate(1) : goNextSection();
+              if (license === '') {
+              licenseValidate(1) ; }
+              else {setCurrentSection(5)};
             }
           }}
         />
@@ -559,13 +569,7 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    goNextSection();
-                  }
-                }}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
