@@ -18,69 +18,44 @@ const SportBottom = ({ showLicense, license, ...props }) => {
 
     return (
         <group ref={sportBottom} {...props} dispose={null}>
-
-            {/* <mesh
+              
+            <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
                 material-metalness={0}
-            >
-            {showLicense && (
-                <>
-                <Text
-                    position={[0,0.402,2.39]}
-                    color="#000000"
-                    fontSize={0.08}
-                    font={interFont}
                 >
-                    {license}
-                </Text>
-                </>
-                )}
-            </mesh>
+                {showLicense && (
+                    <>
+                    <Text
+                        position={[0,0.402,2.39]}
+                        color="#000000"
+                        fontSize={0.08}
+                        font={interFont}
+                    >
+                        {license}
+                    </Text>
+                    </>
+                    )}
+                </mesh>
             <mesh
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
                 material-metalness={0}
                 >
-                  {showLicense && (
-                <>
-                <Text
-                    position={[0,0.428,-1.19]}
-                    color="#000000"
-                    fontSize={0.08}
-                    rotation={[0, Math.PI,0]}
-                    font={interFont}
-                >
-                  {license}
-                </Text>
-                </>
-                )}
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                position={[0, 0.026, 0.001]}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                position={[0, 0.026, 0.001]}
-                material-metalness={0}
-            /> */}
-
-            <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
+                {showLicense && (
+              <>
+              <Text
+                  position={[0,0.428,-1.19]}
+                  color="#000000"
+                  fontSize={0.08}
+                  rotation={[0, Math.PI,0]}
+                  font={interFont}
+              >
+                {license}
+              </Text>
+              </>
+              )}
+          </mesh>
             <mesh
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
