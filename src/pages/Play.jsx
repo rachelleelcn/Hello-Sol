@@ -39,7 +39,7 @@ const Play = () => {
   const dateFormat = today.toLocaleString('en-US', dateValues)
 
   // Timer variables
-  const START_MINUTES = '5'
+  const START_MINUTES = '4'
   const START_SECONDS = '00'
   const START_DURATION = 10
   const [minutes, setMinutes] = useState(START_MINUTES)
@@ -47,6 +47,8 @@ const Play = () => {
   const [duration, setDuration] = useState(START_DURATION)
   const [isRunning, setIsRunning] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
+  //const [elapsedMins, setElapsedMins] = useState(0)
+  //const [elapsedSecs, setElapsedSecs] = useState(0)
 
   const startTimer = () => {
     setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
@@ -127,6 +129,9 @@ const Play = () => {
           setMinutes(mins)
           setSeconds(secs)
           setElapsedTime(duration - timer)
+
+          // elapsedMins = parseInt(elapsedTime / 60)
+          // elapsedSecs = parseInt(elapsedTime % 60)
         }
       }, 1000)
       return () => clearInterval(interval)
@@ -140,6 +145,7 @@ const Play = () => {
       setElapsedTime(elapsedTime)
     }
   }, [entries, elapsedTime])
+
 
   const [details, setDetails] = useState({
     to_email: "",
