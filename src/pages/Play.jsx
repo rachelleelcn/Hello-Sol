@@ -186,46 +186,6 @@ const Play = () => {
   };
 
 
-const [details, setDetails] = useState({
-  to_email: "",
-  numEntry: entries,
-  timeTaken: '',
-  date: formattedDate,
-  image: imageUrl,
-});
-
-const handleDetailsChange = (event) => {
-  const { name, value } = event.target;
-
-  setDetails((prevDetails) => {
-    return {
-      ...prevDetails,
-      [name]: value
-    };
-  });
-};
-
-const handleSendEmail = (entryNum, dateFormat, imageUrl, emailTime) => {
-  sendCustomEmail(details, entryNum, dateFormat, imageUrl, emailTime);
-
-  //setEntries(entries);
-  //console.log("Value of entries:", entryNum);
- //console.log("today's date:", dateFormat);
- //console.log("image: ", imageUrl);
-};
-
-const handleClearEmail = ()=> {
-  setDetails({...details, to_email: ""});
-
-};
-
-const handleButtonEmailClick = () => {
-  if (details.to_email.trim() !== '') {
-    handleSendEmail(entries, formattedDate, imageUrl);
-    setShowEmailSent(true);
-  }
-};
-
   // for testing
   // const divElement = document.getElementById('test');
   // const width = divElement.offsetWidth;

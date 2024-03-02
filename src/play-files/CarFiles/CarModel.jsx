@@ -10,6 +10,9 @@ import { UseControls } from './UseControls'
 
 
 import EVCar from '../../models/EVWhole'
+import EVTop from '../../models/EVTop'
+import EVBottom from '../../models/EVBottom'
+import EVWheels from '../../models/EVWheels'
 
 export function CarModel() {
     const position = [15, 0, 0]
@@ -29,7 +32,7 @@ export function CarModel() {
 
     const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius)
 
-    const [vehicle, vehicleAPI] = useRaycastVehicle (() => ({
+    const [vehicle, vehicleAPI] = useRaycastVehicle(() => ({
         chassisBody,
         wheelInfos,
         wheels
@@ -61,24 +64,31 @@ export function CarModel() {
         state.camera.position.copy(cameraPosition)
         state.camera.lookAt(position)
 
-       
+
     })
+
+    const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
 
     return (
         <group position={[-13, 0, 0]}>
             <group ref={vehicle} name='vehicle'>
                 <group ref={chassisBody} name="chassisBody">
-                    <EVCar
+                    {/* <EVCar
                         rotation-y={Math.PI}
                         position={[0, -0.6, 0]}
                         scale={0.28}
-                    />  
+                    />   */}
+
+                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
+                    <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
+                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
+                    
                 </group>
-        
-                <WheelDebug wheelRef={wheels[0]} radius={wheelRadius}/>
-                <WheelDebug wheelRef={wheels[1]} radius={wheelRadius}/>
-                <WheelDebug wheelRef={wheels[2]} radius={wheelRadius}/>
-                <WheelDebug wheelRef={wheels[3]} radius={wheelRadius}/>
+
+                <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
             </group>
         </group>
     )
