@@ -9,6 +9,8 @@ import { useGLTF, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
 import evBottomScene from "../assets/3d/EV-BOTTOM.glb";
+import interFont from '../assets/fonts/Inter.ttf';
+
 
 const EVBottom = ({showLicense,license, ...props}) => {
 
@@ -80,6 +82,7 @@ const EVBottom = ({showLicense,license, ...props}) => {
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
+                    font={interFont}
                 >
                   {license}
                 </Text>
@@ -97,6 +100,7 @@ const EVBottom = ({showLicense,license, ...props}) => {
                     position={[0,0.34,2.055]}
                     color="#000000"
                     fontSize={0.08}
+                    font={interFont}
                 >
                     {license}
                 </Text>

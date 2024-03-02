@@ -18,18 +18,22 @@ const BoxyTop = (props) => {
     return (
         <group ref={boxyTop} {...props} dispose={null}>
 
-            <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
+            <group position={[-0.001, -0.004, 0.004]}>
+                <mesh
+                    geometry={nodes.mesh_0.geometry}
+                    material={nodes.mesh_0.material}
+                    position={[-0.002, 0, -0.005]}
+                    material-metalness={0}
+                >
+                    <meshStandardMaterial color={props.colour} />
+                </mesh>
+                <mesh
+                    geometry={nodes.mesh_1.geometry}
+                    material={nodes.mesh_1.material}
+                    position={[-0.002, 0, -0.005]}
+                    material-metalness={0}
+                />
+            </group>
 
         </group>
     );

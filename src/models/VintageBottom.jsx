@@ -9,8 +9,9 @@ import { useGLTF, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
 import vintageBottomScene from "../assets/3d/VINTAGE-BOTTOM.glb";
+import interFont from '../assets/fonts/Inter.ttf';
 
-const VintageBottom = ({showLicense,license, ...props}) => {
+const VintageBottom = ({ showLicense, license, ...props }) => {
 
     const vintageBottom = useRef();
     const { nodes, materials } = useGLTF(vintageBottomScene);
@@ -18,13 +19,14 @@ const VintageBottom = ({showLicense,license, ...props}) => {
     return (
         <group ref={vintageBottom} {...props} dispose={null}>
 
-                {/* Front License
+            {/* Front License
                {showLicense && (
                 <>
                 <Text
                     position={[0,0.402,2.39]}
                     color="#000000"
                     fontSize={0.08}
+                    font={interFont}
                 >
                     {license}
                 </Text>
@@ -41,6 +43,7 @@ const VintageBottom = ({showLicense,license, ...props}) => {
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
+                    font={interFont}
                 >
                   {license}
                 </Text>
@@ -48,6 +51,31 @@ const VintageBottom = ({showLicense,license, ...props}) => {
                 )}
              */}
 
+            <group position={[0, 0.002, 0]}>
+                <mesh
+                    geometry={nodes.mesh_0.geometry}
+                    material={nodes.mesh_0.material}
+                    position={[0, -0.002, 0]}
+                    material-metalness={0}
+                >
+                    <meshStandardMaterial color={props.colour} />
+                </mesh>
+                <mesh
+                    geometry={nodes.mesh_1.geometry}
+                    material={nodes.mesh_1.material}
+                    material-metalness={0}
+                />
+                <mesh
+                    geometry={nodes.mesh_2.geometry}
+                    material={nodes.mesh_2.material}
+                    material-metalness={0}
+                />
+                <mesh
+                    geometry={nodes.mesh_3.geometry}
+                    material={nodes.mesh_3.material}
+                    material-metalness={0}
+                />
+            </group>
 
         </group>
     );

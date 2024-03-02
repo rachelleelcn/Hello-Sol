@@ -23,7 +23,7 @@ const SportTop = (props) => {
                 material={nodes.mesh_0.material}
                 position={[0.001, 0.026, 0.002]}
                 material-metalness={0}
-                >
+            >
                 <meshStandardMaterial color={props.colour} />
             </mesh>
             <mesh

@@ -9,6 +9,7 @@ import { useGLTF, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 
 import classicBottomScene from "../assets/3d/CLASSIC-BOTTOM.glb";
+import interFont from '../assets/fonts/Inter.ttf';
 
 const ClassicBottom = ({showLicense,license, ...props}) => {
 
@@ -72,6 +73,7 @@ const ClassicBottom = ({showLicense,license, ...props}) => {
                     position={[0,0.396,2.012]}
                     color="#000000"
                     fontSize={0.08}
+                    font={interFont}
                 >
                     {license}
                 </Text>
@@ -90,6 +92,7 @@ const ClassicBottom = ({showLicense,license, ...props}) => {
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
+                    font={interFont}
                 >
                   {license}
                 </Text>

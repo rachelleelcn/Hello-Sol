@@ -17,7 +17,11 @@ const RoundWheels = (props) => {
     return (
         <group ref={roundWheels} {...props} dispose={null}>
 
-            
+            <mesh
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+                material-metalness={0}
+            />
 
         </group>
     );

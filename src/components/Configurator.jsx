@@ -16,6 +16,12 @@ import BoxyWheels from '../models/BoxyWheels';
 import SportTop from '../models/SportTop';
 import SportBottom from '../models/SportBottom';
 import SportWheels from '../models/SportWheels';
+import RoundTop from '../models/RoundTop';
+import RoundBottom from '../models/RoundBottom';
+import RoundWheels from '../models/RoundWheels';
+import VintageTop from '../models/VintageTop';
+import VintageBottom from '../models/VintageBottom';
+import VintageWheels from '../models/VintageWheels';
 // import VintageTop from '../models/VintageTop';
 // import VintageBottom from '../models/VintageBottom';
 // import VintageWheels from '../models/VintageWheels';
@@ -26,7 +32,7 @@ const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, 
     // 'Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'
     // const models = ['Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'];
 
-    const rotation = section === 4 ? [-0.1, 0, 0] : [0.1, -0.6, 0];
+    const rotation = section === 4 ? [-0.1, 0, 0] : [-0.04, -0.6, 0];
     const scaleValue = 0.7;
 
     return (
@@ -45,10 +51,9 @@ const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, 
                 <ClassicBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 1} showLicense={showLicense} license ={license}/>
                 <ClassicWheels scale={scaleValue} visible={wheelModel === 1} />
 
-                {/* Uncomment the following code for other models */}
-                {/* <RoundTop scale={scaleValue} colour={colours[topColour]} visible={topModel === 2} />
+                <RoundTop scale={scaleValue} colour={colours[topColour]} visible={topModel === 2} />
                 <RoundBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 2} showLicense={showLicense} license ={license}/>
-                <RoundWheels scale={scaleValue} visible={wheelModel === 2} /> */}
+                <RoundWheels scale={scaleValue} visible={wheelModel === 2} />
 
                 <BoxyTop scale={scaleValue} colour={colours[topColour]} visible={topModel === 3} />
                 <BoxyBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 3} showLicense={showLicense} license ={license}/>
@@ -58,10 +63,9 @@ const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, 
                 <SportBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 4} showLicense={showLicense} license ={license}/>
                 <SportWheels scale={scaleValue} visible={wheelModel === 4} />
 
-                {/* Uncomment the following code for other models */}
-                {/* <VintageTop scale={scaleValue} colour={colours[topColour]} visible={topModel === 5} />
+                <VintageTop scale={scaleValue} colour={colours[topColour]} visible={topModel === 5} />
                 <VintageBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 5} showLicense={showLicense} license ={license}/>
-                <VintageWheels scale={scaleValue} visible={wheelModel === 5} /> */}
+                <VintageWheels scale={scaleValue} visible={wheelModel === 5} />
 
 
             </Stage>

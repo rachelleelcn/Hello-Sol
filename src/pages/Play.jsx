@@ -392,7 +392,7 @@ const Play = () => {
 
 
         {/* Timer */}
-        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
+        <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-pink-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
           {minutes} <span>:</span> {seconds}
         </div>
         {/* <GameTimer/>       */}
