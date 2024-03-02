@@ -1,0 +1,23 @@
+<TreeFinal  pos={[-13, -1, 0]} 
+            hitboxPos={[0, 0, 0]}/>
+
+            hitbox: +13, 0
+
+
+<StreetLightFinal pos={[-13, -1, 0]} rotate={rotateU}
+                  hitboxPos={[0, 0, 0]} />
+
+                  hitbox: +13, 0
+
+
+<TrafficLFinal  pos={[-13, -1, 0]} rotate={rotateU}
+                hitboxPos={[0, 0, 0]} /> 
+
+                hitbox: +13, 0
+
+
+<TrafficRFinal  pos={[-13, 0, 0]} rotate={rotateU}
+                hitboxPos={[0, 0, 0]} />
+
+                hitbox: +13, 0
+                                   
