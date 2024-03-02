@@ -1,5 +1,6 @@
+/* eslint-disable no-const-assign */
 import { useNavigate } from 'react-router-dom';
-import React, { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import go_icon from "../assets/icons/go.png";
 import go_transparent_icon from "../assets/icons/go_transparent.png";
@@ -29,7 +30,6 @@ const Play = () => {
   //const [email, setEmail] = useState('');
   const imageUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
 
-
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
 
@@ -39,7 +39,7 @@ const Play = () => {
   const dateFormat = today.toLocaleString('en-US', dateValues)
 
   // Timer variables
-  const START_MINUTES = '5'
+  const START_MINUTES = '4'
   const START_SECONDS = '00'
   const START_DURATION = 10
   const [minutes, setMinutes] = useState(START_MINUTES)
@@ -47,7 +47,7 @@ const Play = () => {
   const [duration, setDuration] = useState(START_DURATION)
   const [isRunning, setIsRunning] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
-
+  
   const startTimer = () => {
     setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
     setIsRunning(true)
@@ -69,6 +69,10 @@ const Play = () => {
 
     if (index < 3) {
       setStartGame(false);
+    }
+    else if (index === 4) {
+      resetTimer()
+      setElapsedTime(elapsedTime)
     }
     else {
       setStartGame(true);
@@ -182,6 +186,45 @@ const Play = () => {
   };
 
 
+const [details, setDetails] = useState({
+  to_email: "",
+  numEntry: entries,
+  timeTaken: '',
+  date: formattedDate,
+  image: imageUrl,
+});
+
+const handleDetailsChange = (event) => {
+  const { name, value } = event.target;
+
+  setDetails((prevDetails) => {
+    return {
+      ...prevDetails,
+      [name]: value
+    };
+  });
+};
+
+const handleSendEmail = (entryNum, dateFormat, imageUrl, emailTime) => {
+  sendCustomEmail(details, entryNum, dateFormat, imageUrl, emailTime);
+
+  //setEntries(entries);
+  //console.log("Value of entries:", entryNum);
+ //console.log("today's date:", dateFormat);
+ //console.log("image: ", imageUrl);
+};
+
+const handleClearEmail = ()=> {
+  setDetails({...details, to_email: ""});
+
+};
+
+const handleButtonEmailClick = () => {
+  if (details.to_email.trim() !== '') {
+    handleSendEmail(entries, formattedDate, imageUrl);
+    setShowEmailSent(true);
+  }
+};
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -445,15 +488,16 @@ const Play = () => {
             <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
           </div>
         )}
-
-        {entries === 6 && (
+        
+        {/* bonus entry given if all stations found under 3 minutes */}
+        {entries === 6 && elapsedTime <= 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
           </div>
         )}
 
-        {entries > 0 && entries < 6 && (
+        {entries > 0 && entries <= 6 && elapsedTime > 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
