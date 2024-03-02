@@ -17,7 +17,12 @@ const VintageWheels = (props) => {
     return (
         <group ref={vintageWheels} {...props} dispose={null}>
 
-            
+            <mesh
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+                position={[0, 0.002, 0]}
+                material-metalness={0}
+            />
 
         </group>
     );

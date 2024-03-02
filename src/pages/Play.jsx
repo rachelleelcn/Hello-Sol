@@ -164,14 +164,13 @@ const Play = () => {
     });
   };
 
-  const handleSendEmail = (entryNum, dateFormat, imageUrl, timeTaken) => {
-    sendCustomEmail(details, entryNum, dateFormat, imageUrl, timeTaken);
+  const handleSendEmail = (entryNum, dateFormat, imageUrl, takenTime) => {
+    sendCustomEmail(details, entryNum, dateFormat, imageUrl, takenTime);
 
     //setEntries(entries);
     //console.log("Value of entries:", entryNum);
-    //console.log("today's date:", dateFormat);
     //console.log("image: ", imageUrl);
-    //  console.log('Time:', timeTaken)
+    console.log('Time:', takenTime)
   };
 
   const handleClearEmail = () => {
@@ -181,7 +180,7 @@ const Play = () => {
 
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
-      handleSendEmail(entries, formattedDate, imageUrl);
+      handleSendEmail(entries, formattedDate, imageUrl, elapsedTime);
       setShowEmailSent(true);
     }
   };
@@ -436,7 +435,7 @@ const handleButtonEmailClick = () => {
 
 
         {/* Timer */}
-        <div className="font-bold text-xl" style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
+        <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-pink-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
           {minutes} <span>:</span> {seconds}
         </div>
         {/* <GameTimer/>       */}

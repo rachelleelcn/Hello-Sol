@@ -18,7 +18,18 @@ const RoundTop = (props) => {
     return (
         <group ref={roundTop} {...props} dispose={null}>
 
-            
+            <mesh
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+                material-metalness={0}
+                >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
+            <mesh
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+                material-metalness={0}
+            />
 
 
         </group>
