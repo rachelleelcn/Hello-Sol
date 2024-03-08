@@ -78,7 +78,7 @@ export function UpdateEntries(entries, setEntries) {
 
 function Randomize() {
     const MIN = 1
-    const MAX = 1
+    const MAX = 6
 
     return (
         (Math.floor(Math.random() * (MAX - MIN + 1)) + MIN)

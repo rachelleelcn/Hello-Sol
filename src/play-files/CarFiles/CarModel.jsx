@@ -28,6 +28,8 @@ export function CarModel() {
         mass: 80,
         position,
         allowSleep: false,
+        linearDamping: 0.1,
+        angularDamping: 0.1,
     }), useRef(null))
 
     const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius)
@@ -62,8 +64,7 @@ export function CarModel() {
         const lerpFactor = 1
   
         state.camera.position.lerp(cameraPosition, lerpFactor)
-        state.camera.updateProjectionMatrix
-        // state.camera.position.copy(cameraPosition, lerpFactor)
+        // state.camera.updateProjectionMatrix
         state.camera.lookAt(position)
     })
 
