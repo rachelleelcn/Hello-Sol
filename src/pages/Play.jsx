@@ -44,7 +44,7 @@ const Play = () => {
   const currentDate = new Date();
   //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
-  const bannerUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
+  const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
 
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -190,7 +190,7 @@ const Play = () => {
 
     //setEntries(entries);
     //console.log("Value of entries:", entryNum);
-    //console.log("image: ", imageUrl);
+    console.log("image: ", imageUrl);
     //console.log("date: ", formatDate);
     //console.log('Time:', formatTime)
 
@@ -204,7 +204,7 @@ const Play = () => {
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
 
-      handleSendEmail(entries, dateFormat, imageUrl, timeFormat);
+      handleSendEmail(entries, dateFormat, bannerUrl, timeFormat);
 
       setShowEmailSent(true);
     
