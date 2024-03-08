@@ -22,14 +22,14 @@ return (
     )
 }
 
-export const TreeFinal = ({ colour, pos, hitboxPos }) => {
+export const TreeFinal = ({ pos, hitboxPos }) => {
     return (
         <group>
-            <group position={pos}>
-                <Tree colour={colour} />
+            <group position={pos} scale={0.6}>
+                <Tree />
             </group>
 
-            <Hitbox position={hitboxPos} size={[2, 2, 2]} />
+            <Hitbox position={hitboxPos} size={[1, 2, 1]} />
         </group>
     )
 }

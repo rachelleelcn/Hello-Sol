@@ -23,11 +23,18 @@ return (
     )
 }
 
-export const UFinal = ({ colour, pos, rotate, hitboxPos1, hitboxPos2, hitboxPos3 }) => {
+export const UFinal = 
+    ({ 
+        glassColour, frameColour, wallColour, 
+        pos, rotate, hitboxPos1, hitboxPos2, hitboxPos3 }) => {
+
     return (
         <group>
             <group position={pos} rotation={rotate} >
-                <UBuilding colour={colour} />
+                <UBuilding 
+                    glassColour={glassColour}
+                    frameColour={frameColour}
+                    wallColour={wallColour}  />
             </group>
 
             <Hitbox position={hitboxPos1} rotation={rotate}  size={[12, 6, 6]} />

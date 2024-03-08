@@ -21,11 +21,18 @@ return (
     )
 }
 
-export const SquareFinal = ({ colour, pos, rotate, hitboxPos }) => {
+export const SquareFinal = 
+    ({ 
+        glassColour, frameColour, wallColour,
+        pos, rotate, hitboxPos }) => {
+
     return (
         <group>
             <group position={pos} rotation={rotate}>
-                <SquareBuilding colour={colour} />
+                <SquareBuilding 
+                    glassColour={glassColour}
+                    frameColour={frameColour}
+                    wallColour={wallColour}  />
             </group>
 
             <Hitbox position={hitboxPos} size={[6, 6, 6]} />

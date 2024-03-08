@@ -9,7 +9,7 @@ import { useGLTF } from "@react-three/drei";
 
 import ZBuildingScene from '../../assets/3d/BuildingZ.glb'
 
-const ZBuilding = ({props, colour}) => {
+const ZBuilding = ({props, glassColour, frameColour, wallColour}) => {
     const buildingRef = useRef()
     const {nodes, materials} = useGLTF(ZBuildingScene)
 
@@ -21,31 +21,35 @@ const ZBuilding = ({props, colour}) => {
                 geometry={nodes.Building_Z_1.geometry}
                 // material={materials.wall_Z}
                 >
-                    <meshStandardMaterial color={colour}/>
+                    <meshStandardMaterial color={wallColour}/>
                 </mesh>
 
                 <mesh
-                geometry={nodes.Building_Z_2.geometry}
-                material={materials.frame_Z}
-                />
-                <mesh
-                geometry={nodes.Building_Z_3.geometry}
-                material={materials.glass_Z}
-                />
-                <mesh
-                geometry={nodes.Building_Z_4.geometry}
-                // material={materials.roof_Z}
+                    geometry={nodes.Building_Z_2.geometry}
+                    material={materials.frame_Z}
                 >
-                    <meshStandardMaterial color={colour}/>
+                    <meshStandardMaterial color={frameColour}/>
+                </mesh>
+                <mesh
+                    geometry={nodes.Building_Z_3.geometry}
+                    // material={materials.glass_Z}
+                >
+                    <meshStandardMaterial color={glassColour}/>
+                </mesh>
+                <mesh
+                    geometry={nodes.Building_Z_4.geometry}
+                    // material={materials.roof_Z}
+                >
+                    <meshStandardMaterial color={wallColour}/>
                 </mesh>
                 
                 <mesh
-                geometry={nodes.Building_Z_5.geometry}
-                material={materials.door_handle_Z}
+                    geometry={nodes.Building_Z_5.geometry}
+                    material={materials.door_handle_Z}
                 />
                 <mesh
-                geometry={nodes.Building_Z_6.geometry}
-                material={materials.awning_Z}
+                    geometry={nodes.Building_Z_6.geometry}
+                    material={materials.awning_Z}
                 />
             </group>
 

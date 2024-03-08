@@ -9,6 +9,7 @@ export const Ground = () => {
       position: [0,-1,0],
       rotation: [-Math.PI / 2, 0, 0],
       material: 'ground',
+      friction: 10,
       type: 'Static'
     }), useRef())
 

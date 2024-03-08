@@ -20,11 +20,15 @@ const Tree = (props) => {
                 <mesh
                     geometry={nodes.Icosphere001.geometry}
                     material={materials.treeBush}
-                />
+                >
+                    <meshStandardMaterial color={'#9CDC8C'}/>
+                </mesh>
                 <mesh
                     geometry={nodes.Icosphere001_1.geometry}
                     material={materials.treeTrunk}
-                />
+                >
+                    <meshStandardMaterial color={'#D17E3F'}/>    
+                </mesh>
                 <mesh
                     geometry={nodes.Icosphere001_2.geometry}
                     material={materials.cement}

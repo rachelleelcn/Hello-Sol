@@ -41,15 +41,12 @@ export function CarModel() {
     UseControls(vehicleAPI, chassisAPI)
 
     // Third person camera stuff
-    useFrame((state) => {
+    useFrame((state, delta) => {
         let position = new Vector3(0, 0, 0)
         position.setFromMatrixPosition(chassisBody.current.matrixWorld)
 
         let quaternion = new Quaternion(0, 0, 0, 0)
         quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld)
-
-        // let offset = new Vector3(5, 2, 0)
-        // offset.setFromMatrixPosition(chassisBody.current.matrixWorld)
 
         let wDir = new Vector3(0, 0, -1)
         wDir.applyQuaternion(quaternion)
@@ -57,31 +54,47 @@ export function CarModel() {
 
         let cameraPosition = position.clone().add(
             wDir.clone().multiplyScalar(-1).add(
-                new Vector3(0, 0.35, 0)
+                new Vector3(0, 0.35, 0.015)
             )
         )
-        // state.camera.position.lerp(offset, 0.2)
-        state.camera.position.copy(cameraPosition)
+        
+        // const lerpFactor = Math.min(1, 5 * delta)
+        const lerpFactor = 1
+  
+        state.camera.position.lerp(cameraPosition, lerpFactor)
+        state.camera.updateProjectionMatrix
+        // state.camera.position.copy(cameraPosition, lerpFactor)
         state.camera.lookAt(position)
-
-
     })
+
+    // useFrame((state, delta) => {
+    //     const carPosition = new Vector3();
+    //     chassisBody.current.getWorldPosition(carPosition);
+
+    //     const offset = new Vector3(0, 0.35, 1.5); // Adjust the offset as needed
+    //     const cameraPosition = carPosition.clone().add(offset);
+
+    //     // Smoothly follow the car
+    //     const lerpFactor = 0.1; // Adjust the lerp factor
+    //     state.camera.position.lerp(cameraPosition, lerpFactor);
+    //     state.camera.lookAt(carPosition);
+    // })
 
     const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
 
     return (
-        <group position={[-13, 0, 0]}>
-            <group ref={vehicle} name='vehicle'>
+        <group>
+            <group ref={vehicle} name='vehicle' position={[-13, 0, 60]}>
                 <group ref={chassisBody} name="chassisBody">
                     {/* <EVCar
                         rotation-y={Math.PI}
                         position={[0, -0.6, 0]}
                         scale={0.28}
                     />   */}
-
-                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
-                    <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
-                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.6, 0]} scale={0.28} />
+    
+                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
+                    <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
+                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
                     
                 </group>
 

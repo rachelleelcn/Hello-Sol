@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 
-import RectBuilding from '../../models/Buildings/RectBuilding'
+import RectBuilding2 from '../../models/Buildings/RectBuilding2'
 import { useBox } from '@react-three/cannon'
 
 
@@ -22,7 +22,7 @@ return (
     )
 }
 
-export const RectFinal = 
+export const RectFinal2 = 
     ({ 
         glassColour, frameColour, wallColour, 
         pos, rotate, hitboxPos }) => {
@@ -30,7 +30,7 @@ export const RectFinal =
     return (
         <group>
             <group position={pos} rotation={rotate}>
-                <RectBuilding 
+                <RectBuilding2 
                      glassColour={glassColour}
                      frameColour={frameColour}
                      wallColour={wallColour}  /> 

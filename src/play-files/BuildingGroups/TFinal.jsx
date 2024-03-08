@@ -23,11 +23,18 @@ return (
     )
 }
 
-export const TFinal = ({ colour, pos, rotate, hitboxPos1, hitboxPos2 }) => {
+export const TFinal = 
+    ({ 
+        glassColour, frameColour, wallColour, 
+        pos, rotate, hitboxPos1, hitboxPos2 }) => {
+        
     return (
         <group>
             <group position={pos} rotation={rotate} >
-                <TBuilding colour={colour} />
+                <TBuilding 
+                    glassColour={glassColour}
+                    frameColour={frameColour}
+                    wallColour={wallColour}  />
             </group>
 
             <Hitbox position={hitboxPos1} rotation={rotate} size={[4, 10, 12]} />
