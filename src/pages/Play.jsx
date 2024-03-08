@@ -2,15 +2,27 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react"
 
+import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
-import go_transparent_icon from "../assets/icons/go_transparent.png";
 import add_icon from "../assets/icons/add.png";
 import close_icon from "../assets/icons/close.png";
-import info_icon from "../assets/icons/info.png";
 import share_icon from "../assets/icons/share.png";
 import mute_icon from "../assets/icons/mute.png";
 import controls_icon from "../assets/icons/controls.png";
 import sound_icon from "../assets/icons/sound.png";
+import arrows_icon from "../assets/icons/arrows.png";
+import shift_icon from "../assets/icons/shift.png";
+import key_icon from "../assets/icons/key.png";
+import cursor_icon from "../assets/icons/cursor.png";
+import station_img from "../assets/images/station.png";
+import email_icon from "../assets/icons/email.png";
+import leave_icon from "../assets/icons/leave.png";
+import quit_icon from "../assets/icons/quit.png";
+import car_icon from "../assets/icons/car.png";
+import leaf_icon from "../assets/icons/leaf.png";
+import leafGrey_icon from "../assets/icons/leaf_grey.png";
+import download_icon from "../assets/icons/download.png";
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
 
@@ -23,12 +35,15 @@ const Play = () => {
   const [showCreateGeo, setShowCreateGeo] = useState(false);
   const [showQuitGame, setShowQuitGame] = useState(false);
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+  const [showImageShare, setShowImageShare] = useState(false);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [shareUrl, setShareUrl] = useState(null);
 
   const [entries, setEntries] = useState(0);
   const currentDate = new Date();
   const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
-  const imageUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
+  const bannerUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
 
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -47,7 +62,8 @@ const Play = () => {
   const [duration, setDuration] = useState(START_DURATION)
   const [isRunning, setIsRunning] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
-  
+
+
   const startTimer = () => {
     setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
     setIsRunning(true)
@@ -149,7 +165,7 @@ const Play = () => {
     to_email: "",
     numEntry: entries,
     date: formattedDate,
-    image: imageUrl,
+    image: bannerUrl,
     timeTaken: elapsedTime
   });
 
@@ -164,12 +180,12 @@ const Play = () => {
     });
   };
 
-  const handleSendEmail = (entryNum, dateFormat, imageUrl, takenTime) => {
-    sendCustomEmail(details, entryNum, dateFormat, imageUrl, takenTime);
+  const handleSendEmail = (entryNum, dateFormat, bannerUrl, takenTime) => {
+    sendCustomEmail(details, entryNum, dateFormat, bannerUrl, takenTime);
 
     //setEntries(entries);
     //console.log("Value of entries:", entryNum);
-    //console.log("image: ", imageUrl);
+    //console.log("image: ", bannerUrl);
     console.log('Time:', takenTime)
   };
 
@@ -180,10 +196,77 @@ const Play = () => {
 
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
-      handleSendEmail(entries, formattedDate, imageUrl, elapsedTime);
+      handleSendEmail(entries, formattedDate, bannerUrl, elapsedTime);
       setShowEmailSent(true);
     }
   };
+
+  const generateImage = () => {
+
+    return new Promise((resolve) => {
+      const newCanvas = document.createElement('canvas');
+      newCanvas.width = 1200;
+      newCanvas.height = 1400;
+      const newContext = newCanvas.getContext('2d');
+
+      // background color
+      newContext.fillStyle = '#F1F1F1';
+      newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+      // text / image
+      const image = new Image();
+      image.src = geo_icon;
+      image.onload = function () {
+        newContext.fillStyle = 'black';
+
+        newContext.font = 'bold 64px Inter';
+        newContext.fillText('Congradulations!', 48, 120);
+
+        newContext.font = '36px Inter';
+        newContext.fillText(`You have successfully earned ${entries} entries to our giveaway!`, 48, 196);
+
+        
+
+
+        newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
+        newContext.font = 'bold 28px Inter';
+        newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
+        const imageHeight = 26;
+        const imageAspectRatio = image.width / image.height;
+        const imageWidth = imageHeight * imageAspectRatio;
+        newContext.drawImage(image, newCanvas.width - 48 - imageWidth, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
+
+        resolve(newCanvas);
+      };
+    });
+
+  };
+
+  const downloadImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+
+    // trigger download
+    const link = document.createElement('a');
+    link.setAttribute('download', 'MyGameResults.png');
+    link.setAttribute('href', imageUrl.replace('image/png', 'image/octet-stream'));
+    link.click();
+  };
+
+  const shareImage = async () => {
+    const newCanvas = await generateImage();
+    const imageUrl = newCanvas.toDataURL('image/png');
+    setImageUrl(imageUrl);
+
+    // create blob
+    const blob = await (await fetch(imageUrl)).blob();
+    const blobUrl = URL.createObjectURL(blob);
+    setShareUrl(blobUrl);
+    setShowImageShare(true);
+
+  }
+
+
 
 
   // for testing
@@ -247,30 +330,37 @@ const Play = () => {
           <div className="flex">
             <div className="flex flex-col">
               <div className="text-3xl font-bold pb-3">Instructions</div>
-              <div className="text-sm w-[680px] pb-10 mr-6">
+              <div className="text-sm w-[680px] pb-8 mr-4">
                 Drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within 3 minutes to earn a bonus entry to the giveaway!
               </div>
             </div>
-            <div className="w-16 h-24 bg-grey-100"></div>
+            <div className="h-32 flex items-center justify-center">
+              <img src={station_img} alt='station_img' className='h-full object-contain ' />
+            </div>
           </div>
-
-          <div className="flex gap-10 text-nowrap">
+          <div className="flex gap-14 text-nowrap">
             <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
+              <div className="inline-flex items-center mr-5">
+                <img src={arrows_icon} alt='arrows_icon' className='h-12 object-contain ' />
+              </div>
               <div className="text-xs">
                 <div className="font-bold font-sans">WASD / Arrows</div>
                 <div>Steer car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
+              <div className="inline-flex items-center mr-5">
+                <img src={shift_icon} alt='shift_icon' className='h-12 object-contain ' />
+              </div>
               <div className="text-xs">
                 <div className="font-bold">Shift</div>
                 <div>Brake car</div>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
+              <div className="inline-flex items-center mr-5">
+                <img src={key_icon} alt='key_icon' className='h-12 object-contain ' />
+              </div>
               <div className="text-xs">
                 <div className="font-bold">R</div>
                 <div>Reset car</div>
@@ -284,7 +374,9 @@ const Play = () => {
               </div>
             </div> */}
             <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
+              <div className="inline-flex items-center mr-5">
+                <img src={cursor_icon} alt='cursor_icon' className='h-12 object-contain ' />
+              </div>
               <div className="text-xs">
                 <div className="font-bold">Cursor click</div>
                 <div>Collect stations</div>
@@ -354,21 +446,27 @@ const Play = () => {
             <div className="w-40 font-inter p-4">
               <div className="flex flex-col gap-6 text-nowrap">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                    <img src={arrows_icon} alt='arrows_icon' className='h-full object-contain ' />
+                  </div>
                   <div className="text-[10px]">
                     <div className="font-bold font-sans">WASD / Arrows</div>
                     <div>Steer car</div>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                    <img src={shift_icon} alt='shift_icon' className='h-full object-contain ' />
+                  </div>
                   <div className="text-[10px]">
                     <div className="font-bold">Shift</div>
                     <div>Brake car</div>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                    <img src={key_icon} alt='key_icon' className='h-full object-contain ' />
+                  </div>
                   <div className="text-[10px]">
                     <div className="font-bold">R</div>
                     <div>Reset car</div>
@@ -382,7 +480,9 @@ const Play = () => {
                   </div>
                 </div> */}
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
+                  <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
+                    <img src={cursor_icon} alt='cursor_icon' className='h-full object-contain ' />
+                  </div>
                   <div className="text-[10px]">
                     <div className="font-bold">Cursor click</div>
                     <div>Collect stations</div>
@@ -402,12 +502,49 @@ const Play = () => {
 
         {/* Collected station indicators */}
         <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-11 h-11 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
+
+          <div className={`w-11 h-11 rounded-full ${entries > 0 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 0 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
+          <div className={`w-11 h-11 rounded-full ${entries > 1 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 1 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
+          <div className={`w-11 h-11 rounded-full ${entries > 2 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 2 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
+          <div className={`w-11 h-11 rounded-full ${entries > 3 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 3 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
+          <div className={`w-11 h-11 rounded-full ${entries > 4 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 4 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
+          <div className={`w-11 h-11 rounded-full ${entries > 5 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 5 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+            )}
+          </div>
         </div>
 
         {/* for testing - TO BE DELETED */}
@@ -436,7 +573,7 @@ const Play = () => {
       </div>
 
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
-        <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6'>
+        <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
 
@@ -448,7 +585,7 @@ const Play = () => {
             <div className="text-base pb-6">Unfortunately, you have missed today’s entry to our giveaway.</div>
           </div>
         )}
-        
+
         {/* bonus entry given if all stations found under 3 minutes */}
         {entries === 6 && elapsedTime <= 180 && (
           <div>
@@ -484,18 +621,56 @@ const Play = () => {
 
         {/* Indicators of # of stations found */}
         <div className="flex gap-2 justify-center items-center pb-8">
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
-          {entries > 5 && (
+          <div className={`w-8 h-8 rounded-full ${entries > 0 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 0 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
+          <div className={`w-8 h-8 rounded-full ${entries > 1 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 1 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
+          <div className={`w-8 h-8 rounded-full ${entries > 2 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 2 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
+          {entries === 6 && elapsedTime <= 180 && (
             <div className="relative">
               <div className="w-10 h-10 rounded-full outline outline-1"></div>
-              <div className="w-8 h-8 bg-grey-100 rounded-full outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="w-8 h-8 rounded-full outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+                <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+              </div>
             </div>
           )}
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
-          <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>
+          <div className={`w-8 h-8 rounded-full ${entries > 3 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 3 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
+          <div className={`w-8 h-8 rounded-full ${entries > 4 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 4 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
+          <div className={`w-8 h-8 rounded-full ${entries > 5 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+            {entries > 5 ? (
+              <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
+            )}
+          </div>
         </div>
 
         {/* Email text field */}
@@ -542,7 +717,9 @@ const Play = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showCreateGeo === true ? 1 : 0, pointerEvents: showCreateGeo === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={car_icon} alt='car_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Going to Geo-Creator...</div>
           <div className="text-sm mb-8">You’re about to leave this page to create your own custom Geo-Sol with our Geo-Creator.</div>
           <div className="flex justify-center">
@@ -558,7 +735,9 @@ const Play = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showEmailSent === true ? 1 : 0, pointerEvents: showEmailSent === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={email_icon} alt='email_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Email sent!</div>
           <div className="text-sm mb-0">Confirmation of today’s entry and game results have been sent to {details.to_email}.</div>
           <div className="text-sm mb-8">This giveaway ends on April 19th, 2024 at 11:59 PM EST. 10 winners will be announced on April 21st via email.</div>
@@ -583,7 +762,9 @@ const Play = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showQuitGame === true ? 1 : 0, pointerEvents: showQuitGame === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={quit_icon} alt='quit_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Quit game?</div>
           <div className="text-sm mb-8">Progress you made are not saved. Are you sure you want to quit?</div>
           <div className="flex justify-center">
@@ -599,7 +780,9 @@ const Play = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={leave_icon} alt='leave_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
           <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">
@@ -607,6 +790,46 @@ const Play = () => {
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* PopUp - Image Share*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showImageShare === true ? 1 : 0, pointerEvents: showImageShare === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+
+        <div className="font-inter outline outline-1 rounded-3xl p-12 w-[560px] bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+
+          <button className="p-2 absolute top-6 right-6" onClick={() => setShowImageShare(false)}>
+            <img src={close_icon} alt='close-icon' className='w-4 object-contain' />
+          </button>
+
+          <div className='flex items-center'>
+            <img className="flex-col mr-8 outline outline-1 w-40 outline-grey-200" src={imageUrl} alt="Your image" />
+            <div className='flex-col'>
+              <div className="font-bold text-2xl mb-4">Share your creation!</div>
+              <div className="text-sm mb-2">Share this image via</div>
+              <div className="flex gap-2 mb-3">
+                <WhatsappShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
+                  <WhatsappIcon size={40} round={true} />
+                </WhatsappShareButton>
+                <TwitterShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
+                  <XIcon size={40} round={true} />
+                </TwitterShareButton>
+                <FacebookShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
+                  <FacebookIcon size={40} round={true} />
+                </FacebookShareButton>
+                <RedditShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
+                  <RedditIcon size={40} round={true} />
+                </RedditShareButton>
+              </div>
+
+              <button className='mt-7 w-60 rounded-full outline outline-1 flex items-center p-3 justify-center' onClick={downloadImage}>
+                <img src={download_icon} alt='download-icon' className='w-5 object-contain' />
+                <div className="font-inter pl-3 mr-2 text-sm">Download image</div>
+              </button>
+
+            </div>
           </div>
         </div>
       </div>

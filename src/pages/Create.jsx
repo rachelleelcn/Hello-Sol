@@ -9,25 +9,28 @@ import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
-import evTop_img from "../assets/images/placeholder.jpg";
-// import classicTop_img from "../assets/images/placeholder.jpg";
-// import roundTop_img from "../assets/images/placeholder.jpg";
-// import boxyTop_img from "../assets/images/placeholder.jpg";
-// import sportTop_img from "../assets/images/placeholder.jpg";
-// import vintageTop_img from "../assets/images/placeholder.jpg";
-// import evBody_img from "../assets/images/placeholder.jpg";
-// import classicBody_img from "../assets/images/placeholder.jpg";
-// import roundBody_img from "../assets/images/placeholder.jpg";
-// import boxyBody_img from "../assets/images/placeholder.jpg";
-// import sportBody_img from "../assets/images/placeholder.jpg";
-// import vintageBody_img from "../assets/images/placeholder.jpg";
-// import evTires_img from "../assets/images/placeholder.jpg";
-// import classicTires_img from "../assets/images/placeholder.jpg";
-// import roundTires_img from "../assets/images/placeholder.jpg";
-// import boxyTires_img from "../assets/images/placeholder.jpg";
-// import sportTires_img from "../assets/images/placeholder.jpg";
-// import vintageTires_img from "../assets/images/placeholder.jpg";
 
+import leave_icon from "../assets/icons/leave.png";
+import evTop_img from "../assets/images/ev-top.jpg";
+import classicTop_img from "../assets/images/classic-top.jpg";
+import roundTop_img from "../assets/images/round-top.jpg";
+import boxyTop_img from "../assets/images/boxy-top.jpg";
+import sportTop_img from "../assets/images/sport-top.jpg";
+import vintageTop_img from "../assets/images/vintage-top.jpg";
+import evBody_img from "../assets/images/ev-bottom.jpg";
+import classicBody_img from "../assets/images/classic-bottom.jpg";
+import roundBody_img from "../assets/images/round-bottom.jpg";
+import boxyBody_img from "../assets/images/boxy-bottom.jpg";
+import sportBody_img from "../assets/images/sport-bottom.jpg";
+import vintageBody_img from "../assets/images/vintage-bottom.jpg";
+import evTires_img from "../assets/images/ev-tires.jpg";
+import classicTires_img from "../assets/images/classic-tires.jpg";
+import roundTires_img from "../assets/images/round-tires.jpg";
+import boxyTires_img from "../assets/images/boxy-tires.jpg";
+import sportTires_img from "../assets/images/sport-tires.jpg";
+import vintageTires_img from "../assets/images/vintage-tires.jpg";
+import pose_icon from "../assets/icons/pose_indicator.png";
+import rotate_icon from "../assets/icons/rotate_indicator.png";
 
 
 
@@ -53,8 +56,20 @@ const Create = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const generateImage = () => {
+
     return new Promise((resolve) => {
       const existingCanvas = document.querySelector('canvas');
       const newCanvas = document.createElement('canvas');
@@ -67,13 +82,13 @@ const Create = () => {
       newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
       // add existing canvas to new
-      const desiredWidth = 2400;
+      const desiredWidth = 2500;
       const existingCanvasScale = desiredWidth / existingCanvas.width;
       const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
       const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
 
       const existingCanvasX = (newCanvas.width - existingCanvasWidth) / 2;
-      const existingCanvasY = (newCanvas.height - existingCanvasHeight) / 2;
+      const existingCanvasY = (newCanvas.height - existingCanvasHeight) / 2 - 32;
       newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
 
       // text / image
@@ -197,6 +212,9 @@ const Create = () => {
 
   const colours = ['blue', 'green', 'yellow', 'red', 'pink', 'purple'];
   const models = ['Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'];
+  const topModelImg = [evTop_img, classicTop_img, roundTop_img, boxyTop_img, sportTop_img, vintageTop_img];
+  const bodyModelImg = [evBody_img, classicBody_img, roundBody_img, boxyBody_img, sportBody_img, vintageBody_img];
+  const tireModelImg = [evTires_img, classicTires_img, roundTires_img, boxyTires_img, sportTires_img, vintageTires_img];
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -205,10 +223,10 @@ const Create = () => {
   // console.log("Width: " + width + ", Height: " + height);
 
   return (
-    <section className='w-full h-screen relative bg-white-200 download'>
+    <section className='w-full h-screen relative bg-white-200'>
 
       {currentSection > 1 && currentSection < 6 && (
-        <div className="w-2/3 h-screen relative" >
+        <div className="w-2/3 h-screen relative pb-16" >
           <Canvas style={{ background: '#F1F1F1' }} >
             <Suspense fallback={<Loader />}>
               <Configurator
@@ -227,7 +245,7 @@ const Create = () => {
       )}
 
       {currentSection === 6 && (
-        <div className="w-full h-screen relative" >
+        <div className="w-full h-screen relative pb-16" >
           <Canvas style={{ background: '#F1F1F1' }} gl={{ preserveDrawingBuffer: true }}>
             <Suspense fallback={<Loader />}>
               <Configurator
@@ -246,6 +264,17 @@ const Create = () => {
       )}
 
       {/* HTML */}
+      <div style={{ transition: 'opacity 0.2s', opacity: currentSection > 1 && currentSection < 6 ? 1 : 0, pointerEvents: 'none' }}>
+        <div style={{ position: 'fixed', bottom: '9%', left: '4%' }}>
+        <img src={rotate_icon} alt='rotate_icon' className='w-56 object-contain mt-8' />
+        </div>
+      </div>
+      <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 6 ? 1 : 0, pointerEvents: 'none' }}>
+        <div style={{ position: 'fixed', bottom: '10%', left: '22%'}}>
+        <img src={pose_icon} alt='pose_icon' className='w-48 object-contain mt-8' />
+        </div>
+      </div>
+
       {/* P1 */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '23%', left: '50%', transform: `translate(-50%,-50%)` }}>
@@ -346,34 +375,44 @@ const Create = () => {
               <div className="grid grid-rows-2 grid-cols-3 gap-2.5 pb-6">
                 <button className="relative text-[10px]" onClick={() => selectTopModel(0)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 0 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
-                    {/* <img src={evTop_img} alt='close-icon' className='h-full object-contain ' /> */}
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={evTop_img} alt='evTop_img' className='h-full object-contain ' />
                   </div>
                   <div className="absolute inset-0 mt-[76px]">Electric</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectTopModel(1)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 1 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={classicTop_img} alt='classicTop_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Classic</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectTopModel(2)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 2 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={roundTop_img} alt='roundTop_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Round</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectTopModel(3)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 3 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={boxyTop_img} alt='boxyTop_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Boxy</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectTopModel(4)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 4 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={sportTop_img} alt='sportTop_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Sport</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectTopModel(5)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${topModel === 5 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={vintageTop_img} alt='vintageTop_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Vintage</div>
                 </button>
               </div>
@@ -416,32 +455,44 @@ const Create = () => {
               <div className="grid grid-rows-2 grid-cols-3 gap-2.5 pb-6">
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(0)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 0 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={evBody_img} alt='evBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Electric</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(1)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 1 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={classicBody_img} alt='classicBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Classic</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(2)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 2 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={roundBody_img} alt='roundBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Round</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(3)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 3 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={boxyBody_img} alt='boxyBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Boxy</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(4)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 4 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={sportBody_img} alt='sportBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Sport</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectBodyModel(5)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${bodyModel === 5 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={vintageBody_img} alt='vintageBody_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Vintage</div>
                 </button>
               </div>
@@ -456,32 +507,44 @@ const Create = () => {
               <div className="grid grid-rows-2 grid-cols-3 gap-2.5 pb-6">
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(0)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 0 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={evTires_img} alt='evTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Electric</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(1)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 1 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={classicTires_img} alt='classicTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Classic</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(2)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 2 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={roundTires_img} alt='roundTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Round</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(3)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 3 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={boxyTires_img} alt='boxyTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Boxy</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(4)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 4 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={sportTires_img} alt='sportTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Sport</div>
                 </button>
                 <button className="relative text-[10px]" onClick={() => selectWheelModel(5)}>
                   <div className={`w-28 h-24 bg-white-100 rounded-2xl ${wheelModel === 5 ? 'border border-solid border-black-200' : ''}`} />
-                  <div className="bg-grey-100 rounded-xl absolute inset-0 m-2 mb-6" />
+                  <div className="bg-white-100 rounded-xl absolute inset-0 m-2 mb-6 flex items-center justify-center">
+                    <img src={vintageTires_img} alt='vintageTires_img' className='h-full object-contain ' />
+                  </div>
                   <div className="absolute inset-0 mt-[76px]">Vintage</div>
                 </button>
               </div>
@@ -553,7 +616,11 @@ const Create = () => {
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="bg-grey-100 w-14 h-[38px] rounded-xl m-2" />
+
+                  <div className="bg-white-100 w-14 h-[38px] rounded-xl m-2 flex items-center justify-center">
+                    <img src={topModelImg[topModel]} alt='top image' className='h-full object-contain ' />
+                  </div>
+
                   <div className="text-xs font-bold ml-1">{models[topModel]}</div>
                 </div>
                 <div className={`bg-${colours[topColour]}-100 w-8 h-8 rounded-full m-2 mr-3`} />
@@ -564,7 +631,11 @@ const Create = () => {
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="bg-grey-100 w-14 h-[38px] rounded-xl m-2" />
+                  
+                <div className="bg-white-100 w-14 h-[38px] rounded-xl m-2 flex items-center justify-center">
+                    <img src={bodyModelImg[bodyModel]} alt='body image' className='h-full object-contain ' />
+                  </div>
+
                   <div className="text-xs font-bold ml-1">{models[bodyModel]}</div>
                 </div>
                 <div className={`bg-${colours[bodyColour]}-100 w-8 h-8 rounded-full m-2 mr-3`} />
@@ -575,7 +646,11 @@ const Create = () => {
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="bg-grey-100 w-14 h-[38px] rounded-xl m-2" />
+
+                  <div className="bg-white-100 w-14 h-[38px] rounded-xl m-2 flex items-center justify-center">
+                    <img src={tireModelImg[wheelModel]} alt='tire image' className='h-full object-contain ' />
+                  </div>
+
                   <div className="text-xs font-bold ml-1">{models[wheelModel]}</div>
                 </div>
               </div>
@@ -626,12 +701,12 @@ const Create = () => {
             </button>
           </div>
 
-          <div className="w-56 text-base text-grey-100 font-inter mt-20">
+          <div className="w-56 text-sm text-grey-100 font-inter mt-20">
             Visit Geo.com to learn more about our <button className="underline underline-offset-4" onClick={() => setShowLeaveGeo(true)}> models and prices</button>.
           </div>
         </div>
 
-        <div style={{ position: 'fixed', bottom: '20%', right: '4%' }}>
+        <div style={{ position: 'fixed', bottom: '25%', right: '4%' }}>
           <div className="outline outline-1 rounded-3xl p-8">
             <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
               Play to win a free Geo-Energy portable charger!
@@ -650,7 +725,9 @@ const Create = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={leave_icon} alt='leave_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
           <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">
@@ -671,9 +748,6 @@ const Create = () => {
           <button className="p-2 absolute top-6 right-6" onClick={() => setShowImageShare(false)}>
             <img src={close_icon} alt='close-icon' className='w-4 object-contain' />
           </button>
-
-
-
 
           <div className='flex items-center'>
             <img className="flex-col mr-8 outline outline-1 w-40 outline-grey-200" src={imageUrl} alt="Your image" />
@@ -700,10 +774,6 @@ const Create = () => {
             </div>
 
           </div>
-
-
-
-
         </div>
       </div>
 
