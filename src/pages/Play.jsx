@@ -457,7 +457,8 @@ const Play = () => {
           </div>
         )}
 
-        {entries > 0 && entries <= 6 && elapsedTime > 180 && (
+        {/* {entries > 0 && entries <= 6 && elapsedTime > 180 && ( */}
+        {entries > 0 && entries < 6 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>

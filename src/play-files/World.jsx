@@ -24,8 +24,8 @@ export const Borders = () => {
   return (
     <group>
       {/* Front & Back */}
-      <Cube position={[0, 24, -75]} size={[150, 50, 0.01]}/>
-      <Cube position={[0, 24, 75]} size={[150, 50, 0.01]}/>
+      <Cube position={[0, 24, -135]} size={[150, 50, 0.01]}/>
+      <Cube position={[0, 24, 15]} size={[150, 50, 0.01]}/>
 
       {/* Sides */}
       <Cube position={[-62, 24, 0]} size={[0.01, 50, 150]}/>
@@ -40,7 +40,7 @@ export const Borders = () => {
           <Borders/>
           <Ground/>
           <Buildings/>
-          {/* <Stations entries={entries} setEntries={setEntries} /> */}
+          <Stations entries={entries} setEntries={setEntries} />
         </group>   
     )
   }

@@ -9,7 +9,7 @@ import { useGLTF } from "@react-three/drei";
 
 import squareBuildingScene from '../../assets/3d/BuildingA.glb'
 
-const SquareBuilding = ({props, colour}) => {
+const SquareBuilding = ({props, glassColour, frameColour, wallColour}) => {
     
     const buildingRef = useRef()
     const {nodes, materials} = useGLTF(squareBuildingScene)
@@ -24,24 +24,28 @@ const SquareBuilding = ({props, colour}) => {
                 />
                 <mesh
                     geometry={nodes.Building_1001_1.geometry}
-                    material={materials["glass1.004"]}
-                />
+                    // material={materials["glass1.004"]}
+                >
+                    <meshStandardMaterial color={glassColour}/>
+                </mesh>
                 <mesh
                     geometry={nodes.Building_1001_2.geometry}
                     material={materials["frame1.005"]}
-                />
+                >
+                    <meshStandardMaterial color={frameColour}/>    
+                </mesh>
                 <mesh
                     geometry={nodes.Building_1001_3.geometry}
                     // material={materials["Roof.003"]}
                 >
-                    <meshStandardMaterial color={colour}/>
+                    <meshStandardMaterial color={wallColour}/>
                 </mesh>
                 
                 <mesh
                     geometry={nodes.Building_1001_4.geometry}
                     // material={materials["Wall1.006"]}
                 >
-                    <meshStandardMaterial color={colour}/>
+                    <meshStandardMaterial color={wallColour}/>
                 </mesh>
             </group>
         </group>

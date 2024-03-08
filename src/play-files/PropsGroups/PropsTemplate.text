@@ -1,23 +1,29 @@
 <TreeFinal  pos={[-13, -1, 0]} 
-            hitboxPos={[0, 0, 0]}/>
+            hitboxPos={[0, 0, 10]}/>
 
-            hitbox: +13, 0
+            hitbox: +13, -60
 
 
 <StreetLightFinal pos={[-13, -1, 0]} rotate={rotateU}
-                  hitboxPos={[0, 0, 0]} />
+                  hitboxPos={[0, 0, 10]} />
 
-                  hitbox: +13, 0
+                  hitbox: +13, -60
 
 
 <TrafficLFinal  pos={[-13, -1, 0]} rotate={rotateU}
-                hitboxPos={[0, 0, 0]} /> 
+                hitboxPos={[0, 0, 10]} /> 
 
-                hitbox: +13, 0
+                hitbox: +13, -60
 
 
-<TrafficRFinal  pos={[-13, 0, 0]} rotate={rotateU}
-                hitboxPos={[0, 0, 0]} />
+<TrafficRFinal  pos={[-13, -1, 0]} rotate={rotateU}
+                hitboxPos={[0, 0, 10]} />
 
-                hitbox: +13, 0
-                                   
+                hitbox: +13, -60
+
+
+<StationFinal entries={entries} setEntries={setEntries}
+              pos={[0, 0, 0]} rotate={rotateD}/>
+<Hitbox position={[13, -1, -60]}/>
+
+            hitbox: +13, -60

@@ -10,9 +10,9 @@ export const useWheels = (width, height, front, radius) => {
         axleLocal: [1, 0, 0],
 
         suspensionStiffness: 80,
-        suspensionRestLength: 0.3,
+        suspensionRestLength: 0.2,
 
-        frictionSlip: 1,
+        frictionSlip: 0.8,
 
         dampingRelaxation: 10,
         dampingCompression: 4.4,
@@ -30,8 +30,8 @@ export const useWheels = (width, height, front, radius) => {
         steeringQuad: false,
 
         acceleratingSpeed: 1,
-        acceleratingMaxSpeed: 0.04,
-        acceleratingQuad: true,
+        acceleratingMaxSpeed: 0.025,
+        acceleratingQuad: false,
 
         brakeStrength: 5
     }

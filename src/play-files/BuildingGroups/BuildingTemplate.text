@@ -1,145 +1,145 @@
-<SquareFinal colour={colour}
-        pos={[-13, -1, 0]} rotate={rotateU}
-        hitboxPos={[0, 0, 0]}/>
+<SquareFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+             pos={[-13, -1, 0]} rotate={rotateU}
+             hitboxPos={[0, 0, 10]}/>
 
-        hitbox: +13, 0
+        hitbox: +13, -60
 
-<RectFinal colour={colour}
-            pos={[-13, -1, 0]} rotate={rotateU}
-            hitboxPos={[0, 0, 0]} />
+<RectFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+           pos={[-13, -1, 0]} rotate={rotateU}
+           hitboxPos={[0, 0, 10]} />
 
-            hitbox: +13, 0
+            hitbox: +13, -60
 
 {/* top right  */}
-<LFinal colour={colour}
+<LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateL}
-        hitboxPos1={[0, 0, -2]}
-        hitboxPos2={[2, 0, 0]} />
+        hitboxPos1={[0, 0, 8]}
+        hitboxPos2={[2, 0, 10]} />
 
-        hitbox1: +13, -2
-        hitbox2: +15, 0 
+        hitbox1: +13, -62
+        hitbox2: +15, -60
 
 {/* bottom right  */}
-<LFinal colour={colour}
+<LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateU}
-        hitboxPos1={[0, 0, 2]}
-        hitboxPos2={[2, 0, 0]} /> 
+        hitboxPos1={[0, 0, 12]}
+        hitboxPos2={[2, 0, 10]} /> 
 
-        hitbox1: +13, +2
-        hitbox2: +15, 0 
+        hitbox1: +13, -58
+        hitbox2: +15, -60
 
 {/* top left */}
-<LFinal colour={colour}
+<LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateD}
-        hitboxPos1={[0, 0, -2]}
-        hitboxPos2={[-2, 0, 0]} />
+        hitboxPos1={[0, 0, 8]}
+        hitboxPos2={[-2, 0, 10]} />
 
-        hitbox1: +13, -2
-        hitbox2: +11, 0 
+        hitbox1: +13, -62
+        hitbox2: +11, -60
 
 {/* bottom left  */}
-<LFinal colour={colour}
+<LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateR}
-        hitboxPos1={[0, 0, 2]}
-        hitboxPos2={[-2, 0, 0]} />
+        hitboxPos1={[0, 0, 12]}
+        hitboxPos2={[-2, 0, 10]} />
 
-        hitbox1: +13, +2
-        hitbox2: +11, 0 
+        hitbox1: +13, -58
+        hitbox2: +11, -60
 
 {/* stub right */}
-<TFinal colour={colour}
+<TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-11, -1, 0]} rotate={rotateU}
-        hitboxPos1={[0, 0, 0]}
-        hitboxPos2={[4, 0, 0]} />
+        hitboxPos1={[0, 0, 10]}
+        hitboxPos2={[4, 0, 10]} />
 
-        hitbox1: +11, 0
-        hitbox2: +15, 0 
+        hitbox1: +11, -60
+        hitbox2: +15, -60
 
 {/* stub left */}
-<TFinal colour={colour}
+<TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateD}
-        hitboxPos1={[2, 3, 0]}
-        hitboxPos2={[-2, 3, 0]} />
+        hitboxPos1={[2, 3, 10]}
+        hitboxPos2={[-2, 3, 10]} />
 
-        hitbox1: +15, 0
-        hitbox2: +11, 0
+        hitbox1: +15, -60
+        hitbox2: +11, -60
 
 {/* stub up */}
-<TFinal colour={colour}
+<TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateL}
-        hitboxPos1={[0, 3, 2]}
-        hitboxPos2={[0, 3, -2]} />
+        hitboxPos1={[0, 3, 12]}
+        hitboxPos2={[0, 3, 8]} />
 
-        hitbox1: +13, +2
-        hitbox2: +13, -2
+        hitbox1: +13, -58
+        hitbox2: +13, -62
 
 {/* stub down */}
-<TFinal colour={colour}
+<TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateR}
-        hitboxPos1={[0, 3, -2]}
-        hitboxPos2={[0, 3, 2]} />
+        hitboxPos1={[0, 3, -62]}
+        hitboxPos2={[0, 3, -58]} />
 
-        hitbox1: +13, -2
-        hitbox2: +13, +2
+        hitbox1: +13, -62
+        hitbox2: +13, -58
 
 {/* right open */}
-<UFinal colour={colour}
+<UFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateU}
-        hitboxPos1={[0, 0, -6]}
-        hitboxPos2={[-3, 0, 0]}
-        hitboxPos3={[0, 0, 6]} />
+        hitboxPos1={[0, 0, -54]}
+        hitboxPos2={[-3, 0, -60]}
+        hitboxPos3={[0, 0, -66]} />
 
-        hitbox1: +13, -6
-        hitbox2: +10, 0
-        hitbox3: +13, +6
+        hitbox1: +13, -54
+        hitbox2: +10, -60
+        hitbox3: +13, -66
 
 {/* left open */}
-<UFinal colour={colour}
+<UFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateD}
-        hitboxPos1={[0, 0, -6]}
-        hitboxPos2={[3, 0, 0]}
-        hitboxPos3={[0, 0, 6]} />
+        hitboxPos1={[0, 0, +16]}
+        hitboxPos2={[3, 0, +10]}
+        hitboxPos3={[0, 0, +4]} />
 
-        hitbox1: +13, -6
-        hitbox2: +16, 0
-        hitbox3: +13, +6
+        hitbox1: +13, -54
+        hitbox2: +16, -60
+        hitbox3: +13, -66
 
 {/* top open */}
-<UFinal colour={colour}
+<UFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateL}
-        hitboxPos1={[-6, 0, 0]}
-        hitboxPos2={[0, 0, 3]}
-        hitboxPos3={[6, 0, 0]} /> 
+        hitboxPos1={[-6, 0, -60]}
+        hitboxPos2={[0, 0, -57]}
+        hitboxPos3={[6, 0, -60]} /> 
 
-        hitbox1: +7, 0
-        hitbox2: +13, +3
-        hitbox3: +19, 0      
+        hitbox1: +7, -60
+        hitbox2: +13, -57
+        hitbox3: +19, -60       
 
 {/* bottom open */}
-<UFinal colour={colour}
+<UFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateR}
-        hitboxPos1={[-6, 0, 0]}
-        hitboxPos2={[0, 0, -3]}
-        hitboxPos3={[6, 0, 0]} />
+        hitboxPos1={[-6, 0, -60]}
+        hitboxPos2={[0, 0, -63]}
+        hitboxPos3={[6, 0, -60]} />
 
-        hitbox1: +7, 0
-        hitbox2: +13, -3
-        hitbox3: +19, 0
+        hitbox1: +7, -60
+        hitbox2: +13, -63
+        hitbox3: +19, -60
 
 {/* up */}
-<ZFinal colour={colour}
+<ZFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateU} 
-        hitboxPos1={[3, 3, -6]}
-        hitboxPos2={[9, 3, -12]}/>
+        hitboxPos1={[3, 3, -66]}
+        hitboxPos2={[9, 3, -72]}/>
 
-        hitbox1: +16, -6
-        hitbox2: +22, -12
+        hitbox1: +16, -66
+        hitbox2: +22, -72
 
 {/* side */}
-<ZFinal colour={colour}
+<ZFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
         pos={[-13, -1, 0]} rotate={rotateL} 
-        hitboxPos1={[-6, 3, -3]}
-        hitboxPos2={[-12, 3, -9]}/> 
+        hitboxPos1={[-6, 3, -63]}
+        hitboxPos2={[-12, 3, -69]}/> 
 
-        hitbox1: +7, -3
-        hitbox2: +1, -9
+        hitbox1: +7, -63
+        hitbox2: +1, -69

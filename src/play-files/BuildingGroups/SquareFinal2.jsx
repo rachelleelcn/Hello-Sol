@@ -1,15 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
 
-import RectBuilding from '../../models/Buildings/RectBuilding'
+import SquareBuilding2 from '../../models/Buildings/SquareBuilding2'
 import { useBox } from '@react-three/cannon'
 
-
-const Hitbox = ({position, rotation, size}) => {
+// Small square building
+const Hitbox = ({position, size}) => {
     const [ref] = useBox(() => ({
             args: size,
             position: position,
-            rotation: rotation,
             type: 'Static'
         }))
 
@@ -22,22 +21,21 @@ return (
     )
 }
 
-export const RectFinal = 
+export const SquareFinal2 = 
     ({ 
-        glassColour, frameColour, wallColour, 
+        glassColour, frameColour, wallColour,
         pos, rotate, hitboxPos }) => {
-        
+
     return (
         <group>
             <group position={pos} rotation={rotate}>
-                <RectBuilding 
-                     glassColour={glassColour}
-                     frameColour={frameColour}
-                     wallColour={wallColour}  /> 
+                <SquareBuilding2 
+                    glassColour={glassColour}
+                    frameColour={frameColour}
+                    wallColour={wallColour}  />
             </group>
 
-            <Hitbox position={hitboxPos} rotation={rotate} size={[10, 5, 6]} />
-
+            <Hitbox position={hitboxPos} size={[6, 6, 6]} />
         </group>
     )
 }

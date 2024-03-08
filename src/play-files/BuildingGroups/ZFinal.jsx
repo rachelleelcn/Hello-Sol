@@ -23,11 +23,18 @@ return (
     )
 }
 
-export const ZFinal = ({ colour, pos, rotate, hitboxPos1, hitboxPos2 }) => {
+export const ZFinal = 
+    ({ 
+        glassColour, frameColour, wallColour, 
+        pos, rotate, hitboxPos1, hitboxPos2 }) => {
+            
     return (
         <group>
             <group position={pos} rotation={rotate} >
-                <ZBuilding colour={colour} />
+                <ZBuilding 
+                    glassColour={glassColour}
+                    frameColour={frameColour}
+                    wallColour={wallColour} />
             </group>
         
             <Hitbox position={hitboxPos1} rotation={rotate} size={[6, 14, 12]} />
