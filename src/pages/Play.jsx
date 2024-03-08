@@ -190,7 +190,7 @@ const Play = () => {
 
     //setEntries(entries);
     //console.log("Value of entries:", entryNum);
-    console.log("image: ", imageUrl);
+    //console.log("image: ", imageUrl);
     //console.log("date: ", formatDate);
     //console.log('Time:', formatTime)
 
