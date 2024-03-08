@@ -40,8 +40,9 @@ const Play = () => {
   const [shareUrl, setShareUrl] = useState(null);
 
   const [entries, setEntries] = useState(0);
+
   const currentDate = new Date();
-  const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+  //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
   const bannerUrl = "https://drive.google.com/uc?id=1YZ97A1c4enQjUdMB-8ilceEB2D7uM90B";
 
@@ -63,6 +64,7 @@ const Play = () => {
   const [isRunning, setIsRunning] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
 
+  const timeFormat = `${Math.floor(elapsedTime / 60)}:${String(elapsedTime % 60).padStart(2, '0')}`;
 
   const startTimer = () => {
     setDuration(parseInt(START_SECONDS, 10) + 60 * parseInt(START_MINUTES, 10))
@@ -164,9 +166,11 @@ const Play = () => {
   const [details, setDetails] = useState({
     to_email: "",
     numEntry: entries,
-    date: formattedDate,
+
+    date: dateFormat,
     image: bannerUrl,
-    timeTaken: elapsedTime
+    timeTaken: timeFormat
+
   });
 
   const handleDetailsChange = (event) => {
@@ -180,13 +184,16 @@ const Play = () => {
     });
   };
 
-  const handleSendEmail = (entryNum, dateFormat, bannerUrl, takenTime) => {
-    sendCustomEmail(details, entryNum, dateFormat, bannerUrl, takenTime);
+
+  const handleSendEmail = (entryNum, formatDate, imageUrl, formatTime) => {
+    sendCustomEmail(details, entryNum, formatDate, imageUrl, formatTime);
 
     //setEntries(entries);
     //console.log("Value of entries:", entryNum);
-    //console.log("image: ", bannerUrl);
-    console.log('Time:', takenTime)
+    //console.log("image: ", imageUrl);
+    //console.log("date: ", formatDate);
+    //console.log('Time:', formatTime)
+
   };
 
   const handleClearEmail = () => {
@@ -196,8 +203,11 @@ const Play = () => {
 
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
-      handleSendEmail(entries, formattedDate, bannerUrl, elapsedTime);
+
+      handleSendEmail(entries, dateFormat, imageUrl, timeFormat);
+
       setShowEmailSent(true);
+    
     }
   };
 
@@ -614,7 +624,8 @@ const Play = () => {
           {/* Time taken */}
           <hr className="border-black-100 border-t-1 w-6" />
           <div className="text-base font-bold">
-            {Math.floor(elapsedTime / 60)} <span>:</span> {String(elapsedTime % 60).padStart(2, '0')}
+            {timeFormat}
+            {/*{Math.floor(elapsedTime / 60)} <span>:</span> {String(elapsedTime % 60).padStart(2, '0')}*/}
 
           </div>
         </div>
