@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import geo_icon from "../assets/icons/geo.png";
 import { useState } from 'react';
+import leave_icon from "../assets/icons/leave.png";
 
 const Navbar = () => {
 
@@ -46,7 +47,9 @@ const Navbar = () => {
             <div className="absolute" style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
                 <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
                 <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-                    <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+                    <div className="inline-flex items-center mb-0">
+                        <img src={leave_icon} alt='leave_icon' className='h-16 object-contain ' />
+                    </div>
                     <div className="font-bold text-2xl mb-1">Leaving site...</div>
                     <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
                     <div className="flex justify-center">

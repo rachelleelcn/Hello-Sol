@@ -8,7 +8,11 @@ import Loader from "../components/Loader"
 import { Environment, Scroll, ScrollControls, useScroll } from "@react-three/drei"
 import go_icon from "../assets/icons/go.png";
 import city from "../assets/lighting/potsdamer_platz_1k.hdr";
-
+import rear_icon from "../assets/icons/rear.png";
+import mic_icon from "../assets/icons/mic.png";
+import dash_icon from "../assets/icons/dash.png";
+import leave_icon from "../assets/icons/leave.png";
+import scroll_icon from "../assets/icons/scroll_indicator.png";
 
 import LearnCar from "../models/LearnCar"
 
@@ -114,7 +118,7 @@ const Learn = () => {
       {/* HTML behind Canvas */}
 
       {/* P2 */}
-      <div className="w-56" style={{ position: 'fixed', top: '20%', right: '15%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
+      <div className="w-56" style={{ position: 'fixed', top: '25%', right: '22%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
         <div className="text-base font-bold font-inter pb-1">
           It’s simple.
         </div>
@@ -124,7 +128,7 @@ const Learn = () => {
       </div>
 
       {/* P3 */}
-      <div className="w-56" style={{ position: 'fixed', top: '40%', left: '15%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
+      <div className="w-56" style={{ position: 'fixed', top: '45%', left: '22%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
         <div className="text-base font-bold font-inter pb-1">
           It’s all-electric.
         </div>
@@ -134,7 +138,7 @@ const Learn = () => {
       </div>
 
       {/* P4a+b */}
-      <div className="" style={{ position: 'fixed', bottom: '22%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4a ? 'auto' : 'none' }}>
+      <div className="" style={{ position: 'fixed', bottom: '25%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4a ? 'auto' : 'none' }}>
         <div className="flex gap-2">
           <div className="text-xl font-inter">
             It’s where
@@ -147,7 +151,7 @@ const Learn = () => {
       </div>
 
       {/* P5 */}
-      <div className="w-96 text-center" style={{ position: 'fixed', bottom: '15%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show5 ? 'auto' : 'none' }}>
+      <div className="w-96 text-center" style={{ position: 'fixed', bottom: '20%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show5 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Smaller than ever.
         </div>
@@ -174,7 +178,7 @@ const Learn = () => {
       </div>
 
       {/* P8 */}
-      <div className="w-96" style={{ position: 'fixed', bottom: '30%', right: '20%', opacity: show8 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
+      <div className="w-96" style={{ position: 'fixed', bottom: '33%', right: '30%', opacity: show8 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Greener than ever.
         </div>
@@ -194,32 +198,38 @@ const Learn = () => {
       </div>
 
       {/* P10 */}
-      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '15%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
-        <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
+      <div className="w-48" style={{ position: 'fixed', top: '50%', left: '14%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-10 h-10 mb-2 flex items-center justify-center">
+          <img src={rear_icon} alt='rear-icon' className='h-full object-contain ' />
+        </div>
+        <div className="text-sm font-bold font-inter pb-2">
           Rear View Camera
         </div>
-        <div className="text-xs font-inter">
+        <div className="text-sm font-inter">
           Park like a pro, the Geo-Sol has your back in 4K.
         </div>
       </div>
 
-      <div className="w-48" style={{ position: 'fixed', top: '25%', left: '65%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
-        <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
+      <div className="w-60" style={{ position: 'fixed', top: '22%', left: '60%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-10 h-10 mb-2 flex items-center justify-center">
+          <img src={dash_icon} alt='dash-icon' className='h-9 object-contain mt-2' />
+        </div>
+        <div className="text-sm font-bold font-inter pb-2">
           Digital dashboard
         </div>
-        <div className="text-xs font-inter">
+        <div className="text-sm font-inter">
           Real-time information right behind the wheel for a focused drive.
         </div>
       </div>
 
-      <div className="w-40" style={{ position: 'fixed', top: '58%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-8 h-8 rounded-full bg-grey-100 mb-2"></div>
-        <div className="text-sm font-bold font-inter pb-2 underline underline-offset-8">
+      <div className="w-48" style={{ position: 'fixed', top: '50%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <div className="w-10 h-10 mb-2 flex items-center justify-center">
+          <img src={mic_icon} alt='mic-icon' className='h-9 object-contain ' />
+        </div>
+        <div className="text-sm font-bold font-inter pb-2">
           Smart OS
         </div>
-        <div className="text-xs font-inter">
+        <div className="text-sm font-inter">
           Go hands free with voice enabled actions.
         </div>
       </div>
@@ -230,12 +240,12 @@ const Learn = () => {
       <Canvas className="w-full h-screen relative" camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
         <Suspense fallback={<Loader />}>
 
-        <Environment files={city} />
+          <Environment files={city} />
 
           <ScrollControls pages={15} damping={0.1}>
             <LearnCar
               position={[-0.1, -1, 5.5]}
-              rotation={[0, -0.5, 0]}
+              rotation={[0, -0.4, 0]}
               onScroll={handleScroll}
             />
           </ScrollControls>
@@ -244,6 +254,9 @@ const Learn = () => {
 
       {/* HTML in front of Canvas */}
       {/* P1 */}
+
+      
+
       <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
         <div className="text-5xl font-bold font-inter mb-4">
           <div className="mb-2">Hello.</div>
@@ -252,6 +265,7 @@ const Learn = () => {
         <div className="w-72 text-sm font-inter">
           Introducing the all-new electrifying Geo.
         </div>
+        <img src={scroll_icon} alt='scroll_icon' className='w-20 object-contain mt-6' />
 
       </div>
       <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
@@ -309,7 +323,9 @@ const Learn = () => {
       <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
         <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
         <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
-          <div className="w-12 h-12 bg-grey-100 rounded-full mb-4"></div>
+          <div className="inline-flex items-center mb-0">
+            <img src={leave_icon} alt='leave_icon' className='h-16 object-contain ' />
+          </div>
           <div className="font-bold text-2xl mb-1">Leaving site...</div>
           <div className="text-sm mb-8">Progress you made may not be saved. Are you sure you want to leave this page?</div>
           <div className="flex justify-center">

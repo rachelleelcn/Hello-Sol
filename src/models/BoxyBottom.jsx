@@ -19,15 +19,16 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
     return (
         <group ref={boxyBottom} {...props} dispose={null}>
 
-            {/* <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                material-metalness={0}
-            >
-                  {showLicense && (
+            <group position={[-0.001, -0.004, 0.004]}>
+                <mesh
+                    geometry={nodes.mesh_0.geometry}
+                    material={nodes.mesh_0.material}
+                    material-metalness={0}
+                >
+                     {showLicense && (
                 <>
                 <Text
-                    position={[0,0.405,2.012]}
+                    position={[0,0.41,2.012]}
                     color="#000000"
                     fontSize={0.08}
                     font={interFont}
@@ -36,17 +37,16 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
                 </Text>
                 </>
                 )}
-         
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            >
-               {showLicense && (
+                </mesh>
+                <mesh
+                    geometry={nodes.mesh_1.geometry}
+                    material={nodes.mesh_1.material}
+                    material-metalness={0}
+                >
+                    {showLicense && (
                 <>
                 <Text
-                    position={[0,0.61,-1.2248]}
+                    position={[0,0.62,-1.2248]}
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
@@ -56,32 +56,7 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
                 </Text>
                 </>
                 )}
-                </mesh>
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                material-metalness={0}
-            /> */}
-
-
-            <group position={[-0.001, -0.004, 0.004]}>
-                <mesh
-                    geometry={nodes.mesh_0.geometry}
-                    material={nodes.mesh_0.material}
-                    material-metalness={0}
-                />
-                <mesh
-                    geometry={nodes.mesh_1.geometry}
-                    material={nodes.mesh_1.material}
-                    material-metalness={0}
-                />
+                    </mesh>
                 <mesh
                     geometry={nodes.mesh_2.geometry}
                     material={nodes.mesh_2.material}

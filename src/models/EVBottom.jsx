@@ -23,35 +23,6 @@ const EVBottom = ({showLicense,license, ...props}) => {
         <group ref={evBottom} {...props} dispose={null}>
 
 
-            {/* <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                rotation={[0, Math.PI / 2, 0]}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_4.geometry}
-                material={nodes.mesh_4.material}
-                material-metalness={0}
-            /> */}
-
             <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}

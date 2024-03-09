@@ -29,15 +29,16 @@ import VintageWheels from '../models/VintageWheels';
 const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, section, license, showLicense }) => {
     // 'blue', 'green', 'yellow', 'red', 'pink', 'purple'
     const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
+
     // 'Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'
     // const models = ['Electric', 'Classic', 'Round', 'Boxy', 'Sport', 'Vintage'];
 
     const rotation = section === 4 ? [-0.1, 0, 0] : [-0.04, -0.6, 0];
-    const scaleValue = 0.7;
+    const scaleValue = 0.75;
 
     return (
 
-        <PresentationControls speed={1.5} polar={[-0.2, Math.PI / 4]} rotation={rotation}>
+        <PresentationControls speed={1.5} polar={[-0.1, Math.PI / 4]} rotation={rotation}>
 
             <Stage environment={null} intensity={0.6} shadows="false" >
 
