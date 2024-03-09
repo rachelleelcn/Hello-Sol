@@ -63,7 +63,7 @@ const rotateR = [0, 4.71, 0]
 
         <LFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[42, -1, 38]} rotate={rotateL}
-                hitboxPos1={[65, 0, -24]}
+                hitboxPos1={[55, 0, -24]}
                 hitboxPos2={[57, 0, -22]} />
 
         <LFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}

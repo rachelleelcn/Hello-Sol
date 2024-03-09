@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useBox, useRaycastVehicle } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Quaternion, Vector3 } from 'three'
 
 import { useWheels } from './useWheels'
@@ -43,43 +43,24 @@ export function CarModel() {
     UseControls(vehicleAPI, chassisAPI)
 
     // Third person camera stuff
-    useFrame((state, delta) => {
-        let position = new Vector3(0, 0, 0)
-        position.setFromMatrixPosition(chassisBody.current.matrixWorld)
-
-        let quaternion = new Quaternion(0, 0, 0, 0)
-        quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld)
-
-        let wDir = new Vector3(0, 0, -1)
-        wDir.applyQuaternion(quaternion)
-        wDir.normalize()
-
-        let cameraPosition = position.clone().add(
-            wDir.clone().multiplyScalar(-1).add(
-                new Vector3(0, 0.35, 0.015)
-            )
-        )
-        
-        // const lerpFactor = Math.min(1, 5 * delta)
-        const lerpFactor = 1
-  
-        state.camera.position.lerp(cameraPosition, lerpFactor)
-        // state.camera.updateProjectionMatrix
-        state.camera.lookAt(position)
-    })
-
-    // useFrame((state, delta) => {
+    // useFrame((state) => {
     //     const carPosition = new Vector3();
     //     chassisBody.current.getWorldPosition(carPosition);
 
-    //     const offset = new Vector3(0, 0.35, 1.5); // Adjust the offset as needed
+    //     const quaternion = new Quaternion();
+    //     chassisBody.current.getWorldQuaternion(quaternion);
+
+    //     const offset = new Vector3(0, 0.6, 2.2);
+    //     offset.applyQuaternion(quaternion);
+
     //     const cameraPosition = carPosition.clone().add(offset);
 
     //     // Smoothly follow the car
-    //     const lerpFactor = 0.1; // Adjust the lerp factor
+    //     const lerpFactor = 1 
     //     state.camera.position.lerp(cameraPosition, lerpFactor);
     //     state.camera.lookAt(carPosition);
     // })
+   
 
     const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
 
@@ -93,9 +74,9 @@ export function CarModel() {
                         scale={0.28}
                     />   */}
     
-                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
-                    <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
-                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.35} />
+                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.37} />
+                    <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.37} />
+                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.62, 0]} scale={0.37} />
                     
                 </group>
 

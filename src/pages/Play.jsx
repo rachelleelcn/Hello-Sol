@@ -450,15 +450,21 @@ const Play = () => {
         )}
         
         {/* bonus entry given if all stations found under 3 minutes */}
-        {entries === 6 && elapsedTime <= 180 && (
+        {entries === 6 && elapsedTime < 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
           </div>
         )}
 
-        {/* {entries > 0 && entries <= 6 && elapsedTime > 180 && ( */}
-        {entries > 0 && entries < 6 && (
+        {entries === 6 && elapsedTime >= 180 && (
+          <div>
+            <div className="font-bold text-3xl pb-2">Congratulations!</div>
+            <div className="text-base pb-6">You have successfully earned all 6 entries to our giveaway!</div>
+          </div>
+        )}
+
+        {entries > 0 && entries < 6 && elapsedTime >= 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
@@ -488,12 +494,14 @@ const Play = () => {
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 0 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 1 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 2 ? 'outline outline-1' : ''}`}></div>
-          {entries > 5 && (
+          
+          {entries > 5 && elapsedTime < 180 && (
             <div className="relative">
               <div className="w-10 h-10 rounded-full outline outline-1"></div>
               <div className="w-8 h-8 bg-grey-100 rounded-full outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
             </div>
           )}
+
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 3 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 4 ? 'outline outline-1' : ''}`}></div>
           <div className={`w-8 h-8 bg-grey-100 rounded-full ${entries > 5 ? 'outline outline-1' : ''}`}></div>

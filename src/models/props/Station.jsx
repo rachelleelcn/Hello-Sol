@@ -20,7 +20,7 @@ const Station = ({props, colour}) => {
 
     return (
         <group ref={ref} position={[0, -1, 0]} {...props} dispose={null}>
-            <group scale={[0.3, 0.6, 0.3]}>
+            <group scale={[0.4, 0.7, 0.4]}>
                 <mesh
                     geometry={nodes.Cube009.geometry}
                     // material={materials.chargingStation}

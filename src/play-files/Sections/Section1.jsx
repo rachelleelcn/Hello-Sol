@@ -42,10 +42,10 @@ const rotateR = [0, 4.71, 0]
                 hitboxPos2={[-44, 2, -119]} />
 
         <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                     pos={[-63, -1, -42]} rotate={rotateD}
-                     hitboxPos={[-50, 0, -102]} />
+                     pos={[-63, -1, -43.5]} rotate={rotateD}
+                     hitboxPos={[-50, 0, -103.5]} />
 
-        <RectFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+        <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                    pos={[-58, -1, -33]} rotate={rotateD} 
                    hitboxPos={[-45, 0, -93]} />
 
@@ -64,36 +64,32 @@ const rotateR = [0, 4.71, 0]
                 hitboxPos1={[-31, 2, -99]}
                 hitboxPos2={[-37, 2, -105]} />
 
-        <RectFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                   pos={[-44, -1, -32]} rotate={rotateU}
-                   hitboxPos={[-31, 0, -92]} />
+        <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+                   pos={[-44, -1, -32.5]} rotate={rotateU}
+                   hitboxPos={[-31, 0, -92.5]} />
 
         <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                     pos={[-29, -1, -57]} rotate={rotateL} 
-                     hitboxPos={[-16, 0, -117]}/>
+                     pos={[-29.5, -1, -57]} rotate={rotateL} 
+                     hitboxPos={[-16.5, 0, -117]}/>
 
         <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                    pos={[-26, -1, -48]} rotate={rotateU} 
                    hitboxPos={[-13, 0, -108]}/>
 
         <UFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-25, -1, -35]} rotate={rotateL}
-                hitboxPos1={[-18, 2, -95]}
-                hitboxPos2={[-12, 2, -92]}
-                hitboxPos3={[-6, 2, -95]} />
+                pos={[-25, -1, -34]} rotate={rotateL}
+                hitboxPos1={[-18, 2, -94]}
+                hitboxPos2={[-12, 2, -91]}
+                hitboxPos3={[-6, 2, -94]} />
 
         <ZFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[-9, -1, -57]} rotate={rotateL}
                 hitboxPos1={[-2, 2, -120]}
                 hitboxPos2={[-8, 2, -126]} />
 
-        <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                     pos={[-10, -1, -50]} rotate={rotateU} 
-                     hitboxPos={[3, 0, -110]}/>
-
         <RectFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                   pos={[-8, -1, -41]} rotate={rotateU} 
-                   hitboxPos={[5, 0, -101]}/>
+                   pos={[-10, -1, -48]} rotate={rotateR} 
+                   hitboxPos={[3, 0, -108]}/>
 
         <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                      pos={[-10, -1, -32]} rotate={rotateR}

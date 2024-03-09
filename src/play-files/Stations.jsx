@@ -19,14 +19,14 @@ const Hitbox = ({position}) => {
 
 return (
     <mesh ref={ref}>
-        <boxGeometry args={[0.65, 3, 0.65]}/>
+        <boxGeometry args={[0.85, 2, 0.85]}/>
         {/* <meshBasicMaterial color={'black'}/> */}
         <meshBasicMaterial transparent={true} opacity={0.001} />
     </mesh>
     )
 }
 
-const StationFinal = ({ entries, setEntries, pos, rotate }) => {
+const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos }) => {
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
 
@@ -56,9 +56,12 @@ const StationFinal = ({ entries, setEntries, pos, rotate }) => {
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}>
 
-            {/* <Station colour={active ? '#FFF' : '#3C9C33'}/> */}
+{/* <boxGeometry args={[0.85, 2, 0.85]}/> */}
+        {/* <meshBasicMaterial color={'black'}/> */}
             <Station colour={active ? '#FFF' : "#C8F165"}/>
             </mesh>
+
+            <Hitbox position={hitboxPos}/>
         </group>
     )
   }
@@ -103,12 +106,12 @@ function Randomize() {
     return (
         <group>
             {/* Set 1 */}
-            {num === 1 && (
+            {/* {num === 1 && ( */}
                     <group>
                     {/* Section 1 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-42, 0, -60]} rotate={rotateR}/>
-                    <Hitbox position={[-29, -1, -120]} />
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[-42, 0, -60]} rotate={rotateR}
+                              hitboxPos={[-29, -1, -120]}/>
 
                     {/* Section 2 */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -135,11 +138,11 @@ function Randomize() {
                                 pos={[54, 0, 60]} rotate={rotateL}/>
                     <Hitbox position={[67, -1, 0]} />
                 </group>
-            )}
+            {/* )} */}
             
             
             {/* Set 2 */}
-            {num === 2  && (
+            {/* {num === 2  && ( */}
                 <group>
                     {/* Section 1 */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -171,47 +174,52 @@ function Randomize() {
                                 pos={[41, 0, 39]} rotate={rotateD}/>
                     <Hitbox position={[54, -1, -21]}  />
                 </group>
-            )}
+            {/* )} */}
             
 
             {/* Set 3 */}
-            {num === 3 && (
+            {/* {num === 3 && ( */}
                 <group>
                     {/* Section 1 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-59.5, 0, -42]} rotate={rotateU}/>
-                    <Hitbox position={[-46.5, -1, -102]}/>
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[-59.5, 0, -42]} rotate={rotateU}
+                              hitboxPos={[-46.5, -1, -102]}/>
 
                     {/* Section 2 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[11, 0, -56]} rotate={rotateR}/>
-                    <Hitbox position={[24, -1, -116]}/>
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[11, 0, -56]} rotate={rotateR}
+                              hitboxPos={[24, -1, -116]}/>
+                    {/* <Hitbox position={[24, -1, -116]}/> */}
 
                     {/* Section 3 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-31, 0, -5]} rotate={rotateD}/>
-                    <Hitbox position={[-18, -1, -65]} />
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[-31, 0, -5]} rotate={rotateD}
+                              hitboxPos={[-18, -1, -65]}/>
+                    {/* <Hitbox position={[-18, -1, -65]} /> */}
 
                     {/* Section 4 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[18, 0, 10]} rotate={rotateL}/>
-                    <Hitbox position={[31, -1, -50]} />
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[18, 0, 10]} rotate={rotateL}
+                              hitboxPos={[31, -1, -50]}/>
+                    {/* <Hitbox position={[31, -1, -50]} /> */}
 
                     {/* Section 5 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-47, 0, 50]} rotate={rotateU}/>
-                    <Hitbox position={[-34, -1, -10]} />
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[-47, 0, 50]} rotate={rotateU}
+                              hitboxPos={[-34, -1, -10]}/>
+                    {/* <Hitbox position={[-34, -1, -10]} /> */}
 
                     {/* Section 6 */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[41, 0, 57]} rotate={rotateD}/>
-                    <Hitbox position={[54, -1, -3]} />
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[41, 0, 57]} rotate={rotateD}
+                              hitboxPos={[54, -1, -3]} />
+                    {/* <Hitbox position={[54, -1, -3]} /> */}
                 </group>
-            )}
+            {/* )} */}
             
             
             {/* Set 4 */}
-            {num === 4 && (
+            {/* {num === 4 && ( */}
                 <group>
                     {/* Section 1 */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -243,16 +251,16 @@ function Randomize() {
                                 pos={[19, 0, 45]} rotate={rotateU}/>
                     <Hitbox position={[32, -1, -15]} />
                 </group>
-            )}
+            {/* )} */}
             
                 
             {/* Set 5 */}
-            {num === 5 && (
+            {/* {num === 5 && ( */}
                 <group>
                     {/* Section 1 */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-59, 0, -52]} rotate={rotateU}/>
-                    <Hitbox position={[-46, -1, -112]} />
+                                  pos={[-59, 0, -52]} rotate={rotateU}
+                            hitboxPos={[-46, -1, -112]}/>
 
                     {/* Section 2 */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -279,11 +287,11 @@ function Randomize() {
                                 pos={[29, 0, 39]} rotate={rotateR}/>
                     <Hitbox position={[42, -1, -21]}/>
                 </group>
-            )}
+            {/* )} */}
             
 
             {/* Set 6 */}
-            {num === 6 && (
+            {/* {num === 6 && ( */}
                 <group>
                     {/* Section 1 */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -315,7 +323,7 @@ function Randomize() {
                                 pos={[29, 0, 57]} rotate={rotateL}/>
                     <Hitbox position={[42, -1, -3]} />
                 </group>
-            )}
+            {/* )} */}
             
 
             {/* Set 7 */}

@@ -15,8 +15,8 @@ export function Scene({ entries, setEntries }) {
         <Environment files={city} />
         {/* <ambientLight intensity={0.5} color={'white'} castShadow/> */}
 
-        {/* <OrbitControls/> */}
-        <PerspectiveCamera makeDefault position={[2, 0.8, 60]} fov={100}/>
+        <OrbitControls/>
+        <PerspectiveCamera makeDefault position={[2, 0.8, 60]} fov={70}/>
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>
           <CarModel/>
