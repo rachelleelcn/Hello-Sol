@@ -51,6 +51,7 @@ const Create = () => {
   const [showNameValidate, setShowNameValidate] = useState(false);
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
+  const [profanityDetected, setProfanityDetected] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
   const [showImageShare, setShowImageShare] = useState(false);
@@ -215,17 +216,17 @@ const Create = () => {
     }
   }
 
+  const checkForProfanity = (inputText) => {
+    const matcher = new RegExpMatcher({
+      ...englishDataset.build(),
+      ...englishRecommendedTransformers,
+    });
 
-  // const checkForProfanity = (inputText) => {
-  //   const matcher = new RegExpMatcher({
-  //     ...englishDataset.build(),
-  //     ...englishRecommendedTransformers,
-  //   });
+    return matcher.hasMatch(inputText);
+    
+  };
 
-  //   matcher.addWords(['f u c k', 's h i t', 'b i t c h', 'a s s', 'butts']);
-  // };
-
-  const censorText = (inputText) => {
+  const censorText = (inputText, profanityDetected) => {
     const matcher = new RegExpMatcher({
       ...englishDataset.build(),
       ...englishRecommendedTransformers,
@@ -236,13 +237,18 @@ const Create = () => {
     const censoredValue = censor.applyTo(inputText, matches);
 
     // Check for profanity in the censored value
-    const profanityDetected = matcher.hasMatch(censoredValue);
+    // const profanityDetected = matcher.hasMatch(censoredValue);
+
+
+    console.log('Input Text:', inputText);
+    console.log('Censored Value:', censoredValue);
+    console.log('Profanity detected:', profanityDetected);
 
     return {
-      censoredValue,
-      profanityDetected
+    censoredValue,
     };
   };
+
 
   // const matcher = new RegExpMatcher({
   //   ...englishDataset.build(),
@@ -344,9 +350,24 @@ const Create = () => {
           placeholder="Your name"
           value={name}
           onChange={(e) => {
+            // const value = e.target.value.slice(0, 20);
+            // const {censoredValue} = censorText(value); // Censor/filter input text
+            // setName(censoredValue); // Set name to censoredValue if profanity is detected
+
             const value = e.target.value.slice(0, 20);
-            const {censoredValue, profanityDetected} = censorText(value); // Censor/filter input text
-            setName(censoredValue); // Set name to censoredValue if profanity is detected
+            const profanityDetected = checkForProfanity(value);
+            setProfanityDetected(profanityDetected);
+
+            if (profanityDetected){
+              const {censoredValue} = censorText(value, profanityDetected);
+              setName(censoredValue);
+              nameValidate(3);
+            }else{
+              setName(value);
+              nameValidate(0);
+            }
+
+            consolelog("name:", name);
 
             if (value.length === 20) {
               nameValidate(2);
@@ -365,8 +386,9 @@ const Create = () => {
               e.preventDefault();
               if (name === '') {
                 nameValidate(1);
-              }
-              else { setCurrentSection(3) }
+              }else if (profanityDetected) {
+                nameValidate(3);
+              }else { setCurrentSection(3) }
             }
           }}
         />
@@ -376,7 +398,9 @@ const Create = () => {
         <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
         if (name === '') {
           nameValidate(1);
-        } else {
+        } else if (profanityDetected) {
+          nameValidate(3); 
+        }else{
           setCurrentSection(3);
         }
       }}>
@@ -632,10 +656,25 @@ const Create = () => {
           placeholder="Your message"
           value={license}
           onChange={(e) => {
+            // const value = e.target.value.slice(0, 8).toUpperCase();
+            // const {censoredValue} = censorText(value); // Censor/filter input text
+            // setLicense(censoredValue);
+
             const value = e.target.value.slice(0, 8).toUpperCase();
-            const {censoredValue, profanityDetected} = censorText(value); // Censor/filter input text
-            setLicense(censoredValue);
+            const profanityDetected = checkForProfanity(value);
+            setProfanityDetected(profanityDetected);
             licenseShow();
+
+            if (profanityDetected){
+              const {censoredValue} = censorText(value, profanityDetected);
+              setLicense(censoredValue);
+              licenseValidate(3);
+            }else{
+              setLicense(value);
+              licenseValidate(0);
+            }
+
+            consolelog("license:", license);
 
             if (value.length === 8) {
               licenseValidate(2);
@@ -655,6 +694,9 @@ const Create = () => {
               if (license === '') {
                 licenseValidate(1);
               }
+              else if (profanityDetected) {
+                licenseValidate(3);
+              }
               else { setCurrentSection(5) }
             }
           }}
@@ -667,6 +709,8 @@ const Create = () => {
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
           if (license === '') {
             licenseValidate(1);
+          } else if (profanityDetected) {
+            licenseValidate(3); 
           } else {
             setCurrentSection(5);
           }
