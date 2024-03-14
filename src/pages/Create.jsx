@@ -9,6 +9,7 @@ import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
+import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 import leave_icon from "../assets/icons/leave.png";
 import evTop_img from "../assets/images/ev-top.jpg";
@@ -182,12 +183,16 @@ const Create = () => {
   const selectWheelModel = (index) => {
     setWheelModel(index);
   };
+
   const nameValidate = (index) => {
     if (index === 1) {
       setNameValidateMsg('Name required.');
       setShowNameValidate(true);
     } else if (index === 2) {
       setNameValidateMsg('Maximum 20 characters.');
+      setShowNameValidate(true);
+    } else if (index === 3) {
+      setNameValidateMsg('Please refrain from using profanity.');
       setShowNameValidate(true);
     } else {
       setNameValidateMsg('x');
@@ -201,11 +206,53 @@ const Create = () => {
     } else if (index === 2) {
       setLicenseValidateMsg('Maximum 8 characters.');
       setShowLicenseValidate(true);
+    } else if (index === 3) {
+      setLicenseValidateMsg('Please refrain from using profanity');
+      setShowLicenseValidate(true);
     } else {
       setLicenseValidateMsg('x');
       setShowLicenseValidate(false);
     }
   }
+
+
+  // const checkForProfanity = (inputText) => {
+  //   const matcher = new RegExpMatcher({
+  //     ...englishDataset.build(),
+  //     ...englishRecommendedTransformers,
+  //   });
+
+  //   matcher.addWords(['f u c k', 's h i t', 'b i t c h', 'a s s', 'butts']);
+  // };
+
+  const censorText = (inputText) => {
+    const matcher = new RegExpMatcher({
+      ...englishDataset.build(),
+      ...englishRecommendedTransformers,
+    });
+
+    const censor = new TextCensor();
+    const matches = matcher.getAllMatches(inputText);
+    const censoredValue = censor.applyTo(inputText, matches);
+
+    // Check for profanity in the censored value
+    const profanityDetected = matcher.hasMatch(censoredValue);
+
+    return {
+      censoredValue,
+      profanityDetected
+    };
+  };
+
+  // const matcher = new RegExpMatcher({
+  //   ...englishDataset.build(),
+  //   ...englishRecommendedTransformers,
+  // });
+
+  // // Function to check for profanity in the name input
+  // const checkForProfanity = (inputText) => {
+  //   return matcher.hasMatch(inputText);
+  // };
 
   const tabWidth = 113;
   const tabOffset = activeTab * tabWidth;
@@ -298,13 +345,21 @@ const Create = () => {
           value={name}
           onChange={(e) => {
             const value = e.target.value.slice(0, 20);
-            setName(value);
+            const {censoredValue, profanityDetected} = censorText(value); // Censor/filter input text
+            setName(censoredValue); // Set name to censoredValue if profanity is detected
+
             if (value.length === 20) {
               nameValidate(2);
             } else {
               nameValidate(0);
             }
+            if (censoredValue.length === 20) {
+              nameValidate(2);
+            } else {
+              nameValidate(0);
+            }
           }}
+
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
@@ -318,7 +373,13 @@ const Create = () => {
         <div className={`text-sm mt-2 mb-14 ${showNameValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showNameValidate ? 'text' : 'none' }}>
           {nameValidateMsg}
         </div>
-        <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => name === '' ? nameValidate(1) : goNextSection()}>
+        <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
+        if (name === '') {
+          nameValidate(1);
+        } else {
+          setCurrentSection(3);
+        }
+      }}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
         </button>
       </div>
@@ -572,9 +633,17 @@ const Create = () => {
           value={license}
           onChange={(e) => {
             const value = e.target.value.slice(0, 8).toUpperCase();
-            setLicense(value);
+            const {censoredValue, profanityDetected} = censorText(value); // Censor/filter input text
+            setLicense(censoredValue);
             licenseShow();
+
             if (value.length === 8) {
+              licenseValidate(2);
+            } else {
+              licenseValidate(0);
+            }
+
+            if (censoredValue.length === 8) {
               licenseValidate(2);
             } else {
               licenseValidate(0);
@@ -595,7 +664,14 @@ const Create = () => {
         </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : goNextSection()}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
+          if (license === '') {
+            licenseValidate(1);
+          } else {
+            setCurrentSection(5);
+          }
+        }}>
+
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
         </div>
