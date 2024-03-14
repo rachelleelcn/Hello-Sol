@@ -398,9 +398,11 @@ const Create = () => {
         <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
         if (name === '') {
           nameValidate(1);
-        } else if (profanityDetected) {
-          nameValidate(3); 
-        }else{
+        } 
+        // else if (profanityDetected) {
+        //   nameValidate(3); 
+        // }
+        else{
           setCurrentSection(3);
         }
       }}>
@@ -709,9 +711,11 @@ const Create = () => {
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
           if (license === '') {
             licenseValidate(1);
-          } else if (profanityDetected) {
-            licenseValidate(3); 
-          } else {
+          } 
+          // else if (profanityDetected) {
+          //   licenseValidate(3); 
+          // } 
+          else {
             setCurrentSection(5);
           }
         }}>
