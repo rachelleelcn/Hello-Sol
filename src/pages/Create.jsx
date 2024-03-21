@@ -8,8 +8,9 @@ import close_icon from "../assets/icons/close.png";
 import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon,} from 'react-share';
 import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
+
 
 import leave_icon from "../assets/icons/leave.png";
 import evTop_img from "../assets/images/ev-top.jpg";
@@ -32,8 +33,7 @@ import sportTires_img from "../assets/images/sport-tires.jpg";
 import vintageTires_img from "../assets/images/vintage-tires.jpg";
 import pose_icon from "../assets/icons/pose_indicator.png";
 import rotate_icon from "../assets/icons/rotate_indicator.png";
-
-
+import { useCookies } from 'react-cookie';
 
 const Create = () => {
 
@@ -57,6 +57,21 @@ const Create = () => {
   const [showImageShare, setShowImageShare] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
+
+  const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
+
+  const handleCarConfirm = () => {
+    const configuredCar = {
+      name,
+      topModel,
+      topColour,
+      bodyColour,
+      bodyModel,
+      wheelModel,
+      license,
+    }
+    setCookie('CAR_COOKIE', configuredCar, {path: '/'});
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -259,6 +274,8 @@ const Create = () => {
   // const checkForProfanity = (inputText) => {
   //   return matcher.hasMatch(inputText);
   // };
+
+
 
   const tabWidth = 113;
   const tabOffset = activeTab * tabWidth;
@@ -795,7 +812,7 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>

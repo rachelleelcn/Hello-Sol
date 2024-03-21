@@ -26,6 +26,40 @@ import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookI
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
 
+//****cookie stuff****
+
+//import { useCookies } from 'react-cookie';
+
+ // Retrieve the cookie named 'CAR_COOKIE'
+// const [cookies] = useCookies(['CAR_COOKIE']);
+
+// Access the configuredCar object from cookies
+// const configuredCar = cookies['CAR_COOKIE'];
+
+// Check if the cookie exists and has valid data
+// if (!configuredCar) {
+  // Handle the case where the cookie doesn't exist or is empty
+//   return (
+//     <div>
+//       <p>No configured car data found.</p>
+//     </div>
+//   );
+// }
+
+// Render the configured car data
+// return (
+//   <div>
+//     <h1>Configured Car Details</h1>
+//     <p>Name: {configuredCar.name}</p>
+//     <p>Top Model: {configuredCar.topModel}</p>
+//     <p>Top Colour: {configuredCar.topColour}</p>
+//     <p>Body Colour: {configuredCar.bodyColour}</p>
+//     <p>Body Model: {configuredCar.bodyModel}</p>
+//     <p>Wheel Model: {configuredCar.wheelModel}</p>
+//     <p>License Plate: {configuredCar.license}</p>
+//   </div>
+// );
+
 
 const Play = () => {
   const navigate = useNavigate();
@@ -41,10 +75,11 @@ const Play = () => {
 
   const [entries, setEntries] = useState(0);
 
-  const currentDate = new Date();
+  //const currentDate = new Date();
   //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
+
 
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -275,8 +310,6 @@ const Play = () => {
     setShowImageShare(true);
 
   }
-
-
 
 
   // for testing
