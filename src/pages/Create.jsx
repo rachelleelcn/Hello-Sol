@@ -11,7 +11,6 @@ import Configurator from '../components/Configurator';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon,} from 'react-share';
 import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
-
 import leave_icon from "../assets/icons/leave.png";
 import evTop_img from "../assets/images/ev-top.jpg";
 import classicTop_img from "../assets/images/classic-top.jpg";
