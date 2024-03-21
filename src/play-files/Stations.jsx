@@ -2,7 +2,9 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useState, useEffect } from 'react'
 import { useBox } from '@react-three/cannon'
+import { useSound } from 'use-sound'
 
+import sfx from '../assets/audio/Pop.mp3'
 import Station from '../models/props/Station';
 
 const rotateU = [0, 0, 0]
@@ -29,6 +31,7 @@ return (
 const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos }) => {
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
+    const [play] = useSound(sfx)
 
     const [ref] = useBox(() => ({
         mass: 1,
@@ -46,7 +49,7 @@ const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos }) => {
         if (!active) {
             setActive(true)
             UpdateEntries(entries, setEntries)
-            // colour = '#FFF'
+            play()
         }}
 
     return (
@@ -56,16 +59,15 @@ const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos }) => {
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}>
 
-{/* <boxGeometry args={[0.85, 2, 0.85]}/> */}
-        {/* <meshBasicMaterial color={'black'}/> */}
-            <Station colour={active ? '#FFF' : "#C8F165"}/>
+                {/* <boxGeometry args={[0.85, 2, 0.85]}/> */}
+                {/* <meshBasicMaterial color={'black'}/> */}
+                <Station colour={active ? '#FFF' : "#C8F165"}/>
             </mesh>
 
             <Hitbox position={hitboxPos}/>
         </group>
     )
   }
-
 
 export function UpdateEntries(entries, setEntries) {
     let newEntry = entries
@@ -106,244 +108,219 @@ function Randomize() {
     return (
         <group>
             {/* Set 1 */}
-            {/* {num === 1 && ( */}
+            {num === 1 && (
                     <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - top U-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[-42, 0, -60]} rotate={rotateR}
-                              hitboxPos={[-29, -1, -120]}/>
+                                    pos={[-44, 0, -58]} rotate={rotateR}
+                              hitboxPos={[-31, -1, -118]}/>
 
-                    {/* Section 2 */}
+                    {/* Section 2 - top right L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[49, 0, -48]} rotate={rotateR}/>
-                    <Hitbox position={[62, -1, -108]} />
+                                  pos={[62.5, 0, -47.5]} rotate={rotateR}
+                            hitboxPos={[75.5, -1, -107.5]}/>
 
-                    {/* Section 3 */}
+                    {/* Section 3 - mid right T-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-51, 0, 11]} rotate={rotateL}/>
-                    <Hitbox position={[-38, -1, -49]} />
+                                  pos={[-39, 0, 5]} rotate={rotateR}
+                            hitboxPos={[-26, -1, -55]}/>
 
                     {/* Section 4 */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[64, 0, 1]} rotate={rotateU}/>
-                    <Hitbox position={[77, -1, -59]} />
+                                  pos={[64, 0, 1]} rotate={rotateU}
+                            hitboxPos={[77, -1, -59]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - top mid L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-34, 0, 46]} rotate={rotateU}/>
-                    <Hitbox position={[-21, -1, -14]} />
+                                  pos={[-34, 0, 44]} rotate={rotateU}
+                            hitboxPos={[-21, -1, -16]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - bottom right T-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[54, 0, 60]} rotate={rotateL}/>
-                    <Hitbox position={[67, -1, 0]} />
+                                  pos={[53, 0, 62]} rotate={rotateL}
+                            hitboxPos={[66, -1, 2]}/>
                 </group>
-            {/* )} */}
+            )}
             
             
             {/* Set 2 */}
-            {/* {num === 2  && ( */}
+            {num === 2  && (
                 <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - bottom U-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-25, 0, -37]} rotate={rotateL}/>
-                    <Hitbox position={[-12, -1, -97]} />
+                                  pos={[-25, 0, -37]} rotate={rotateL}
+                            hitboxPos={[-12, -1, -97]}/>
 
-                    {/* Section 2 */}
+                    {/* Section 2 - left top rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[37, 0, -60.5]} rotate={rotateR}/>
-                    <Hitbox position={[50, -1, -120.5]} />
+                                  pos={[28, 0, -58]} rotate={rotateR}
+                            hitboxPos={[41, -1, -118]}/>
 
-                    {/* Section 3 */}
+                    {/* Section 3 - left U-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-58, 0, 0]} rotate={rotateU}/>
-                    <Hitbox position={[-45, -1, -60]} />
+                                  pos={[-58, 0, 1]} rotate={rotateU}
+                            hitboxPos={[-45, -1, -59]}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - bottom rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[50, 0, 13]} rotate={rotateL}/>
-                    <Hitbox position={[63, -1, -47]} />
+                                  pos={[50, 0, 12]} rotate={rotateL}
+                            hitboxPos={[63, -1, -48]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - right rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-20, 0, 52]} rotate={rotateL}/>
-                    <Hitbox position={[-7, -1, -8]} />
+                                  pos={[-20, 0, 52]} rotate={rotateL}
+                            hitboxPos={[-7, -1, -8]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - top right L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[41, 0, 39]} rotate={rotateD}/>
-                    <Hitbox position={[54, -1, -21]}  />
+                                  pos={[40, 0, 39]} rotate={rotateD}
+                            hitboxPos={[53, -1, -21]}/>
                 </group>
-            {/* )} */}
+            )}
             
 
             {/* Set 3 */}
-            {/* {num === 3 && ( */}
+            {num === 3 && (
                 <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - far left square */}
                     <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[-59.5, 0, -42]} rotate={rotateU}
-                              hitboxPos={[-46.5, -1, -102]}/>
+                                    pos={[-62, 0, -43]} rotate={rotateU}
+                              hitboxPos={[-49, -1, -103]}/>
 
-                    {/* Section 2 */}
-                    <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[11, 0, -56]} rotate={rotateR}
-                              hitboxPos={[24, -1, -116]}/>
-                    {/* <Hitbox position={[24, -1, -116]}/> */}
+                    {/* Section 2 - bottom left L-shape */}
+                    <StationFinal entries={entries} setEntries={setEntries}
+                                  pos={[51.5, 0, -36.5]} rotate={rotateL}
+                            hitboxPos={[64.5, -1, -96.5]}/>
 
-                    {/* Section 3 */}
-                    <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[-31, 0, -5]} rotate={rotateD}
-                              hitboxPos={[-18, -1, -65]}/>
-                    {/* <Hitbox position={[-18, -1, -65]} /> */}
+                    {/* Section 3 - top right L-shape */}
+                    <StationFinal entries={entries} setEntries={setEntries}
+                                  pos={[-31.5, 0, -4.5]} rotate={rotateR}
+                            hitboxPos={[-18.5, -1, -64.5]}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - bottom U-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[18, 0, 10]} rotate={rotateL}
-                              hitboxPos={[31, -1, -50]}/>
-                    {/* <Hitbox position={[31, -1, -50]} /> */}
+                                    pos={[18, 0, 8]} rotate={rotateL}
+                              hitboxPos={[31, -1, -52]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - left Z-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[-47, 0, 50]} rotate={rotateU}
-                              hitboxPos={[-34, -1, -10]}/>
-                    {/* <Hitbox position={[-34, -1, -10]} /> */}
+                                    pos={[-46.5, 0, 51]} rotate={rotateU}
+                              hitboxPos={[-33.5, -1, -9]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - bottom right L-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[41, 0, 57]} rotate={rotateD}
-                              hitboxPos={[54, -1, -3]} />
-                    {/* <Hitbox position={[54, -1, -3]} /> */}
+                                    pos={[40, 0, 60]} rotate={rotateD}
+                              hitboxPos={[53, -1, 0]} />
                 </group>
-            {/* )} */}
+            )}
             
             
             {/* Set 4 */}
-            {/* {num === 4 && ( */}
+            {num === 4 && (
                 <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - top right Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-22, 0, -62]} rotate={rotateR}/>
-                    <Hitbox position={[-9, -1, -122]} />
+                                  pos={[-23, 0, -61.5]} rotate={rotateR}
+                            hitboxPos={[-10, -1, -121.5]}/>
 
-                    {/* Section 2 */}
+                    {/* Section 2 - bottom left rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[27, 0, -42]} rotate={rotateL}/>
-                    <Hitbox position={[40, -1, -102]} />
+                                  pos={[27, 0, -41]} rotate={rotateL}
+                            hitboxPos={[40, -1, -101]}/>
 
-                    {/* Section 3 */}
+                    {/* Section 3 - bottom T-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-37, 0, 12]} rotate={rotateU}/>
-                    <Hitbox position={[-24, -1, -48]} />
+                                  pos={[-48, 0, 13]} rotate={rotateD}
+                            hitboxPos={[-35, -1, -47]}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - top side rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[45, 0, -9]} rotate={rotateR}/>
-                    <Hitbox position={[58, -1, -69]} />
+                                pos={[48, 0, -9]} rotate={rotateR}
+                                hitboxPos={[61, -1, -69]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - right mid square */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-20, 0, 48]} rotate={rotateR}/>
-                    <Hitbox position={[-7, -1, -12]} />
+                                  pos={[-20, 0, 48]} rotate={rotateR}
+                            hitboxPos={[-7, -1, -12]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - left square */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[19, 0, 45]} rotate={rotateU}/>
-                    <Hitbox position={[32, -1, -15]} />
+                                  pos={[15, 0, 45]} rotate={rotateU}
+                            hitboxPos={[28, -1, -15]}/>
                 </group>
-            {/* )} */}
+            )}
             
                 
             {/* Set 5 */}
-            {/* {num === 5 && ( */}
+            {num === 5 && (
                 <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - top left Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-59, 0, -52]} rotate={rotateU}
-                            hitboxPos={[-46, -1, -112]}/>
+                                  pos={[-61.5, 0, -55]} rotate={rotateU}
+                            hitboxPos={[-48.5, -1, -115]}/>
 
-                    {/* Section 2 */}
+                    {/* Section 2 - bottom right L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[61, 0, -36]} rotate={rotateD}/>
-                    <Hitbox position={[74, -1, -96]} />
+                                  pos={[62.5, 0, -36.5]} rotate={rotateD}
+                            hitboxPos={[75.5, -1, -96.5]}/>
 
-                    {/* Section 3 */}
+                    {/* Section 3 - right U-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-14, 0, 0]} rotate={rotateD}/>
-                    <Hitbox position={[-1, -1, -60]}/>
+                                  pos={[-16, 0, 1]} rotate={rotateD}
+                            hitboxPos={[-3, -1, -59]}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[30, 0, 11]} rotate={rotateL}/>
-                    <Hitbox position={[43, -1, -49]} />
+                                  pos={[33.5, 0, 14]} rotate={rotateL}
+                            hitboxPos={[46.5, -1, -46]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - mid bottom L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-32, 0, 54]} rotate={rotateL}/>
-                    <Hitbox position={[-19, -1, -6]} />
+                                  pos={[-33, 0, 51.5]} rotate={rotateL}
+                            hitboxPos={[-20, -1, -8.5]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[29, 0, 39]} rotate={rotateR}/>
-                    <Hitbox position={[42, -1, -21]}/>
+                                  pos={[30, 0, 39]} rotate={rotateR}
+                            hitboxPos={[43, -1, -21]}/>
                 </group>
-            {/* )} */}
+            )}
             
 
             {/* Set 6 */}
-            {/* {num === 6 && ( */}
+            {num === 6 && (
                 <group>
-                    {/* Section 1 */}
+                    {/* Section 1 - far right rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-14, 0, -50]} rotate={rotateD}/>
-                    <Hitbox position={[-1, -1, -110]} />
+                                  pos={[-14, 0, -48]} rotate={rotateD}
+                            hitboxPos={[-1, -1, -108]}/>
 
-                    {/* Section 2 */}
+                    {/* Section 2 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[49, 0, -36]} rotate={rotateL}/>
-                    <Hitbox position={[62, -1, -96]} />
+                                  pos={[51.5, 0, -47.5]} rotate={rotateR}
+                            hitboxPos={[64.5, -1, -107.5]}/>
 
-                    {/* Section 3 */}
+                    {/* Section 3 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-51, 0, -11]} rotate={rotateR}/>
-                    <Hitbox position={[-38, -1, -71]} />
+                                  pos={[-51.5, 0, -12.5]} rotate={rotateR}
+                            hitboxPos={[-38.5, -1, -72.5]}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - right Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[53, 0, 6]} rotate={rotateR}/>
-                    <Hitbox position={[66, -1, -54]} />
+                                  pos={[54, 0, 7]} rotate={rotateD}
+                            hitboxPos={[67, -1, -53]}/>
 
-                    {/* Section 5 */}
+                    {/* Section 5 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[-56, 0, 39]} rotate={rotateU}/>
-                    <Hitbox position={[-43, -1, -21]} />
+                                  pos={[-54, 0, 36]} rotate={rotateU}
+                            hitboxPos={[-41, -1, -24]}/>
 
-                    {/* Section 6 */}
+                    {/* Section 6 - bottom left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                pos={[29, 0, 57]} rotate={rotateL}/>
-                    <Hitbox position={[42, -1, -3]} />
+                                  pos={[30, 0, 60]} rotate={rotateL}
+                            hitboxPos={[43, -1, 0]}/>
                 </group>
-            {/* )} */}
-            
-
-            {/* Set 7 */}
-            <group>
-                
-                
-            </group>
-
-            {/* Set 8 */}
-            <group>
-                
-                
-            </group>
-
-            {/* Set 9 */}
-            <group>
-                
-                
-            </group>
-
+            )}
         </group>
     )
   }

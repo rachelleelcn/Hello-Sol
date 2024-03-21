@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
 
+
 export const UseControls = (vehicleAPI, chassisAPI) => {
     let [controls, setControls] = useState({})
 
-    const smoothInput = (current, target, smoothing) => {
-        return current + (target - current) * smoothing;
-      };
-    
     useEffect(() => {
         const keyDownHandler = (e) => {
             setControls((controls) => ({

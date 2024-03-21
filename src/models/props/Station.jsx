@@ -38,6 +38,7 @@ const Station = ({props, colour}) => {
                         position={[0.8, 0.95, 0]}
                         rotation={[0, 1, 0]}
                         scale={[1, 0.7, 1]}
+                        renderOrder={1000}
                         >
                         <meshStandardMaterial 
                             map={texture}

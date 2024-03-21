@@ -35,21 +35,25 @@ const rotateR = [0, 4.71, 0]
       {/* Buildings */}
       <group>
         <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                   pos={[-60, -1, 36]} rotate={rotateL} 
-                   hitboxPos={[-47, 0, -24]}/> 
+                   pos={[-65, -1, 36]} rotate={rotateL} 
+             hitboxPos={[-52, 0, -24]}/> 
 
-        <SquareFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                     pos={[-62, -1, 47]} rotate={rotateD} 
-                     hitboxPos={[-49, 0, -13]}/>
+        <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+                     pos={[-62, -1, 49]} rotate={rotateD} 
+                     hitboxPos={[-49, 0, -11]}/>
 
         <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                   pos={[-60, -1, 58]} rotate={rotateR} 
-                   hitboxPos={[-47, 0, -2]}/> 
+                   pos={[-65, -1, 61]} rotate={rotateR} 
+             hitboxPos={[-52, 0, 1]}/> 
+
+        <SquareFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
+                     pos={[-58.5, -1, 63]} rotate={rotateR} 
+               hitboxPos={[-45.5, 0, 3]}/>
 
         <LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-52, -1, 33]} rotate={rotateD}
-                hitboxPos1={[-39, 5, -29]}
-                hitboxPos2={[-41, 5, -27]} />   
+                pos={[-55, -1, 34]} rotate={rotateD}
+                hitboxPos1={[-42, 5, -28]}
+                hitboxPos2={[-44, 5, -26]} />   
 
         <ZFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[-54, -1, 55]} rotate={rotateU}
@@ -57,23 +61,23 @@ const rotateR = [0, 4.71, 0]
                 hitboxPos2={[-32, 2, -17]} />
 
         <LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-45, -1, 60]} rotate={rotateU}
-                hitboxPos1={[-32, 5, 2]}
-                hitboxPos2={[-30, 5, 0]} />  
+                pos={[-43.5, -1, 60]} rotate={rotateU}
+                hitboxPos1={[-30.5, 5, 2]}
+                hitboxPos2={[-28.5, 5, 0]} />  
 
         <RectFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                    pos={[-34, -1, 35]} rotate={rotateU} 
                    hitboxPos={[-21, 0, -25]}/> 
 
         <LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-35, -1, 45]} rotate={rotateD}
-                hitboxPos1={[-22, 5, -17]}
-                hitboxPos2={[-24, 5, -15]} />   
+                pos={[-35, -1, 42.5]} rotate={rotateD}
+                hitboxPos1={[-22, 5, -19.5]}
+                hitboxPos2={[-24, 5, -17.5]} />   
 
         <LFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-30, -1, 55]} rotate={rotateU}
-                hitboxPos1={[-17, 5, -3]}
-                hitboxPos2={[-15, 5, -5]} />
+                pos={[-31, -1, 53]} rotate={rotateU}
+                hitboxPos1={[-18, 5, -5]}
+                hitboxPos2={[-16, 5, -7]} />
 
         <RectFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                    pos={[-34, -1, 65]} rotate={rotateU} 
@@ -102,48 +106,54 @@ const rotateR = [0, 4.71, 0]
                 hitboxPos2={[7, 0, -10]} />
 
         <TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
-                pos={[-10, -1, 65]} rotate={rotateL}
-                hitboxPos1={[3, 3, 7]}
-                hitboxPos2={[3, 3, 3]} />
+                pos={[-10, -1, 65.5]} rotate={rotateL}
+                hitboxPos1={[3, 3, 7.5]}
+                hitboxPos2={[3, 3, 3.5]} />
       </group>
 
       {/* Props */}
       <group>
-        <TreeFinal  pos={[-62, -1, 30]} 
-              hitboxPos={[-49, 0, -30]}/>
+        <TreeFinal  pos={[-67, -1, 30]} 
+              hitboxPos={[-54, 0, -30]}/>
 
-        <TreeFinal  pos={[-58, -1, 30]} 
-              hitboxPos={[-45, 0, -30]}/>
+        <TreeFinal  pos={[-63, -1, 30]} 
+              hitboxPos={[-50, 0, -30]}/>
 
-        <TreeFinal  pos={[-64, -1, 34]} 
-              hitboxPos={[-51, 0, -26]}/>
+        <TreeFinal  pos={[-69, -1, 34]} 
+              hitboxPos={[-56, 0, -26]}/>
 
-        <TreeFinal  pos={[-64, -1, 38]} 
-              hitboxPos={[-51, 0, -22]}/>
+        <TreeFinal  pos={[-69, -1, 38]} 
+              hitboxPos={[-56, 0, -22]}/>
 
-        <TreeFinal  pos={[-64, -1, 56]} 
-              hitboxPos={[-51, 0, -4]}/>
+        <StreetLightFinal pos={[-69, -1, 47]} rotate={rotateL}
+                    hitboxPos={[-56, 0, -13]} />
 
-        <TreeFinal  pos={[-64, -1, 60]} 
-              hitboxPos={[-51, 0, 0]}/>
+        <TreeFinal  pos={[-69, -1, 59]} 
+              hitboxPos={[-56, 0, -1]}/>
 
-        <StreetLightFinal pos={[-64, -1, 67]} rotate={rotateD}
-                    hitboxPos={[-51, 0, 7]} />
+        <TreeFinal  pos={[-69, -1, 63]} 
+              hitboxPos={[-56, 0, 3]}/>
 
-        <StreetLightFinal pos={[-48, -1, 67]} rotate={rotateD}
-                    hitboxPos={[-35, 0, 7]} />
+        <StreetLightFinal pos={[-45, -1, 30]} rotate={rotateU}
+                    hitboxPos={[-32, 0, -30]} />
 
-        <StreetLightFinal pos={[-38, -1, 30]} rotate={rotateU}
-                    hitboxPos={[-25, 0, -30]} />
+        <StreetLightFinal pos={[-62, -1, 69]} rotate={rotateD}
+                    hitboxPos={[-49, 0, 9]} />                    
 
-        <StreetLightFinal pos={[-30, -1, 30]} rotate={rotateU}
-                    hitboxPos={[-17, 0, -30]} />
+        <StreetLightFinal pos={[-40, -1, 69]} rotate={rotateD}
+                    hitboxPos={[-27, 0, 9]} />
 
-        <TreeFinal  pos={[-34, -1, 30]} 
-              hitboxPos={[-21, 0, -30]}/>
+        <TreeFinal  pos={[-38, -1, 30]} 
+              hitboxPos={[-25, 0, -30]}/>
 
-        <TrafficRFinal  pos={[-5, -1, 30]} rotate={rotateL}
-                  hitboxPos={[8, 0, -30]} />
+        <StreetLightFinal pos={[-34, -1, 30]} rotate={rotateU}
+                    hitboxPos={[-21, 0, -30]} />
+
+        <TreeFinal  pos={[-30, -1, 30]} 
+              hitboxPos={[-17, 0, -30]}/>
+
+        <TrafficRFinal  pos={[-4, -1, 30]} rotate={rotateL}
+                  hitboxPos={[9, 0, -30]} />
 
         <StreetLightFinal pos={[-4, -1, 45]} rotate={rotateR}
                     hitboxPos={[9, 0, -15]} />
@@ -151,8 +161,8 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[-4, -1, 55]} rotate={rotateR}
                     hitboxPos={[9, 0, -5]} />
 
-        <TreeFinal  pos={[-6, -1, 63]} 
-              hitboxPos={[7, 0, 3]}/>
+        <TreeFinal  pos={[-6, -1, 64]} 
+              hitboxPos={[7, 0, 4]}/>
       </group>
     </group>
   )

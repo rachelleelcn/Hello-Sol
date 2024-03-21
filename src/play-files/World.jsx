@@ -25,12 +25,12 @@ export const Borders = () => {
   return (
     <group>
       {/* Front & Back */}
-      <Cube position={[0, 24, -135]} size={[150, 50, 0.01]}/>
-      <Cube position={[0, 24, 15]} size={[150, 50, 0.01]}/>
+      <Cube position={[0, 24, -137]} size={[150, 50, 0.01]}/>
+      <Cube position={[0, 24, 17]} size={[150, 50, 0.01]}/>
 
       {/* Sides */}
-      <Cube position={[-62, 24, 0]} size={[0.01, 50, 150]}/>
-      <Cube position={[88, 24, 0]} size={[0.01, 50, 150]}/>
+      <Cube position={[-64, 24, 0]} size={[0.01, 50, 150]}/>
+      <Cube position={[90, 24, 0]} size={[0.01, 50, 150]}/>
     </group>
     
   )

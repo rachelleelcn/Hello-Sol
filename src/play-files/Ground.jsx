@@ -14,7 +14,7 @@ export const Ground = () => {
     }), useRef())
 
     return (
-      <mesh scale={150} ref={ref}>
+      <mesh scale={155} ref={ref}>
         <planeGeometry/>
         <meshBasicMaterial color={'#FFFFFF'} side={THREE.DoubleSide}/>
       </mesh>

@@ -22,10 +22,12 @@ import car_icon from "../assets/icons/car.png";
 import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
+
+import bgMusic from '../assets/audio/RollOn.mp3'
+
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
-
 
 const Play = () => {
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ const Play = () => {
   const [shareUrl, setShareUrl] = useState(null);
 
   const [entries, setEntries] = useState(0);
+  const [enableControls, setEnableControls] = useState(true)
 
   const currentDate = new Date();
   //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
@@ -91,9 +94,11 @@ const Play = () => {
     else if (index === 4) {
       resetTimer()
       setElapsedTime(elapsedTime)
+      setEnableControls(false)
     }
     else {
       setStartGame(true);
+      setEnableControls(true)
     }
   };
 
@@ -114,7 +119,8 @@ const Play = () => {
   const soundToggle = () => {
     if (soundOn) {
       setSoundOn(false);
-    } else {
+    } 
+    else {
       setSoundOn(true);
     }
   };
@@ -166,11 +172,9 @@ const Play = () => {
   const [details, setDetails] = useState({
     to_email: "",
     numEntry: entries,
-
     date: dateFormat,
     image: bannerUrl,
     timeTaken: timeFormat
-
   });
 
   const handleDetailsChange = (event) => {
@@ -183,7 +187,6 @@ const Play = () => {
       };
     });
   };
-
 
   const handleSendEmail = (entryNum, formatDate, imageUrl, formatTime) => {
     sendCustomEmail(details, entryNum, formatDate, imageUrl, formatTime);
@@ -207,7 +210,6 @@ const Play = () => {
       handleSendEmail(entries, dateFormat, bannerUrl, timeFormat);
 
       setShowEmailSent(true);
-    
     }
   };
 
@@ -235,9 +237,6 @@ const Play = () => {
         newContext.font = '36px Inter';
         newContext.fillText(`You have successfully earned ${entries} entries to our giveaway!`, 48, 196);
 
-        
-
-
         newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
         newContext.font = 'bold 28px Inter';
         newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
@@ -249,7 +248,6 @@ const Play = () => {
         resolve(newCanvas);
       };
     });
-
   };
 
   const downloadImage = async () => {
@@ -273,11 +271,7 @@ const Play = () => {
     const blobUrl = URL.createObjectURL(blob);
     setShareUrl(blobUrl);
     setShowImageShare(true);
-
   }
-
-
-
 
   // for testing
   // const divElement = document.getElementById('test');
@@ -288,10 +282,14 @@ const Play = () => {
   return (
     <section className='w-full h-screen relative bg-white-200'>
 
-      {/* Sandbox Game - Appears after instructions, disappears on results */}
+      {!soundOn && (
+        <audio src={bgMusic} autoPlay loop />
+      )}
+
       {currentSection > 2 && currentSection < 5 && (
         <div style={{ width: '100%', height: '100%' }}>
-          <Scene entries={entries} setEntries={setEntries} />
+          <Scene entries={entries} setEntries={setEntries} 
+                 enableControls={enableControls} />
         </div>
       )}
 
@@ -508,7 +506,6 @@ const Play = () => {
         <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-pink-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
           {minutes} <span>:</span> {seconds}
         </div>
-        {/* <GameTimer/>       */}
 
         {/* Collected station indicators */}
         <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
@@ -766,10 +763,7 @@ const Play = () => {
                   e.preventDefault();
                   setShowEmailSent(false);
                   handleClearEmail();
-                }
-              }
-
-              }>
+                }}}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>
