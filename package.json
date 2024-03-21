@@ -16,12 +16,15 @@
     "@react-three/fiber": "^8.15.16",
     "@types/three": "^0.162.0",
     "gsap": "^3.12.4",
+    "obscenity": "^0.2.1",
     "react": "^18.2.0",
+    "react-cookie": "^7.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
     "react-share": "^5.0.3",
     "three": "^0.162.0",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "universal-cookie": "^7.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

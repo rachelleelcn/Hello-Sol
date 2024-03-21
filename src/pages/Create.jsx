@@ -8,7 +8,8 @@ import close_icon from "../assets/icons/close.png";
 import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon,} from 'react-share';
+import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 import leave_icon from "../assets/icons/leave.png";
 import evTop_img from "../assets/images/ev-top.jpg";
@@ -31,8 +32,7 @@ import sportTires_img from "../assets/images/sport-tires.jpg";
 import vintageTires_img from "../assets/images/vintage-tires.jpg";
 import pose_icon from "../assets/icons/pose_indicator.png";
 import rotate_icon from "../assets/icons/rotate_indicator.png";
-
-
+import { useCookies } from 'react-cookie';
 
 const Create = () => {
 
@@ -50,11 +50,27 @@ const Create = () => {
   const [showNameValidate, setShowNameValidate] = useState(false);
   const [nameValidateMsg, setNameValidateMsg] = useState('x');
   const [showLicenseValidate, setShowLicenseValidate] = useState(false);
+  const [profanityDetected, setProfanityDetected] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
   const [showImageShare, setShowImageShare] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
+
+  const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
+
+  const handleCarConfirm = () => {
+    const configuredCar = {
+      name,
+      topModel,
+      topColour,
+      bodyColour,
+      bodyModel,
+      wheelModel,
+      license,
+    }
+    setCookie('CAR_COOKIE', configuredCar, {path: '/'});
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -182,12 +198,16 @@ const Create = () => {
   const selectWheelModel = (index) => {
     setWheelModel(index);
   };
+
   const nameValidate = (index) => {
     if (index === 1) {
       setNameValidateMsg('Name required.');
       setShowNameValidate(true);
     } else if (index === 2) {
       setNameValidateMsg('Maximum 20 characters.');
+      setShowNameValidate(true);
+    } else if (index === 3) {
+      setNameValidateMsg('Please refrain from using profanity.');
       setShowNameValidate(true);
     } else {
       setNameValidateMsg('x');
@@ -201,11 +221,60 @@ const Create = () => {
     } else if (index === 2) {
       setLicenseValidateMsg('Maximum 8 characters.');
       setShowLicenseValidate(true);
+    } else if (index === 3) {
+      setLicenseValidateMsg('Please refrain from using profanity');
+      setShowLicenseValidate(true);
     } else {
       setLicenseValidateMsg('x');
       setShowLicenseValidate(false);
     }
   }
+
+  const checkForProfanity = (inputText) => {
+    const matcher = new RegExpMatcher({
+      ...englishDataset.build(),
+      ...englishRecommendedTransformers,
+    });
+
+    return matcher.hasMatch(inputText);
+    
+  };
+
+  const censorText = (inputText, profanityDetected) => {
+    const matcher = new RegExpMatcher({
+      ...englishDataset.build(),
+      ...englishRecommendedTransformers,
+    });
+
+    const censor = new TextCensor();
+    const matches = matcher.getAllMatches(inputText);
+    const censoredValue = censor.applyTo(inputText, matches);
+
+    // Check for profanity in the censored value
+    // const profanityDetected = matcher.hasMatch(censoredValue);
+
+
+    console.log('Input Text:', inputText);
+    console.log('Censored Value:', censoredValue);
+    console.log('Profanity detected:', profanityDetected);
+
+    return {
+    censoredValue,
+    };
+  };
+
+
+  // const matcher = new RegExpMatcher({
+  //   ...englishDataset.build(),
+  //   ...englishRecommendedTransformers,
+  // });
+
+  // // Function to check for profanity in the name input
+  // const checkForProfanity = (inputText) => {
+  //   return matcher.hasMatch(inputText);
+  // };
+
+
 
   const tabWidth = 113;
   const tabOffset = activeTab * tabWidth;
@@ -297,28 +366,62 @@ const Create = () => {
           placeholder="Your name"
           value={name}
           onChange={(e) => {
+            // const value = e.target.value.slice(0, 20);
+            // const {censoredValue} = censorText(value); // Censor/filter input text
+            // setName(censoredValue); // Set name to censoredValue if profanity is detected
+
             const value = e.target.value.slice(0, 20);
-            setName(value);
+            const profanityDetected = checkForProfanity(value);
+            setProfanityDetected(profanityDetected);
+
+            if (profanityDetected){
+              const {censoredValue} = censorText(value, profanityDetected);
+              setName(censoredValue);
+              nameValidate(3);
+            }else{
+              setName(value);
+              nameValidate(0);
+            }
+
+            consolelog("name:", name);
+
             if (value.length === 20) {
               nameValidate(2);
             } else {
               nameValidate(0);
             }
+            if (censoredValue.length === 20) {
+              nameValidate(2);
+            } else {
+              nameValidate(0);
+            }
           }}
+
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
               if (name === '') {
                 nameValidate(1);
-              }
-              else { setCurrentSection(3) }
+              }else if (profanityDetected) {
+                nameValidate(3);
+              }else { setCurrentSection(3) }
             }
           }}
         />
         <div className={`text-sm mt-2 mb-14 ${showNameValidate ? 'text-pink-100' : 'text-transparent'}`} style={{ userSelect: showNameValidate ? 'text' : 'none' }}>
           {nameValidateMsg}
         </div>
-        <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => name === '' ? nameValidate(1) : goNextSection()}>
+        <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
+        if (name === '') {
+          nameValidate(1);
+        } 
+        // else if (profanityDetected) {
+        //   nameValidate(3); 
+        // }
+        else{
+          setCurrentSection(3);
+        }
+      }}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
         </button>
       </div>
@@ -571,10 +674,33 @@ const Create = () => {
           placeholder="Your message"
           value={license}
           onChange={(e) => {
+            // const value = e.target.value.slice(0, 8).toUpperCase();
+            // const {censoredValue} = censorText(value); // Censor/filter input text
+            // setLicense(censoredValue);
+
             const value = e.target.value.slice(0, 8).toUpperCase();
-            setLicense(value);
+            const profanityDetected = checkForProfanity(value);
+            setProfanityDetected(profanityDetected);
             licenseShow();
+
+            if (profanityDetected){
+              const {censoredValue} = censorText(value, profanityDetected);
+              setLicense(censoredValue);
+              licenseValidate(3);
+            }else{
+              setLicense(value);
+              licenseValidate(0);
+            }
+
+            consolelog("license:", license);
+
             if (value.length === 8) {
+              licenseValidate(2);
+            } else {
+              licenseValidate(0);
+            }
+
+            if (censoredValue.length === 8) {
               licenseValidate(2);
             } else {
               licenseValidate(0);
@@ -586,6 +712,9 @@ const Create = () => {
               if (license === '') {
                 licenseValidate(1);
               }
+              else if (profanityDetected) {
+                licenseValidate(3);
+              }
               else { setCurrentSection(5) }
             }
           }}
@@ -595,7 +724,18 @@ const Create = () => {
         </div>
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
-          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => license === '' ? licenseValidate(1) : goNextSection()}>
+          <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
+          if (license === '') {
+            licenseValidate(1);
+          } 
+          // else if (profanityDetected) {
+          //   licenseValidate(3); 
+          // } 
+          else {
+            setCurrentSection(5);
+          }
+        }}>
+
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
         </div>
@@ -671,7 +811,7 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={goNextSection}>
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}>
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>

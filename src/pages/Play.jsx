@@ -44,10 +44,11 @@ const Play = () => {
   const [entries, setEntries] = useState(0);
   const [enableControls, setEnableControls] = useState(true)
 
-  const currentDate = new Date();
+  //const currentDate = new Date();
   //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
+
 
   const [startGame, setStartGame] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
