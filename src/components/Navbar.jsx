@@ -34,8 +34,11 @@ const Navbar = () => {
                 <NavLink to='/Hello-Sol/create' className={({ isActive }) => isActive ? "underline underline-offset-4" : null} onClick={() => (isActive('/Hello-Sol/create') ? handleClick() : null)}>
                     <div className="text-sm font-inter">Create</div>
                 </NavLink>
-                <NavLink to='/Hello-Sol/play' className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => (isActive('/Hello-Sol/play') ? handleClick() : null)}>
+                {/* <NavLink to='/Hello-Sol/play' className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => (isActive('/Hello-Sol/play') ? handleClick() : null)}>
                     <div className="text-white-100 text-sm font-inter py-2 px-6">Play</div>
+                </NavLink> */}
+                <NavLink to='/Hello-Sol/play' className={`rounded-full flex items-center justify-center ${isActive('/Hello-Sol/play') ? 'outline outline-1 text-black-100' : 'bg-black-200 text-white-100'}`} onClick={() => (isActive('/Hello-Sol/play') ? handleClick() : null)}>
+                    <div className="text-sm font-inter py-2 px-6">Play</div>
                 </NavLink>
                 <NavLink onClick={() => setShowLeaveGeo(true)}>
                     <img src={geo_icon} alt='geo-logo' className='w-10 object-contain' />

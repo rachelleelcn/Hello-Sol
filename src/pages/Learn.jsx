@@ -7,12 +7,29 @@ import Loader from "../components/Loader"
 // import { OrbitControls } from "@react-three/drei"
 import { Environment, Scroll, ScrollControls, useScroll } from "@react-three/drei"
 import go_icon from "../assets/icons/go.png";
+import go_diagonal from "../assets/icons/go_diagonal.png";
+import go_outline_icon from "../assets/icons/go_outline.png";
 import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 import rear_icon from "../assets/icons/rear.png";
 import mic_icon from "../assets/icons/mic.png";
 import dash_icon from "../assets/icons/dash.png";
 import leave_icon from "../assets/icons/leave.png";
 import scroll_icon from "../assets/icons/scroll_indicator.png";
+import sol_icon from "../assets/icons/sol.png";
+import dot_bar from "../assets/graphics/dot_bar.png";
+import vroom from "../assets/graphics/vroom.png";
+import shh from "../assets/graphics/shh.png";
+import red_arrow from "../assets/graphics/red_arrow.png";
+import small from "../assets/graphics/small.png";
+import fast from "../assets/graphics/fast.png";
+import circle from "../assets/graphics/circle.png";
+import triangles from "../assets/graphics/triangles.png";
+import star from "../assets/graphics/star.png";
+import green from "../assets/graphics/green.png";
+import dot_circle from "../assets/graphics/dot_circle.png";
+import green_rect from "../assets/graphics/green_rect.png";
+import pink_rect from "../assets/graphics/pink_rect.png";
+import tech_arrow from "../assets/graphics/tech_arrow.png";
 
 import LearnCar from "../models/LearnCar"
 
@@ -118,8 +135,9 @@ const Learn = () => {
       {/* HTML behind Canvas */}
 
       {/* P2 */}
-      <div className="w-56" style={{ position: 'fixed', top: '25%', right: '22%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
-        <div className="text-base font-bold font-inter pb-1">
+      <div className="w-56" style={{ position: 'fixed', top: '24%', right: '20%', opacity: show2 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
+        <img src={pink_rect} alt='' className='w-12 object-contain -ml-8 -mb-3 z-10' />
+        <div className="text-base font-bold font-inter pb-1 z-20">
           It’s simple.
         </div>
         <div className="text-sm font-inter">
@@ -128,17 +146,21 @@ const Learn = () => {
       </div>
 
       {/* P3 */}
-      <div className="w-56" style={{ position: 'fixed', top: '45%', left: '22%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
-        <div className="text-base font-bold font-inter pb-1">
+      <div className="w-56" style={{ position: 'fixed', top: '24%', left: '28%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
+        <img src={green_rect} alt='' className='h-12 object-contain -ml-3.5 -mb-6 z-10' />
+        <div className="text-base font-bold font-inter pb-1 z-20">
           It’s all-electric.
         </div>
         <div className="text-sm font-inter">
           For a smooth, quiet, and comfortable ride.
         </div>
       </div>
+      <div style={{ position: 'fixed', top: '50%', left: '26%', opacity: show3 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
+        <img src={shh} alt='' className='h-12 object-contain' />
+      </div>
 
       {/* P4a+b */}
-      <div className="" style={{ position: 'fixed', bottom: '25%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4a ? 'auto' : 'none' }}>
+      <div className="" style={{ position: 'fixed', bottom: '24%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show4a ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4a ? 'auto' : 'none' }}>
         <div className="flex gap-2">
           <div className="text-xl font-inter">
             It’s where
@@ -148,6 +170,12 @@ const Learn = () => {
             <div className="text-xl font-inter">.</div>
           </div>
         </div>
+      </div>
+      <div style={{ position: 'fixed', bottom: '26%', left: '-16%', opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+        <img src={red_arrow} alt='' className='h-4 object-contain' />
+      </div>
+      <div style={{ position: 'fixed', bottom: '26%', right: '-16%', opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+        <img src={red_arrow} alt='' className='h-4 object-contain transform scale-x-[-1]' />
       </div>
 
       {/* P5 */}
@@ -159,22 +187,32 @@ const Learn = () => {
           Small but mighty! The Geo-Sol can maneuver through tight spaces, helping you save time and space on parking.
         </div>
       </div>
+      {/* <div style={{ position: 'fixed', top: '50%', right: '50%', transform: `translate(-50%,-50%)`, opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+        <img src={small} alt='' className='h-56 object-contain' />
+      </div> */}
+      <div style={{ position: 'fixed', bottom: '30%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, pointerEvents: show5 ? 'auto' : 'none' }}>
+        <img src={small} alt='' className='h-56 object-contain' />
+      </div>
 
       {/* P6 */}
-      <div className="" style={{ position: 'fixed', top: '53%', left: '50%', transform: `translate(${show6 ? '-49.8%' : '100%'}, -50%)`, opacity: show6 ? 1 : 0, transition: 'transform 0.5s, opacity 0.2s', pointerEvents: show6 ? 'auto' : 'none' }}>
-        <div className="vroom font-bold font-inter text-yellow-100">
+      <div className="w-full" style={{ position: 'fixed', top: '56%', left: '50%', transform: `translate(${show6 ? '-48%' : '100%'}, -50%)`, opacity: show6 ? 1 : 0, transition: 'transform 0.5s, opacity 0.2s', pointerEvents: show6 ? 'auto' : 'none' }}>
+        {/* <div className="vroom font-bold font-inter text-yellow-100">
           Vrooom!!
-        </div>
+        </div> */}
+        <img src={vroom} alt='' className='w-[95%] object-contain' />
       </div>
 
       {/* P7 */}
-      <div className="w-72" style={{ position: 'fixed', top: '25%', left: '20%', opacity: show7 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show7 ? 'auto' : 'none' }}>
+      <div className="w-72" style={{ position: 'fixed', top: '23%', left: '24%', opacity: show7 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show7 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Faster than ever.
         </div>
         <div className="text-sm font-inter">
-          Accelerate in an instant. The Geo-Sol can reach up to 100 km/hr in 5 seconds.
+          Accelerate in an instant. The Geo-Sol can reach up to 100 km/h in 5 seconds.
         </div>
+      </div>
+      <div style={{ position: 'fixed', top: '28%', left: '46%', opacity: show7 ? 1 : 0, pointerEvents: show7 ? 'auto' : 'none' }}>
+        <img src={fast} alt='' className='h-3 object-contain' />
       </div>
 
       {/* P8 */}
@@ -186,9 +224,12 @@ const Learn = () => {
           Powered by solar energy and ethically sourced high voltage lithium-ion batteries, the Geo-Sol is a zero-emission vehicle.
         </div>
       </div>
+      <div className="w-full" style={{ position: 'fixed', top: '-130%', left: '-10%', opacity: show8 ? 1 : 0, pointerEvents: show8 ? 'auto' : 'none' }}>
+        <img src={green} alt='' style={{ maxWidth: '160%' }} />
+      </div>
 
       {/* P9 */}
-      <div className="w-72" style={{ position: 'fixed', top: '15%', left: '10%', opacity: show9 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show9 ? 'auto' : 'none' }}>
+      <div className="w-72" style={{ position: 'fixed', top: '20%', left: '15%', opacity: show9 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show9 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Easier than ever.
         </div>
@@ -198,40 +239,47 @@ const Learn = () => {
       </div>
 
       {/* P10 */}
-      <div className="w-48" style={{ position: 'fixed', top: '50%', left: '14%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-10 h-10 mb-2 flex items-center justify-center">
-          <img src={rear_icon} alt='rear-icon' className='h-full object-contain ' />
-        </div>
-        <div className="text-sm font-bold font-inter pb-2">
-          Rear View Camera
-        </div>
-        <div className="text-sm font-inter">
-          Park like a pro, the Geo-Sol has your back in 4K.
-        </div>
-      </div>
 
-      <div className="w-60" style={{ position: 'fixed', top: '22%', left: '60%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-10 h-10 mb-2 flex items-center justify-center">
-          <img src={dash_icon} alt='dash-icon' className='h-9 object-contain mt-2' />
-        </div>
-        <div className="text-sm font-bold font-inter pb-2">
+
+      <div className="w-60" style={{ position: 'fixed', top: '28%', left: '67%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={dash_icon} alt='dash-icon' className='h-11 object-contain mb-1' />
+        <div className="text-sm font-bold font-inter pb-1">
           Digital dashboard
         </div>
         <div className="text-sm font-inter">
           Real-time information right behind the wheel for a focused drive.
         </div>
       </div>
+      <div className="w-48" style={{ position: 'fixed', top: '46%', left: '57%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={tech_arrow} alt='' className='h-1.5 object-contain transform -rotate-[40deg]' />
+      </div>
 
-      <div className="w-48" style={{ position: 'fixed', top: '50%', left: '76%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
-        <div className="w-10 h-10 mb-2 flex items-center justify-center">
-          <img src={mic_icon} alt='mic-icon' className='h-9 object-contain ' />
+
+      <div className="w-48" style={{ position: 'fixed', top: '54%', left: '10%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={rear_icon} alt='rear-icon' className='h-11 object-contain mb-1' />
+        <div className="text-sm font-bold font-inter pb-1">
+          Rear View Camera
         </div>
-        <div className="text-sm font-bold font-inter pb-2">
+        <div className="text-sm font-inter">
+          Park like a pro, the Geo-Sol has your back in 4K.
+        </div>
+      </div>
+      <div className="w-48" style={{ position: 'fixed', top: '65%', left: '25.5%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={tech_arrow} alt='' className='h-1.5 object-contain transform scale-x-[-1]' />
+      </div>
+      
+
+      <div className="w-48" style={{ position: 'fixed', top: '54%', left: '77%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={mic_icon} alt='mic-icon' className='h-11 object-contain mb-1' />
+        <div className="text-sm font-bold font-inter pb-1">
           Smart OS
         </div>
         <div className="text-sm font-inter">
           Go hands free with voice enabled actions.
         </div>
+      </div>
+      <div className="w-48" style={{ position: 'fixed', top: '65%', left: '66%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+        <img src={tech_arrow} alt='' className='h-1.5 object-contain' />
       </div>
 
 
@@ -244,8 +292,8 @@ const Learn = () => {
 
           <ScrollControls pages={15} damping={0.1}>
             <LearnCar
-              position={[-0.1, -1, 5.5]}
-              rotation={[0, -0.4, 0]}
+              position={[0.1, -0.8, 6]}
+              rotation={[0.02, -0.44, 0]}
               onScroll={handleScroll}
             />
           </ScrollControls>
@@ -255,57 +303,106 @@ const Learn = () => {
       {/* HTML in front of Canvas */}
       {/* P1 */}
 
-      
-
-      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
-        <div className="text-5xl font-bold font-inter mb-4">
-          <div className="mb-2">Hello.</div>
-          <div>This is Geo-Sol.</div>
+      <div style={{ position: 'fixed', top: '16%', left: '8%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+        <div className="text-5xl font-inter mb-4">
+          <div className='flex items-center mb-2'>
+            <div>Hello.</div>
+            <img src={sol_icon} alt='sol-icon' className='h-14 object-contain pl-2' />
+          </div>
+          <div className='font-bold'>This is Geo-Sol.</div>
         </div>
         <div className="w-72 text-sm font-inter">
           Introducing the all-new electrifying Geo.
         </div>
-        <img src={scroll_icon} alt='scroll_icon' className='w-20 object-contain mt-6' />
-
+        <img src={scroll_icon} alt='scroll_icon' className='w-10 object-contain mt-14' />
       </div>
+
       <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
         <div className="outline outline-1 rounded-3xl p-8 mb-4">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-4">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-4">
             Play daily for a chance to win a free Geo-Energy Portable Charger!
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
+          {/* <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
             <div className="text-sm font-inter py-2.5 px-6">Start playing</div>
-          </button>
+          </button> */}
+          <div className='flex justify-end'>
+            <button onClick={() => navigate('/Hello-Sol/play')}>
+              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
+            </button>
+          </div>
         </div>
-        <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
+
+        <div className="bg-grey-300 rounded-3xl p-8">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
             Create your dream Geo!
           </div>
-          <div className="w-64 text-sm font-inter pb-4">
+          <div className="w-60 text-sm font-inter pb-4">
             Bring your Geo to life with Geo-Creator and see your Geo in action in Geo-Town.
           </div>
-          <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
+          {/* <button className='rounded-full outline outline-1 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
             <div className="text-sm font-inter py-2.5 px-6">Start building</div>
-          </button>
+          </button> */}
+          <div className='flex justify-between'>
+            <img src={dot_bar} alt='' className='w-44 object-contain' />
+            <button onClick={() => navigate('/Hello-Sol/create')}>
+              <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+            </button>
+          </div>
+
         </div>
       </div>
 
       {/* P11 */}
-      <div style={{ position: 'fixed', top: '15%', left: '10%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
-        <div className="text-5xl font-bold font-inter mb-2">
-          It’s Geo-Sol.
+      <div style={{ position: 'fixed', top: '12%', left: '8%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+        <div className='flex items-end'>
+          <div className="text-5xl font-bold font-inter mb-2 z-20">
+            It’s Geo-Sol.
+          </div>
+          <img src={sol_icon} alt='sol-icon' className='h-28 object-contain -ml-12 -mb-4 z-10' />
         </div>
-        <div className="text-2xl text-grey-100 font-inter pb-5">
+
+        <div className="text-2xl font-inter pb-6 pt-2 text-grey-100">
           Where geometric meets electric.
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
           <button onClick={() => setShowLeaveGeo(true)}>
-            <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+            <img src={go_diagonal} alt='go-icon' className='w-10 object-contain' />
           </button>
         </div>
       </div>
-      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+
+      <div style={{ position: 'fixed', bottom: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+        <div className="bg-grey-300 rounded-3xl p-8 mb-4">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+            It’s your dream car!
+          </div>
+          <div className="w-60 text-sm font-inter pb-4">
+            Create your own custom Geo-Sol with our Geo-Creator.
+          </div>
+          <div className='flex justify-between'>
+            <img src={dot_bar} alt='' className='w-44 object-contain' />
+            <button onClick={() => navigate('/Hello-Sol/create')}>
+              <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+            </button>
+          </div>
+        </div>
+        <div className="outline outline-1 rounded-3xl p-8">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-6">
+            Play for a chance to win a free Geo-Energy charger!
+          </div>
+          <div className='flex justify-end'>
+            <button onClick={() => navigate('/Hello-Sol/play')}>
+              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* <div style={{ position: 'fixed', top: '28%', right: '6%', opacity: show11 ? 1 : 0, pointerEvents: show11 ? 'auto' : 'none' }}>
+        <img src={star} alt='' className='h-12 object-contain' />
+      </div> */}
+
+      {/* <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
         <div className="outline outline-1 rounded-3xl p-8">
           <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
             It’s your dream car!
@@ -317,7 +414,7 @@ const Learn = () => {
             <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start building</div>
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* PopUp - Leave Geo*/}
       <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>
