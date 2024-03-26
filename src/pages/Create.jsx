@@ -902,7 +902,7 @@ const Create = () => {
           <div className="text-sm mb-8">This website uses cookies to offer you a personalized experience. Accepting allows us to save your configured car. Declining will result in not being able to drive your configured car in the mini game.</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => { goNextSection(); setShowCookie(false); }}>Decline</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); }}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); handleCarConfirm()}}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Accept cookies</div>
             </button>
           </div>
