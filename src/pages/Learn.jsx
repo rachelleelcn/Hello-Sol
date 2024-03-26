@@ -190,13 +190,13 @@ const Learn = () => {
       {/* <div style={{ position: 'fixed', top: '50%', right: '50%', transform: `translate(-50%,-50%)`, opacity: show4b ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={small} alt='' className='h-56 object-contain' />
       </div> */}
-      <div style={{ position: 'fixed', bottom: '30%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, pointerEvents: show5 ? 'auto' : 'none' }}>
-        <img src={small} alt='' className='h-56 object-contain' />
+      <div style={{ position: 'fixed', bottom: '32%', left: '50%', transform: `translate(-50%,-50%)`, opacity: show5 ? 1 : 0, pointerEvents: show5 ? 'auto' : 'none' }}>
+        <img src={small} alt='' className='h-52 object-contain' />
       </div>
 
       {/* P6 */}
       <div className="w-full" style={{ position: 'fixed', top: '56%', left: '50%', transform: `translate(${show6 ? '-48%' : '100%'}, -50%)`, opacity: show6 ? 1 : 0, transition: 'transform 0.5s, opacity 0.2s', pointerEvents: show6 ? 'auto' : 'none' }}>
-        {/* <div className="vroom font-bold font-inter text-yellow-100">
+        {/* <div className="vroom font-bold font-inter text-grey-300">
           Vrooom!!
         </div> */}
         <img src={vroom} alt='' className='w-[95%] object-contain' />
