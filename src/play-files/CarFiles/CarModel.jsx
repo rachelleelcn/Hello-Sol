@@ -28,7 +28,7 @@ import VintageTop from '../../models/VintageTop';
 import VintageBottom from '../../models/VintageBottom';
 import VintageWheels from '../../models/VintageWheels';
 
-export const CarModel = (enableControls) => {
+export const CarModel = ({enableControls, soundOff}) => {
     const position = [15, 0, 0]
     const width = 0.8
     const height = 0.8
@@ -56,9 +56,9 @@ export const CarModel = (enableControls) => {
         // maxSubSteps: 10,
     }), useRef(null))
 
-    if (enableControls) {
-        UseControls(vehicleAPI, chassisAPI)
-    }
+
+    UseControls(vehicleAPI, chassisAPI, enableControls, soundOff)
+
 
     // const prevCarPosition = useRef(new Vector3());
 

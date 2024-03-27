@@ -22,8 +22,8 @@ import { TrafficRFinal } from '../PropsGroups/TrafficLightR'
 export const Section6 = () => {
 
 const glassColour = '#F5DAD7'
-const frameColour = '#CC777A'
-const wallColour = '#F5A9B2'
+const frameColour = '#FF8778'
+const wallColour = '#FFB0A3'
 
 const rotateU = [0, 0, 0]
 const rotateL = [0, 1.57, 0]
@@ -111,10 +111,6 @@ const rotateR = [0, 4.71, 0]
 
         <TreeFinal  pos={[12, -1, 68]} 
               hitboxPos={[25, 0, 8]}/>
-                    
-        <TreeFinal  pos={[16, -1, 64]} 
-              hitboxPos={[29, 0, 4]}/>
-
 
         <StreetLightFinal pos={[25, -1, 30]} rotate={rotateU}
                     hitboxPos={[38, 0, -30]} />

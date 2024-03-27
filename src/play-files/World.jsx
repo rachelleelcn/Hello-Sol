@@ -35,14 +35,14 @@ export const Borders = () => {
     
   )
 }
-  export const World = ({ entries, setEntries }) => {
+  export const World = ({ entries, setEntries, soundOff }) => {
     return ( 
         <group>
           <Borders/>
           <Ground/>
           <Roads/>
           <Buildings/>
-          <Stations entries={entries} setEntries={setEntries} />
+          <Stations entries={entries} setEntries={setEntries} soundOff={soundOff}/>
         </group>   
     )
   }

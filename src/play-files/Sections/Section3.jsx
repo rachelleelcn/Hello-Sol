@@ -22,8 +22,8 @@ import { TrafficRFinal } from '../PropsGroups/TrafficLightR'
 export const Section3 = () => {
 
 const glassColour = '#E2F4FF'
-const frameColour = '#7BB4D1'
-const wallColour = '#C9EEF0'
+const frameColour = '#8BD5DD'
+const wallColour = '#B4E3E8'
 
 const rotateU = [0, 0, 0]
 const rotateL = [0, 1.57, 0]
@@ -108,8 +108,11 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[-65, -1, -18]} rotate={rotateU}
                     hitboxPos={[-52, 0, -78]}/>
 
-        <TreeFinal    pos={[-65, -1, -15]}
-                hitboxPos={[-52, 0, -75]}/>
+        <TreeFinal    pos={[-65, -1, 12]}
+                hitboxPos={[-52, 0, -48]}/>
+
+        <TreeFinal    pos={[-65, -1, 15]}
+                hitboxPos={[-52, 0, -45]}/>
 
         <TrafficRFinal pos={[-69, -1, 20]} rotate={rotateU} 
                  hitboxPos={[-56, 0, -40]}/>  
@@ -125,12 +128,6 @@ const rotateR = [0, 4.71, 0]
 
         <StreetLightFinal pos={[-28, -1, -18]} rotate={rotateU}
                     hitboxPos={[-15, 0, -78]}/>
-
-        <TreeFinal pos={[-7, -1, -16]}
-             hitboxPos={[6, 0, -76]}/>
-
-        <TreeFinal pos={[-7, -1, -14]}
-             hitboxPos={[6, 0, -74]}/>
 
         <TreeFinal pos={[-7, -1, -5]}
              hitboxPos={[6, 0, -65]}/>

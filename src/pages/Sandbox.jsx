@@ -10,7 +10,7 @@ import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 import { World } from '../play-files/World.jsx'
 import { CarModel } from '../play-files/CarFiles/CarModel.jsx'
 
-export function Scene({ entries, setEntries, enableControls }) {
+export function Scene({ entries, setEntries, enableControls, soundOff }) {
   return (
     <Suspense fallback={null}>
         <Canvas shadows>
@@ -21,8 +21,8 @@ export function Scene({ entries, setEntries, enableControls }) {
         <PerspectiveCamera makeDefault position={[2, 0.8, 60]} fov={70}/>
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>
-          <CarModel enableControls={enableControls} />
-          <World entries={entries} setEntries={setEntries}/>
+          <CarModel enableControls={enableControls} soundOff={soundOff} />
+          <World entries={entries} setEntries={setEntries} soundOff={soundOff}/>
         </Physics>
       </Canvas>
     </Suspense>

@@ -1,6 +1,7 @@
 /* eslint-disable no-const-assign */
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react"
+import { useSound } from 'use-sound'
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
@@ -23,7 +24,10 @@ import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
 
-import bgMusic from '../assets/audio/RollOn.mp3'
+import bgm from '../assets/audio/bgm_default.mp3'
+import bgmFast from '../assets/audio/bgm_fast.mp3'
+import winSFX from '../assets/audio/Win.mp3'
+import loseSFX from '../assets/audio/Lose.mp3'
 
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
@@ -41,17 +45,21 @@ const Play = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
 
+  // Game variables
+  const [startGame, setStartGame] = useState(false);
   const [entries, setEntries] = useState(0);
   const [enableControls, setEnableControls] = useState(true)
 
-  //const currentDate = new Date();
+  const currentDate = new Date();
   //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
   //const [email, setEmail] = useState('');
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
 
-
-  const [startGame, setStartGame] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
+  // Audio variables
+  const [musicOff, setMusicOff] = useState(true);
+  const [sfxOff, setSfxOff] = useState(true);
+  const [playWinSFX, {pause: pauseWinSFX} ] = useSound(winSFX)
+  const [playLoseSFX, {pause: pauseLoseSFX}] = useSound(loseSFX)
 
   // Current date variables
   const today = new Date()
@@ -90,12 +98,23 @@ const Play = () => {
     setCurrentSection(index);
 
     if (index < 3) {
-      setStartGame(false);
+      setStartGame(false)
+      setEnableControls(false)
     }
     else if (index === 4) {
       resetTimer()
       setElapsedTime(elapsedTime)
       setEnableControls(false)
+      setMusicOff(true)
+
+      if (!sfxOff) {
+        if (entries === 0) {
+          playLoseSFX()
+        }
+        else {
+          playWinSFX()
+        }
+      }
     }
     else {
       setStartGame(true);
@@ -117,14 +136,24 @@ const Play = () => {
     navigate('/Hello-Sol/create');
   };
 
-  const soundToggle = () => {
-    if (soundOn) {
-      setSoundOn(false);
+  const musicToggle = () => {
+    if (musicOff) {
+      setMusicOff(false);
     } 
     else {
-      setSoundOn(true);
+      setMusicOff(true);
     }
   };
+
+  const sfxToggle = () => {
+    if (sfxOff) {
+      setSfxOff(false)
+    }
+    else {
+      setSfxOff(true)
+    }
+  }
+
   const controlsToggle = () => {
     if (showControls) {
       setShowControls(false);
@@ -162,6 +191,7 @@ const Play = () => {
     }
   }, [isRunning, duration])
 
+  // show results when entries is 6
   useEffect(() => {
     if (entries === 6) {
       goSection(4)
@@ -202,14 +232,11 @@ const Play = () => {
 
   const handleClearEmail = () => {
     setDetails({ ...details, to_email: "" });
-
   };
 
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
-
       handleSendEmail(entries, dateFormat, bannerUrl, timeFormat);
-
       setShowEmailSent(true);
     }
   };
@@ -282,17 +309,26 @@ const Play = () => {
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
+      {/* Toggle music */}
+      <group>
+        {!musicOff && elapsedTime < 210 && (
+          <audio src={bgm} autoPlay loop />
+        )}
 
-      {!soundOn && (
-        <audio src={bgMusic} autoPlay loop />
-      )}
+        {/* sped up at 30 seconds */}
+        {!musicOff && elapsedTime >= 210 && (
+          <audio src={bgmFast} autoPlay loop />
+        )}    
+      </group>
 
-      {currentSection > 2 && currentSection < 5 && (
-        <div style={{ width: '100%', height: '100%' }}>
-          <Scene entries={entries} setEntries={setEntries} 
-                 enableControls={enableControls} />
-        </div>
-      )}
+      {/* Render scene */}
+        {currentSection > 2 && currentSection < 5 && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <Scene entries={entries} setEntries={setEntries} 
+                  enableControls={enableControls} 
+                  soundOff={sfxOff}/>
+          </div>
+        )}
 
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
@@ -394,17 +430,25 @@ const Play = () => {
           </div>
 
 
+          {/* Car selection */}
           <hr className="border-black-100 border-t-1 my-10" />
           <div className=" text-sm font-bold pb-4">Pick your car:</div>
+
           <div className="flex gap-6">
+
+            {/* Default (EV) */}
             <button className="w-36 min-w-min h-36 rounded-3xl outline outline-1 bg-white-100 p-4 flex flex-col items-center text-center">
               <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
               <div className="text-xs">Geo-Sol</div>
             </button>
+
+            {/* Configured car */}
             <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
               <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
               <div className="text-xs whitespace-nowrap">Jane Doe’s</div>
             </button>
+
+            {/* Create car */}
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
               <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
                 <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
@@ -441,8 +485,19 @@ const Play = () => {
             <img src={controls_icon} alt='controls-icon' className='w-3.5 object-contain' />
             <div className="text-sm font-inter text-black-100 pr-1.5">Controls</div>
           </button>
-          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={soundToggle}>
-            {soundOn ? (
+
+          {/* Music button */}
+          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={musicToggle}>
+            {musicOff ? (
+              <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
+            )}
+          </button>
+
+          {/* SFX button */}
+          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={sfxToggle}>
+            {sfxOff ? (
               <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
             ) : (
               <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
@@ -468,7 +523,7 @@ const Play = () => {
                     <img src={shift_icon} alt='shift_icon' className='h-full object-contain ' />
                   </div>
                   <div className="text-[10px]">
-                    <div className="font-bold">Shift</div>
+                    <div className="font-bold">Hold Shift</div>
                     <div>Brake car</div>
                   </div>
                 </div>

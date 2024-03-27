@@ -18,7 +18,7 @@ const Road = ({pos, size}) => {
     return (
       <mesh ref={ref}>
         <planeGeometry args={size}/>
-        <meshBasicMaterial color={'#BFBFC9'} side={THREE.DoubleSide}/>
+        <meshBasicMaterial color={'#A8A8A8'} side={THREE.DoubleSide}/>
       </mesh>
     )
   }
