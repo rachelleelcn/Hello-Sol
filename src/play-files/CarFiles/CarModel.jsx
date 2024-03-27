@@ -4,6 +4,7 @@ import { useBox, useRaycastVehicle } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import { Quaternion, Vector3 } from 'three'
+import { useCookies } from 'react-cookie';
 
 import { useWheels } from './useWheels'
 import { WheelDebug } from './WheelDebug'
@@ -29,6 +30,9 @@ import VintageBottom from '../../models/VintageBottom';
 import VintageWheels from '../../models/VintageWheels';
 
 export const CarModel = ({enableControls, soundOff}) => {
+    const [cookies] = useCookies(['CAR_COOKIE']);
+    const configuredCar = cookies['CAR_COOKIE'];
+
     const position = [15, 0, 0]
     const width = 0.8
     const height = 0.8
@@ -53,55 +57,67 @@ export const CarModel = ({enableControls, soundOff}) => {
         wheelInfos,
         wheels,
         fixedTimeStep: 1 / 120,
-        // maxSubSteps: 10,
     }), useRef(null))
 
 
     UseControls(vehicleAPI, chassisAPI, enableControls, soundOff)
 
-
-    // const prevCarPosition = useRef(new Vector3());
-
     // Third person camera stuff
-    // useFrame((state, delta) => {
-    //     const carPosition = new Vector3();
-    //     chassisBody.current.getWorldPosition(carPosition);
+    useFrame((state) => {
+        const carPosition = new Vector3();
+        chassisBody.current.getWorldPosition(carPosition);
 
-    //     const quaternion = new Quaternion();
-    //     chassisBody.current.getWorldQuaternion(quaternion);
+        const quaternion = new Quaternion();
+        chassisBody.current.getWorldQuaternion(quaternion);
 
-    //     const offset = new Vector3(0, 0.8, 3);
-    //     offset.applyQuaternion(quaternion);
+        const offset = new Vector3(0, 0.8, 3);
+        offset.applyQuaternion(quaternion);
 
-    //     const cameraPosition = carPosition.clone().add(offset);
+        const cameraPosition = carPosition.clone().add(offset);
 
-    //     // camera follow car
-    //     const lerpFactor = 1
-    //     state.camera.position.lerp(cameraPosition, lerpFactor);
-        
-    //     // const lerpFactor = 1 - Math.exp(-3 * delta);
-    //     // state.camera.position.lerp(prevCarPosition.current, lerpFactor);
-    //     // prevCarPosition.current.copy(cameraPosition);
-        
-    //     state.camera.lookAt(carPosition);
-    // })
+        // camera follow car
+        const lerpFactor = 1
+        state.camera.position.lerp(cameraPosition, lerpFactor);
+
+        state.camera.lookAt(carPosition);
+    })
    
+    // const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
 
-    const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
+    const CarPart = {
+        EV:      { top: EVTop,      bottom: EVBottom,      wheels: EVWheels },
+        Classic: { top: ClassicTop, bottom: ClassicBottom, wheels: ClassicWheels },
+        Boxy:    { top: BoxyTop,    bottom: BoxyBottom,    wheels: BoxyWheels },
+        Sport:   { top: SportTop,   bottom: SportBottom,   wheels: SportWheels },
+        Round:   { top: RoundTop,   bottom: RoundBottom,   wheels: RoundWheels },
+        Vintage: { top: VintageTop, bottom: VintageBottom, wheels: VintageWheels }
+      }
+
+    const renderCarParts = (configuredCar) => {
+        if (!configuredCar) return null
+
+        const Car = CarPart[configuredCar.name]
+        if (!Car) return null
+
+        return (
+            <>
+                <Car.top colour={configuredCar.topColour} />
+                <Car.bottom colour={configuredCar.bodyColour} />
+                <Car.wheels colour={configuredCar.bodyColour} />
+            </>
+        )
+    }
 
     return (
         <group>
             <group ref={vehicle} name='vehicle' position={[-13, 0, 60]}>
                 <group ref={chassisBody} name="chassisBody">
-                    {/* <EVCar
-                        rotation-y={Math.PI}
-                        position={[0, -0.6, 0]}
-                        scale={0.28}
-                    />   */}
+
+                    {renderCarParts(configuredCar)}
     
-                    <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.63, 0]} scale={0.56} />
+                    {/* <EVTop colour={colours[0]} rotation-y={Math.PI} position={[0, -0.63, 0]} scale={0.56} />
                     <EVBottom colour={colours[0]} rotation-y={Math.PI} position={[0, -0.63, 0]} scale={0.56} />
-                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.63, 0]} scale={0.56} />
+                    <EVWheels colour={colours[0]} rotation-y={Math.PI} position={[0, -0.63, 0]} scale={0.56} /> */}
                     
                 </group>
 

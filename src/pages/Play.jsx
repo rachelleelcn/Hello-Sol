@@ -32,6 +32,7 @@ import loseSFX from '../assets/audio/Lose.mp3'
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
+import { CarSelection } from './CarCookie';
 
 const Play = () => {
   const navigate = useNavigate();
@@ -411,13 +412,6 @@ const Play = () => {
                 <div>Reset car</div>
               </div>
             </div>
-            {/* <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
-              <div className="text-xs">
-                <div className="font-bold">Cursor movement</div>
-                <div>Rotate camera</div>
-              </div>
-            </div> */}
             <div className="flex items-center">
               <div className="inline-flex items-center mr-5">
                 <img src={cursor_icon} alt='cursor_icon' className='h-12 object-contain ' />
@@ -432,21 +426,22 @@ const Play = () => {
 
           {/* Car selection */}
           <hr className="border-black-100 border-t-1 my-10" />
-          <div className=" text-sm font-bold pb-4">Pick your car:</div>
+          <div className=" text-sm font-bold pb-4">Select your car:</div>
 
           <div className="flex gap-6">
+            <CarSelection/>
 
             {/* Default (EV) */}
-            <button className="w-36 min-w-min h-36 rounded-3xl outline outline-1 bg-white-100 p-4 flex flex-col items-center text-center">
+            {/* <button className="w-36 min-w-min h-36 rounded-3xl outline outline-1 bg-white-100 p-4 flex flex-col items-center text-center">
               <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
               <div className="text-xs">Geo-Sol</div>
-            </button>
+            </button> */}
 
             {/* Configured car */}
-            <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
+            {/* <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
               <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
-              <div className="text-xs whitespace-nowrap">Jane Doe’s</div>
-            </button>
+              <div className="text-xs whitespace-nowrap">Name</div>
+            </button> */}
 
             {/* Create car */}
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
