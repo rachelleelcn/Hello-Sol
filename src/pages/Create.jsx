@@ -32,7 +32,12 @@ import sportTires_img from "../assets/images/sport-tires.jpg";
 import vintageTires_img from "../assets/images/vintage-tires.jpg";
 import pose_icon from "../assets/icons/pose_indicator.png";
 import rotate_icon from "../assets/icons/rotate_indicator.png";
+import go_outline_icon from "../assets/icons/go_outline.png";
+import go_icon from "../assets/icons/go.png";
+import cookie_icon from "../assets/icons/cookie.png";
+
 import { useCookies } from 'react-cookie';
+
 
 const Create = () => {
 
@@ -53,6 +58,7 @@ const Create = () => {
   const [profanityDetected, setProfanityDetected] = useState(false);
   const [licenseValidateMsg, setLicenseValidateMsg] = useState('x');
   const [showLeaveGeo, setShowLeaveGeo] = useState(false);
+  const [showCookie, setShowCookie] = useState(false);
   const [showImageShare, setShowImageShare] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
@@ -334,13 +340,13 @@ const Create = () => {
 
       {/* HTML */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection > 1 && currentSection < 6 ? 1 : 0, pointerEvents: 'none' }}>
-        <div style={{ position: 'fixed', bottom: '9%', left: '4%' }}>
-        <img src={rotate_icon} alt='rotate_icon' className='w-56 object-contain mt-8' />
+        <div style={{ position: 'fixed', bottom: '10%', left: '4.5%' }}>
+          <img src={rotate_icon} alt='rotate_icon' className='w-40 object-contain mt-8' />
         </div>
       </div>
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 6 ? 1 : 0, pointerEvents: 'none' }}>
-        <div style={{ position: 'fixed', bottom: '10%', left: '22%'}}>
-        <img src={pose_icon} alt='pose_icon' className='w-48 object-contain mt-8' />
+        <div style={{ position: 'fixed', bottom: '12%', left: '22%' }}>
+          <img src={pose_icon} alt='pose_icon' className='w-40 object-contain mt-8' />
         </div>
       </div>
 
@@ -432,7 +438,7 @@ const Create = () => {
         <div className="pl-4 pb-2 text-sm">Creating {name}’s dream Geo...</div>
         <div className="w-[404px] h-[545px] outline outline-1 rounded-3xl p-6 flex flex-col">
 
-          <div className="rounded-full outline outline-1 p-2 relative mb-4">
+          <div className="rounded-full bg-grey-300 p-2 relative mb-4">
             <div className="flex items-center justify-between absolute inset-0 p-2 z-10">
 
               <button className={`text-xs w-1/3 h-8 rounded-full ${activeTab === 0 ? 'text-white-100' : 'text-black-100'}`} onClick={() => toggleTab(0)}>Top</button>
@@ -771,8 +777,8 @@ const Create = () => {
               <div className="h-[54px] bg-white-100 rounded-2xl border border-solid border-black-200" />
               <div className="absolute inset-0 flex justify-between items-center">
                 <div className="flex items-center">
-                  
-                <div className="bg-white-100 w-14 h-[38px] rounded-xl m-2 flex items-center justify-center">
+
+                  <div className="bg-white-100 w-14 h-[38px] rounded-xl m-2 flex items-center justify-center">
                     <img src={bodyModelImg[bodyModel]} alt='body image' className='h-full object-contain ' />
                   </div>
 
@@ -811,7 +817,11 @@ const Create = () => {
             <hr className="border-black-100 border-t" />
             <div className="flex items-center justify-center pt-6">
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
-              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}>
+
+              <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowCookie(true)}>
+
+              {/* <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}> */}
+
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
             </div>
@@ -848,15 +858,17 @@ const Create = () => {
 
         <div style={{ position: 'fixed', bottom: '25%', right: '4%' }}>
           <div className="outline outline-1 rounded-3xl p-8">
-            <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
-              Play to win a free Geo-Energy portable charger!
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+          Play to win a free Geo-Energy portable charger!
+          </div>
+          <div className="w-60 text-sm font-inter pb-4">
+          Put your Geo to the test, play to enter today’s giveaway.
+          </div>
+            <div className='flex justify-end'>
+              <button onClick={() => navigate('/Hello-Sol/play')}>
+                <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+              </button>
             </div>
-            <div className="w-64 text-sm font-inter pb-4">
-              Put your Geo to the test, play to enter today’s giveaway.
-            </div>
-            <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
-              <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start playing</div>
-            </button>
           </div>
         </div>
       </div>
@@ -874,6 +886,24 @@ const Create = () => {
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => setShowLeaveGeo(false)}>Stay</button>
             <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={leaveToGeo}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Let’s go!</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* PopUp - Cookies*/}
+      <div style={{ transition: 'opacity 0.2s', opacity: showCookie === true ? 1 : 0, pointerEvents: showCookie === true ? 'auto' : 'none' }}>
+        <div className="fixed inset-0 bg-black-100 opacity-40 z-10"></div>
+        <div className="font-inter outline outline-1 rounded-3xl p-10 w-96 bg-white-200 z-20" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-54%)` }}>
+          <div className="inline-flex items-center mb-0">
+            <img src={cookie_icon} alt='leave_icon' className='h-16 object-contain ' />
+          </div>
+          <div className="font-bold text-2xl mb-1">We use cookies!</div>
+          <div className="text-sm mb-8">This website uses cookies to offer you a personalized experience. Accepting allows us to save your configured car. Declining will result in not being able to drive your configured car in the mini game.</div>
+          <div className="flex justify-center">
+            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => { goNextSection(); setShowCookie(false); }}>Decline</button>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); handleCarConfirm()}}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Accept cookies</div>
             </button>
           </div>
         </div>

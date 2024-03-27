@@ -5,6 +5,8 @@ import { useSound } from 'use-sound'
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
+import go_outline_icon from "../assets/icons/go_outline.png";
+import go_diagonal from "../assets/icons/go_diagonal.png";
 import add_icon from "../assets/icons/add.png";
 import close_icon from "../assets/icons/close.png";
 import share_icon from "../assets/icons/share.png";
@@ -336,29 +338,29 @@ const Play = () => {
       {/* P1 - Landing */}
       <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '10%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <div className="text-3xl font-bold pb-2">Welcome to Geo-Town</div>
-        <div className="text-xl text-grey-100 font-inter pb-4">
+        <div className="text-xl  font-inter pb-5">
           Play for a chance to win a Geo-Energy portable charger!
         </div>
-        <div className="text-sm w-[53%] pb-4">
+        <div className="text-sm w-[53%] pb-6">
           Find the 6 charging stations located across Geo-Town before the time runs out to earn entries to our giveaway. The more entries you have, the higher your chances of winning!
         </div>
-        <div className="text-xs pb-0.5">
+        {/* <div className="text-xs pb-0.5 text-grey-100">
           Please note that each email can only claim entries to the giveaway once per day.
-        </div>
-        <div className="text-xs pb-7">
+        </div> */}
+        <div className="text-xs pb-8 text-grey-100">
           Play daily from <span className="underline underline-offset-4"> April 5th to 19th, 2024</span>.
         </div>
 
-        <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between mb-7'>
+        <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between mb-8'>
           <div className="font-inter pl-2">Visit Geo.com to learn more</div>
           <button onClick={() => setShowLeaveGeo(true)}>
-            <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
+            <img src={go_diagonal} alt='go-icon' className='w-10 object-contain' />
           </button>
         </div>
 
-        <div className="flex items-center gap-16 mb-7">
-          <div className="w-40 h-40 rounded-full bg-grey-100 border-[16px] border-green-100"></div>
-          <div className="text-sm w-56">
+        <div className="flex items-center gap-16 mb-10">
+          <div className="w-40 h-40 rounded-full bg-grey-300"></div>
+          <div className="text-sm w-60">
             <div className="font-bold pb-1">Geo-Energy portable charger</div>
             <div>A smarter, safer, and more portable solution to charge your EV.</div>
           </div>
@@ -445,9 +447,10 @@ const Play = () => {
 
             {/* Create car */}
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
-              <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
+              {/* <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
                 <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
-              </div>
+              </div> */}
+              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain mb-2.5' />
               <div className="text-xs font-bold w-24 pb-1">Create new dream Geo</div>
             </button>
           </div>
@@ -460,7 +463,7 @@ const Play = () => {
               goSection(3)
               startTimer()
             }}>
-            <div className="text-sm font-inter py-3 px-6 text-white-100">Start game</div>
+            <div className="text-sm font-inter py-3 px-6 text-white-100">Play now</div>
           </button>
         </div>
       </div>
@@ -559,48 +562,48 @@ const Play = () => {
         </div>
 
         {/* Collected station indicators */}
-        <div className="flex flex-col items-center gap-2" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
+        <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
 
-          <div className={`w-11 h-11 rounded-full ${entries > 0 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 0 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-          <div className={`w-11 h-11 rounded-full ${entries > 1 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 1 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 1 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-          <div className={`w-11 h-11 rounded-full ${entries > 2 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 2 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 2 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-          <div className={`w-11 h-11 rounded-full ${entries > 3 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 3 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 3 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-          <div className={`w-11 h-11 rounded-full ${entries > 4 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 4 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 4 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-          <div className={`w-11 h-11 rounded-full ${entries > 5 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-9 h-9 rounded-full ${entries > 5 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 5 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-7 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-7 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
         </div>
@@ -630,7 +633,7 @@ const Play = () => {
         </button>
       </div>
 
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
@@ -687,21 +690,21 @@ const Play = () => {
 
         {/* Indicators of # of stations found */}
         <div className="flex gap-2 justify-center items-center pb-8">
-          <div className={`w-8 h-8 rounded-full ${entries > 0 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 0 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
             )}
           </div>
-          <div className={`w-8 h-8 rounded-full ${entries > 1 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 1 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 1 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
             )}
           </div>
-          <div className={`w-8 h-8 rounded-full ${entries > 2 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 2 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 2 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
@@ -711,26 +714,26 @@ const Play = () => {
           {entries === 6 && elapsedTime <= 180 && (
             <div className="relative">
               <div className="w-10 h-10 rounded-full outline outline-1"></div>
-              <div className="w-8 h-8 rounded-full outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+              <div className="w-8 h-8 rounded-full bg-green-100 outline outline-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
                 <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
               </div>
             </div>
           )}
-          <div className={`w-8 h-8 rounded-full ${entries > 3 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 3 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 3 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
             )}
           </div>
-          <div className={`w-8 h-8 rounded-full ${entries > 4 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 4 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 4 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-5 object-contain' />
             )}
           </div>
-          <div className={`w-8 h-8 rounded-full ${entries > 5 ? 'outline outline-1' : ''} flex justify-center items-center`}>
+          <div className={`w-8 h-8 rounded-full ${entries > 5 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 5 ? (
               <img src={leaf_icon} alt='leaf-icon' className='w-5 object-contain' />
             ) : (
@@ -741,7 +744,7 @@ const Play = () => {
 
         {/* Email text field */}
         {entries > 0 && (
-          <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6">
+          <div className="outline outline-1 rounded-2xl p-6 pt-[22px] mb-6 ">
             <div className="text-sm pb-3">Enter your email to be added into the draw for a Geo-Energy portable charger:</div>
             <div className="flex gap-2">
               <input

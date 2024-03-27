@@ -30,16 +30,16 @@ const LearnCar = (props) => {
 
         tl.current
             .to(learnCar.current.position, { x: 0, duration: 1 }, 0)
-            .to(learnCar.current.position, { y: -0.5, duration: 1 }, 0)
+            .to(learnCar.current.position, { y: -0.4, duration: 1 }, 0)
             .to(learnCar.current.position, { z: 4, duration: 1 }, 0)
-            .to(learnCar.current.rotation, { x: 0.05, duration: 1 }, 0)
+            .to(learnCar.current.rotation, { x: 0.1, duration: 1 }, 0)
             .to(learnCar.current.rotation, { y: -6.3, duration: 1 }, 0)
             .to(learnCar.current.rotation, { z: 0, duration: 1 }, 0)
 
             .to(learnCar.current.position, { x: 0 }, 1)
-            .to(learnCar.current.position, { y: -0.5 }, 1)
+            .to(learnCar.current.position, { y: -0.4 }, 1)
             .to(learnCar.current.position, { z: 4 }, 1)
-            .to(learnCar.current.rotation, { x: 0.05 }, 1)
+            .to(learnCar.current.rotation, { x: 0.1 }, 1)
             .to(learnCar.current.rotation, { y: -6.3 }, 1)
             .to(learnCar.current.rotation, { z: 0 }, 1)
 
@@ -92,14 +92,18 @@ const LearnCar = (props) => {
             .to(learnCar.current.rotation, { y: -4.65 }, 4.5)
             .to(learnCar.current.rotation, { z: 0 }, 4.5)
 
-            .to(learnCar.current.position, { x: -0.1 }, 5)
-            .to(learnCar.current.position, { y: -1 }, 5)
-            .to(learnCar.current.position, { z: 5.5 }, 5)
-            .to(learnCar.current.rotation, { x: 0 }, 5)
-            .to(learnCar.current.rotation, { y: -6.8 }, 5)
+            .to(learnCar.current.position, { x: 0.1 }, 5)
+            .to(learnCar.current.position, { y: -0.8 }, 5)
+            .to(learnCar.current.position, { z: 6 }, 5)
+            .to(learnCar.current.rotation, { x: 0.02 }, 5)
+            .to(learnCar.current.rotation, { y: -0.44 }, 5)
             .to(learnCar.current.rotation, { z: 0 }, 5)
 
     }, [])
+
+    // 'blue', 'green', 'yellow', 'red', 'pink', 'purple'
+    const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE" ];
+
 
     return (
         <group ref={learnCar} {...props} dispose={null}>
@@ -136,7 +140,9 @@ const LearnCar = (props) => {
                 geometry={nodes.mesh_5.geometry}
                 material={nodes.mesh_5.material}
                 material-metalness={0}
-            />
+            >
+                <meshStandardMaterial color={colours[0]} />
+            </mesh>
             <mesh
                 geometry={nodes.mesh_6.geometry}
                 material={nodes.mesh_6.material}
@@ -157,7 +163,9 @@ const LearnCar = (props) => {
                 geometry={nodes.mesh_9.geometry}
                 material={nodes.mesh_9.material}
                 material-metalness={0}
-            />
+                >
+                <meshStandardMaterial color={colours[0]} />
+            </mesh>
             {/* <mesh
                 geometry={nodes.mesh_10.geometry}
                 material={nodes.mesh_10.material}
