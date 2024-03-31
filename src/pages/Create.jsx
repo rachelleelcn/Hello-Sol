@@ -228,7 +228,7 @@ const Create = () => {
       setLicenseValidateMsg('Maximum 8 characters.');
       setShowLicenseValidate(true);
     } else if (index === 3) {
-      setLicenseValidateMsg('Please refrain from using profanity');
+      setLicenseValidateMsg('Please refrain from using profanity.');
       setShowLicenseValidate(true);
     } else {
       setLicenseValidateMsg('x');
