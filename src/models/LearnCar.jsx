@@ -92,17 +92,17 @@ const LearnCar = (props) => {
             .to(learnCar.current.rotation, { y: -4.65 }, 4.5)
             .to(learnCar.current.rotation, { z: 0 }, 4.5)
 
-            .to(learnCar.current.position, { x: 0.1 }, 5)
+            .to(learnCar.current.position, { x: 0.2 }, 5)
             .to(learnCar.current.position, { y: -0.8 }, 5)
             .to(learnCar.current.position, { z: 6 }, 5)
             .to(learnCar.current.rotation, { x: 0.02 }, 5)
-            .to(learnCar.current.rotation, { y: -0.44 }, 5)
+            .to(learnCar.current.rotation, { y: -0.5 }, 5)
             .to(learnCar.current.rotation, { z: 0 }, 5)
 
     }, [])
 
     // 'blue', 'green', 'yellow', 'red', 'pink', 'purple'
-    const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE" ];
+    const colours = ["#5AC7D2", "#C8F165", "#FFDF59", "#FE574F", "#F178B8", "#986CDE"];
 
 
     return (
@@ -140,9 +140,8 @@ const LearnCar = (props) => {
                 geometry={nodes.mesh_5.geometry}
                 material={nodes.mesh_5.material}
                 material-metalness={0}
-            >
-                <meshStandardMaterial color={colours[0]} />
-            </mesh>
+            />
+
             <mesh
                 geometry={nodes.mesh_6.geometry}
                 material={nodes.mesh_6.material}
@@ -163,39 +162,7 @@ const LearnCar = (props) => {
                 geometry={nodes.mesh_9.geometry}
                 material={nodes.mesh_9.material}
                 material-metalness={0}
-                >
-                <meshStandardMaterial color={colours[0]} />
-            </mesh>
-            {/* <mesh
-                geometry={nodes.mesh_10.geometry}
-                material={nodes.mesh_10.material}
-                material-metalness={0}
-                >
-                <Text
-                    position={[0,0.34,-1.225]}
-                    color="#000000"
-                    fontSize={0.08}
-                    rotation={[0, Math.PI,0]}
-                    font={interFont}
-                >
-                  SOL2025
-                </Text>
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_11.geometry}
-                material={nodes.mesh_11.material}
-                material-metalness={0}
-                >
-                <Text
-                    position={[0,0.34,2.055]}
-                    color="#000000"
-                    fontSize={0.08}
-                    font={interFont}
-                >
-                  SOL2025
-                </Text>
-            </mesh> */}
-
+            />
 
         </group>
 

@@ -86,7 +86,7 @@ const Create = () => {
       newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
       // add existing canvas to new
-      const desiredWidth = 2500;
+      const desiredWidth = 2800;
       const existingCanvasScale = desiredWidth / existingCanvas.width;
       const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
       const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
@@ -712,12 +712,12 @@ const Create = () => {
 
         <div style={{ position: 'fixed', bottom: '25%', right: '4%' }}>
           <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
-          Play to win a free Geo-Energy portable charger!
-          </div>
-          <div className="w-60 text-sm font-inter pb-4">
-          Put your Geo to the test, play to enter today’s giveaway.
-          </div>
+            <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+              Play to win a free Geo-Energy portable charger!
+            </div>
+            <div className="w-60 text-sm font-inter pb-4">
+              Put your Geo to the test, play to enter today’s giveaway.
+            </div>
             <div className='flex justify-end'>
               <button onClick={() => navigate('/Hello-Sol/play')}>
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
@@ -779,9 +779,6 @@ const Create = () => {
               <div className="font-bold text-2xl mb-4">Share your creation!</div>
               <div className="text-sm mb-2">Share this image via</div>
               <div className="flex gap-2 mb-3">
-                {/* <WhatsappShareButton separator={'\n'} url={shareUrl} title="Thank you for visiting Hello-Sol. Here is your geo!" windowHeight={700} windowWidth={1000}>
-                  <WhatsappIcon size={40} round={true} />
-                </WhatsappShareButton> */}
                 <WhatsappShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
                   <WhatsappIcon size={40} round={true} />
                 </WhatsappShareButton>
@@ -795,7 +792,14 @@ const Create = () => {
                   <RedditIcon size={40} round={true} />
                 </RedditShareButton>
               </div>
+
+              <button className='mt-7 w-60 rounded-full outline outline-1 flex items-center p-3 justify-center' onClick={downloadImage}>
+                <img src={download_icon} alt='download-icon' className='w-5 object-contain' />
+                <div className="font-inter pl-3 mr-2 text-sm">Download image</div>
+              </button>
             </div>
+
+
 
           </div>
         </div>

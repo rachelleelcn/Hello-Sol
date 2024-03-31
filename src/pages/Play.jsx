@@ -12,6 +12,8 @@ import share_icon from "../assets/icons/share.png";
 import mute_icon from "../assets/icons/mute.png";
 import controls_icon from "../assets/icons/controls.png";
 import sound_icon from "../assets/icons/sound.png";
+import music_icon from "../assets/icons/music.png";
+import no_music_icon from "../assets/icons/no_music.png";
 import arrows_icon from "../assets/icons/arrows.png";
 import shift_icon from "../assets/icons/shift.png";
 import key_icon from "../assets/icons/key.png";
@@ -24,6 +26,16 @@ import car_icon from "../assets/icons/car.png";
 import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
+import town_image from "../assets/images/play_landing.png";
+import leaf6_bonus from "../assets/images/leaf6_bonus.png";
+import leaf6 from "../assets/images/leaf6.png";
+import leaf5 from "../assets/images/leaf5.png";
+import leaf4 from "../assets/images/leaf4.png";
+import leaf3 from "../assets/images/leaf3.png";
+import leaf2 from "../assets/images/leaf2.png";
+import leaf1 from "../assets/images/leaf1.png";
+import leaf0 from "../assets/images/leaf0.png";
+
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
@@ -209,9 +221,11 @@ const Play = () => {
       handleSendEmail(entries, dateFormat, bannerUrl, timeFormat);
 
       setShowEmailSent(true);
-    
+
     }
   };
+
+  // result text
 
   const generateImage = () => {
 
@@ -226,27 +240,95 @@ const Play = () => {
       newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
       // text / image
-      const image = new Image();
-      image.src = geo_icon;
-      image.onload = function () {
-        newContext.fillStyle = 'black';
+      const town = new Image();
+      town.src = town_image;
+      const geo = new Image();
+      geo.src = geo_icon;
+      const leaf = new Image();
+      if (entries === 6 && elapsedTime < 180) {
+        leaf.src = leaf6_bonus;
+      } else if (entries === 6 && elapsedTime >= 180) {
+        leaf.src = leaf6;
+      } else if (entries === 5) {
+        leaf.src = leaf5;
+      } else if (entries === 4) {
+        leaf.src = leaf4;
+      } else if (entries === 3) {
+        leaf.src = leaf3;
+      } else if (entries === 2) {
+        leaf.src = leaf2;
+      } else if (entries === 1) {
+        leaf.src = leaf1;
+      } else if (entries === 0) {
+        leaf.src = leaf0;
+      }
 
-        newContext.font = 'bold 64px Inter';
-        newContext.fillText('Congradulations!', 48, 120);
+
+      leaf.onload = function () {
+        const leafHeight = 100;
+        const leafAspectRatio = leaf.width / leaf.height;
+        const leafWidth = leafHeight * leafAspectRatio;
+
+        newContext.fillStyle = 'black';
+        newContext.font = 'bold 72px Inter';
+
+        if (entries === 6 && elapsedTime < 180) {
+          newContext.fillText('Congratulations!', 120, 180);
+          newContext.font = '36px Inter';
+          newContext.fillText('You have successfully earned all 6 entries', 120, 260);
+          newContext.fillText('and a bonus entry to our giveaway!', 120, 306);
+
+        } else if (entries === 6 && elapsedTime >= 180) {
+          newContext.fillText('Congratulations!', 120, 180);
+          newContext.font = '36px Inter';
+          newContext.fillText('You have successfully earned all 6 entries', 120, 260);
+          newContext.fillText('to our giveaway!', 120, 306);
+
+        } else if (entries > 0 && entries < 6) {
+          newContext.fillText('Congratulations!', 120, 180);
+          newContext.font = '36px Inter';
+          newContext.fillText(`You have successfully earned ${entries} entries`, 120, 260);
+          newContext.fillText('to our giveaway!', 120, 306);
+
+        } else if (entries === 0) {
+          newContext.fillText('Good try!', 120, 180);
+          newContext.font = '36px Inter';
+          newContext.fillText('Unfortunately, you have missed today’s entry', 120, 260);
+          newContext.fillText('to our giveaway.', 120, 306);
+
+        }
+
 
         newContext.font = '36px Inter';
-        newContext.fillText(`You have successfully earned ${entries} entries to our giveaway!`, 48, 196);
+        const dateText = `    ──    ${dateFormat}    ──    `;
+        const dateTextWidth = newContext.measureText(dateText).width;
+        const dateTextX = (newCanvas.width - dateTextWidth) / 2;
+        newContext.fillText(dateText, dateTextX, 430);
 
-        
+        newContext.font = 'bold 36px Inter';
+        const dayText = 'Day 1';
+        const dayTextWidth = newContext.measureText(dayText).width;
+        const dayTextX = dateTextX - dayTextWidth;
+        newContext.fillText(dayText, dayTextX, 430);
 
+        const timeText = timeFormat;
+        const timeTextX = dateTextX + dateTextWidth;
+        newContext.fillText(timeText, timeTextX, 430);
+
+        newContext.drawImage(leaf, (newCanvas.width - leafWidth) / 2, 470, leafWidth, leafHeight);
+
+        const townHeight = 940;
+        const townAspectRatio = town.width / town.height;
+        const townWidth = townHeight * townAspectRatio;
+        newContext.drawImage(town, 60, 680, townWidth, townHeight);
 
         newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
         newContext.font = 'bold 28px Inter';
         newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
-        const imageHeight = 26;
-        const imageAspectRatio = image.width / image.height;
-        const imageWidth = imageHeight * imageAspectRatio;
-        newContext.drawImage(image, newCanvas.width - 48 - imageWidth, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
+        const geoHeight = 26;
+        const geoAspectRatio = geo.width / geo.height;
+        const geoWidth = geoHeight * geoAspectRatio;
+        newContext.drawImage(geo, newCanvas.width - 48 - geoWidth, newCanvas.height - 48 - geoHeight + 8, geoWidth, geoHeight);
 
         resolve(newCanvas);
       };
@@ -300,7 +382,7 @@ const Play = () => {
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
-      <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '10%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
+      <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '8%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <div className="text-3xl font-bold pb-2">Welcome to Geo-Town</div>
         <div className="text-xl  font-inter pb-5">
           Play for a chance to win a Geo-Energy portable charger!
@@ -333,6 +415,11 @@ const Play = () => {
         <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => goSection(2)}>
           <div className="text-sm py-3 px-6 text-white-100">Start game</div>
         </button>
+
+      </div>
+
+      <div className="w-full" style={{ position: 'fixed', top: '20%', left: '48%', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
+        <img src={town_image} alt='go-icon' className='w-[72%] object-contain' />
       </div>
 
 
@@ -584,7 +671,7 @@ const Play = () => {
         </button>
       </div>
 
-      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: '3.5%', transform: 'translateY(-48%)', transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: currentSection === 4 ? '3.5%' : '1.5%', transform: 'translateY(-48%)', transition: 'right 0.4s, opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
