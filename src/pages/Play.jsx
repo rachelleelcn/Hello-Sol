@@ -1,7 +1,7 @@
-/* eslint-disable no-const-assign */
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useSound } from 'use-sound'
+import { CookiesProvider, useCookies } from 'react-cookie';
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
@@ -34,7 +34,6 @@ import loseSFX from '../assets/audio/Lose.mp3'
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
-import { CarSelection } from './CarCookie';
 
 const Play = () => {
   const navigate = useNavigate();
@@ -48,21 +47,23 @@ const Play = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
 
+  // Cookie variables (for car selection)
+  const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
+  const configuredCar = cookies['CAR_COOKIE'];
+  const [selectedButton, setSelectedButton] = useState(null)
+  const [selectedCar, setSelectedCar] = useState(null)  
+
   // Game variables
   const [startGame, setStartGame] = useState(false);
   const [entries, setEntries] = useState(0);
   const [enableControls, setEnableControls] = useState(true)
-
-  const currentDate = new Date();
-  //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-  //const [email, setEmail] = useState('');
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
 
   // Audio variables
   const [musicOff, setMusicOff] = useState(true);
   const [sfxOff, setSfxOff] = useState(true);
-  const [playWinSFX, {pause: pauseWinSFX} ] = useSound(winSFX)
-  const [playLoseSFX, {pause: pauseLoseSFX}] = useSound(loseSFX)
+  const [playWinSFX] = useSound(winSFX)
+  const [playLoseSFX] = useSound(loseSFX)
 
   // Current date variables
   const today = new Date()
@@ -131,7 +132,6 @@ const Play = () => {
     setStartGame(false);
     setEntries(0)
     resetTimer()
-    //TODO: reset all values
   };
 
   const leaveToCreate = () => {
@@ -165,9 +165,13 @@ const Play = () => {
     }
   };
 
+  function onChange(newName) {setCookie('name', newName)}
+
+  function SelectedCar(selectedCar) {setSelectedCar(selectedCar)}
+
   // Timer logic
   useEffect(() => {
-    if (isRunning === true) {
+    if (isRunning) {
       let timer = duration
       var mins, secs
 
@@ -200,6 +204,7 @@ const Play = () => {
       goSection(4)
       resetTimer()
       setElapsedTime(elapsedTime)
+      // setEnableControls(false)
     }
   }, [entries, elapsedTime])
 
@@ -224,13 +229,6 @@ const Play = () => {
 
   const handleSendEmail = (entryNum, formatDate, imageUrl, formatTime) => {
     sendCustomEmail(details, entryNum, formatDate, imageUrl, formatTime);
-
-    //setEntries(entries);
-    //console.log("Value of entries:", entryNum);
-    //console.log("image: ", imageUrl);
-    //console.log("date: ", formatDate);
-    //console.log('Time:', formatTime)
-
   };
 
   const handleClearEmail = () => {
@@ -304,11 +302,54 @@ const Play = () => {
     setShowImageShare(true);
   }
 
-  // for testing
-  // const divElement = document.getElementById('test');
-  // const width = divElement.offsetWidth;
-  // const height = divElement.offsetHeight;
-  // console.log("Width: " + width + ", Height: " + height);
+  const carThumbnail = () => {
+
+    return new Promise((resolve) => {
+      const existingCanvas = document.querySelector('canvas');
+      const newCanvas = document.createElement('canvas');
+      newCanvas.width = 1200;
+      newCanvas.height = 1400;
+      const newContext = newCanvas.getContext('2d');
+
+      // background color
+      newContext.fillStyle = '#F1F1F1';
+      newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
+
+      // add existing canvas to new
+      const desiredWidth = 2500;
+      const existingCanvasScale = desiredWidth / existingCanvas.width;
+      const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
+      const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
+
+      const existingCanvasX = (newCanvas.width - existingCanvasWidth) / 2;
+      const existingCanvasY = (newCanvas.height - existingCanvasHeight) / 2 - 32;
+      newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
+
+      // text / image
+      const image = new Image();
+      image.src = geo_icon;
+      image.onload = function () {
+        newContext.fillStyle = 'black';
+        newContext.font = 'bold 64px Inter';
+        newContext.fillText('The rarest Geo of all,', 48, 120);
+        newContext.font = '64px Inter';
+        newContext.fillText(`${name}’s Geo`, 48, 196);
+        newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
+        newContext.font = 'bold 28px Inter';
+        newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
+        newContext.font = '28px Inter';
+        const nameText = `by ${name}`;
+        const nameTextWidth = newContext.measureText(nameText).width;
+        newContext.fillText(nameText, newCanvas.width - nameTextWidth - 48, newCanvas.height - 48);
+        const imageHeight = 26;
+        const imageAspectRatio = image.width / image.height;
+        const imageWidth = imageHeight * imageAspectRatio;
+        newContext.drawImage(image, newCanvas.width - nameTextWidth - 48 - imageWidth - 12, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
+
+        resolve(newCanvas);
+      };
+    });
+  };
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
@@ -329,7 +370,8 @@ const Play = () => {
           <div style={{ width: '100%', height: '100%' }}>
             <Scene entries={entries} setEntries={setEntries} 
                   enableControls={enableControls} 
-                  soundOff={sfxOff}/>
+                  soundOff={sfxOff}
+                  selectedCar={selectedCar}/>
           </div>
         )}
 
@@ -431,19 +473,38 @@ const Play = () => {
           <div className=" text-sm font-bold pb-4">Select your car:</div>
 
           <div className="flex gap-6">
-            <CarSelection/>
+            <CookiesProvider defaultSetOptions={{path: '/'}}>
+              {/* Default (EV) */}
+              <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                      ${selectedButton === 'EV' ? 'outline outline-1' : ''}`}
+                      onClick={() => {
+                        // onChange('EV')
+                        setSelectedButton('EV');
+                        SelectedCar('EV');
+                      }}>
+                <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
+                <div className="text-xs">Geo-Sol</div>
+              </button>
 
-            {/* Default (EV) */}
-            {/* <button className="w-36 min-w-min h-36 rounded-3xl outline outline-1 bg-white-100 p-4 flex flex-col items-center text-center">
-              <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
-              <div className="text-xs">Geo-Sol</div>
-            </button> */}
+              {/* Configured car - only appear if there is one made */}
+              {configuredCar && (
+                <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                        ${selectedButton === 'configuredCar' ? 'outline outline-1' : ''}`}
+                        onClick={() => {
+                          onChange(configuredCar.name)
+                          setSelectedButton('configuredCar');
+                          SelectedCar('configuredCar');
+                        }} >
 
-            {/* Configured car */}
-            {/* <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
-              <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
-              <div className="text-xs whitespace-nowrap">Name</div>
-            </button> */}
+                  <div className="w-full h-full bg-grey-100 rounded-2xl mb-2">
+                    
+                  </div>
+                  <div className="text-xs whitespace-nowrap"> 
+                    <p> {configuredCar.name}&apos;s Geo </p>
+                  </div>
+                </button>
+              )}
+            </CookiesProvider>
 
             {/* Create car */}
             <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
@@ -534,13 +595,6 @@ const Play = () => {
                     <div>Reset car</div>
                   </div>
                 </div>
-                {/* <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
-                  <div className="text-[10px]">
-                    <div className="font-bold">Cursor movement</div>
-                    <div>Rotate camera</div>
-                  </div>
-                </div> */}
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
                     <img src={cursor_icon} alt='cursor_icon' className='h-full object-contain ' />
@@ -638,7 +692,6 @@ const Play = () => {
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
 
-
         {/* Result message */}
         {entries === 0 && (
           <div>
@@ -683,7 +736,6 @@ const Play = () => {
           <hr className="border-black-100 border-t-1 w-6" />
           <div className="text-base font-bold">
             {timeFormat}
-            {/*{Math.floor(elapsedTime / 60)} <span>:</span> {String(elapsedTime % 60).padStart(2, '0')}*/}
 
           </div>
         </div>

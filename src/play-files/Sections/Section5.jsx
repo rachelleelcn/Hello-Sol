@@ -138,7 +138,7 @@ const rotateR = [0, 4.71, 0]
                     hitboxPos={[-32, 0, -30]} />
 
        <TreeFinal  pos={[-46, -1, 66]} 
-              hitboxPos={[59, 0, 6]}/>
+              hitboxPos={[-33, 0, 6]}/>
 
         <StreetLightFinal pos={[-62, -1, 69]} rotate={rotateD}
                     hitboxPos={[-49, 0, 9]} />                    

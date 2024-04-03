@@ -124,7 +124,6 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[45, -1, 30]} rotate={rotateU}
                     hitboxPos={[58, 0, -30]} />
 
-
         <StreetLightFinal pos={[25, -1, 69]} rotate={rotateD} 
                     hitboxPos={[38, 0, 9]} />
 

@@ -259,13 +259,12 @@ const Create = () => {
     // Check for profanity in the censored value
     // const profanityDetected = matcher.hasMatch(censoredValue);
 
-
     console.log('Input Text:', inputText);
     console.log('Censored Value:', censoredValue);
     console.log('Profanity detected:', profanityDetected);
 
     return {
-    censoredValue,
+      censoredValue
     };
   };
 
@@ -389,14 +388,7 @@ const Create = () => {
               nameValidate(0);
             }
 
-            consolelog("name:", name);
-
             if (value.length === 20) {
-              nameValidate(2);
-            } else {
-              nameValidate(0);
-            }
-            if (censoredValue.length === 20) {
               nameValidate(2);
             } else {
               nameValidate(0);
@@ -698,19 +690,12 @@ const Create = () => {
               licenseValidate(0);
             }
 
-            consolelog("license:", license);
-
             if (value.length === 8) {
               licenseValidate(2);
             } else {
               licenseValidate(0);
             }
 
-            if (censoredValue.length === 8) {
-              licenseValidate(2);
-            } else {
-              licenseValidate(0);
-            }
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

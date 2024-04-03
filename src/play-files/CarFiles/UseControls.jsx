@@ -4,7 +4,7 @@ import { useSound } from 'use-sound'
 import carSFX1 from '../../assets/audio/car_sound.mp3'
 import carSFX2 from '../../assets/audio/car_sound_2.mp3'
 
-export const UseControls = (vehicleAPI, chassisAPI, enableControls, soundOff) => {
+export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
     let [controls, setControls] = useState({})
     const [playSFX1, { pause: pauseSFX1 }] = useSound(carSFX1, {volume: 0.5})
     const [playSFX2, { pause: pauseSFX2 }] = useSound(carSFX2, {volume: 0.5})
@@ -36,7 +36,7 @@ export const UseControls = (vehicleAPI, chassisAPI, enableControls, soundOff) =>
             return
         }
         
-    }, [])
+    }, [enableControls])
 
     // Apply movement
     useEffect(() => {
