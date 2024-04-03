@@ -1,7 +1,11 @@
+/* eslint-disable react/no-unknown-property */
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from "react"
 import { useSound } from 'use-sound'
 import { CookiesProvider, useCookies } from 'react-cookie';
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
@@ -25,6 +29,7 @@ import car_icon from "../assets/icons/car.png";
 import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
+import ev_image from '../assets/images/ev-whole.png'
 
 import bgm from '../assets/audio/bgm_default.mp3'
 import bgmFast from '../assets/audio/bgm_fast.mp3'
@@ -34,6 +39,7 @@ import loseSFX from '../assets/audio/Lose.mp3'
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
+import { CarThumbnail } from './CarCookie';
 
 const Play = () => {
   const navigate = useNavigate();
@@ -165,9 +171,13 @@ const Play = () => {
     }
   };
 
-  function onChange(newName) {setCookie('name', newName)}
+  function onChange(newName) {
+    setCookie('name', newName)
+  }
 
-  function SelectedCar(selectedCar) {setSelectedCar(selectedCar)}
+  function SelectedCar(selectedCar) {
+    setSelectedCar(selectedCar)
+  }
 
   // Timer logic
   useEffect(() => {
@@ -302,55 +312,6 @@ const Play = () => {
     setShowImageShare(true);
   }
 
-  const carThumbnail = () => {
-
-    return new Promise((resolve) => {
-      const existingCanvas = document.querySelector('canvas');
-      const newCanvas = document.createElement('canvas');
-      newCanvas.width = 1200;
-      newCanvas.height = 1400;
-      const newContext = newCanvas.getContext('2d');
-
-      // background color
-      newContext.fillStyle = '#F1F1F1';
-      newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
-
-      // add existing canvas to new
-      const desiredWidth = 2500;
-      const existingCanvasScale = desiredWidth / existingCanvas.width;
-      const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
-      const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
-
-      const existingCanvasX = (newCanvas.width - existingCanvasWidth) / 2;
-      const existingCanvasY = (newCanvas.height - existingCanvasHeight) / 2 - 32;
-      newContext.drawImage(existingCanvas, existingCanvasX, existingCanvasY, existingCanvas.width * existingCanvasScale, existingCanvas.height * existingCanvasScale);
-
-      // text / image
-      const image = new Image();
-      image.src = geo_icon;
-      image.onload = function () {
-        newContext.fillStyle = 'black';
-        newContext.font = 'bold 64px Inter';
-        newContext.fillText('The rarest Geo of all,', 48, 120);
-        newContext.font = '64px Inter';
-        newContext.fillText(`${name}’s Geo`, 48, 196);
-        newContext.fillRect(48, newCanvas.height - 108, newCanvas.width - 96, 1);
-        newContext.font = 'bold 28px Inter';
-        newContext.fillText('Hello-Sol', 48, newCanvas.height - 48);
-        newContext.font = '28px Inter';
-        const nameText = `by ${name}`;
-        const nameTextWidth = newContext.measureText(nameText).width;
-        newContext.fillText(nameText, newCanvas.width - nameTextWidth - 48, newCanvas.height - 48);
-        const imageHeight = 26;
-        const imageAspectRatio = image.width / image.height;
-        const imageWidth = imageHeight * imageAspectRatio;
-        newContext.drawImage(image, newCanvas.width - nameTextWidth - 48 - imageWidth - 12, newCanvas.height - 48 - imageHeight + 8, imageWidth, imageHeight);
-
-        resolve(newCanvas);
-      };
-    });
-  };
-
   return (
     <section className='w-full h-screen relative bg-white-200'>
       {/* Toggle music */}
@@ -475,20 +436,24 @@ const Play = () => {
           <div className="flex gap-6">
             <CookiesProvider defaultSetOptions={{path: '/'}}>
               {/* Default (EV) */}
-              <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+              <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
                       ${selectedButton === 'EV' ? 'outline outline-1' : ''}`}
                       onClick={() => {
                         // onChange('EV')
                         setSelectedButton('EV');
                         SelectedCar('EV');
                       }}>
-                <div className="w-full h-full bg-grey-100 rounded-2xl mb-2"></div>
-                <div className="text-xs">Geo-Sol</div>
+
+                <div className="w-36 h-full">
+                  <img src={ev_image} className='h-full object-contain'/>
+                </div>
+                
+                <div className="text-xs"><br/>Geo-Sol</div>
               </button>
 
               {/* Configured car - only appear if there is one made */}
               {configuredCar && (
-                <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
                         ${selectedButton === 'configuredCar' ? 'outline outline-1' : ''}`}
                         onClick={() => {
                           onChange(configuredCar.name)
@@ -496,18 +461,28 @@ const Play = () => {
                           SelectedCar('configuredCar');
                         }} >
 
-                  <div className="w-full h-full bg-grey-100 rounded-2xl mb-2">
-                    
+                  <div className="w-36 h-36 ">
+                    <Canvas>
+                      <Environment files={city} />
+                      <PerspectiveCamera makeDefault position={[0, -0.23, 2.4]}/>
+                      
+                      <group position={[0.4, 0, 0]} rotation-y={Math.PI} >
+                        <group rotation={[-0.04, -0.6, 0]} >
+                          <CarThumbnail/>
+                        </group>
+                      </group>
+
+                    </Canvas>
                   </div>
-                  <div className="text-xs whitespace-nowrap"> 
-                    <p> {configuredCar.name}&apos;s Geo </p>
-                  </div>
+
+                  <div className="text-xs whitespace-nowrap">{configuredCar.name}&apos;s Geo</div>
                 </button>
               )}
             </CookiesProvider>
 
             {/* Create car */}
-            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
+            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" 
+                    onClick={() => setShowCreateGeo(true)}>
               {/* <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
                 <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
               </div> */}

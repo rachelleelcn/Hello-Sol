@@ -20,7 +20,7 @@ import VintageTop from '../models/VintageTop';
 import VintageBottom from '../models/VintageBottom';
 import VintageWheels from '../models/VintageWheels';
 
-export function RenderCar({selectedCar}) {
+export const RenderCar = ({selectedCar}) => {
   const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
   const configuredCar = cookies['CAR_COOKIE'];
   
@@ -48,6 +48,26 @@ export function RenderCar({selectedCar}) {
         </>
       )
   }
+}
+
+// Thumbnail for car selection
+export const CarThumbnail = () => {
+  const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
+  const configuredCar = cookies['CAR_COOKIE'];
+  
+  function updateCar(newTop, newBody, newWheel, newTopColour, newBodyColour, newLicense) {
+    setCookie('CAR_COOKIE', {
+      ...configuredCar,
+      topModel: newTop,
+      bodyModel: newBody,
+      wheelModel: newWheel,
+      topColour: newTopColour,
+      bodyColour: newBodyColour,
+      license: newLicense
+    });
+  }
+
+  return getParts(configuredCar)
 }
 
 // Retrive car components from cookies

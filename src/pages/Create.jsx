@@ -136,8 +136,8 @@ const Create = () => {
 
         resolve(newCanvas);
       };
+      return image
     });
-
   };
 
   const downloadImage = async () => {
@@ -161,7 +161,6 @@ const Create = () => {
     const blobUrl = URL.createObjectURL(blob);
     setShareUrl(blobUrl);
     setShowImageShare(true);
-
   }
 
 
