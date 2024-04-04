@@ -185,7 +185,7 @@ body:has(.card[data-color="green"]:hover) {
   0% {
     opacity: 1;
     top: -300%;
-    left: -15%;
+    left: -18%;
   }
   80% {
     opacity: 1;
