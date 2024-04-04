@@ -138,8 +138,8 @@ const Create = () => {
 
         resolve(newCanvas);
       };
+      return image
     });
-
   };
 
   const downloadImage = async () => {
@@ -163,7 +163,6 @@ const Create = () => {
     const blobUrl = URL.createObjectURL(blob);
     setShareUrl(blobUrl);
     setShowImageShare(true);
-
   }
 
 
@@ -261,13 +260,12 @@ const Create = () => {
     // Check for profanity in the censored value
     // const profanityDetected = matcher.hasMatch(censoredValue);
 
-
     console.log('Input Text:', inputText);
     console.log('Censored Value:', censoredValue);
     console.log('Profanity detected:', profanityDetected);
 
     return {
-      censoredValue,
+      censoredValue
     };
   };
 
@@ -394,14 +392,7 @@ const Create = () => {
               nameValidate(0);
             }
 
-            consolelog("name:", name);
-
             if (value.length === 20) {
-              nameValidate(2);
-            } else {
-              nameValidate(0);
-            }
-            if (censoredValue.length === 20) {
               nameValidate(2);
             } else {
               nameValidate(0);
@@ -703,19 +694,12 @@ const Create = () => {
               licenseValidate(0);
             }
 
-            consolelog("license:", license);
-
             if (value.length === 8) {
               licenseValidate(2);
             } else {
               licenseValidate(0);
             }
 
-            if (censoredValue.length === 8) {
-              licenseValidate(2);
-            } else {
-              licenseValidate(0);
-            }
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -909,7 +893,7 @@ const Create = () => {
           <div className="text-sm mb-8">This website uses cookies to offer you a personalized experience. Accepting allows us to save your configured car. Declining will result in not being able to drive your configured car in the mini game.</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => { goNextSection(); setShowCookie(false); }}>Decline</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); }}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); handleCarConfirm()}}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Accept cookies</div>
             </button>
           </div>

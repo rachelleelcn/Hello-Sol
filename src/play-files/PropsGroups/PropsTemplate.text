@@ -23,7 +23,7 @@
 
 
 <StationFinal entries={entries} setEntries={setEntries}
-              pos={[0, 0, 0]} rotate={rotateD}/>
-<Hitbox position={[13, -1, -60]}/>
+              pos={[0, 0, 0]} rotate={rotateU}
+        hitboxPos={[13, -1, -60]}/>
 
             hitbox: +13, -60

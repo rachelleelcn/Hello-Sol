@@ -41,8 +41,6 @@ export const LFinal =
             <Hitbox position={hitboxPos1} size={[8, 12, 4]} />
             <Hitbox position={hitboxPos2} size={[4, 12, 8]} />
   
-            
-
         </group>
     )
 }
