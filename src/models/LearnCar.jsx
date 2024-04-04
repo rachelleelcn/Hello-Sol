@@ -92,11 +92,11 @@ const LearnCar = (props) => {
             .to(learnCar.current.rotation, { y: -4.65 }, 4.5)
             .to(learnCar.current.rotation, { z: 0 }, 4.5)
 
-            .to(learnCar.current.position, { x: 0.2 }, 5)
-            .to(learnCar.current.position, { y: -0.8 }, 5)
-            .to(learnCar.current.position, { z: 6 }, 5)
+            .to(learnCar.current.position, { x: 0.45 }, 5)
+            .to(learnCar.current.position, { y: -0.74 }, 5)
+            .to(learnCar.current.position, { z: 6.3 }, 5)
             .to(learnCar.current.rotation, { x: 0.02 }, 5)
-            .to(learnCar.current.rotation, { y: -0.5 }, 5)
+            .to(learnCar.current.rotation, { y: -0.6 }, 5)
             .to(learnCar.current.rotation, { z: 0 }, 5)
 
     }, [])
@@ -109,59 +109,68 @@ const LearnCar = (props) => {
         <group ref={learnCar} {...props} dispose={null}>
 
 
-            <group rotation={[0, Math.PI / 2, 0]}>
-                <mesh
-                    geometry={nodes.mesh_0.geometry}
-                    material={nodes.mesh_0.material}
-                    material-metalness={0}
-                />
-                <mesh
-                    geometry={nodes.mesh_1.geometry}
-                    material={nodes.mesh_1.material}
-                    material-metalness={0}
-                />
-                <mesh
-                    geometry={nodes.mesh_2.geometry}
-                    material={nodes.mesh_2.material}
-                    material-metalness={0}
-                />
-                <mesh
-                    geometry={nodes.mesh_3.geometry}
-                    material={nodes.mesh_3.material}
-                    material-metalness={0}
-                />
-            </group>
+            {/* <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+            /> */}
+            {/* <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+            /> */}
             <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
+            />
+            <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_4.geometry}
                 material={nodes.mesh_4.material}
-                material-metalness={0}
+                rotation={[0, Math.PI / 2, 0]}
             />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_5.geometry}
                 material={nodes.mesh_5.material}
-                material-metalness={0}
             />
-
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_6.geometry}
                 material={nodes.mesh_6.material}
-                rotation={[0, Math.PI / 2, 0]}
-                material-metalness={0}
             />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_7.geometry}
                 material={nodes.mesh_7.material}
-                material-metalness={0}
             />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_8.geometry}
                 material={nodes.mesh_8.material}
-                material-metalness={0}
             />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_9.geometry}
                 material={nodes.mesh_9.material}
+            />
+            <mesh
                 material-metalness={0}
+                geometry={nodes.mesh_10.geometry}
+                material={nodes.mesh_10.material}
+                position={[0, 0, -1.497]}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_11.geometry}
+                material={nodes.mesh_11.material}
+                position={[0, 0, -1.497]}
             />
 
         </group>

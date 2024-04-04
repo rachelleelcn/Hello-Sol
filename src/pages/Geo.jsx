@@ -3,6 +3,7 @@ import AllCars from '../models/AllCars';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, OrthographicCamera, PresentationControls, ScrollControls, Stage } from '@react-three/drei';
 import city from "../assets/lighting/potsdamer_platz_1k.hdr";
+import Charger from '../models/Charger';
 
 const Geo = () => {
   const navigate = useNavigate();
@@ -25,23 +26,17 @@ const Geo = () => {
         </button>
       </div>
 
-      {/* <Canvas style={{ background: '#F1F1F1' }} >
+ 
 
-          <PresentationControls speed={1.5} polar={[-0.1, Math.PI / 4]}>
-            <Stage environment={null} intensity={1} shadows="false" >
-              <Environment files={city} />
-              <AllCars scale={[10, 10, 10]} />
-            </Stage>
-          </PresentationControls>
+      {/* <Canvas orthographic camera={{ zoom: 20, position: [0, 0, 200] }} className='p-10'>
 
-        </Canvas> */}
+        <PresentationControls speed={1.5} polar={[-0.1, Math.PI / 4]} rotation={[0, -Math.PI / 2, 0]}>
 
-      {/* <Canvas orthographic camera={{ zoom: 20, position: [0, 0, 200] }} >
+        <Stage environment={null} intensity={1} shadows={false}>
 
-        <PresentationControls speed={1.5} polar={[-0.1, Math.PI / 4]}>
-          <Stage environment={null} intensity={1} shadows="false" >
             <Environment files={city} />
             <AllCars />
+            <Charger />
           </Stage>
         </PresentationControls>
 

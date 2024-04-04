@@ -18,42 +18,23 @@ const EVTop = (props) => {
     return (
         <group ref={evTop} {...props} dispose={null}>
 
-            {/* <mesh
+            <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            >
+                >
                 <meshStandardMaterial color={props.colour} />
             </mesh>
             <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
                 material-metalness={0}
-            /> */}
-
-            <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                material-metalness={0}
-            />
-            <mesh
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
+            />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
-                material-metalness={0}
             />
-
 
         </group>
     );

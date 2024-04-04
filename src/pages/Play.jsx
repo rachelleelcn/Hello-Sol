@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
-import go_outline_icon from "../assets/icons/go_outline.png";
 import go_diagonal from "../assets/icons/go_diagonal.png";
 import add_icon from "../assets/icons/add.png";
 import close_icon from "../assets/icons/close.png";
@@ -35,6 +34,8 @@ import leaf3 from "../assets/images/leaf3.png";
 import leaf2 from "../assets/images/leaf2.png";
 import leaf1 from "../assets/images/leaf1.png";
 import leaf0 from "../assets/images/leaf0.png";
+import charger1 from "../assets/images/charger1.png";
+import play_arrow from "../assets/graphics/play_arrow.png";
 
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
@@ -380,7 +381,7 @@ const Play = () => {
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
       {/* P1 - Landing */}
-      <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '8%', transform: 'translateY(-50%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
+      <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '8%', transform: 'translateY(-49%)', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <div className="text-3xl font-bold pb-2">Welcome to Geo-Town</div>
         <div className="text-xl  font-inter pb-5">
           Play for a chance to win a Geo-Energy portable charger!
@@ -402,8 +403,9 @@ const Play = () => {
           </button>
         </div>
 
-        <div className="flex items-center gap-16 mb-10">
-          <div className="w-40 h-40 rounded-full bg-grey-300"></div>
+        <div className="flex items-center gap-8 mb-12 mt-12">
+          <img src={charger1} alt='' className='h-32 object-contain -rotate-12' />
+          <img src={play_arrow} alt='' className='h-1.5 object-contain -ml-16' />
           <div className="text-sm w-60">
             <div className="font-bold pb-1">Geo-Energy portable charger</div>
             <div>A smarter, safer, and more portable solution to charge your EV.</div>
@@ -496,7 +498,7 @@ const Play = () => {
               {/* <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
                 <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
               </div> */}
-              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain mb-2.5' />
+              <img src={add_icon} alt='go-icon' className='w-10 object-contain mb-2' />
               <div className="text-xs font-bold w-24 pb-1">Create new dream Geo</div>
             </button>
           </div>

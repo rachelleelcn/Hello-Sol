@@ -18,8 +18,8 @@ const SportBottom = ({ showLicense, license, ...props }) => {
 
     return (
         <group ref={sportBottom} {...props} dispose={null}>
-              
-            <mesh
+
+            {/* <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
                 material-metalness={0}
@@ -69,6 +69,29 @@ const SportBottom = ({ showLicense, license, ...props }) => {
                 material={nodes.mesh_3.material}
                 position={[0, 0.026, 0.001]}
                 material-metalness={0}
+            /> */}
+
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+                >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
             />
 
         </group>

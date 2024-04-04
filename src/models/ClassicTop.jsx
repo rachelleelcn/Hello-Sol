@@ -18,28 +18,15 @@ const ClassicTop = (props) => {
     return (
         <group ref={classicTop} {...props} dispose={null}>
 
-            {/* <mesh
+            <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                material-metalness={0}
             />
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh> */}
-
-            <mesh
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
             >
                 <meshStandardMaterial color={props.colour} />
             </mesh>

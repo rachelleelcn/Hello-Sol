@@ -19,7 +19,7 @@ const RoundBottom = ({ showLicense, license, ...props }) => {
     return (
         <group ref={roundBottom} {...props} dispose={null}>
 
-            <mesh
+            {/* <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
                 material-metalness={0}
@@ -67,6 +67,29 @@ const RoundBottom = ({ showLicense, license, ...props }) => {
                 geometry={nodes.mesh_3.geometry}
                 material={nodes.mesh_3.material}
                 material-metalness={0}
+            /> */}
+
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+            >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
             />
 
 

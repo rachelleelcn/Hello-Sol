@@ -19,7 +19,7 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
     return (
         <group ref={boxyBottom} {...props} dispose={null}>
 
-            <group position={[-0.001, -0.004, 0.004]}>
+            {/* <group position={[-0.001, -0.004, 0.004]}>
                 <mesh
                     geometry={nodes.mesh_0.geometry}
                     material={nodes.mesh_0.material}
@@ -70,6 +70,31 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
                     material={nodes.mesh_3.material}
                     position={[0, 0, -0.006]}
                     material-metalness={0}
+                />
+            </group> */}
+
+            <group position={[-0.001, -0.004, 0.004]}>
+                <mesh
+                    material-metalness={0}
+                    geometry={nodes.mesh_0.geometry}
+                    material={nodes.mesh_0.material}
+                />
+                <mesh
+                    material-metalness={0}
+                    geometry={nodes.mesh_1.geometry}
+                    material={nodes.mesh_1.material}
+                />
+                <mesh
+                    material-metalness={0}
+                    geometry={nodes.mesh_2.geometry}
+                    material={nodes.mesh_2.material}
+                    >
+                    <meshStandardMaterial color={props.colour} />
+                </mesh>
+                <mesh
+                    material-metalness={0}
+                    geometry={nodes.mesh_3.geometry}
+                    material={nodes.mesh_3.material}
                 />
             </group>
 

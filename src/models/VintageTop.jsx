@@ -18,20 +18,18 @@ const VintageTop = (props) => {
     return (
         <group ref={vintageTop} {...props} dispose={null}>
 
-            <group position={[0, 0.002, 0]}>
-                <mesh
-                    geometry={nodes.mesh_0.geometry}
-                    material={nodes.mesh_0.material}
-                    material-metalness={0}
-                >
-                    <meshStandardMaterial color={props.colour} />
-                </mesh>
-                <mesh
-                    geometry={nodes.mesh_1.geometry}
-                    material={nodes.mesh_1.material}
-                    material-metalness={0}
-                />
-            </group>
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+            >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
 
 
         </group>

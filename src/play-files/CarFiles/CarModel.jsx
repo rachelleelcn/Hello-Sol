@@ -9,7 +9,6 @@ import { WheelDebug } from './WheelDebug'
 import { UseControls } from './UseControls'
 
 
-import EVCar from '../../models/EVWhole'
 import EVTop from '../../models/EVTop'
 import EVBottom from '../../models/EVBottom'
 import EVWheels from '../../models/EVWheels'

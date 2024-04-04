@@ -8,7 +8,7 @@ import close_icon from "../assets/icons/close.png";
 import Loader from "../components/Loader"
 import { Canvas } from "@react-three/fiber"
 import Configurator from '../components/Configurator';
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon,} from 'react-share';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon, } from 'react-share';
 import { TextCensor, RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 import leave_icon from "../assets/icons/leave.png";
@@ -32,9 +32,11 @@ import sportTires_img from "../assets/images/sport-tires.jpg";
 import vintageTires_img from "../assets/images/vintage-tires.jpg";
 import pose_icon from "../assets/icons/pose_indicator.png";
 import rotate_icon from "../assets/icons/rotate_indicator.png";
-import go_outline_icon from "../assets/icons/go_outline.png";
 import go_icon from "../assets/icons/go.png";
 import cookie_icon from "../assets/icons/cookie.png";
+import create_landing1 from "../assets/images/create_landing1.png";
+import charger1 from "../assets/images/charger1.png";
+
 
 import { useCookies } from 'react-cookie';
 
@@ -75,7 +77,7 @@ const Create = () => {
       wheelModel,
       license,
     }
-    setCookie('CAR_COOKIE', configuredCar, {path: '/'});
+    setCookie('CAR_COOKIE', configuredCar, { path: '/' });
   };
 
   useEffect(() => {
@@ -243,7 +245,7 @@ const Create = () => {
     });
 
     return matcher.hasMatch(inputText);
-    
+
   };
 
   const censorText = (inputText, profanityDetected) => {
@@ -265,7 +267,7 @@ const Create = () => {
     console.log('Profanity detected:', profanityDetected);
 
     return {
-    censoredValue,
+      censoredValue,
     };
   };
 
@@ -352,12 +354,15 @@ const Create = () => {
 
       {/* P1 */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
-        <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '23%', left: '50%', transform: `translate(-50%,-50%)` }}>
+        <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '22%', left: '50%', transform: `translate(-50%,-50%)` }}>
           <div className="text-3xl font-bold pb-4">Welcome to Geo-Creator</div>
           <div className="text-sm">Mix and match with our signature models to create and share your very own custom Geo-Sol.</div>
         </div>
+
+        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '11%', left: '50%', transform: `translate(-50%,-50%)` }}/>
+        
         <button className='rounded-full bg-black-200 items-center justify-center flex'
-          style={{ position: 'fixed', bottom: '14%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
+          style={{ position: 'fixed', bottom: '12%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Create your dream Geo</div>
         </button>
       </div>
@@ -380,11 +385,11 @@ const Create = () => {
             const profanityDetected = checkForProfanity(value);
             setProfanityDetected(profanityDetected);
 
-            if (profanityDetected){
-              const {censoredValue} = censorText(value, profanityDetected);
+            if (profanityDetected) {
+              const { censoredValue } = censorText(value, profanityDetected);
               setName(censoredValue);
               nameValidate(3);
-            }else{
+            } else {
               setName(value);
               nameValidate(0);
             }
@@ -408,9 +413,9 @@ const Create = () => {
               e.preventDefault();
               if (name === '') {
                 nameValidate(1);
-              }else if (profanityDetected) {
+              } else if (profanityDetected) {
                 nameValidate(3);
-              }else { setCurrentSection(3) }
+              } else { setCurrentSection(3) }
             }
           }}
         />
@@ -418,16 +423,16 @@ const Create = () => {
           {nameValidateMsg}
         </div>
         <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
-        if (name === '') {
-          nameValidate(1);
-        } 
-        // else if (profanityDetected) {
-        //   nameValidate(3); 
-        // }
-        else{
-          setCurrentSection(3);
-        }
-      }}>
+          if (name === '') {
+            nameValidate(1);
+          }
+          // else if (profanityDetected) {
+          //   nameValidate(3); 
+          // }
+          else {
+            setCurrentSection(3);
+          }
+        }}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
         </button>
       </div>
@@ -689,11 +694,11 @@ const Create = () => {
             setProfanityDetected(profanityDetected);
             licenseShow();
 
-            if (profanityDetected){
-              const {censoredValue} = censorText(value, profanityDetected);
+            if (profanityDetected) {
+              const { censoredValue } = censorText(value, profanityDetected);
               setLicense(censoredValue);
               licenseValidate(3);
-            }else{
+            } else {
               setLicense(value);
               licenseValidate(0);
             }
@@ -731,16 +736,16 @@ const Create = () => {
         <div className="flex">
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={goPrevSection}>Back</button>
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex' onClick={() => {
-          if (license === '') {
-            licenseValidate(1);
-          } 
-          // else if (profanityDetected) {
-          //   licenseValidate(3); 
-          // } 
-          else {
-            setCurrentSection(5);
-          }
-        }}>
+            if (license === '') {
+              licenseValidate(1);
+            }
+            // else if (profanityDetected) {
+            //   licenseValidate(3); 
+            // } 
+            else {
+              setCurrentSection(5);
+            }
+          }}>
 
             <div className="text-sm font-inter py-3 px-6 text-white-100">Next</div>
           </button>
@@ -820,7 +825,7 @@ const Create = () => {
 
               <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowCookie(true)}>
 
-              {/* <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}> */}
+                {/* <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}> */}
 
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
@@ -856,12 +861,12 @@ const Create = () => {
           </div>
         </div>
 
-        <div style={{ position: 'fixed', bottom: '25%', right: '4%' }}>
+        <div style={{ position: 'fixed', bottom: '35%', right: '4%' }}>
           <div className="outline outline-1 rounded-3xl p-8">
             <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
               Play to win a free Geo-Energy portable charger!
             </div>
-            <div className="w-60 text-sm font-inter pb-4">
+            <div className="w-60 text-sm font-inter pb-1.5">
               Put your Geo to the test, play to enter today’s giveaway.
             </div>
             <div className='flex justify-end'>
@@ -869,6 +874,8 @@ const Create = () => {
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
             </div>
+
+            <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[140px] left-[18px]' />
           </div>
         </div>
       </div>

@@ -17,31 +17,30 @@ const EVWheels = (props) => {
   return (
     <group ref={evWheels} {...props} dispose={null}>
 
+      <mesh
+        material-metalness={0}
+        geometry={nodes.mesh_0.geometry}
+        material={nodes.mesh_0.material}
+      />
+      <mesh
+        material-metalness={0}
+        geometry={nodes.mesh_1.geometry}
+        material={nodes.mesh_1.material}
+      />
+      <mesh
+        material-metalness={0}
+        geometry={nodes.mesh_2.geometry}
+        material={nodes.mesh_2.material}
+        position={[0, 0, -1.497]}
+      />
+      <mesh
+        material-metalness={0}
+        geometry={nodes.mesh_3.geometry}
+        material={nodes.mesh_3.material}
+        position={[0, 0, -1.497]}
+      />
 
-      <group rotation={[0, Math.PI / 2, 0]}>
-        <mesh
-          geometry={nodes.mesh_0.geometry}
-          material={nodes.mesh_0.material}
-          material-metalness={0}
-        />
-        <mesh
-          geometry={nodes.mesh_1.geometry}
-          material={nodes.mesh_1.material}
-          material-metalness={0}
-        />
-        <mesh
-          geometry={nodes.mesh_2.geometry}
-          material={nodes.mesh_2.material}
-          material-metalness={0}
-        />
-        <mesh
-          geometry={nodes.mesh_3.geometry}
-          material={nodes.mesh_3.material}
-          material-metalness={0}
-        />
-      </group>
 
-      
     </group>
   );
 }

@@ -17,6 +17,7 @@ import leave_icon from "../assets/icons/leave.png";
 import scroll_icon from "../assets/icons/scroll_indicator.png";
 import sol_icon from "../assets/icons/sol.png";
 import dot_bar from "../assets/graphics/dot_bar.png";
+import dot_bar2 from "../assets/graphics/dot_bar2.png";
 import vroom from "../assets/graphics/vroom.png";
 import shh from "../assets/graphics/shh.png";
 import red_arrow from "../assets/graphics/red_arrow.png";
@@ -25,8 +26,9 @@ import green_arrow from "../assets/graphics/green_arrow.png";
 import small from "../assets/graphics/small.png";
 import fast from "../assets/graphics/fast.png";
 import green from "../assets/graphics/green.png";
-import greenB from "../assets/graphics/greenB.png";
 import tech_arrow from "../assets/graphics/tech_arrow.png";
+import charger1 from "../assets/images/charger1.png";
+
 
 import LearnCar from "../models/LearnCar"
 
@@ -167,6 +169,8 @@ const Learn = () => {
   }, [scrollValue]);
 
 
+
+
   return (
 
     <section className='w-full h-screen relative bg-white-200'>
@@ -232,8 +236,11 @@ const Learn = () => {
           Small but mighty! The Geo-Sol can maneuver through tight spaces, helping you save time and space on parking.
         </div>
       </div>
-      <div style={{ position: 'fixed', bottom: showSmall ? '32.5%' : '30%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
+      {/* <div style={{ position: 'fixed', bottom: showSmall ? '32.5%' : '30%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
         <img src={small} alt='' className='h-52 object-contain' />
+      </div> */}
+      <div className="h-full" style={{ position: 'fixed', bottom: showSmall ? '-73.7%' : '-50%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
+        <img src={small} alt='' className='h-[30%] object-contain' />
       </div>
 
       {/* P6 */}
@@ -266,13 +273,10 @@ const Learn = () => {
           Powered by solar energy and ethically sourced high voltage lithium-ion batteries, the Geo-Sol is a zero-emission vehicle.
         </div>
       </div>
-      {/* <div className="w-full" style={{ position: 'fixed', top: showGreenA? '-125%' : '-20%', left: showGreenA? '-10%' : '-60%', transform: `scale(${show8 ? '1' : '1.25'})`,  opacity: show8 ? 1 : 0, transition: 'top 0.4s, left 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
-        <img src={green} alt='' style={{ maxWidth: '160%' }} />
-      </div> */}
 
       <div className={`w-full ${showGreenA ? 'fade-in-scale' : ''}`} style={{
         position: 'fixed',
-        top: '-335%',
+        top: '-320%',
         left: '-15%',
         opacity: showGreenA ? 1 : 0,
         transition: 'opacity 0.2s',
@@ -289,45 +293,6 @@ const Learn = () => {
         <img src={green} alt='' style={{ maxWidth: '255%' }} />
       </div>
 
-      {/* scale */}
-      {/* <div className="w-full" style={{
-          position: 'fixed',
-          top: '-335%', 
-          left: '-15%',
-          transform: `scale(${show8 ? '1' : '1.25'})`,
-          opacity: show8 ? 1 : 0,
-          transition: 'transform 0.4s, opacity 0.2s',
-          pointerEvents: show8 ? 'auto' : 'none'
-        }}>
-          <img src={greenB} alt='' style={{ maxWidth: '255%' }} />
-      </div> */}
-      {/* <div className={`w-full ${show8 ? 'fade-in-scale' : ''}`} style={{
-          position: 'fixed',
-          top: '-30%',
-          left: '-150%',
-          transform: `scale(${show8 ? '1' : '1.25'})`,
-          opacity: show8 ? 1 : 0,
-          transition: 'transform 0.4s, opacity 0.2s',
-          pointerEvents: show8 ? 'auto' : 'none',
-        }}>
-          <img src={greenB} alt='' style={{ maxWidth: '255%' }} />
-      </div> */}
-
-      {/* translate */}
-      {/* <div className="w-full" style={{
-          position: 'fixed',
-          top: showGreenA ? '-20%' : '-125%',
-          left: showGreenA ? '-60%' : '-10%',
-          transform: `scale(${show8 ? '1' : '1.25'})`,
-          opacity: show8 ? 1 : 0,
-          transition: 'top 0.2s, left 0.2s, transform 0.4s, opacity 0.2s',
-          pointerEvents: show8 ? 'auto' : 'none'
-        }}>
-          <img src={green} alt='' style={{ maxWidth: '160%' }} />
-      </div> */}
-
-
-      {/* transition: show7 ? 'left 0.4s 0.04s, opacity 0.2s' : 'opacity 0.2s', */}
 
 
       {/* P9 */}
@@ -394,7 +359,7 @@ const Learn = () => {
 
           <ScrollControls pages={15} damping={0.1}>
             <LearnCar
-              position={[0.3, -0.8, 6]}
+              position={[0.45, -0.74, 6.3]}
               rotation={[0.02, -0.6, 0]}
               onScroll={handleScroll}
             />
@@ -405,7 +370,7 @@ const Learn = () => {
       {/* HTML in front of Canvas */}
       {/* P1 */}
 
-      <div style={{ position: 'fixed', top: '15%', left: '8%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '14%', left: '8%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
         <div className="text-[56px] font-inter mb-2">
           <div className='flex items-center -mb-4'>
             <div>Hello.</div>
@@ -421,7 +386,7 @@ const Learn = () => {
 
       <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
         <div className="outline outline-1 rounded-3xl p-8 mb-4">
-          <div className="w-60 text-lg font-bold font-inter leading-6 pb-4">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-1">
             Play daily for a chance to win a free Geo-Energy Portable Charger!
           </div>
           <div className='flex justify-end'>
@@ -429,6 +394,7 @@ const Learn = () => {
               <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
             </button>
           </div>
+          <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[115px] left-[18px]' />
         </div>
 
         <div className="bg-grey-300 rounded-3xl p-8">
@@ -451,13 +417,13 @@ const Learn = () => {
       {/* P11 */}
       <div style={{ position: 'fixed', top: '13%', left: '8%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
         <div className='flex items-end'>
-          <div className="text-6xl font-bold font-inter mb-2 z-20">
+          <div className="text-[56px] font-bold font-inter mb-0 z-20">
             It’s Geo-Sol.
           </div>
-          <img src={sol_icon} alt='sol-icon' className='h-28 object-contain -ml-14 -mb-4 z-10' />
+          <img src={sol_icon} alt='sol-icon' className='h-24 object-contain -ml-14 -mb-2 z-10' />
         </div>
 
-        <div className="text-2xl font-inter pb-6 pt-2 text-grey-100">
+        <div className="text-2xl font-inter pb-6 pt-2 text-grey-100 -mt-2">
           Where geometric meets electric.
         </div>
         <div className='w-72 rounded-full outline outline-1 p-2 flex items-center justify-between'>
@@ -468,9 +434,21 @@ const Learn = () => {
         </div>
       </div>
 
-      <div style={{ position: 'fixed', bottom: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
-        <div className="bg-grey-300 rounded-3xl p-8 mb-4">
-          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+      {/* <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+        <div className="outline outline-1 rounded-3xl p-8 mb-4">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-3">
+            Play daily for a chance to win a free Geo-Energy Portable Charger!
+          </div>
+          <div className='flex justify-end'>
+            <button onClick={() => navigate('/Hello-Sol/play')}>
+              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
+            </button>
+          </div>
+          <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[94px] left-[26px]' />
+        </div>
+
+        <div className="bg-grey-300 rounded-3xl p-8">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-1.5">
             It’s your dream car!
           </div>
           <div className="w-60 text-sm font-inter pb-4">
@@ -483,34 +461,28 @@ const Learn = () => {
             </button>
           </div>
         </div>
-        <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-60 text-lg font-bold font-inter leading-6 pb-6">
-            Play for a chance to win a free Geo-Energy charger!
+
+      </div> */}
+
+      <div style={{ position: 'fixed', bottom: '16%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+
+        <div className="bg-grey-300 rounded-3xl p-8">
+          <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+            It’s your dream car!
           </div>
-          <div className='flex justify-end'>
-            <button onClick={() => navigate('/Hello-Sol/play')}>
-              <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
+          <div className="w-60 text-sm font-inter pb-4">
+            Create your own custom Geo-Sol with our Geo-Creator.
+          </div>
+          <div className='flex justify-between'>
+            <img src={dot_bar2} alt='' className='w-44 object-contain' />
+            <button onClick={() => navigate('/Hello-Sol/create')}>
+              <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
             </button>
           </div>
         </div>
-      </div>
-      {/* <div style={{ position: 'fixed', top: '28%', right: '6%', opacity: show11 ? 1 : 0, pointerEvents: show11 ? 'auto' : 'none' }}>
-        <img src={star} alt='' className='h-12 object-contain' />
-      </div> */}
 
-      {/* <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
-        <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-64 text-xl font-bold font-inter leading-6 pb-2">
-            It’s your dream car!
-          </div>
-          <div className="w-64 text-sm font-inter pb-4">
-            Create your own custom Geo-Sol with our Geo-Creator.
-          </div>
-          <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
-            <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start building</div>
-          </button>
-        </div>
-      </div> */}
+      </div>
+
 
       {/* PopUp - Leave Geo*/}
       <div style={{ transition: 'opacity 0.2s', opacity: showLeaveGeo === true ? 1 : 0, pointerEvents: showLeaveGeo === true ? 'auto' : 'none' }}>

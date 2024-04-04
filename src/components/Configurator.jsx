@@ -68,6 +68,8 @@ const Configurator = ({ topColour, topModel, bodyColour, bodyModel, wheelModel, 
                 <VintageBottom scale={scaleValue} colour={colours[bodyColour]} visible={bodyModel === 5} showLicense={showLicense} license ={license}/>
                 <VintageWheels scale={scaleValue} visible={wheelModel === 5} />
 
+                
+
 
             </Stage>
 

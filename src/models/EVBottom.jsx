@@ -12,7 +12,7 @@ import evBottomScene from "../assets/3d/EV-BOTTOM.glb";
 import interFont from '../assets/fonts/Inter.ttf';
 
 
-const EVBottom = ({showLicense,license, ...props}) => {
+const EVBottom = ({ showLicense, license, ...props }) => {
 
     const evBottom = useRef();
     const { nodes, materials } = useGLTF(evBottomScene);
@@ -23,7 +23,7 @@ const EVBottom = ({showLicense,license, ...props}) => {
         <group ref={evBottom} {...props} dispose={null}>
 
 
-            <mesh
+            {/* <mesh
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
                 rotation={[0, Math.PI / 2, 0]}
@@ -77,6 +77,35 @@ const EVBottom = ({showLicense,license, ...props}) => {
                 </Text>
                 </>
                 )}
+            </mesh> */}
+
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
+                rotation={[0, Math.PI / 2, 0]}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_4.geometry}
+                material={nodes.mesh_4.material}
+            >
+                <meshStandardMaterial color={props.colour} />
             </mesh>
 
         </group>
