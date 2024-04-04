@@ -220,10 +220,10 @@ const Learn = () => {
         </div>
       </div>
 
-      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-16%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-10%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain' />
       </div>
-      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-16%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-10%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain transform scale-x-[-1]' />
       </div>
 
@@ -265,7 +265,7 @@ const Learn = () => {
       </div>
 
       {/* P8 */}
-      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '33%' : '31%', right: '30%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
+      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '40%' : '38%', right: '35%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Greener than ever.
         </div>
@@ -276,7 +276,7 @@ const Learn = () => {
 
       <div className={`w-full ${showGreenA ? 'fade-in-scale' : ''}`} style={{
         position: 'fixed',
-        top: '-320%',
+        top: '-300%',
         left: '-15%',
         opacity: showGreenA ? 1 : 0,
         transition: 'opacity 0.2s',
@@ -308,7 +308,7 @@ const Learn = () => {
       {/* P10 */}
 
 
-      <div className="w-60" style={{ position: 'fixed', top: '28%', left: show10 ? '67%' : '69%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-60" style={{ position: 'fixed', top: '30%', left: show10 ? '65%' : '67%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={dash_icon} alt='dash-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Digital dashboard
@@ -322,7 +322,7 @@ const Learn = () => {
       </div>
 
 
-      <div className="w-48" style={{ position: 'fixed', top: '54%', left: show10 ? '10%' : '8%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '56%', left: show10 ? '12%' : '10%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={rear_icon} alt='rear-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Rear View Camera
@@ -336,7 +336,7 @@ const Learn = () => {
       </div>
 
 
-      <div className="w-48" style={{ position: 'fixed', top: '54%', left: show10 ? '77%' : '79%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '56%', left: show10 ? '75%' : '73%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={mic_icon} alt='mic-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Smart OS

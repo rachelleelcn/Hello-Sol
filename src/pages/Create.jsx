@@ -106,7 +106,7 @@ const Create = () => {
       newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
       // add existing canvas to new
-      const desiredWidth = 2800;
+      const desiredWidth = 2400;
       const existingCanvasScale = desiredWidth / existingCanvas.width;
       const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
       const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
