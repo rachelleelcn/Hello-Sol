@@ -389,7 +389,7 @@ const Create = () => {
               nameValidate(0);
             }
 
-            consolelog("name:", name);
+            //console.log("name:", name);
 
             if (value.length === 20) {
               nameValidate(2);
@@ -698,8 +698,6 @@ const Create = () => {
               licenseValidate(0);
             }
 
-            consolelog("license:", license);
-
             if (value.length === 8) {
               licenseValidate(2);
             } else {
@@ -819,8 +817,6 @@ const Create = () => {
               <button className="underline underline-offset-4 text-sm  px-4 mr-6" onClick={goPrevSection}>Back</button>
 
               <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => setShowCookie(true)}>
-
-              {/* <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => {goNextSection(), handleCarConfirm()}}> */}
 
                 <div className="text-sm font-inter py-3 px-6 text-white-100">Confirm</div>
               </button>
