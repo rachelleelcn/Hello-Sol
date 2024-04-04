@@ -18,26 +18,25 @@ const ClassicBottom = ({ showLicense, license, ...props }) => {
 
     return (
         <group ref={classicBottom} {...props} dispose={null}>
-
-            {/* <mesh
+            <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                material-metalness={0}
             >
                 <meshStandardMaterial color={props.colour} />
             </mesh>
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                material-metalness={0}
             />
-         
+            {/*front license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
-                material-metalness={0}
             >
-                   {showLicense && (
+                {showLicense && (
                 <>
                 <Text
                     position={[0,0.396,2.012]}
@@ -49,16 +48,17 @@ const ClassicBottom = ({ showLicense, license, ...props }) => {
                 </Text>
                 </>
                 )}
-                </mesh>
+            </mesh>
+            {/*back license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_3.geometry}
                 material={nodes.mesh_3.material}
-                material-metalness={0}
-            >
+                >
                 {showLicense && (
                 <>
                 <Text
-                    position={[0,0.34,-1.275]}
+                    position={[0,0.45,-1.274]}
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
@@ -68,35 +68,7 @@ const ClassicBottom = ({ showLicense, license, ...props }) => {
                 </Text>
                 </>
                 )}
-                </mesh>
-            <mesh
-                geometry={nodes.mesh_4.geometry}
-                material={nodes.mesh_4.material}
-                material-metalness={0}
-            /> */}
-
-            <mesh
-                material-metalness={0}
-                geometry={nodes.mesh_0.geometry}
-                material={nodes.mesh_0.material}
-            >
-                <meshStandardMaterial color={props.colour} />
             </mesh>
-            <mesh
-                material-metalness={0}
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-            />
-            <mesh
-                material-metalness={0}
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-            />
-            <mesh
-                material-metalness={0}
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-            />
             <mesh
                 material-metalness={0}
                 geometry={nodes.mesh_4.geometry}

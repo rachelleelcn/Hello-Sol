@@ -19,13 +19,14 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
     return (
         <group ref={boxyBottom} {...props} dispose={null}>
 
-            {/* <group position={[-0.001, -0.004, 0.004]}>
+            <group position={[-0.001, -0.004, 0.004]}>
+                {/*front license*/}
                 <mesh
+                    material-metalness={0}
                     geometry={nodes.mesh_0.geometry}
                     material={nodes.mesh_0.material}
-                    material-metalness={0}
-                >
-                     {showLicense && (
+                    >
+                {showLicense && (
                 <>
                 <Text
                     position={[0,0.41,2.012]}
@@ -38,12 +39,13 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
                 </>
                 )}
                 </mesh>
+                {/*back license*/}
                 <mesh
+                    material-metalness={0}
                     geometry={nodes.mesh_1.geometry}
                     material={nodes.mesh_1.material}
-                    material-metalness={0}
                 >
-                    {showLicense && (
+                {showLicense && (
                 <>
                 <Text
                     position={[0,0.62,-1.2248]}
@@ -56,34 +58,8 @@ const BoxyBottom = ({ showLicense, license, ...props }) => {
                 </Text>
                 </>
                 )}
-                    </mesh>
-                <mesh
-                    geometry={nodes.mesh_2.geometry}
-                    material={nodes.mesh_2.material}
-                    position={[0, 0, -0.006]}
-                    material-metalness={0}
-                >
-                    <meshStandardMaterial color={props.colour} />
                 </mesh>
-                <mesh
-                    geometry={nodes.mesh_3.geometry}
-                    material={nodes.mesh_3.material}
-                    position={[0, 0, -0.006]}
-                    material-metalness={0}
-                />
-            </group> */}
-
-            <group position={[-0.001, -0.004, 0.004]}>
-                <mesh
-                    material-metalness={0}
-                    geometry={nodes.mesh_0.geometry}
-                    material={nodes.mesh_0.material}
-                />
-                <mesh
-                    material-metalness={0}
-                    geometry={nodes.mesh_1.geometry}
-                    material={nodes.mesh_1.material}
-                />
+           
                 <mesh
                     material-metalness={0}
                     geometry={nodes.mesh_2.geometry}
