@@ -31,7 +31,7 @@ import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
 
-import ev_image from '../assets/images/ev-whole.png'
+import ev_image from '../assets/images/ev-whole.jpg'
 import bgm from '../assets/audio/bgm_default.mp3'
 import bgmFast from '../assets/audio/bgm_fast.mp3'
 import winSFX from '../assets/audio/Win.mp3'
@@ -70,8 +70,8 @@ const Play = () => {
   // Cookie variables (for car selection)
   const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
   const configuredCar = cookies['CAR_COOKIE'];
-  const [selectedButton, setSelectedButton] = useState(null)
-  const [selectedCar, setSelectedCar] = useState(null)  
+  const [selectedButton, setSelectedButton] = useState('EV')
+  const [selectedCar, setSelectedCar] = useState(null)
 
   // Game variables
   const [startGame, setStartGame] = useState(false);
@@ -162,7 +162,7 @@ const Play = () => {
   const musicToggle = () => {
     if (musicOff) {
       setMusicOff(false);
-    } 
+    }
     else {
       setMusicOff(true);
     }
@@ -411,18 +411,18 @@ const Play = () => {
         {/* sped up at 30 seconds */}
         {!musicOff && elapsedTime >= 210 && (
           <audio src={bgmFast} autoPlay loop />
-        )}    
+        )}
       </group>
 
       {/* Render scene */}
-        {currentSection > 2 && currentSection < 5 && (
-          <div style={{ width: '100%', height: '100%' }}>
-            <Scene entries={entries} setEntries={setEntries} 
-                  enableControls={enableControls} 
-                  soundOff={sfxOff}
-                  selectedCar={selectedCar}/>
-          </div>
-        )}
+      {currentSection > 2 && currentSection < 5 && (
+        <div style={{ width: '100%', height: '100%' }}>
+          <Scene entries={entries} setEntries={setEntries}
+            enableControls={enableControls}
+            soundOff={sfxOff}
+            selectedCar={selectedCar} />
+        </div>
+      )}
 
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
@@ -528,58 +528,53 @@ const Play = () => {
           <div className=" text-sm font-bold pb-4">Select your car:</div>
 
           <div className="flex gap-6">
-            <CookiesProvider defaultSetOptions={{path: '/'}}>
+            <CookiesProvider defaultSetOptions={{ path: '/' }}>
               {/* Default (EV) */}
-              <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+              <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
                       ${selectedButton === 'EV' ? 'outline outline-1' : ''}`}
-                      onClick={() => {
-                        // onChange('EV')
-                        setSelectedButton('EV');
-                        SelectedCar('EV');
-                      }}>
-
-                <div className="w-36 h-full">
-                  <img src={ev_image} className='h-full object-contain'/>
+                onClick={() => {
+                  // onChange('EV')
+                  setSelectedButton('EV');
+                  SelectedCar('EV');
+                }}>
+                <div className="w-20 h-full bg-white-100 pt-2 -ml-1">
+                  <img src={ev_image} className='h-full object-contain' />
                 </div>
-                
-                <div className="text-xs"><br/>Geo-Sol</div>
+                <div className="text-xs"><br />Geo-Sol</div>
               </button>
+
 
               {/* Configured car - only appear if there is one made */}
               {configuredCar && (
-                <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                <button className={`w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
                         ${selectedButton === 'configuredCar' ? 'outline outline-1' : ''}`}
-                        onClick={() => {
-                          onChange(configuredCar.name)
-                          setSelectedButton('configuredCar');
-                          SelectedCar('configuredCar');
-                        }} >
+                  onClick={() => {
+                    onChange(configuredCar.name)
+                    setSelectedButton('configuredCar');
+                    SelectedCar('configuredCar');
+                  }} >
 
-                  <div className="w-36 h-36 ">
+                  <div className="w-24 h-[88px] bg-white-100 -ml-1.5">
                     <Canvas>
                       <Environment files={city} />
-                      <PerspectiveCamera makeDefault position={[0, -0.23, 2.4]}/>
-                      
-                      <group position={[0.4, 0, 0]} rotation-y={Math.PI} >
-                        <group rotation={[-0.04, -0.6, 0]} >
-                          <CarThumbnail/>
+                      <PerspectiveCamera makeDefault position={[0, -0.23, 2.4]} />
+                      <group position={[0.4, -0.05, 0]} rotation-y={Math.PI} >
+                        <group rotation={[-0.04, -0.7, 0]} >
+                          <CarThumbnail />
                         </group>
                       </group>
-
                     </Canvas>
                   </div>
 
-                  <div className="text-xs whitespace-nowrap">{configuredCar.name}&apos;s Geo</div>
+                  <div className="text-xs whitespace-nowrap pt-2">{configuredCar.name}&apos;s Geo</div>
                 </button>
               )}
             </CookiesProvider>
 
+
             {/* Create car */}
-            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" 
-                    onClick={() => setShowCreateGeo(true)}>
-              {/* <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
-                <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
-              </div> */}
+            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center"
+              onClick={() => setShowCreateGeo(true)}>
               <img src={add_icon} alt='go-icon' className='w-10 object-contain mb-2' />
               <div className="text-xs font-bold w-24 pb-1">Create new dream Geo</div>
             </button>
@@ -617,9 +612,9 @@ const Play = () => {
           {/* Music button */}
           <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={musicToggle}>
             {musicOff ? (
-              <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
+              <img src={no_music_icon} alt='mute-icon' className='w-5 object-contain' />
             ) : (
-              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
+              <img src={music_icon} alt='sound-icon' className='w-5 object-contain' />
             )}
           </button>
 
@@ -732,7 +727,7 @@ const Play = () => {
         </div>
 
         {/* for testing - TO BE DELETED */}
-        <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
+        {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4); }}>
             <div className="text-sm font-inter text-black-100">All Entries</div>
           </button>
@@ -742,7 +737,7 @@ const Play = () => {
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(0); goSection(4); }}>
             <div className="text-sm font-inter text-black-100">No Entries</div>
           </button>
-        </div>
+        </div> */}
 
       </div>
 
@@ -750,11 +745,11 @@ const Play = () => {
       {/* P4 - Results*/}
 
       {/* for testing - TO BE DELETED */}
-      <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); setEntries(0) }}>
           <div className="text-sm font-inter text-black-100">Back</div>
         </button>
-      </div>
+      </div> */}
 
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: currentSection === 4 ? '3.5%' : '1.5%', transform: 'translateY(-48%)', transition: 'right 0.4s, opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
@@ -938,7 +933,8 @@ const Play = () => {
                   e.preventDefault();
                   setShowEmailSent(false);
                   handleClearEmail();
-                }}}>
+                }
+              }}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>
