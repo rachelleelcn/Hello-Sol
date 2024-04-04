@@ -392,6 +392,8 @@ const Create = () => {
               nameValidate(0);
             }
 
+            consolelog("name:", name);
+
             if (value.length === 20) {
               nameValidate(2);
             } else {
@@ -693,6 +695,7 @@ const Create = () => {
               setLicense(value);
               licenseValidate(0);
             }
+            consolelog("license:", license);
 
             if (value.length === 8) {
               licenseValidate(2);
