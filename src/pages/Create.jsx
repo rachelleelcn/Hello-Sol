@@ -359,7 +359,7 @@ const Create = () => {
           <div className="text-sm">Mix and match with our signature models to create and share your very own custom Geo-Sol.</div>
         </div>
 
-        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '11%', left: '50%', transform: `translate(-50%,-50%)` }}/>
+        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '9%', left: '50%', transform: `translate(-50%,-50%)` }}/>
         
         <button className='rounded-full bg-black-200 items-center justify-center flex'
           style={{ position: 'fixed', bottom: '12%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
