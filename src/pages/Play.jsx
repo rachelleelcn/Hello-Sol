@@ -1,6 +1,11 @@
-/* eslint-disable no-const-assign */
+/* eslint-disable react/no-unknown-property */
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import { useSound } from 'use-sound'
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 
 import geo_icon from "../assets/icons/geo.png";
 import go_icon from "../assets/icons/go.png";
@@ -25,6 +30,13 @@ import car_icon from "../assets/icons/car.png";
 import leaf_icon from "../assets/icons/leaf.png";
 import leafGrey_icon from "../assets/icons/leaf_grey.png";
 import download_icon from "../assets/icons/download.png";
+
+import ev_image from '../assets/images/ev-whole.png'
+import bgm from '../assets/audio/bgm_default.mp3'
+import bgmFast from '../assets/audio/bgm_fast.mp3'
+import winSFX from '../assets/audio/Win.mp3'
+import loseSFX from '../assets/audio/Lose.mp3'
+
 import town_image from "../assets/images/play_landing.png";
 import leaf6_bonus from "../assets/images/leaf6_bonus.png";
 import leaf6 from "../assets/images/leaf6.png";
@@ -37,9 +49,11 @@ import leaf0 from "../assets/images/leaf0.png";
 import charger1 from "../assets/images/charger1.png";
 import play_arrow from "../assets/graphics/play_arrow.png";
 
+
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, XIcon, WhatsappIcon, PinterestShareButton, PinterestIcon, RedditShareButton, RedditIcon } from 'react-share';
 import { sendCustomEmail } from "./email";
 import { Scene } from './Sandbox';
+import { CarThumbnail } from './CarCookie';
 
 const Play = () => {
   const navigate = useNavigate();
@@ -53,16 +67,23 @@ const Play = () => {
   const [imageUrl, setImageUrl] = useState(null);
   const [shareUrl, setShareUrl] = useState(null);
 
-  const [entries, setEntries] = useState(0);
+  // Cookie variables (for car selection)
+  const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
+  const configuredCar = cookies['CAR_COOKIE'];
+  const [selectedButton, setSelectedButton] = useState(null)
+  const [selectedCar, setSelectedCar] = useState(null)  
 
-  //const currentDate = new Date();
-  //const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-  //const [email, setEmail] = useState('');
+  // Game variables
+  const [startGame, setStartGame] = useState(false);
+  const [entries, setEntries] = useState(0);
+  const [enableControls, setEnableControls] = useState(true)
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
 
-
-  const [startGame, setStartGame] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
+  // Audio variables
+  const [musicOff, setMusicOff] = useState(true);
+  const [sfxOff, setSfxOff] = useState(true);
+  const [playWinSFX] = useSound(winSFX)
+  const [playLoseSFX] = useSound(loseSFX)
 
   // Current date variables
   const today = new Date()
@@ -101,14 +122,27 @@ const Play = () => {
     setCurrentSection(index);
 
     if (index < 3) {
-      setStartGame(false);
+      setStartGame(false)
+      setEnableControls(false)
     }
     else if (index === 4) {
       resetTimer()
       setElapsedTime(elapsedTime)
+      setEnableControls(false)
+      setMusicOff(true)
+
+      if (!sfxOff) {
+        if (entries === 0) {
+          playLoseSFX()
+        }
+        else {
+          playWinSFX()
+        }
+      }
     }
     else {
       setStartGame(true);
+      setEnableControls(true)
     }
   };
 
@@ -118,7 +152,6 @@ const Play = () => {
     setStartGame(false);
     setEntries(0)
     resetTimer()
-    //TODO: reset all values
   };
 
   const leaveToCreate = () => {
@@ -126,13 +159,24 @@ const Play = () => {
     navigate('/Hello-Sol/create');
   };
 
-  const soundToggle = () => {
-    if (soundOn) {
-      setSoundOn(false);
-    } else {
-      setSoundOn(true);
+  const musicToggle = () => {
+    if (musicOff) {
+      setMusicOff(false);
+    } 
+    else {
+      setMusicOff(true);
     }
   };
+
+  const sfxToggle = () => {
+    if (sfxOff) {
+      setSfxOff(false)
+    }
+    else {
+      setSfxOff(true)
+    }
+  }
+
   const controlsToggle = () => {
     if (showControls) {
       setShowControls(false);
@@ -141,9 +185,17 @@ const Play = () => {
     }
   };
 
+  function onChange(newName) {
+    setCookie('name', newName)
+  }
+
+  function SelectedCar(selectedCar) {
+    setSelectedCar(selectedCar)
+  }
+
   // Timer logic
   useEffect(() => {
-    if (isRunning === true) {
+    if (isRunning) {
       let timer = duration
       var mins, secs
 
@@ -170,22 +222,22 @@ const Play = () => {
     }
   }, [isRunning, duration])
 
+  // show results when entries is 6
   useEffect(() => {
     if (entries === 6) {
       goSection(4)
       resetTimer()
       setElapsedTime(elapsedTime)
+      // setEnableControls(false)
     }
   }, [entries, elapsedTime])
 
   const [details, setDetails] = useState({
     to_email: "",
     numEntry: entries,
-
     date: dateFormat,
     image: bannerUrl,
     timeTaken: timeFormat
-
   });
 
   const handleDetailsChange = (event) => {
@@ -199,28 +251,17 @@ const Play = () => {
     });
   };
 
-
   const handleSendEmail = (entryNum, formatDate, imageUrl, formatTime) => {
     sendCustomEmail(details, entryNum, formatDate, imageUrl, formatTime);
-
-    //setEntries(entries);
-    //console.log("Value of entries:", entryNum);
-    //console.log("image: ", imageUrl);
-    //console.log("date: ", formatDate);
-    //console.log('Time:', formatTime)
-
   };
 
   const handleClearEmail = () => {
     setDetails({ ...details, to_email: "" });
-
   };
 
   const handleButtonEmailClick = () => {
     if (details.to_email.trim() !== '') {
-
       handleSendEmail(entries, dateFormat, bannerUrl, timeFormat);
-
       setShowEmailSent(true);
 
     }
@@ -334,7 +375,6 @@ const Play = () => {
         resolve(newCanvas);
       };
     });
-
   };
 
   const downloadImage = async () => {
@@ -358,25 +398,31 @@ const Play = () => {
     const blobUrl = URL.createObjectURL(blob);
     setShareUrl(blobUrl);
     setShowImageShare(true);
-
   }
-
-
-  // for testing
-  // const divElement = document.getElementById('test');
-  // const width = divElement.offsetWidth;
-  // const height = divElement.offsetHeight;
-  // console.log("Width: " + width + ", Height: " + height);
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
+      {/* Toggle music */}
+      <group>
+        {!musicOff && elapsedTime < 210 && (
+          <audio src={bgm} autoPlay loop />
+        )}
 
-      {/* Sandbox Game - Appears after instructions, disappears on results */}
-      {currentSection > 2 && currentSection < 5 && (
-        <div style={{ width: '100%', height: '100%' }}>
-          <Scene entries={entries} setEntries={setEntries} />
-        </div>
-      )}
+        {/* sped up at 30 seconds */}
+        {!musicOff && elapsedTime >= 210 && (
+          <audio src={bgmFast} autoPlay loop />
+        )}    
+      </group>
+
+      {/* Render scene */}
+        {currentSection > 2 && currentSection < 5 && (
+          <div style={{ width: '100%', height: '100%' }}>
+            <Scene entries={entries} setEntries={setEntries} 
+                  enableControls={enableControls} 
+                  soundOff={sfxOff}
+                  selectedCar={selectedCar}/>
+          </div>
+        )}
 
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
 
@@ -465,13 +511,6 @@ const Play = () => {
                 <div>Reset car</div>
               </div>
             </div>
-            {/* <div className="flex items-center">
-              <div className="w-12 h-12 rounded-full bg-grey-100 mr-3"></div>
-              <div className="text-xs">
-                <div className="font-bold">Cursor movement</div>
-                <div>Rotate camera</div>
-              </div>
-            </div> */}
             <div className="flex items-center">
               <div className="inline-flex items-center mr-5">
                 <img src={cursor_icon} alt='cursor_icon' className='h-12 object-contain ' />
@@ -483,18 +522,61 @@ const Play = () => {
             </div>
           </div>
 
+
+          {/* Car selection */}
           <hr className="border-black-100 border-t-1 my-10" />
-          <div className=" text-sm font-bold pb-4">Pick your car:</div>
+          <div className=" text-sm font-bold pb-4">Select your car:</div>
+
           <div className="flex gap-6">
-            <button className="w-36 min-w-min h-36 rounded-3xl outline outline-1 bg-white-100 p-4 flex flex-col items-center text-center">
-              <div className="w-full h-full bg-grey-300 rounded-2xl mb-2"></div>
-              <div className="text-xs">Geo-Sol</div>
-            </button>
-            <button className="w-36 min-w-min h-36 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center">
-              <div className="w-full h-full bg-grey-300 rounded-2xl mb-2"></div>
-              <div className="text-xs whitespace-nowrap">Jane Doe’s</div>
-            </button>
-            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" onClick={() => setShowCreateGeo(true)}>
+            <CookiesProvider defaultSetOptions={{path: '/'}}>
+              {/* Default (EV) */}
+              <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                      ${selectedButton === 'EV' ? 'outline outline-1' : ''}`}
+                      onClick={() => {
+                        // onChange('EV')
+                        setSelectedButton('EV');
+                        SelectedCar('EV');
+                      }}>
+
+                <div className="w-36 h-full">
+                  <img src={ev_image} className='h-full object-contain'/>
+                </div>
+                
+                <div className="text-xs"><br/>Geo-Sol</div>
+              </button>
+
+              {/* Configured car - only appear if there is one made */}
+              {configuredCar && (
+                <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
+                        ${selectedButton === 'configuredCar' ? 'outline outline-1' : ''}`}
+                        onClick={() => {
+                          onChange(configuredCar.name)
+                          setSelectedButton('configuredCar');
+                          SelectedCar('configuredCar');
+                        }} >
+
+                  <div className="w-36 h-36 ">
+                    <Canvas>
+                      <Environment files={city} />
+                      <PerspectiveCamera makeDefault position={[0, -0.23, 2.4]}/>
+                      
+                      <group position={[0.4, 0, 0]} rotation-y={Math.PI} >
+                        <group rotation={[-0.04, -0.6, 0]} >
+                          <CarThumbnail/>
+                        </group>
+                      </group>
+
+                    </Canvas>
+                  </div>
+
+                  <div className="text-xs whitespace-nowrap">{configuredCar.name}&apos;s Geo</div>
+                </button>
+              )}
+            </CookiesProvider>
+
+            {/* Create car */}
+            <button className="w-36 h-36 rounded-full bg-white-100 p-4 flex flex-col items-center text-center justify-center" 
+                    onClick={() => setShowCreateGeo(true)}>
               {/* <div className="w-10 h-10 rounded-full mb-2 outline outline-1 flex items-center justify-center">
                 <img src={add_icon} alt='add-icon' className='w-4 object-contain' />
               </div> */}
@@ -531,8 +613,19 @@ const Play = () => {
             <img src={controls_icon} alt='controls-icon' className='w-3.5 object-contain' />
             <div className="text-sm font-inter text-black-100 pr-1.5">Controls</div>
           </button>
-          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={soundToggle}>
-            {soundOn ? (
+
+          {/* Music button */}
+          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={musicToggle}>
+            {musicOff ? (
+              <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
+            ) : (
+              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
+            )}
+          </button>
+
+          {/* SFX button */}
+          <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={sfxToggle}>
+            {sfxOff ? (
               <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
             ) : (
               <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
@@ -558,7 +651,7 @@ const Play = () => {
                     <img src={shift_icon} alt='shift_icon' className='h-full object-contain ' />
                   </div>
                   <div className="text-[10px]">
-                    <div className="font-bold">Shift</div>
+                    <div className="font-bold">Hold Shift</div>
                     <div>Brake car</div>
                   </div>
                 </div>
@@ -571,13 +664,6 @@ const Play = () => {
                     <div>Reset car</div>
                   </div>
                 </div>
-                {/* <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-grey-100 mr-2"></div>
-                  <div className="text-[10px]">
-                    <div className="font-bold">Cursor movement</div>
-                    <div>Rotate camera</div>
-                  </div>
-                </div> */}
                 <div className="flex items-center">
                   <div className="w-8 h-8 rounded-full mr-2 flex justify-center items-center">
                     <img src={cursor_icon} alt='cursor_icon' className='h-full object-contain ' />
@@ -597,7 +683,6 @@ const Play = () => {
         <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-pink-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
           {minutes} <span>:</span> {seconds}
         </div>
-        {/* <GameTimer/>       */}
 
         {/* Collected station indicators */}
         <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
@@ -676,7 +761,6 @@ const Play = () => {
           <img src={share_icon} alt='share-icon' className='w-4 object-contain' />
         </button>
 
-
         {/* Result message */}
         {entries === 0 && (
           <div>
@@ -686,15 +770,21 @@ const Play = () => {
         )}
 
         {/* bonus entry given if all stations found under 3 minutes */}
-        {entries === 6 && elapsedTime <= 180 && (
+        {entries === 6 && elapsedTime < 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned all 6 entries and a bonus entry to our giveaway!</div>
           </div>
         )}
 
-        {/* {entries > 0 && entries <= 6 && elapsedTime > 180 && ( */}
-        {entries > 0 && entries < 6 && (
+        {entries === 6 && elapsedTime >= 180 && (
+          <div>
+            <div className="font-bold text-3xl pb-2">Congratulations!</div>
+            <div className="text-base pb-6">You have successfully earned all 6 entries to our giveaway!</div>
+          </div>
+        )}
+
+        {entries > 0 && entries < 6 && elapsedTime >= 180 && (
           <div>
             <div className="font-bold text-3xl pb-2">Congratulations!</div>
             <div className="text-base pb-6">You have successfully earned {entries} entries to our giveaway!</div>
@@ -715,7 +805,6 @@ const Play = () => {
           <hr className="border-black-100 border-t-1 w-6" />
           <div className="text-base font-bold">
             {timeFormat}
-            {/*{Math.floor(elapsedTime / 60)} <span>:</span> {String(elapsedTime % 60).padStart(2, '0')}*/}
 
           </div>
         </div>
@@ -849,10 +938,7 @@ const Play = () => {
                   e.preventDefault();
                   setShowEmailSent(false);
                   handleClearEmail();
-                }
-              }
-
-              }>
+                }}}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Thank you!</div>
             </button>
           </div>

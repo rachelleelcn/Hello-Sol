@@ -6,7 +6,7 @@ import { usePlane } from '@react-three/cannon'
 
 export const Ground = () => {
     const [ref] = usePlane(() => ({
-      position: [0,-1,0],
+      position: [0,-1, 0],
       rotation: [-Math.PI / 2, 0, 0],
       material: 'ground',
       friction: 10,
@@ -14,7 +14,7 @@ export const Ground = () => {
     }), useRef())
 
     return (
-      <mesh scale={150} ref={ref} receiveShadow>
+      <mesh scale={155} ref={ref}>
         <planeGeometry/>
         <meshBasicMaterial color={'#FFFFFF'} side={THREE.DoubleSide}/>
       </mesh>

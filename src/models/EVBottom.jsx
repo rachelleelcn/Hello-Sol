@@ -16,8 +16,6 @@ const EVBottom = ({ showLicense, license, ...props }) => {
 
     const evBottom = useRef();
     const { nodes, materials } = useGLTF(evBottomScene);
-    console.log('license showing? ', showLicense);
-    console.log('license :', license);
 
     return (
         <group ref={evBottom} {...props} dispose={null}>

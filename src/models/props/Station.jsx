@@ -20,7 +20,7 @@ const Station = ({props, colour}) => {
 
     return (
         <group ref={ref} position={[0, -1, 0]} {...props} dispose={null}>
-            <group scale={[0.3, 0.6, 0.3]}>
+            <group scale={[0.4, 0.7, 0.4]}>
                 <mesh
                     geometry={nodes.Cube009.geometry}
                     // material={materials.chargingStation}
@@ -35,9 +35,10 @@ const Station = ({props, colour}) => {
                 >
                     <meshStandardMaterial color={colour}/>
                     <Decal
-                        position={[0.8, 0.95, 0]}
+                        position={[0.8, 0.9, 0]}
                         rotation={[0, 1, 0]}
                         scale={[1, 0.7, 1]}
+                        renderOrder={10000}
                         >
                         <meshStandardMaterial 
                             map={texture}
