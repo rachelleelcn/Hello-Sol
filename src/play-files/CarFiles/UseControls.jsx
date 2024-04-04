@@ -7,7 +7,7 @@ import carSFX2 from '../../assets/audio/car_sound_2.mp3'
 export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
     let [controls, setControls] = useState({})
     const [playSFX1, { pause: pauseSFX1 }] = useSound(carSFX1, {volume: 0.5})
-    const [playSFX2, { pause: pauseSFX2 }] = useSound(carSFX2, {volume: 0.5})
+    // const [playSFX2, { pause: pauseSFX2 }] = useSound(carSFX2, {volume: 0.5})
 
     useEffect(() => {
         if (enableControls) {
@@ -66,9 +66,8 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
 
             if (!soundOff) {
                 pauseSFX1()
-                playSFX2()
+                // playSFX2()
             }
-            
         }
 
         // Left
@@ -100,7 +99,7 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
 
             if (!soundOff) {
                 pauseSFX1()
-                pauseSFX2()
+                // pauseSFX2()
                 // playSFX2()
             }
             
@@ -121,7 +120,7 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
 
             if (!soundOff) {
                 pauseSFX1()
-                pauseSFX2()
+                // pauseSFX2()
                 // playSFX2()
             }
         }

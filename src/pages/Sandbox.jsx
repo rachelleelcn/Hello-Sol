@@ -11,6 +11,7 @@ import { World } from '../play-files/World.jsx'
 import { CarModel } from '../play-files/CarFiles/CarModel.jsx'
 
 export function Scene({ entries, setEntries, enableControls, soundOff, selectedCar }) {
+
   return (
     <Suspense fallback={null}>
         <Canvas shadows>

@@ -66,10 +66,10 @@ const Play = () => {
   const bannerUrl = "https://drive.google.com/uc?export=download&id=1XjjptZBsovPQDdHkR-Ok_6vg7VtVDCNm";
 
   // Audio variables
-  const [musicOff, setMusicOff] = useState(true);
+  const [musicOff, setMusicOff] = useState(false);
   const [sfxOff, setSfxOff] = useState(true);
-  const [playWinSFX] = useSound(winSFX)
-  const [playLoseSFX] = useSound(loseSFX)
+  const [playWinSFX] = useSound(winSFX, {volume: 0.8})
+  const [playLoseSFX] = useSound(loseSFX, {volume: 0.8})
 
   // Current date variables
   const today = new Date()
@@ -111,6 +111,7 @@ const Play = () => {
       setStartGame(false)
       setEnableControls(false)
     }
+    // Results page
     else if (index === 4) {
       resetTimer()
       setElapsedTime(elapsedTime)
@@ -118,12 +119,8 @@ const Play = () => {
       setMusicOff(true)
 
       if (!sfxOff) {
-        if (entries === 0) {
-          playLoseSFX()
-        }
-        else {
-          playWinSFX()
-        }
+        if (entries < 1) { playLoseSFX() }
+        else { playWinSFX() }
       }
     }
     else {
@@ -171,13 +168,9 @@ const Play = () => {
     }
   };
 
-  function onChange(newName) {
-    setCookie('name', newName)
-  }
+  function onChange(newName) { setCookie('name', newName) }
 
-  function SelectedCar(selectedCar) {
-    setSelectedCar(selectedCar)
-  }
+  function SelectedCar(selectedCar) { setSelectedCar(selectedCar) }
 
   // Timer logic
   useEffect(() => {
@@ -191,7 +184,14 @@ const Play = () => {
           goSection(4)
           resetTimer()
           setElapsedTime(duration)
+
+          // Play sfx when timer ends if sounds are on
+          if (!sfxOff) {
+            if (entries < 1) { playLoseSFX() } 
+            else { playWinSFX() }
+          }
         }
+        
         else {
           mins = parseInt(timer / 60, 10)
           secs = parseInt(timer % 60, 10)
@@ -214,7 +214,6 @@ const Play = () => {
       goSection(4)
       resetTimer()
       setElapsedTime(elapsedTime)
-      // setEnableControls(false)
     }
   }, [entries, elapsedTime])
 
@@ -314,21 +313,22 @@ const Play = () => {
 
   return (
     <section className='w-full h-screen relative bg-white-200'>
-      {/* Toggle music */}
-      <group>
-        {!musicOff && elapsedTime < 210 && (
-          <audio src={bgm} autoPlay loop />
-        )}
-
-        {/* sped up at 30 seconds */}
-        {!musicOff && elapsedTime >= 210 && (
-          <audio src={bgmFast} autoPlay loop />
-        )}    
-      </group>
-
+      
       {/* Render scene */}
         {currentSection > 2 && currentSection < 5 && (
           <div style={{ width: '100%', height: '100%' }}>
+            {/* Toggle music */}
+            <group>
+              {!musicOff && elapsedTime < 210 && (
+                <audio src={bgm} autoPlay loop />
+              )}
+
+              {/* sped up at 30 seconds */}
+              {!musicOff && elapsedTime >= 210 && (
+                <audio src={bgmFast} autoPlay loop />
+              )}    
+            </group>
+
             <Scene entries={entries} setEntries={setEntries} 
                   enableControls={enableControls} 
                   soundOff={sfxOff}
@@ -439,13 +439,13 @@ const Play = () => {
               <button className={`w-37 min-w-min h-37 rounded-3xl bg-white-100 p-4 flex flex-col items-center text-center 
                       ${selectedButton === 'EV' ? 'outline outline-1' : ''}`}
                       onClick={() => {
-                        // onChange('EV')
                         setSelectedButton('EV');
                         SelectedCar('EV');
                       }}>
 
+                {/* Thumbnail */}
                 <div className="w-36 h-full">
-                  <img src={ev_image} className='h-full object-contain'/>
+                  <img src={ev_image} className='h-full object-contain' style={{width: '95%', height: '110%'}} />
                 </div>
                 
                 <div className="text-xs"><br/>Geo-Sol</div>
@@ -461,6 +461,7 @@ const Play = () => {
                           SelectedCar('configuredCar');
                         }} >
 
+                  {/* Thumbnail */}
                   <div className="w-36 h-36 ">
                     <Canvas>
                       <Environment files={city} />
@@ -591,7 +592,7 @@ const Play = () => {
         </div>
 
         {/* Collected station indicators */}
-        <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
+        {/* <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
 
           <div className={`w-9 h-9 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 0 ? (
@@ -635,10 +636,10 @@ const Play = () => {
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* for testing - TO BE DELETED */}
-        <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
+        {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(6); goSection(4); }}>
             <div className="text-sm font-inter text-black-100">All Entries</div>
           </button>
@@ -648,7 +649,7 @@ const Play = () => {
           <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { setEntries(0); goSection(4); }}>
             <div className="text-sm font-inter text-black-100">No Entries</div>
           </button>
-        </div>
+        </div> */}
 
       </div>
 

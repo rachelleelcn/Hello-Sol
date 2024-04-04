@@ -111,8 +111,8 @@ const rotateR = [0, 4.71, 0]
 
       {/* Props */}
       <group>
-        <TreeFinal    pos={[15, -1, -67]}
-                hitboxPos={[28, 0, -127]}/>
+        <StreetLightFinal pos={[8, -1, -65]}
+                    hitboxPos={[21, 0, -125]}/>
 
         <StreetLightFinal pos={[8, -1, -50]} rotate={rotateL}
                     hitboxPos={[21, 0, -110]} />
@@ -129,11 +129,11 @@ const rotateR = [0, 4.71, 0]
         <TreeFinal    pos={[13, -1, -33]} 
                 hitboxPos={[0, 0, -93]}/>
 
-        <TreeFinal    pos={[25, -1, -29]} 
-                hitboxPos={[38, 0, -89]}/>
+        {/* <TreeFinal    pos={[25, -1, -29]} 
+                hitboxPos={[38, 0, -89]}/> */}
 
-        <TreeFinal    pos={[29, -1, -29]} 
-                hitboxPos={[42, 0, -89]}/>
+        {/* <TreeFinal    pos={[29, -1, -29]} 
+                hitboxPos={[42, 0, -89]}/> */}
 
         <StreetLightFinal pos={[35, -1, -28]} rotate={rotateD}
                     hitboxPos={[48, 0, -88]}/>
