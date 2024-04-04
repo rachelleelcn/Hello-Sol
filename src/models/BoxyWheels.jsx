@@ -18,24 +18,10 @@ const BoxyWheels = (props) => {
         <group ref={boxyWheels} {...props} dispose={null}>
 
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                material-metalness={0}
+                position={[-0.001, -0.004, 0.004]}
             />
 
         </group>

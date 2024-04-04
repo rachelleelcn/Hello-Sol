@@ -20,21 +20,22 @@ const RoundBottom = ({ showLicense, license, ...props }) => {
         <group ref={roundBottom} {...props} dispose={null}>
 
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                material-metalness={0}
             >
                 <meshStandardMaterial color={props.colour} />
             </mesh>
+            {/*back license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                material-metalness={0}
             >
                 {showLicense && (
                 <>
                 <Text
-                    position={[0,0.335,-1.17]}
+                    position={[0,0.37,-1.19]}
                     color="#000000"
                     fontSize={0.08}
                     rotation={[0, Math.PI,0]}
@@ -45,12 +46,13 @@ const RoundBottom = ({ showLicense, license, ...props }) => {
                 </>
                 )}
             </mesh>
+            {/*front license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_2.geometry}
                 material={nodes.mesh_2.material}
-                material-metalness={0}
             >
-                {showLicense && (
+            {showLicense && (
                 <>
                 <Text
                     position={[0,0.4,2.06]}
@@ -64,9 +66,9 @@ const RoundBottom = ({ showLicense, license, ...props }) => {
                 )}
             </mesh>
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_3.geometry}
                 material={nodes.mesh_3.material}
-                material-metalness={0}
             />
 
 

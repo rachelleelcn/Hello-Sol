@@ -18,26 +18,9 @@ const SportWheels = (props) => {
         <group ref={sportWheels} {...props} dispose={null}>
 
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                position={[0, 0, -0.213]}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_1.geometry}
-                material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                position={[0, 0, -0.213]}
-                material-metalness={0}
             />
 
         </group>

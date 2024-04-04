@@ -19,54 +19,13 @@ const VintageBottom = ({ showLicense, license, ...props }) => {
     return (
         <group ref={vintageBottom} {...props} dispose={null}>
 
-            {/* Front License
-               {showLicense && (
-                <>
-                <Text
-                    position={[0,0.402,2.39]}
-                    color="#000000"
-                    fontSize={0.08}
-                    font={interFont}
+            {/*front license*/}
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_0.geometry}
+                material={nodes.mesh_0.material}
                 >
-                    {license}
-                </Text>
-                </>
-                )}
-             */}
-
-            {/* Back License
-            
-            {showLicense && (
-                <>
-                <Text
-                    position={[0,0.428,-1.19]}
-                    color="#000000"
-                    fontSize={0.08}
-                    rotation={[0, Math.PI,0]}
-                    font={interFont}
-                >
-                  {license}
-                </Text>
-                </>
-                )}
-             */}
-
-            <group position={[0, 0.002, 0]}>
-                <mesh
-                    geometry={nodes.mesh_0.geometry}
-                    material={nodes.mesh_0.material}
-                    position={[0, -0.002, 0]}
-                    material-metalness={0}
-                >
-                    <meshStandardMaterial color={props.colour} />
-                </mesh>
-                <mesh
-                    geometry={nodes.mesh_1.geometry}
-                    material={nodes.mesh_1.material}
-                    material-metalness={0}
-                >
-                    <meshStandardMaterial color="#FFF" />
-                    {showLicense && (
+                 {showLicense && (
                         <>
                             <Text
                                 position={[0, 0.46, 2.11]}
@@ -78,14 +37,14 @@ const VintageBottom = ({ showLicense, license, ...props }) => {
                             </Text>
                         </>
                     )}
-                </mesh>
-                <mesh
-                    geometry={nodes.mesh_2.geometry}
-                    material={nodes.mesh_2.material}
-                    material-metalness={0}
+            </mesh>
+            {/*back license*/}
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_1.geometry}
+                material={nodes.mesh_1.material}
                 >
-                    <meshStandardMaterial color="#FFF" />
-                    {showLicense && (
+                  {showLicense && (
                         <>
                             <Text
                                 position={[0, 0.49, -1.31]}
@@ -98,13 +57,19 @@ const VintageBottom = ({ showLicense, license, ...props }) => {
                             </Text>
                         </>
                     )}
-                </mesh>
-                <mesh
-                    geometry={nodes.mesh_3.geometry}
-                    material={nodes.mesh_3.material}
-                    material-metalness={0}
-                />
-            </group>
+            </mesh>
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
+                >
+                <meshStandardMaterial color={props.colour} />
+            </mesh>
 
         </group>
     );
