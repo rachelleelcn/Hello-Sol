@@ -11,7 +11,15 @@ import { UseControls } from './UseControls'
 
 import { RenderCar } from '../../pages/CarCookie'
 
+
 export const CarModel = ({ enableControls, soundOff, selectedCar }) => {
+
+// import EVTop from '../../models/EVTop'
+// import EVBottom from '../../models/EVBottom'
+// import EVWheels from '../../models/EVWheels'
+
+// export function CarModel() {
+
     const position = [15, 0, 0]
     const width = 0.8
     const height = 0.8

@@ -12,7 +12,7 @@ import evBottomScene from "../assets/3d/EV-BOTTOM.glb";
 import interFont from '../assets/fonts/Inter.ttf';
 
 
-const EVBottom = ({showLicense,license, ...props}) => {
+const EVBottom = ({ showLicense, license, ...props }) => {
 
     const evBottom = useRef();
     const { nodes, materials } = useGLTF(evBottomScene);
@@ -20,30 +20,31 @@ const EVBottom = ({showLicense,license, ...props}) => {
     return (
         <group ref={evBottom} {...props} dispose={null}>
 
-
+            {/*front license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                rotation={[0, Math.PI / 2, 0]}
-                material-metalness={0}
-            />
+            >
+           {showLicense && (
+                <>
+                <Text
+                    position={[0,0.34,2.055]}
+                    color="#000000"
+                    fontSize={0.08}
+                    font={interFont}
+                >
+                    {license}
+                </Text>
+                </>
+                )}
+                </mesh>
+            {/*back license*/}
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                material-metalness={0}
-            />
-            <mesh
-                geometry={nodes.mesh_2.geometry}
-                material={nodes.mesh_2.material}
-                material-metalness={0}
-            >
-                <meshStandardMaterial color={props.colour} />
-            </mesh>
-            <mesh
-                geometry={nodes.mesh_3.geometry}
-                material={nodes.mesh_3.material}
-                material-metalness={0}
-            >
+                >
                 {showLicense && (
                 <>
                 <Text
@@ -57,24 +58,24 @@ const EVBottom = ({showLicense,license, ...props}) => {
                 </Text>
                 </>
                 )}
-            </mesh>
+                </mesh>
             <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_2.geometry}
+                material={nodes.mesh_2.material}
+            />
+            <mesh
+                material-metalness={0}
+                geometry={nodes.mesh_3.geometry}
+                material={nodes.mesh_3.material}
+                rotation={[0, Math.PI / 2, 0]}
+            />
+            <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_4.geometry}
                 material={nodes.mesh_4.material}
-                material-metalness={0}
             >
-                {showLicense && (
-                <>
-                <Text
-                    position={[0,0.34,2.055]}
-                    color="#000000"
-                    fontSize={0.08}
-                    font={interFont}
-                >
-                    {license}
-                </Text>
-                </>
-                )}
+                <meshStandardMaterial color={props.colour} />
             </mesh>
 
         </group>

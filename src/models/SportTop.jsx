@@ -19,18 +19,16 @@ const SportTop = (props) => {
         <group ref={sportTop} {...props} dispose={null}>
 
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_0.geometry}
                 material={nodes.mesh_0.material}
-                position={[0.001, 0.026, 0.002]}
-                material-metalness={0}
-            >
+                >
                 <meshStandardMaterial color={props.colour} />
             </mesh>
             <mesh
+                material-metalness={0}
                 geometry={nodes.mesh_1.geometry}
                 material={nodes.mesh_1.material}
-                position={[0.001, 0.026, 0.002]}
-                material-metalness={0}
             />
 
         </group>
