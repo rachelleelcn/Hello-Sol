@@ -220,10 +220,10 @@ const Learn = () => {
         </div>
       </div>
 
-      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-6%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-3%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain' />
       </div>
-      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-6%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-3%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain transform scale-x-[-1]' />
       </div>
 
@@ -265,7 +265,7 @@ const Learn = () => {
       </div>
 
       {/* P8 */}
-      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '38%' : '36%', right: '35%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
+      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '35%' : '33%', right: '35%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Greener than ever.
         </div>
@@ -277,7 +277,7 @@ const Learn = () => {
       <div className={`w-full ${showGreenA ? 'fade-in-scale' : ''}`} style={{
         position: 'fixed',
         top: '-300%',
-        left: '-18%',
+        left: '-25%',
         opacity: showGreenA ? 1 : 0,
         transition: 'opacity 0.2s',
         pointerEvents: showGreenA ? 'auto' : 'none',
