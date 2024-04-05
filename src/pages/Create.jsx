@@ -381,7 +381,7 @@ const Create = () => {
             // const {censoredValue} = censorText(value); // Censor/filter input text
             // setName(censoredValue); // Set name to censoredValue if profanity is detected
 
-            const value = e.target.value.slice(0, 20);
+            const value = e.target.value.slice(0, 21);
             const profanityDetected = checkForProfanity(value);
             setProfanityDetected(profanityDetected);
 
@@ -389,7 +389,7 @@ const Create = () => {
               const { censoredValue } = censorText(value, profanityDetected);
               setName(censoredValue);
               nameValidate(3);
-            } else if (value.length === 20) {
+            } else if (value.length === 21) {
               nameValidate(2);
             }else {
               setName(value);
@@ -686,7 +686,7 @@ const Create = () => {
             // const {censoredValue} = censorText(value); // Censor/filter input text
             // setLicense(censoredValue);
 
-            const value = e.target.value.slice(0, 8).toUpperCase();
+            const value = e.target.value.slice(0, 9).toUpperCase();
             const profanityDetected = checkForProfanity(value);
             setProfanityDetected(profanityDetected);
             licenseShow();
@@ -695,7 +695,7 @@ const Create = () => {
               const { censoredValue } = censorText(value, profanityDetected);
               setLicense(censoredValue);
               licenseValidate(3);
-            } else if (value.length === 8) {
+            } else if (value.length === 9) {
               licenseValidate(2);
             } else {
               setLicense(value);
