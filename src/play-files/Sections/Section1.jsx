@@ -134,8 +134,8 @@ const rotateR = [0, 4.71, 0]
         <TreeFinal  pos={[-12.5, -1, -29]} 
                 hitboxPos={[0.5, 0, -89]}/>
 
-        <StreetLightFinal pos={[-4, -1, -34]} rotate={rotateR}
-                    hitboxPos={[9, 0, -94]}/>
+        {/* <StreetLightFinal pos={[-4, -1, -34]} rotate={rotateR}
+                    hitboxPos={[9, 0, -94]}/> */}
 
         <TrafficRFinal pos={[-4, -1, -28]} rotate={rotateU}
                  hitboxPos={[9, 0, -88]}  />         

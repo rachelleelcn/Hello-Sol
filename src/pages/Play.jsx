@@ -435,9 +435,7 @@ const Play = () => {
         <div className="text-sm w-[53%] pb-6">
           Find the 6 charging stations located across Geo-Town before the time runs out to earn entries to our giveaway. The more entries you have, the higher your chances of winning!
         </div>
-        {/* <div className="text-xs pb-0.5 text-grey-100">
-          Please note that each email can only claim entries to the giveaway once per day.
-        </div> */}
+        
         <div className="text-xs pb-8 text-grey-100">
           Play daily from <span className="underline underline-offset-4"> April 5th to 19th, 2024</span>.
         </div>

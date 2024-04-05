@@ -117,14 +117,14 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[8, -1, -50]} rotate={rotateL}
                     hitboxPos={[21, 0, -110]} />
 
-        <StreetLightFinal pos={[8, -1, -34]} rotate={rotateL}
-                    hitboxPos={[21, 0, -94]} />
+        {/* <StreetLightFinal pos={[8, -1, -34]} rotate={rotateL}
+                    hitboxPos={[21, 0, -94]} /> */}
 
         <TrafficRFinal pos={[8, -1, -28]} rotate={rotateR} 
                  hitboxPos={[21, 0, -88]}/> 
 
         <TreeFinal    pos={[13, -1, -41]} 
-                hitboxPos={[0, 0, -101]}/>
+                hitboxPos={[26, 0, -101]}/>
 
         <TreeFinal    pos={[13, -1, -33]} 
                 hitboxPos={[0, 0, -93]}/>

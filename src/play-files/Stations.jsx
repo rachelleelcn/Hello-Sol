@@ -110,7 +110,7 @@ function Randomize() {
         }
     }, [num])
 
-    console.log(num)
+    // console.log(num)
 
     return (
         <group>

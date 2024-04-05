@@ -139,8 +139,8 @@ const rotateR = [0, 4.71, 0]
         <TrafficRFinal  pos={[69, -1, 30]} rotate={rotateD}
                   hitboxPos={[82, 0, -30]} />
 
-        <StreetLightFinal pos={[69, -1, 69]} rotate={rotateR}
-                    hitboxPos={[82, 0, 9]} />
+        {/* <StreetLightFinal pos={[69, -1, 69]} rotate={rotateR}
+                    hitboxPos={[82, 0, 9]} /> */}
 
       </group>
     </group>

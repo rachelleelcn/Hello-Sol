@@ -49,24 +49,24 @@ export const CarModel = ({ enableControls, soundOff, selectedCar }) => {
     UseControls(vehicleAPI, chassisAPI, enableControls, soundOff)
 
     // Third person camera stuff
-    // useFrame((state) => {
-    //     const carPosition = new Vector3();
-    //     chassisBody.current.getWorldPosition(carPosition);
+    useFrame((state) => {
+        const carPosition = new Vector3();
+        chassisBody.current.getWorldPosition(carPosition);
 
-    //     const quaternion = new Quaternion();
-    //     chassisBody.current.getWorldQuaternion(quaternion);
+        const quaternion = new Quaternion();
+        chassisBody.current.getWorldQuaternion(quaternion);
 
-    //     const offset = new Vector3(0, 0.9, 2.8);
-    //     offset.applyQuaternion(quaternion);
+        const offset = new Vector3(0, 0.9, 2.8);
+        offset.applyQuaternion(quaternion);
 
-    //     const cameraPosition = carPosition.clone().add(offset);
+        const cameraPosition = carPosition.clone().add(offset);
 
-    //     // camera follow car
-    //     const lerpFactor = 1
-    //     state.camera.position.lerp(cameraPosition, lerpFactor);
+        // camera follow car
+        const lerpFactor = 1
+        state.camera.position.lerp(cameraPosition, lerpFactor);
 
-    //     state.camera.lookAt(carPosition);
-    // })
+        state.camera.lookAt(carPosition);
+    })
 
     console.log('controls:', enableControls)
    
