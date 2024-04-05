@@ -220,6 +220,7 @@ const Create = () => {
       setNameValidateMsg('x');
       setShowNameValidate(false);
     }
+    console.log("nameindex:", index);
   }
   const licenseValidate = (index) => {
     if (index === 1) {
@@ -235,6 +236,7 @@ const Create = () => {
       setLicenseValidateMsg('x');
       setShowLicenseValidate(false);
     }
+    console.log("licenseindex:", index);
   }
 
   const checkForProfanity = (inputText) => {
@@ -379,7 +381,7 @@ const Create = () => {
             // const {censoredValue} = censorText(value); // Censor/filter input text
             // setName(censoredValue); // Set name to censoredValue if profanity is detected
 
-            const value = e.target.value.slice(0, 20);
+            const value = e.target.value.slice(0, 21);
             const profanityDetected = checkForProfanity(value);
             setProfanityDetected(profanityDetected);
 
@@ -387,18 +389,20 @@ const Create = () => {
               const { censoredValue } = censorText(value, profanityDetected);
               setName(censoredValue);
               nameValidate(3);
-            } else {
+            } else if (value.length === 21) {
+              nameValidate(2);
+            }else {
               setName(value);
               nameValidate(0);
             }
-
             consolelog("name:", name);
 
-            if (value.length === 20) {
-              nameValidate(2);
-            } else {
-              nameValidate(0);
-            }
+            // if (value.length === 20) {
+            //   nameValidate(2);
+            // } else {
+            //   nameValidate(0);
+            // }
+            // consolelog("value:", value);
           }}
 
           onKeyDown={(e) => {
@@ -682,7 +686,7 @@ const Create = () => {
             // const {censoredValue} = censorText(value); // Censor/filter input text
             // setLicense(censoredValue);
 
-            const value = e.target.value.slice(0, 8).toUpperCase();
+            const value = e.target.value.slice(0, 9).toUpperCase();
             const profanityDetected = checkForProfanity(value);
             setProfanityDetected(profanityDetected);
             licenseShow();
@@ -691,17 +695,19 @@ const Create = () => {
               const { censoredValue } = censorText(value, profanityDetected);
               setLicense(censoredValue);
               licenseValidate(3);
+            } else if (value.length === 9) {
+              licenseValidate(2);
             } else {
               setLicense(value);
               licenseValidate(0);
             }
             consolelog("license:", license);
 
-            if (value.length === 8) {
-              licenseValidate(2);
-            } else {
-              licenseValidate(0);
-            }
+            // if (value.length === 8) {
+            //   licenseValidate(2);
+            // } else {
+            //   licenseValidate(0);
+            // }
 
           }}
           onKeyDown={(e) => {

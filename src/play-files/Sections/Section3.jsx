@@ -108,20 +108,20 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[-65, -1, -18]} rotate={rotateU}
                     hitboxPos={[-52, 0, -78]}/>
 
-        <TreeFinal    pos={[-65, -1, 12]}
-                hitboxPos={[-52, 0, -48]}/>
+        {/* <TreeFinal    pos={[-65, -1, 12]}
+                hitboxPos={[-52, 0, -48]}/> */}
 
-        <TreeFinal    pos={[-65, -1, 15]}
-                hitboxPos={[-52, 0, -45]}/>
+        {/* <TreeFinal    pos={[-65, -1, 15]}
+                hitboxPos={[-52, 0, -45]}/> */}
 
         <TrafficRFinal pos={[-69, -1, 20]} rotate={rotateU} 
                  hitboxPos={[-56, 0, -40]}/>  
 
-        <StreetLightFinal pos={[-52, -1, 20]} rotate={rotateD}
-                    hitboxPos={[-39, 0, -40]}/>
+        {/* <StreetLightFinal pos={[-52, -1, 20]} rotate={rotateD}
+                    hitboxPos={[-39, 0, -40]}/> */}
 
-        <StreetLightFinal pos={[-38, -1, 20]} rotate={rotateD}
-                    hitboxPos={[-25, 0, -40]}/>
+        {/* <StreetLightFinal pos={[-38, -1, 20]} rotate={rotateD}
+                    hitboxPos={[-25, 0, -40]}/> */}
 
         <StreetLightFinal pos={[-30, -1, 20]} rotate={rotateD}
                     hitboxPos={[-17, 0, -40]}/>

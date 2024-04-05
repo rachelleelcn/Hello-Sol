@@ -119,41 +119,41 @@ const rotateR = [0, 4.71, 0]
         <TreeFinal  pos={[-63, -1, 30]} 
               hitboxPos={[-50, 0, -30]}/>
 
-        <TreeFinal  pos={[-69, -1, 34]} 
-              hitboxPos={[-56, 0, -26]}/>
+        {/* <TreeFinal  pos={[-69, -1, 34]} 
+              hitboxPos={[-56, 0, -26]}/> */}
 
-        <TreeFinal  pos={[-69, -1, 38]} 
-              hitboxPos={[-56, 0, -22]}/>
+        {/* <TreeFinal  pos={[-69, -1, 38]} 
+              hitboxPos={[-56, 0, -22]}/> */}
 
         <StreetLightFinal pos={[-69, -1, 47]} rotate={rotateL}
                     hitboxPos={[-56, 0, -13]} />
 
-        <TreeFinal  pos={[-69, -1, 59]} 
-              hitboxPos={[-56, 0, -1]}/>
+        {/* <TreeFinal  pos={[-69, -1, 59]} 
+              hitboxPos={[-56, 0, -1]}/> */}
 
-        <TreeFinal  pos={[-69, -1, 63]} 
-              hitboxPos={[-56, 0, 3]}/>
+        {/* <TreeFinal  pos={[-69, -1, 63]} 
+              hitboxPos={[-56, 0, 3]}/> */}
 
         <StreetLightFinal pos={[-45, -1, 30]} rotate={rotateU}
                     hitboxPos={[-32, 0, -30]} />
 
-       <TreeFinal  pos={[-46, -1, 66]} 
-              hitboxPos={[-33, 0, 6]}/>
+       {/* <TreeFinal  pos={[-46, -1, 66]} 
+              hitboxPos={[-33, 0, 6]}/> */}
 
-        <StreetLightFinal pos={[-62, -1, 69]} rotate={rotateD}
-                    hitboxPos={[-49, 0, 9]} />                    
+        {/* <StreetLightFinal pos={[-62, -1, 69]} rotate={rotateD}
+                    hitboxPos={[-49, 0, 9]} />                     */}
 
         <StreetLightFinal pos={[-40, -1, 69]} rotate={rotateD}
                     hitboxPos={[-27, 0, 9]} />
 
-        <TreeFinal  pos={[-38, -1, 30]} 
-              hitboxPos={[-25, 0, -30]}/>
+        {/* <TreeFinal  pos={[-38, -1, 30]} 
+              hitboxPos={[-25, 0, -30]}/> */}
 
         <StreetLightFinal pos={[-34, -1, 30]} rotate={rotateU}
                     hitboxPos={[-21, 0, -30]} />
 
-        <TreeFinal  pos={[-30, -1, 30]} 
-              hitboxPos={[-17, 0, -30]}/>
+        {/* <TreeFinal  pos={[-30, -1, 30]} 
+              hitboxPos={[-17, 0, -30]}/> */}
 
         <StreetLightFinal pos={[-20, -1, 69]} rotate={rotateD}
                     hitboxPos={[-7, 0, 9]} />
@@ -161,14 +161,14 @@ const rotateR = [0, 4.71, 0]
         <TrafficRFinal  pos={[-4, -1, 30]} rotate={rotateL}
                   hitboxPos={[9, 0, -30]} />
 
-        <TreeFinal  pos={[-6, -1, 32]} 
-              hitboxPos={[7, 0, -28]}/>
+        {/* <TreeFinal  pos={[-6, -1, 32]} 
+              hitboxPos={[7, 0, -28]}/> */}
 
         <TreeFinal  pos={[-6, -1, 38]} 
               hitboxPos={[7, 0, -22]}/>
 
-        <StreetLightFinal pos={[-4, -1, 45]} rotate={rotateR}
-                    hitboxPos={[9, 0, -15]} />
+        {/* <StreetLightFinal pos={[-4, -1, 45]} rotate={rotateR}
+                    hitboxPos={[9, 0, -15]} /> */}
 
         <StreetLightFinal pos={[-4, -1, 55]} rotate={rotateR}
                     hitboxPos={[9, 0, -5]} />

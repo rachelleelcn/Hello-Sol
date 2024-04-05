@@ -28,15 +28,11 @@ return (
     )
 }
 
-const StationFinal = 
-    ({ entries, setEntries, 
-        pos, rotate, hitboxPos, 
-        soundOff 
-    }) => {
+const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos, soundOff }) => {
             
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
-    const [play] = useSound(sfx)
+    const [play] = useSound(sfx, {volume: 0.7})
 
     const [ref] = useBox(() => ({
         mass: 1,
@@ -71,8 +67,6 @@ const StationFinal =
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}>
 
-                {/* <boxGeometry args={[0.85, 2, 0.85]}/> */}
-                {/* <meshBasicMaterial color={'black'}/> */}
                 <Station colour={active ? '#FFF' : "#C8F165"}/>
             </mesh>
 
@@ -93,6 +87,7 @@ export function UpdateEntries(entries, setEntries) {
     return newEntry
 }
 
+// Randomize station placement
 function Randomize() {
     const MIN = 1
     const MAX = 6
@@ -121,7 +116,7 @@ function Randomize() {
         <group>
             {/* Set 1 */}
             {num === 1 && (
-                    <group>
+                <group>
                     {/* Section 1 - top U-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
                                     pos={[-44, 0, -58]} rotate={rotateR}
