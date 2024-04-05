@@ -73,7 +73,7 @@ const rotateR = [0, 4.71, 0]
         <LFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[42, -1, 62]} rotate={rotateU}
          hitboxPos1={[55, 0, 4]}
-         hitboxPos2={[57, 0, 4]} /> 
+         hitboxPos2={[57, 0, 2]} /> 
 
         <TFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[53, -1, 49]} rotate={rotateU}
@@ -106,11 +106,11 @@ const rotateR = [0, 4.71, 0]
         <StreetLightFinal pos={[8, -1, 55]} rotate={rotateL}
                     hitboxPos={[21, 0, -5]} />
 
-        <StreetLightFinal pos={[8, -1, 65]} rotate={rotateL}
-                    hitboxPos={[21, 0, 5]} />
+        {/* <StreetLightFinal pos={[8, -1, 65]} rotate={rotateL}
+                    hitboxPos={[21, 0, 5]} /> */}
 
-        <TreeFinal  pos={[12, -1, 68]} 
-              hitboxPos={[25, 0, 8]}/>
+        {/* <TreeFinal  pos={[12, -1, 68]} 
+              hitboxPos={[25, 0, 8]}/> */}
 
         <StreetLightFinal pos={[25, -1, 30]} rotate={rotateU}
                     hitboxPos={[38, 0, -30]} />
@@ -139,8 +139,8 @@ const rotateR = [0, 4.71, 0]
         <TrafficRFinal  pos={[69, -1, 30]} rotate={rotateD}
                   hitboxPos={[82, 0, -30]} />
 
-        <StreetLightFinal pos={[69, -1, 69]} rotate={rotateR}
-                    hitboxPos={[82, 0, 9]} />
+        {/* <StreetLightFinal pos={[69, -1, 69]} rotate={rotateR}
+                    hitboxPos={[82, 0, 9]} /> */}
 
       </group>
     </group>

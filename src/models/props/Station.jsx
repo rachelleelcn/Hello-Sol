@@ -33,7 +33,7 @@ const Station = ({props, colour}) => {
                     geometry={nodes.Cube009_1.geometry}
                     // material={materials.chargingStationLight}
                 >
-                    <meshStandardMaterial color={colour}/>
+                    <meshStandardMaterial color={colour} depthWrite={false}/>
                     <Decal
                         position={[0.8, 0.9, 0]}
                         rotation={[0, 1, 0]}

@@ -50,7 +50,7 @@ export const RenderCar = ({selectedCar}) => {
   }
 }
 
-// Thumbnail for car selection
+// Thumbnail of configured car for car selection
 export const CarThumbnail = () => {
   const [cookies, setCookie] = useCookies(['CAR_COOKIE']);
   const configuredCar = cookies['CAR_COOKIE'];
