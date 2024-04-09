@@ -203,7 +203,7 @@ const Learn = () => {
       <div style={{ position: 'fixed', top: '22.5%', left: show3 ? '25%' : '23%', opacity: show3 ? 1 : 0, transition: 'left 0.4s 0.02s, opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
         <img src={green_arrow} alt='' className='h-28 object-contain' />
       </div>
-      <div style={{ position: 'fixed', top: '50%', transform: `translateX(${showShh ? '800%' : '-100%'})`, opacity: showShh ? 1 : 0, transition: 'transform 3s linear', pointerEvents: showShh ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '50%', transform: `translateX(${showShh ? '800%' : '-100%'})`, opacity: showShh ? 1 : 0, transition: 'transform 3s linear, opacity 0.2s', pointerEvents: showShh ? 'auto' : 'none' }}>
         <img src={shh} alt='' className='h-12 object-contain' />
       </div>
 
