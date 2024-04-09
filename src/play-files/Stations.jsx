@@ -32,7 +32,7 @@ const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos, soundOff })
             
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
-    const [play] = useSound(sfx, {volume: 0.7})
+    const [play] = useSound(sfx, {volume: 0.5})
 
     const [ref] = useBox(() => ({
         mass: 1,
@@ -97,8 +97,7 @@ function Randomize() {
     ) 
 }
 
-  export const Stations = ({ entries, setEntries, soundOff }) => {
-    // const [entries, setEntries] = useState(0); 
+export const Stations = ({ entries, setEntries, soundOff }) => {
     setEntries(entries)
     
     const [num, setNum] = useState(null)

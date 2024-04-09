@@ -8,12 +8,12 @@ import React, { useRef } from "react";
 import { useGLTF, Decal, useTexture } from "@react-three/drei";
 
 // import leaf_icon from "../../assets/icons/leaf.png";
-import leaf_icon from '../../assets/icons/Leaf2.png'
+// import leaf_icon from '../../assets/icons/Leaf2.png'
 
 import stationScene from "../../assets/3d/Station.glb";
 
 const Station = ({props, colour}) => {
-    const texture = useTexture(leaf_icon)
+    const texture = useTexture('Leaf2.png')
 
     const ref = useRef();
     const { nodes, materials } = useGLTF(stationScene);

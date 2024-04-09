@@ -127,7 +127,7 @@ const rotateR = [0, 4.71, 0]
                 hitboxPos={[26, 0, -101]}/>
 
         <TreeFinal    pos={[13, -1, -33]} 
-                hitboxPos={[0, 0, -93]}/>
+                hitboxPos={[26, 0, -93]}/>
 
         {/* <TreeFinal    pos={[25, -1, -29]} 
                 hitboxPos={[38, 0, -89]}/> */}

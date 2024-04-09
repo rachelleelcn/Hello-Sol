@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { useSound } from 'use-sound'
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Environment, PerspectiveCamera } from '@react-three/drei'
 import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 
 import geo_icon from "../assets/icons/geo.png";
@@ -81,7 +81,7 @@ const Play = () => {
 
   // Audio variables
   const [musicOff, setMusicOff] = useState(false);
-  const [sfxOff, setSfxOff] = useState(true);
+  const [sfxOff, setSfxOff] = useState(false);
   const [playWinSFX] = useSound(winSFX, {volume: 0.8})
   const [playLoseSFX] = useSound(loseSFX, {volume: 0.8})
 
@@ -631,6 +631,7 @@ const Play = () => {
           </button>
         </div>
 
+        {/* Game Controls */}
         <div style={{ position: 'fixed', bottom: 'calc(5% + 52px)', left: '3.5%' }}>
           <div style={{ transition: 'opacity 0.2s', opacity: showControls === true ? 1 : 0, pointerEvents: showControls === true ? 'auto' : 'none' }}>
             <div className="w-40 font-inter p-4">
@@ -683,7 +684,7 @@ const Play = () => {
         </div>
 
         {/* Collected station indicators */}
-        {/* <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
+        <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
 
           <div className={`w-9 h-9 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 0 ? (
@@ -727,7 +728,7 @@ const Play = () => {
               <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
             )}
           </div>
-        </div> */}
+        </div>
 
         {/* for testing - TO BE DELETED */}
         {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)` }}>
@@ -748,11 +749,11 @@ const Play = () => {
       {/* P4 - Results*/}
 
       {/* for testing - TO BE DELETED */}
-      {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); setEntries(0) }}>
           <div className="text-sm font-inter text-black-100">Back</div>
         </button>
-      </div> */}
+      </div>
 
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: currentSection === 4 ? '3.5%' : '1.5%', transform: 'translateY(-48%)', transition: 'right 0.4s, opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
