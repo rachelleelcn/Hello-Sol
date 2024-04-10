@@ -81,9 +81,11 @@ const Play = () => {
 
   // Audio variables
   const [musicOff, setMusicOff] = useState(false);
+
   const [sfxOff, setSfxOff] = useState(false);
   const [playWinSFX] = useSound(winSFX, {volume: 0.8})
   const [playLoseSFX] = useSound(loseSFX, {volume: 0.8})
+
 
   // Current date variables
   const today = new Date()
@@ -200,9 +202,11 @@ const Play = () => {
           goSection(4)
           resetTimer()
           setElapsedTime(duration)
+
           setEnableControls(false)
+
         }
-        
+
         else {
           mins = parseInt(timer / 60, 10)
           secs = parseInt(timer % 60, 10)
@@ -400,19 +404,20 @@ const Play = () => {
     <section className='w-full h-screen relative bg-white-200'>
 
       {/* Render scene */}
-        {currentSection > 2 && currentSection < 5 && (
-          <div style={{ width: '100%', height: '100%' }}>
-            {/* Toggle music */}
-            <group>
-              {!musicOff && elapsedTime < 210 && (
-                <audio src={bgm} autoPlay loop />
-              )}
+      {currentSection > 2 && currentSection < 5 && (
+        <div style={{ width: '100%', height: '100%' }}>
+          {/* Toggle music */}
+          <group>
+            {!musicOff && elapsedTime < 210 && (
+              <audio src={bgm} autoPlay loop />
+            )}
 
-              {/* sped up at 30 seconds */}
-              {!musicOff && elapsedTime >= 210 && (
-                <audio src={bgmFast} autoPlay loop />
-              )}    
-            </group>
+            {/* sped up at 30 seconds */}
+            {!musicOff && elapsedTime >= 210 && (
+              <audio src={bgmFast} autoPlay loop />
+            )}
+          </group>
+
 
             <Scene entries={entries} setEntries={setEntries} 
                    enableControls={enableControls}
@@ -420,6 +425,7 @@ const Play = () => {
                    selectedCar={selectedCar}/>
           </div>
         )}
+
 
 
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
@@ -433,7 +439,7 @@ const Play = () => {
         <div className="text-sm w-[53%] pb-6">
           Find the 6 charging stations located across Geo-Town before the time runs out to earn entries to our giveaway. The more entries you have, the higher your chances of winning!
         </div>
-        
+
         <div className="text-xs pb-8 text-grey-100">
           Play daily from <span className="underline underline-offset-4"> April 5th to 19th, 2024</span>.
         </div>
@@ -467,15 +473,19 @@ const Play = () => {
 
       {/* P2 - Pre-game instructions */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 2 ? 1 : 0, pointerEvents: currentSection === 2 ? 'auto' : 'none' }}>
-        <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-52%)` }}>
+        <div className="font-inter" style={{ position: 'fixed', top: '50%', left: '50%', transform: `translate(-50%,-48%)` }}>
           <div className="flex">
             <div className="flex flex-col">
               <div className="text-3xl font-bold pb-3">Instructions</div>
-              <div className="text-sm w-[680px] pb-8 mr-4">
-                Drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within 3 minutes to earn a bonus entry to the giveaway!
+              <div className="text-sm w-[680px] pb-4 mr-4">
+                You have <span className='font-bold'>4 minutes</span> to drive around Geo-Town to locate the 6 hidden charging stations, each represented by a green box with a leaf symbol. Each station you collect counts as 1 entry to the giveaway. Collect all 6 stations within <span className="font-bold">3 minutes</span> to earn a bonus entry to the giveaway!
+              </div>
+
+              <div className="text-xs text-grey-100 pb-8">
+                <span className='font-bold'>Hint:</span> There is a station located within each of the 6 uniquely colored sections.
               </div>
             </div>
-            <div className="h-32 flex items-center justify-center">
+            <div className="h-32 flex items-center justify-center mt-4">
               <img src={station_img} alt='station_img' className='h-full object-contain ' />
             </div>
           </div>
@@ -578,9 +588,23 @@ const Play = () => {
               <div className="text-xs font-bold w-24 pb-1">Create new dream Geo</div>
             </button>
           </div>
+
+
+
+
+          <div className="flex mt-10 justify-end">
+            <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => goSection(1)}>Back</button>
+            <button className='w-40 rounded-full bg-black-200 items-center justify-center flex'
+              onClick={() => {
+                goSection(3)
+                startTimer()
+              }}>
+              <div className="text-sm font-inter py-3 px-6 text-white-100">Play now</div>
+            </button>
+          </div>
         </div>
 
-        <div className="flex" style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
+        {/* <div className="flex" style={{ position: 'fixed', bottom: '5%', right: '3.5%' }}>
           <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => goSection(1)}>Back</button>
           <button className='w-40 rounded-full bg-black-200 items-center justify-center flex'
             onClick={() => {
@@ -589,7 +613,9 @@ const Play = () => {
             }}>
             <div className="text-sm font-inter py-3 px-6 text-white-100">Play now</div>
           </button>
-        </div>
+        </div> */}
+
+
       </div>
 
 
@@ -611,9 +637,9 @@ const Play = () => {
           {/* Music button */}
           <button className='w-11 h-11 rounded-full outline outline-1 flex items-center justify-center' onClick={musicToggle}>
             {musicOff ? (
-              <img src={no_music_icon} alt='mute-icon' className='w-5 object-contain' />
+              <img src={no_music_icon} alt='no-music-icon' className='w-5 object-contain' />
             ) : (
-              <img src={music_icon} alt='sound-icon' className='w-5 object-contain' />
+              <img src={music_icon} alt='music-icon' className='w-5 object-contain' />
             )}
           </button>
 
@@ -622,7 +648,7 @@ const Play = () => {
             {sfxOff ? (
               <img src={mute_icon} alt='mute-icon' className='w-5 object-contain' />
             ) : (
-              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain ml-0.5' />
+              <img src={sound_icon} alt='sound-icon' className='w-5 object-contain' />
             )}
           </button>
         </div>
@@ -675,53 +701,53 @@ const Play = () => {
 
 
         {/* Timer */}
-        <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-pink-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
+        <div className={`font-bold text-xl ${minutes === 0 && seconds <= 30 ? 'text-red-100' : ''}`} style={{ position: 'fixed', bottom: '5%', left: '50%', transform: 'translateX(-50%)' }}>
           {minutes} <span>:</span> {seconds}
         </div>
 
         {/* Collected station indicators */}
-        <div className="flex flex-col items-center gap-2.5" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
+        <div className="flex flex-col items-center gap-3" style={{ position: 'fixed', top: '50%', transform: 'translateY(-54%)', right: '3.5%' }}>
 
-          <div className={`w-9 h-9 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 0 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 0 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
-          <div className={`w-9 h-9 rounded-full ${entries > 1 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 1 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 1 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
-          <div className={`w-9 h-9 rounded-full ${entries > 2 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 2 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 2 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
-          <div className={`w-9 h-9 rounded-full ${entries > 3 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 3 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 3 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
-          <div className={`w-9 h-9 rounded-full ${entries > 4 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 4 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 4 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
-          <div className={`w-9 h-9 rounded-full ${entries > 5 ? 'bg-green-100' : ''} flex justify-center items-center`}>
+          <div className={`w-11 h-11 rounded-full ${entries > 5 ? 'bg-green-100' : ''} flex justify-center items-center`}>
             {entries > 5 ? (
-              <img src={leaf_icon} alt='leaf-icon' className='w-6 object-contain' />
+              <img src={leaf_icon} alt='leaf-icon' className='w-8 object-contain' />
             ) : (
-              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-6 object-contain' />
+              <img src={leafGrey_icon} alt='leafGrey-icon' className='w-8 object-contain' />
             )}
           </div>
         </div>
@@ -990,7 +1016,7 @@ const Play = () => {
           <div className='flex items-center'>
             <img className="flex-col mr-8 outline outline-1 w-40 outline-grey-200" src={imageUrl} alt="Your image" />
             <div className='flex-col'>
-              <div className="font-bold text-2xl mb-4">Share your creation!</div>
+              <div className="font-bold text-2xl mb-4">Share your results!</div>
               <div className="text-sm mb-2">Share this image via</div>
               <div className="flex gap-2 mb-3">
                 <WhatsappShareButton url={shareUrl} windowHeight={700} windowWidth={1000}>
