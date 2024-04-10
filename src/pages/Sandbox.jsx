@@ -17,7 +17,7 @@ export function Scene({ entries, setEntries, enableControls, soundOff, selectedC
         <Canvas shadows>
         <Environment files={city} />
 
-        <OrbitControls/>
+        {/* <OrbitControls/> */}
         <PerspectiveCamera makeDefault position={[2, 0.8, 60]} fov={70}/>
 
         <Physics broadphase='SAP' gravity={[0, -20, 0]}>

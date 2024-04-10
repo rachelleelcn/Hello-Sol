@@ -121,6 +121,7 @@ const Play = () => {
   const goSection = (index) => {
     setCurrentSection(index);
 
+    // Instructions
     if (index < 3) {
       setStartGame(false)
       setEnableControls(false)
@@ -137,6 +138,7 @@ const Play = () => {
         else { playWinSFX() }
       }
     }
+    // Game
     else {
       setStartGame(true);
       setEnableControls(true)
@@ -198,12 +200,7 @@ const Play = () => {
           goSection(4)
           resetTimer()
           setElapsedTime(duration)
-
-          // Play sfx when timer ends if sounds are on
-          if (!sfxOff) {
-            if (entries < 1) { playLoseSFX() } 
-            else { playWinSFX() }
-          }
+          setEnableControls(false)
         }
         
         else {
@@ -402,7 +399,6 @@ const Play = () => {
   return (
     <section className='w-full h-screen relative bg-white-200'>
 
-      
       {/* Render scene */}
         {currentSection > 2 && currentSection < 5 && (
           <div style={{ width: '100%', height: '100%' }}>
@@ -419,9 +415,9 @@ const Play = () => {
             </group>
 
             <Scene entries={entries} setEntries={setEntries} 
-                  enableControls={enableControls} 
-                  soundOff={sfxOff}
-                  selectedCar={selectedCar}/>
+                   enableControls={enableControls}
+                   soundOff={sfxOff}
+                   selectedCar={selectedCar}/>
           </div>
         )}
 
