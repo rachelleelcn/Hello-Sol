@@ -32,7 +32,7 @@ const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos, soundOff })
             
     const [active, setActive] = useState(false)
     const [hovered, setHovered] = useState(false)
-    const [play] = useSound(sfx, {volume: 0.7})
+    const [play] = useSound(sfx, {volume: 0.5})
 
     const [ref] = useBox(() => ({
         mass: 1,
@@ -75,7 +75,7 @@ const StationFinal = ({ entries, setEntries, pos, rotate, hitboxPos, soundOff })
     )
   }
 
-export function UpdateEntries(entries, setEntries) {
+function UpdateEntries(entries, setEntries) {
     let newEntry = entries
 
     if (entries < 6) {
@@ -97,10 +97,7 @@ function Randomize() {
     ) 
 }
 
-  export const Stations = ({ entries, setEntries, soundOff }) => {
-    // const [entries, setEntries] = useState(0); 
-    setEntries(entries)
-    
+export const Stations = ({ entries, setEntries, soundOff }) => {
     const [num, setNum] = useState(null)
 
     useEffect(() => {
@@ -109,9 +106,7 @@ function Randomize() {
             setNum(randomNum)
         }
     }, [num])
-
-    // console.log(num)
-
+    
     return (
         <group>
             {/* Set 1 */}
@@ -127,15 +122,15 @@ function Randomize() {
                                   pos={[62.5, 0, -47.5]} rotate={rotateR}
                             hitboxPos={[75.5, -1, -107.5]} soundOff={soundOff}/>
 
-                    {/* Section 3 - mid right T-shape */}
+                    {/* Section 3 - right U-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-39, 0, 5]} rotate={rotateR}
-                            hitboxPos={[-26, -1, -55]} soundOff={soundOff}/>
+                                  pos={[-17, 0, 2]} rotate={rotateD}
+                            hitboxPos={[-4, -1, -58]} soundOff={soundOff}/>
 
-                    {/* Section 4 */}
+                    {/* Section 4 - mid Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[64, 0, 1]} rotate={rotateU}
-                            hitboxPos={[77, -1, -59]} soundOff={soundOff}/>
+                                  pos={[29, 0, 8.5]} rotate={rotateL}
+                            hitboxPos={[42, -1, -51.5]} soundOff={soundOff}/>
 
                     {/* Section 5 - top mid L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -153,26 +148,26 @@ function Randomize() {
             {/* Set 2 */}
             {num === 2  && (
                 <group>
-                    {/* Section 1 - bottom U-shape */}
-                    <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-25, 0, -37]} rotate={rotateL}
-                            hitboxPos={[-12, -1, -97]} soundOff={soundOff}/>
+                    {/* Section 1 - top U-shape */}
+                    <StationFinal   entries={entries} setEntries={setEntries}
+                                    pos={[-44, 0, -58]} rotate={rotateR}
+                              hitboxPos={[-31, -1, -118]} soundOff={soundOff}/>
 
-                    {/* Section 2 - left top rect */}
+                    {/* Section 2 - top right L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[28, 0, -58]} rotate={rotateR}
-                            hitboxPos={[41, -1, -118]} soundOff={soundOff}/>
-
-                    {/* Section 3 - left U-shape */}
+                                  pos={[62.5, 0, -47.5]} rotate={rotateR}
+                            hitboxPos={[75.5, -1, -107.5]} soundOff={soundOff}/>
+                    
+                    {/* Section 3 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-58, 0, 1]} rotate={rotateU}
-                            hitboxPos={[-45, -1, -59]} soundOff={soundOff}/>
+                                  pos={[-51.5, 0, -12.5]} rotate={rotateR}
+                            hitboxPos={[-38.5, -1, -72.5]} soundOff={soundOff}/>
 
-                    {/* Section 4 - bottom rect */}
+                    {/* Section 4 - mid Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[50, 0, 12]} rotate={rotateL}
-                            hitboxPos={[63, -1, -48]} soundOff={soundOff}/>
-
+                                  pos={[29, 0, 8.5]} rotate={rotateL}
+                            hitboxPos={[42, -1, -51.5]} soundOff={soundOff}/>
+                    
                     {/* Section 5 - right rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
                                   pos={[-20, 0, 52]} rotate={rotateL}
@@ -194,20 +189,20 @@ function Randomize() {
                                     pos={[-62, 0, -43]} rotate={rotateU}
                               hitboxPos={[-49, -1, -103]} soundOff={soundOff}/>
 
-                    {/* Section 2 - bottom left L-shape */}
+                    {/* Section 2 - bottom left rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[51.5, 0, -36.5]} rotate={rotateL}
-                            hitboxPos={[64.5, -1, -96.5]} soundOff={soundOff}/>
+                                  pos={[27, 0, -41]} rotate={rotateL}
+                            hitboxPos={[40, -1, -101]} soundOff={soundOff}/>
 
-                    {/* Section 3 - top right L-shape */}
+                    {/* Section 3 - mid T-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-31.5, 0, -4.5]} rotate={rotateR}
-                            hitboxPos={[-18.5, -1, -64.5]} soundOff={soundOff}/>
+                                  pos={[-50, 0, 5]} rotate={rotateR}
+                            hitboxPos={[-37, -1, -55]} soundOff={soundOff}/>
 
-                    {/* Section 4 - bottom U-shape */}
-                    <StationFinal   entries={entries} setEntries={setEntries}
-                                    pos={[18, 0, 8]} rotate={rotateL}
-                              hitboxPos={[31, -1, -52]} soundOff={soundOff}/>
+                    {/* Section 4 - top side rect */}
+                    <StationFinal entries={entries} setEntries={setEntries}
+                                  pos={[48, 0, -9]} rotate={rotateR}
+                            hitboxPos={[61, -1, -69]} soundOff={soundOff}/>
 
                     {/* Section 5 - left Z-shape */}
                     <StationFinal   entries={entries} setEntries={setEntries}
@@ -235,10 +230,10 @@ function Randomize() {
                                   pos={[27, 0, -41]} rotate={rotateL}
                             hitboxPos={[40, -1, -101]} soundOff={soundOff}/>
 
-                    {/* Section 3 - bottom T-shape */}
+                    {/* Section 3 - mid T-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-48, 0, 13]} rotate={rotateD}
-                            hitboxPos={[-35, -1, -47]} soundOff={soundOff}/>
+                                  pos={[-50, 0, 5]} rotate={rotateR}
+                            hitboxPos={[-37, -1, -55]} soundOff={soundOff}/>
 
                     {/* Section 4 - top side rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -266,20 +261,20 @@ function Randomize() {
                                   pos={[-61.5, 0, -55]} rotate={rotateU}
                             hitboxPos={[-48.5, -1, -115]} soundOff={soundOff}/>
 
-                    {/* Section 2 - bottom right L-shape */}
+                    {/* Section 2 - mid rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[62.5, 0, -36.5]} rotate={rotateD}
-                            hitboxPos={[75.5, -1, -96.5]} soundOff={soundOff}/>
+                                  pos={[39, 0, -49.5]} rotate={rotateR}
+                            hitboxPos={[52, -1, -109.5]} soundOff={soundOff}/>
 
                     {/* Section 3 - right U-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[-16, 0, 1]} rotate={rotateD}
-                            hitboxPos={[-3, -1, -59]} soundOff={soundOff}/>
+                                  pos={[-17, 0, 2]} rotate={rotateD}
+                            hitboxPos={[-4, -1, -58]} soundOff={soundOff}/>
 
-                    {/* Section 4 - L-shape */}
+                    {/* Section 4 - right Z-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[33.5, 0, 14]} rotate={rotateL}
-                            hitboxPos={[46.5, -1, -46]} soundOff={soundOff}/>
+                                  pos={[54, 0, 7]} rotate={rotateD}
+                            hitboxPos={[67, -1, -53]} soundOff={soundOff}/>
 
                     {/* Section 5 - mid bottom L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}
@@ -302,10 +297,10 @@ function Randomize() {
                                   pos={[-14, 0, -48]} rotate={rotateD}
                             hitboxPos={[-1, -1, -108]} soundOff={soundOff}/>
 
-                    {/* Section 2 - top left L-shape */}
+                    {/* Section 2 - mid rect */}
                     <StationFinal entries={entries} setEntries={setEntries}
-                                  pos={[51.5, 0, -47.5]} rotate={rotateR}
-                            hitboxPos={[64.5, -1, -107.5]} soundOff={soundOff}/>
+                                  pos={[39, 0, -49.5]} rotate={rotateR}
+                            hitboxPos={[52, -1, -109.5]} soundOff={soundOff}/>
 
                     {/* Section 3 - top left L-shape */}
                     <StationFinal entries={entries} setEntries={setEntries}

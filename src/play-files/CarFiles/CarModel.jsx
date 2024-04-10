@@ -61,8 +61,6 @@ export const CarModel = ({ enableControls, soundOff, selectedCar }) => {
 
         state.camera.lookAt(carPosition);
     })
-
-    console.log('controls:', enableControls)
    
     return (
         <group>
