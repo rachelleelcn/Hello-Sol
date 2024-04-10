@@ -359,8 +359,8 @@ const Create = () => {
           <div className="text-sm">Mix and match with our signature models to create and share your very own custom Geo-Sol.</div>
         </div>
 
-        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '9%', left: '50%', transform: `translate(-50%,-50%)` }}/>
-        
+        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '9%', left: '50%', transform: `translate(-50%,-50%)` }} />
+
         <button className='rounded-full bg-black-200 items-center justify-center flex'
           style={{ position: 'fixed', bottom: '12%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Create your dream Geo</div>
@@ -391,7 +391,7 @@ const Create = () => {
               nameValidate(3);
             } else if (value.length === 21) {
               nameValidate(2);
-            }else {
+            } else {
               setName(value);
               nameValidate(0);
             }
@@ -855,20 +855,24 @@ const Create = () => {
         </div>
 
         <div style={{ position: 'fixed', bottom: '35%', right: '4%' }}>
-          <div className="outline outline-1 rounded-3xl p-8">
+          <div className="bg-grey-300 rounded-3xl p-8">
             <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
               Play to win a free Geo-Energy portable charger!
             </div>
-            <div className="w-60 text-sm font-inter pb-1.5">
+            <div className="w-60 text-sm font-inter pb-8">
               Put your Geo to the test, play to enter today’s giveaway.
             </div>
-            <div className='flex justify-end'>
+            {/* <div className='flex justify-end'>
               <button onClick={() => navigate('/Hello-Sol/play')}>
                 <img src={go_icon} alt='go-icon' className='w-10 object-contain' />
               </button>
-            </div>
+            </div> */}
+            <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/play')}>
+              <div className="text-sm font-inter py-2.5 px-6 text-white-100">Start playing</div>
+            </button>
 
-            <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[140px] left-[18px]' />
+            {/* <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[140px] left-[18px]' /> */}
+            <img src={charger1} alt='' className='absolute h-[124px] object-contain top-[120px] left-[170px] -rotate-[25deg]' />
           </div>
         </div>
       </div>
@@ -902,7 +906,7 @@ const Create = () => {
           <div className="text-sm mb-8">This website uses cookies to offer you a personalized experience. Accepting allows us to save your configured car. Declining will result in not being able to drive your configured car in the mini game.</div>
           <div className="flex justify-center">
             <button className="underline underline-offset-4 text-sm px-4 mr-6" onClick={() => { goNextSection(); setShowCookie(false); }}>Decline</button>
-            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); handleCarConfirm()}}>
+            <button className='w-full rounded-full bg-black-200 items-center justify-center flex' onClick={() => { goNextSection(); setShowCookie(false); handleCarConfirm() }}>
               <div className="text-sm font-inter py-3 px-6 text-white-100">Accept cookies</div>
             </button>
           </div>
