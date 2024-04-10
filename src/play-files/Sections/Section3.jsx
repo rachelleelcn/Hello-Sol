@@ -70,8 +70,8 @@ const rotateR = [0, 4.71, 0]
 
         <TFinal glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[-44.5, -1, 15]} rotate={rotateL}
-         hitboxPos1={[31.5, 3, -43]}
-         hitboxPos2={[31.5, 3, -47]} />
+         hitboxPos1={[-31.5, 3, -43]}
+         hitboxPos2={[-31.5, 3, -47]} />
 
         <LFinal2 glassColour={glassColour} frameColour={frameColour} wallColour={wallColour}
                 pos={[-30, -1, -6]} rotate={rotateL}

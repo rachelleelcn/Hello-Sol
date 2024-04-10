@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { useSound } from 'use-sound'
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { Environment, PerspectiveCamera } from '@react-three/drei'
 import city from "../assets/lighting/potsdamer_platz_1k.hdr";
 
 import geo_icon from "../assets/icons/geo.png";
@@ -81,9 +81,11 @@ const Play = () => {
 
   // Audio variables
   const [musicOff, setMusicOff] = useState(false);
-  const [sfxOff, setSfxOff] = useState(true);
-  const [playWinSFX] = useSound(winSFX, { volume: 0.8 })
-  const [playLoseSFX] = useSound(loseSFX, { volume: 0.8 })
+
+  const [sfxOff, setSfxOff] = useState(false);
+  const [playWinSFX] = useSound(winSFX, {volume: 0.8})
+  const [playLoseSFX] = useSound(loseSFX, {volume: 0.8})
+
 
   // Current date variables
   const today = new Date()
@@ -121,6 +123,7 @@ const Play = () => {
   const goSection = (index) => {
     setCurrentSection(index);
 
+    // Instructions
     if (index < 3) {
       setStartGame(false)
       setEnableControls(false)
@@ -137,6 +140,7 @@ const Play = () => {
         else { playWinSFX() }
       }
     }
+    // Game
     else {
       setStartGame(true);
       setEnableControls(true)
@@ -199,11 +203,8 @@ const Play = () => {
           resetTimer()
           setElapsedTime(duration)
 
-          // Play sfx when timer ends if sounds are on
-          if (!sfxOff) {
-            if (entries < 1) { playLoseSFX() }
-            else { playWinSFX() }
-          }
+          setEnableControls(false)
+
         }
 
         else {
@@ -402,7 +403,6 @@ const Play = () => {
   return (
     <section className='w-full h-screen relative bg-white-200'>
 
-
       {/* Render scene */}
       {currentSection > 2 && currentSection < 5 && (
         <div style={{ width: '100%', height: '100%' }}>
@@ -418,12 +418,14 @@ const Play = () => {
             )}
           </group>
 
-          <Scene entries={entries} setEntries={setEntries}
-            enableControls={enableControls}
-            soundOff={sfxOff}
-            selectedCar={selectedCar} />
-        </div>
-      )}
+
+            <Scene entries={entries} setEntries={setEntries} 
+                   enableControls={enableControls}
+                   soundOff={sfxOff}
+                   selectedCar={selectedCar}/>
+          </div>
+        )}
+
 
 
       <div className="h-screen bg-white-200 absolute inset-0 z-0" style={{ transition: 'opacity 0.2s', opacity: startGame ? 0 : 1, pointerEvents: startGame ? 'none' : 'auto' }}></div>
@@ -651,6 +653,7 @@ const Play = () => {
           </button>
         </div>
 
+        {/* Game Controls */}
         <div style={{ position: 'fixed', bottom: 'calc(5% + 52px)', left: '3.5%' }}>
           <div style={{ transition: 'opacity 0.2s', opacity: showControls === true ? 1 : 0, pointerEvents: showControls === true ? 'auto' : 'none' }}>
             <div className="w-40 font-inter p-4">

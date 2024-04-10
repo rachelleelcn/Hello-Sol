@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react'
 import { useSound } from 'use-sound'
 
 import carSFX1 from '../../assets/audio/car_sound.mp3'
-import carSFX2 from '../../assets/audio/car_sound_2.mp3'
 
 export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
     let [controls, setControls] = useState({})
-    const [playSFX1, { pause: pauseSFX1 }] = useSound(carSFX1, {volume: 0.5})
-    // const [playSFX2, { pause: pauseSFX2 }] = useSound(carSFX2, {volume: 0.5})
+    const [playSFX1, { pause: pauseSFX1 }] = useSound(carSFX1, {volume: 0.4})
 
     useEffect(() => {
         if (enableControls) {
@@ -63,11 +61,7 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
         else {
             vehicleAPI.applyEngineForce(0, 2)
             vehicleAPI.applyEngineForce(0, 3)
-
-            if (!soundOff) {
-                pauseSFX1()
-                // playSFX2()
-            }
+            pauseSFX1()
         }
 
         // Left
@@ -96,12 +90,7 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
         if (controls.shift) {
             vehicleAPI.setBrake(8, 0)
             vehicleAPI.setBrake(8, 1)
-
-            if (!soundOff) {
-                pauseSFX1()
-                // pauseSFX2()
-                // playSFX2()
-            }
+            pauseSFX1()
             
         }
         else {
@@ -109,7 +98,6 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
             vehicleAPI.setBrake(0, 1)
             vehicleAPI.setBrake(0, 2)
             vehicleAPI.setBrake(0, 3)
-            // pauseSFX2()
         }
 
         // Reset position
@@ -117,12 +105,7 @@ export function UseControls(vehicleAPI, chassisAPI, enableControls, soundOff) {
             chassisAPI.position.set(15, 0, 0)
             chassisAPI.velocity.set(0, 0, 0)
             chassisAPI.rotation.set(0, 0, 0)
-
-            if (!soundOff) {
-                pauseSFX1()
-                // pauseSFX2()
-                // playSFX2()
-            }
+            pauseSFX1()
         }
 
     }, [controls, vehicleAPI, chassisAPI])
