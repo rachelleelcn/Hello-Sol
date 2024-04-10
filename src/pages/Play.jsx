@@ -745,11 +745,11 @@ const Play = () => {
       {/* P4 - Results*/}
 
       {/* for testing - TO BE DELETED */}
-      <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
+      {/* <div className="flex gap-2" style={{ position: 'fixed', top: '5%', left: '50%', transform: `translateX(-50%)`, transition: 'opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='w-40 rounded-full outline outline-1 items-center justify-center flex py-3 px-6 gap-2' onClick={() => { goSection(3); setEntries(0) }}>
           <div className="text-sm font-inter text-black-100">Back</div>
         </button>
-      </div>
+      </div> */}
 
       <div className="font-inter outline outline-1 rounded-3xl p-12 w-[416px] bg-white-200/90" style={{ position: 'fixed', top: '50%', right: currentSection === 4 ? '3.5%' : '1.5%', transform: 'translateY(-48%)', transition: 'right 0.4s, opacity 0.2s', opacity: currentSection === 4 ? 1 : 0, pointerEvents: currentSection === 4 ? 'auto' : 'none' }}>
         <button className='absolute w-10 h-10 rounded-full outline outline-1 flex items-center justify-center right-6 top-6' onClick={shareImage}>
