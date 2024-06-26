@@ -162,7 +162,7 @@ const Learn = () => {
     } else {
       setShow10(false);
     }
-    if (scrollValue > 0.995) {
+    if (scrollValue > 0.99) {
       setShow11(true);
     } else {
       setShow11(false);
@@ -188,7 +188,7 @@ const Learn = () => {
           Geo’s signature sleek, clean, and minimalist design with a twist...
         </div>
       </div>
-      <div style={{ position: 'fixed', top: '24%', right: show2 ? '17%' : '15%', opacity: show2 ? 1 : 0, transition: 'right 0.4s 0.02s, opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '23.5%', right: show2 ? '17%' : '15%', opacity: show2 ? 1 : 0, transition: 'right 0.4s 0.02s, opacity 0.2s', pointerEvents: show2 ? 'auto' : 'none' }}>
         <img src={pink_arrow} alt='' className='h-28 object-contain' />
       </div>
 
@@ -202,10 +202,10 @@ const Learn = () => {
           For a smooth, quiet, and comfortable ride.
         </div>
       </div>
-      <div style={{ position: 'fixed', top: '23.5%', left: show3 ? '27%' : '25%', opacity: show3 ? 1 : 0, transition: 'left 0.4s 0.02s, opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '23%', left: show3 ? '27%' : '25%', opacity: show3 ? 1 : 0, transition: 'left 0.4s 0.02s, opacity 0.2s', pointerEvents: show3 ? 'auto' : 'none' }}>
         <img src={green_arrow} alt='' className='h-28 object-contain' />
       </div>
-      <div style={{ position: 'fixed', top: '50%', transform: `translateX(${showShh ? '1000%' : '-100%'})`, opacity: showShh ? 1 : 0, transition: 'transform 3s linear, opacity 0.2s', pointerEvents: showShh ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '50%', transform: `translateX(${showShh ? '800%' : '-100%'})`, opacity: showShh ? 1 : 0, transition: 'transform 3.5s linear, opacity 0.2s', pointerEvents: showShh ? 'auto' : 'none' }}>
         <img src={shh} alt='' className='h-12 object-contain' />
       </div>
 
@@ -222,10 +222,10 @@ const Learn = () => {
         </div>
       </div>
 
-      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-0%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', left: show4b ? '-14%' : '-50%', opacity: show4b ? 1 : 0, transition: 'left 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain' />
       </div>
-      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-0%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', bottom: '26%', right: show4b ? '-14%' : '-50%', opacity: show4b ? 1 : 0, transition: 'right 0.6s, opacity 0.2s', pointerEvents: show4b ? 'auto' : 'none' }}>
         <img src={red_arrow} alt='' className='h-4 object-contain transform scale-x-[-1]' />
       </div>
 
@@ -241,8 +241,8 @@ const Learn = () => {
       {/* <div style={{ position: 'fixed', bottom: showSmall ? '32.5%' : '30%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
         <img src={small} alt='' className='h-52 object-contain' />
       </div> */}
-      <div className="h-full" style={{ position: 'fixed', bottom: showSmall ? '-73.7%' : '-50%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
-        <img src={small} alt='' className='h-[30%] object-contain' />
+      <div className="h-full" style={{ position: 'fixed', bottom: showSmall ? '-75.2%' : '-50%', left: '50%', transform: `translate(-50%,-50%) scale(${showSmall ? '1' : '0'})`, opacity: showSmall ? 1 : 0, transition: 'bottom 0.4s, transform 0.4s, opacity 0.2s', pointerEvents: showSmall ? 'auto' : 'none' }}>
+        <img src={small} alt='' className='h-[28%] object-contain' />
       </div>
 
       {/* P6 */}
@@ -262,12 +262,12 @@ const Learn = () => {
           Accelerate in an instant. The Geo-Sol can reach up to 100 km/h in 5 seconds.
         </div>
       </div>
-      <div style={{ position: 'fixed', top: '27%', left: show7 ? '43%' : '41%', opacity: show7 ? 1 : 0, transition: 'left 0.4s 0.04s, opacity 0.2s', pointerEvents: show7 ? 'auto' : 'none' }}>
-        <img src={fast} alt='' className='h-2.5 object-contain' />
+      <div style={{ position: 'fixed', top: '27%', left: show7 ? '45%' : '43%', opacity: show7 ? 1 : 0, transition: 'left 0.4s 0.04s, opacity 0.2s', pointerEvents: show7 ? 'auto' : 'none' }}>
+        <img src={fast} alt='' className='h-2 object-contain' />
       </div>
 
       {/* P8 */}
-      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '35%' : '33%', right: '35%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
+      <div className="w-96" style={{ position: 'fixed', bottom: show8 ? '40%' : '36%', right: '28%', opacity: show8 ? 1 : 0, transition: 'bottom 0.4s, opacity 0.2s', pointerEvents: show8 ? 'auto' : 'none' }}>
         <div className="text-2xl font-bold font-inter pb-1.5">
           Greener than ever.
         </div>
@@ -278,8 +278,8 @@ const Learn = () => {
 
       <div className={`w-full ${showGreenA ? 'fade-in-scale' : ''}`} style={{
         position: 'fixed',
-        top: '-280%',
-        left: '-25%',
+        top: '-250%',
+        left: '-18%',
         opacity: showGreenA ? 1 : 0,
         transition: 'opacity 0.2s',
         pointerEvents: showGreenA ? 'auto' : 'none',
@@ -310,7 +310,7 @@ const Learn = () => {
       {/* P10 */}
 
 
-      <div className="w-60" style={{ position: 'fixed', top: '33%', left: show10 ? '65%' : '67%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-60" style={{ position: 'fixed', top: '32.5%', left: show10 ? '65.2%' : '67.2%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={dash_icon} alt='dash-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Digital dashboard
@@ -319,12 +319,12 @@ const Learn = () => {
           Real-time information right behind the wheel for a focused drive.
         </div>
       </div>
-      <div className="w-48" style={{ position: 'fixed', top: '46%', left: '57%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '47%', left: '55.5%', opacity: show10 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={tech_arrow} alt='' className='h-1.5 object-contain transform -rotate-[40deg]' />
       </div>
 
 
-      <div className="w-48" style={{ position: 'fixed', top: '57%', left: show10 ? '13.5%' : '11.5%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '56.5%', left: show10 ? '10.6%' : '8.6%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={rear_icon} alt='rear-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Rear View Camera
@@ -338,7 +338,7 @@ const Learn = () => {
       </div>
 
 
-      <div className="w-48" style={{ position: 'fixed', top: '57%', left: show10 ? '75%' : '77%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
+      <div className="w-48" style={{ position: 'fixed', top: '56.5%', left: show10 ? '76.5%' : '78.5%', opacity: show10 ? 1 : 0, transition: 'left 0.4s, opacity 0.2s', pointerEvents: show10 ? 'auto' : 'none' }}>
         <img src={mic_icon} alt='mic-icon' className='h-11 object-contain mb-1' />
         <div className="text-sm font-bold font-inter pb-1">
           Smart OS
@@ -353,16 +353,17 @@ const Learn = () => {
 
 
 
-
-      <Canvas className="w-full h-screen relative" camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
+      <Canvas className="w-full h-screen relative pb-16 pt-16"  camera={{ near: 0.1, far: 1000, position: [0, 0, 10], fov: 60 }} style={{ pointerEvents: 'auto' }}>
         <Suspense fallback={<Loader />}>
 
           <Environment files={city} />
 
           <ScrollControls pages={15} damping={0.1}>
             <LearnCar
-              position={[0.45, -0.74, 6.3]}
+              position={[0.45, -0.72, 6.4]}
               rotation={[0.02, -0.6, 0]}
+              // position={[0.55, -0.74, 6.3]}
+              // rotation={[0.02, -0.62, 0]}
               onScroll={handleScroll}
             />
           </ScrollControls>
@@ -372,9 +373,9 @@ const Learn = () => {
       {/* HTML in front of Canvas */}
       {/* P1 */}
 
-      <div style={{ position: 'fixed', top: '14%', left: '8%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
-        <div className="text-[56px] font-inter mb-2">
-          <div className='flex items-center -mb-4'>
+      <div style={{ position: 'fixed', top: '14.8%', left: '8%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+        <div className="text-[56px] font-inter mb-1">
+          <div className='flex items-center -mb-5'>
             <div>Hello.</div>
             <img src={sol_icon} alt='sol-icon' className='h-16 object-contain pl-2' />
           </div>
@@ -383,7 +384,7 @@ const Learn = () => {
         <div className="w-80 font-inter">
           Introducing the all-new electrifying Geo.
         </div>
-        <img src={scroll_icon} alt='scroll_icon' className='w-11 object-contain mt-16' />
+        <img src={scroll_icon} alt='scroll_icon' className='w-11 object-contain mt-20' />
       </div>
 
       {/* <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
@@ -415,9 +416,9 @@ const Learn = () => {
         </div>
       </div> */}
 
-      <div style={{ position: 'fixed', top: '15%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
-        <div className="bg-grey-300 rounded-3xl p-8 mb-5">
-          <div className="w-60 text-lg font-bold font-inter leading-6 pb-1">
+      <div style={{ position: 'fixed', top: '12%', right: '4%', opacity: show1 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show1 ? 'auto' : 'none' }}>
+        <div className="bg-grey-300 rounded-3xl p-8 mb-4">
+          <div className="w-60 text-lg font-bold font-inter leading-[23px] pb-6">
             Play daily for a chance to win a free Geo-Energy Portable Charger!
           </div>
           <div className='flex justify-end'>
@@ -425,7 +426,7 @@ const Learn = () => {
               <img src={go_outline_icon} alt='go-icon' className='w-10 object-contain' />
             </button>
           </div>
-          <img src={charger1} alt='' className='absolute h-32 object-contain rotate-6 top-[115px] left-[18px]' />
+          <img src={charger1} alt='' className='absolute h-32 object-contain rotate-[6deg] top-[108px] left-[20px]' />
         </div>
 
         <div className="outline outline-1 rounded-3xl p-8">
@@ -446,7 +447,7 @@ const Learn = () => {
       </div>
 
       {/* P11 */}
-      <div style={{ position: 'fixed', top: '13%', left: '8%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
+      <div style={{ position: 'fixed', top: '14%', left: '8%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
         <div className='flex items-end'>
           <div className="text-[56px] font-bold font-inter mb-0 z-20">
             It’s Geo-Sol.
@@ -468,10 +469,10 @@ const Learn = () => {
       <div style={{ position: 'fixed', bottom: '18%', right: '4%', opacity: show11 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: show11 ? 'auto' : 'none' }}>
 
         <div className="outline outline-1 rounded-3xl p-8">
-          <div className="w-[200px] text-lg font-bold font-inter leading-6 pb-2">
+          <div className="w-[180px] text-lg font-bold font-inter leading-6 pb-2">
             It’s your dream car!
           </div>
-          <div className="w-[200px] text-sm font-inter pb-48">
+          <div className="w-[180px] text-sm font-inter pb-40">
             Create your own custom Geo-Sol with our Geo-Creator.
           </div>
           <button className='rounded-full bg-black-200 items-center justify-center flex' onClick={() => navigate('/Hello-Sol/create')}>
@@ -479,7 +480,7 @@ const Learn = () => {
           </button>
 
           {/* <img src={dot_bar2} alt='' className='absolute object-contain rotate-[40deg] top-[202px] -left-[48px]' style={{ width: '360px', maxWidth: 'none' }}/> */}
-          <img src={shapes2} alt='' className='absolute object-contain top-[130px] left-8 w-[200px]'/>
+          <img src={shapes2} alt='' className='absolute object-contain top-[140px] left-8 w-[180px]'/>
 
         </div>
       </div>

@@ -466,7 +466,7 @@ const Play = () => {
 
       </div>
 
-      <div className="w-full" style={{ position: 'fixed', top: '20%', left: '48%', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
+      <div className="w-full" style={{ position: 'fixed', top: '27%', left: '47%', transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
         <img src={town_image} alt='go-icon' className='w-[72%] object-contain' />
       </div>
 

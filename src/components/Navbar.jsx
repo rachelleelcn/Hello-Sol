@@ -23,11 +23,11 @@ const Navbar = () => {
     };
 
     return (
-        <div className='header'>
+        <div className='header mt-3'>
             <NavLink to='/Hello-Sol/learn' onClick={() => (isActive('/Hello-Sol/learn') ? handleClick() : null)}>
-                <div className="text-xl font-bold font-inter">Hello-Sol</div>
+                <div className="text-xl font-bold font-inter -ml-6">Hello-Sol</div>
             </NavLink>
-            <nav className='items-center justify-center flex gap-8'>
+            <nav className='items-center justify-center flex gap-8 -mr-3'>
                 <NavLink to='/Hello-Sol/learn' className={({ isActive }) => isActive ? "underline underline-offset-4" : null} onClick={() => (isActive('/Hello-Sol/learn') ? handleClick() : null)}>
                     <div className="text-sm font-inter">Learn</div>
                 </NavLink>

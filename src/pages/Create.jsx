@@ -106,7 +106,7 @@ const Create = () => {
       newContext.fillRect(0, 0, newCanvas.width, newCanvas.height);
 
       // add existing canvas to new
-      const desiredWidth = 2400;
+      const desiredWidth = 2100;
       const existingCanvasScale = desiredWidth / existingCanvas.width;
       const existingCanvasWidth = existingCanvas.width * existingCanvasScale;
       const existingCanvasHeight = existingCanvas.height * existingCanvasScale;
@@ -303,7 +303,7 @@ const Create = () => {
     <section className='w-full h-screen relative bg-white-200'>
 
       {currentSection > 1 && currentSection < 6 && (
-        <div className="w-2/3 h-screen relative pb-16" >
+        <div className="w-2/3 h-screen relative pb-16 pl-16" >
           <Canvas style={{ background: '#F1F1F1' }} >
             <Suspense fallback={<Loader />}>
               <Configurator
@@ -354,15 +354,15 @@ const Create = () => {
 
       {/* P1 */}
       <div style={{ transition: 'opacity 0.2s', opacity: currentSection === 1 ? 1 : 0, pointerEvents: currentSection === 1 ? 'auto' : 'none' }}>
-        <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '22%', left: '50%', transform: `translate(-50%,-50%)` }}>
+        <div className="w-96 text-center font-inter" style={{ position: 'fixed', top: '24%', left: '50%', transform: `translate(-50%,-50%)` }}>
           <div className="text-3xl font-bold pb-4">Welcome to Geo-Creator</div>
           <div className="text-sm">Mix and match with our signature models to create and share your very own custom Geo-Sol.</div>
         </div>
 
-        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '9%', left: '50%', transform: `translate(-50%,-50%)` }} />
+        <img src={create_landing1} alt='' className='w-full object-contain' style={{ position: 'fixed', bottom: '15%', left: '50%', transform: `translate(-50%,-50%)` }} />
 
         <button className='rounded-full bg-black-200 items-center justify-center flex'
-          style={{ position: 'fixed', bottom: '12%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
+          style={{ position: 'fixed', bottom: '15%', left: '50%', transform: `translate(-50%,-50%)` }} onClick={goNextSection}>
           <div className="text-sm font-inter py-3 px-6 text-white-100">Create your dream Geo</div>
         </button>
       </div>
@@ -831,7 +831,7 @@ const Create = () => {
 
       {/* P6 */}
       <div style={{ opacity: currentSection === 6 ? 1 : 0, transition: 'opacity 0.2s', pointerEvents: currentSection === 6 ? 'auto' : 'none' }}>
-        <div style={{ position: 'fixed', top: '15%', left: '8%' }}>
+        <div style={{ position: 'fixed', top: '15%', left: '6%' }}>
           <div className="text-4xl font-bold font-inter mb-1">
             The rarest Geo of all,
           </div>
@@ -856,7 +856,7 @@ const Create = () => {
 
         <div style={{ position: 'fixed', bottom: '35%', right: '4%' }}>
           <div className="bg-grey-300 rounded-3xl p-8">
-            <div className="w-60 text-lg font-bold font-inter leading-6 pb-2">
+            <div className="w-60 text-lg font-bold font-inter leading-[23px] pb-2">
               Play to win a free Geo-Energy portable charger!
             </div>
             <div className="w-60 text-sm font-inter pb-8">

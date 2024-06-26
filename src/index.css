@@ -184,8 +184,8 @@ body:has(.card[data-color="green"]:hover) {
 @keyframes translate-green-animation {
   0% {
     opacity: 1;
-    top: -280%;
-    left: -25%;
+    top: -250%;
+    left: -18%;
   }
   80% {
     opacity: 1;
