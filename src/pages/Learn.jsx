@@ -360,10 +360,10 @@ const Learn = () => {
 
           <ScrollControls pages={15} damping={0.1}>
             <LearnCar
-              position={[0.45, -0.72, 6.4]}
-              rotation={[0.02, -0.6, 0]}
-              // position={[0.55, -0.74, 6.3]}
-              // rotation={[0.02, -0.62, 0]}
+              // position={[0.45, -0.72, 6.4]}
+              // rotation={[0.02, -0.6, 0]}
+              position={[0.45, -0.74, 6.2]}
+              rotation={[0.02, -0.62, 0]}
               onScroll={handleScroll}
             />
           </ScrollControls>

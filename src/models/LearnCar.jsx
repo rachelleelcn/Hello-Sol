@@ -94,7 +94,7 @@ const LearnCar = (props) => {
 
             .to(learnCar.current.position, { x: 0.55 }, 5)
             .to(learnCar.current.position, { y: -0.74 }, 5)
-            .to(learnCar.current.position, { z: 6.3 }, 5)
+            .to(learnCar.current.position, { z: 6.2 }, 5)
             .to(learnCar.current.rotation, { x: 0.02 }, 5)
             .to(learnCar.current.rotation, { y: -0.62 }, 5)
             .to(learnCar.current.rotation, { z: 0 }, 5)
